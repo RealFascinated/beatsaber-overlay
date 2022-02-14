@@ -5,6 +5,7 @@ import PlayerStats from '../components/PlayerStats';
 
 // Why do u have to proxy requests... it's so dumb LOL
 const API_URL = "https://bangor375.herokuapp.com/https://scoresaber.com/api/player/%s/full";
+const GUTHUB_URL = "https://github.com/RealFascinated/beatsaber-overlay";
 
 export default class Home extends Component {
 
@@ -73,8 +74,12 @@ export default class Home extends Component {
 				<p>Provide a valid scoresaber id</p>
 				<p>Example: {document.location.origin}?id=76561198449412074</p>
 				<div className={'info'}>
-					<p>This is currently just a simple overlay displaying ScoreSaber stats.</p>
+					<p>This is currently just a simple overlay for OBS displaying ScoreSaber stats.</p>
 					<p>If you have any suggestions you can message me on discord @ Fascinated#4719</p>
+					<div className={'info'}>
+						<p>If you use this overlay and like it, don&apos;t forget to star the project :3</p>
+						<p>Github link: <span><a href={GUTHUB_URL}>{GUTHUB_URL}</a></span></p>
+					</div>
 				</div>
 			</div> :
 			<div className={'overlay'}>

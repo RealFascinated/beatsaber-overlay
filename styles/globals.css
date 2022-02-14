@@ -12,8 +12,19 @@
 }
 
 .info {
-	margin-top: 50px;
+	margin-top: 35px;
 	color: white;
+}
+
+.info a {
+	font-size: large;
+	text-decoration: none;
+	color: #7299d4;
+	transition: 0.2s;
+}
+
+.info a:hover {
+    color: #4b72d3 !important;
 }
 
 .overlay {

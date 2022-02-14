@@ -58,11 +58,16 @@ export default class Home extends Component {
 	render() {
 		const { loading, isValidScoresaber, data } = this.state;
 
+		if (!isValidScoresaber && !loading) {
+			const body = document.body;
+			body.style.backgroundColor = "#181a1b";
+		}
+
 		return <>
 			{ loading ? 
-			<>
-				<p>Loading...</p>
-			</>
+			<div className={'loading'}>
+				<h2>Loading...</h2>
+			</div>
 			: !isValidScoresaber ? 
 			<div className={'invalid-player'}>
 				<p>Provide a valid scoresaber id</p>

@@ -5,7 +5,15 @@ To use your scoresaber: `https://bs-overlay.fascinated.cc/?id=765611`
 
 ## Getting Started with developent
 
-First, run the development server:
+First, install the node dependencies:
+
+```bash
+npm i
+# or
+yarn
+```
+
+Secondly, open the development server
 
 ```bash
 npm run dev

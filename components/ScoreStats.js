@@ -1,4 +1,4 @@
-import {Component, useState} from "react";
+import {Component} from "react";
 
 export default class ScoreStats extends Component {
 
@@ -99,6 +99,7 @@ export default class ScoreStats extends Component {
                         "averagePreSwing": [70.00],
                         "averagePostSwing": [30.00],
                     },
+                    score: 0,
                     isVisible: false
                 });
             },
@@ -115,6 +116,7 @@ export default class ScoreStats extends Component {
                         "averagePreSwing": [70.00],
                         "averagePostSwing": [30.00],
                     },
+                    score: 0,
                     isVisible: true
                 });
             },

@@ -1,5 +1,4 @@
-import Head from 'next/head'
-import { Component } from 'react'
+import {Component} from 'react'
 import Avatar from '../components/Avatar';
 import PlayerStats from '../components/PlayerStats';
 import ScoreStats from '../components/ScoreStats';

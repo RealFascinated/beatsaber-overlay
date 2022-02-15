@@ -1,16 +1,18 @@
 import Head from 'next/head'
 
+import Config from '../config.json';
+
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   return <>
 		<Head>
-			<title>BeatSaber Overlay</title>
-			<meta name="twitter:title" content='BeatSaber Overlay' />
-			<meta property="og:site_name" content="BeatSaber Overlay" key="title" />
-			<meta property="og:url" content="https://bs-overlay.fascinated.cc" key="title" />
-			<meta property="og:description" content="Simple scoresaber overlay" key="description" />
-			<meta name="theme-color" content='#0EBFE9' />
+			<title>{Config.name}</title>
+			<meta name="twitter:title" content= {Config.name} />
+			<meta property="og:site_name" content= {Config.name} key="title" />
+			<meta property="og:url" content= {Config.url} key="title" />
+			<meta property="og:description" content= {Config.description} key="description" />
+			<meta name="theme-color" content= {Config.color} />
 		</Head>
 		<Component {...pageProps} />
   	</>

@@ -69,11 +69,20 @@
 }
 
 .score-stats {
-	text-align: right;
+	text-align: center;
 	position:absolute;
 	top:0;
 	right:0;
-	margin-right: 15px;
+	margin-right: 10px;
+}
+
+.score-stats-right {
+	margin-right: 10px;
+}
+
+.score-stats-average-cut {
+	font-weight: bold;
+	font-size: x-large;
 }
 
 .score-stats-hands {
@@ -83,4 +92,12 @@
 
 .score-stats-hands div {
 	padding-left: 10px;
+}
+
+.score-stats-info {
+	position: fixed;
+	bottom:0;
+	right:0;
+	margin-right: 10px;
+	text-align: right;
 }

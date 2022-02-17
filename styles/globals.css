@@ -38,6 +38,8 @@
 
 .player-stats-container {
 	display: flex;
+	margin-left: -5px;
+	margin-top: -5px;
 }
 
 .player-country {
@@ -73,7 +75,8 @@
 	position:absolute;
 	top:0;
 	right:0;
-	margin-right: 10px;
+	margin-right: 5px;
+	margin-top: -5px;
 }
 
 .score-stats-right {
@@ -99,5 +102,82 @@
 	bottom:0;
 	right:0;
 	margin-right: 10px;
+	margin-bottom: -10px;
 	text-align: right;
 }
+
+.song-info-container {
+	display: flex;
+	position: fixed;
+	bottom:0;
+	left:0;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+.song-info-container img {
+	border-radius: 5%;
+}
+
+.song-info {
+	margin-left: 10px;
+	margin-top: -10px;
+}
+
+.song-info-song-name {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+.song-info-song-author {
+	font-size: large;
+	margin-top: -5px;
+	margin-bottom: -5px;
+}
+
+.song-info-song-other-container {
+	display: flex;
+	margin-top: 5px;
+}
+
+.song-info-diff {
+	font-size: large;
+	padding: 9px 5px;
+	width: fit-content;
+	border-radius: 5%;
+	font-weight: bold;
+}
+
+.song-info-bsr {
+	font-size: large;
+	margin-left: 10px;
+	margin-top: 28px;
+}
+
+.song-time-container {
+	width: 200px;
+	display: grid;
+}
+
+.song-time-background {
+	grid-column: 1;
+	grid-row: 1;
+	z-index: 1;
+	padding: 3px;
+	width: 100%;
+	background-color: white !important;
+}
+
+.song-time {
+	grid-column: 1;
+	grid-row: 1;
+	z-index: 2;
+	padding: 3px;
+	background-color: red;
+}
+
+.song-time-text {
+	margin-top: 8px;
+	font-size: large;
+}
+

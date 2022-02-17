@@ -4,9 +4,11 @@ import PlayerStats from '../components/PlayerStats';
 import ScoreStats from '../components/ScoreStats';
 
 import Config from '../config.json';
+import SongInfo from "../components/SongInfo";
 
 // Why do u have to proxy requests... it's so dumb LOL
-const API_URL = Config.proxy_url + "/https://scoresaber.com/api/player/%s/full";
+const SCORESABER_API_URL = Config.proxy_url + "/https://scoresaber.com/api/player/%s/full";
+const BEATSAVER_API_URL = Config.proxy_url + "/https://api.beatsaver.com/maps/hash/%s";
 const GITHUB_URL = "https://github.com/RealFascinated/beatsaber-overlay";
 
 export default class Home extends Component {
@@ -20,8 +22,39 @@ export default class Home extends Component {
 			isValidScoresaber: true,
 			data: undefined,
 			showPlayerStats: true,
-			showScore: false
+			showScore: false,
+			showSongInfo: false,
+
+			socket: undefined,
+			isVisible: false,
+			songInfo: undefined,
+			beatSaverData: undefined,
+			currentSongTime: 0,
+			paused: true,
+			currentScore: 0,
+			percentage: "100.00%",
+			failed: false,
+			leftHand: {
+				averageCut: [15.00],
+				averagePreSwing: [70.00],
+				averagePostSwing: [30.00],
+			},
+			rightHand: {
+				averageCut: [15.00],
+				averagePreSwing: [70.00],
+				averagePostSwing: [30.00],
+			}
 		}
+		this.setupTimer();
+	}
+
+	// I'd love if HTTP Status just gave this data lmao
+	setupTimer() {
+		setInterval(() => {
+			if (!this.state.paused && this.state.beatSaverData !== undefined) {
+				this.setState({ currentSongTime: this.state.currentSongTime + 1 })
+			}
+		}, 1000);
 	}
 
 	async componentDidMount() {
@@ -39,9 +72,15 @@ export default class Home extends Component {
 			this.setState({ showPlayerStats: false });
 		}
 
-		// Check if the player wants to show their current score information on the overlay
+		// Check if the player wants to show their current score information
 		if (params.scoreinfo === 'true') {
 			this.setState({ showScore: true });
+			this.connectSocket();
+		}
+
+		// Check if the player wants to show the current song
+		if (params.songinfo === 'true') {
+			this.setState({ showSongInfo: true });
 		}
 
 		await this.updateData(id);
@@ -54,19 +93,154 @@ export default class Home extends Component {
 	}
 
 	async updateData(id) {
-		const data = await fetch(API_URL.replace("%s", id), {
+		const data = await fetch(SCORESABER_API_URL.replace("%s", id), {
 			mode: 'cors'
 		});
-		if (data.status == 422) { // invalid scoresaber
+		if (data.status === 422) { // Invalid scoresaber account (I think??)
 			this.setState({ loading: false, isValidScoresaber: false });
 			return;
 		}
 		const json = await data.json();
-		if (json.errorMessage) {
+		if (json.errorMessage) { // Invalid scoresaber account
 			this.setState({ loading: false, isValidScoresaber: false });
 			return;
 		}
 		this.setState({ loading: false, id: id, data: json });
+	}
+
+	connectSocket() {
+		const socket = new WebSocket('ws://localhost:6557/socket');
+		socket.addEventListener('error' || 'close', () => {
+			console.log("Attempting to re-connect to the HTTP Status socket in 30 seconds.");
+			setTimeout(() => this.connectSocket(), 30_000);
+		});
+		socket.addEventListener('message', (message) => {
+			const json = JSON.parse(message.data);
+			if (!this.handlers[json.event]) {
+				console.log("Unhandled message from HTTP Status. (" + json.event + ")");
+				return;
+			}
+			this.handlers[json.event](json || []);
+		})
+		this.setState({ socket: socket });
+	}
+
+	async setBeatSaver(songData) {
+		console.log("Updating BeatSaver info")
+		const data = await fetch(BEATSAVER_API_URL.replace("%s", songData.levelId.replace("custom_level_", "")));
+		const json = await data.json();
+		console.log(json)
+		this.setState({ beatSaverData: json })
+	}
+
+	resetData(visible) {
+		console.log("Exiting level, resetting data.")
+		this.setState({
+			"leftHand": {
+				"averageCut": [15.00],
+				"averagePreSwing": [70.00],
+				"averagePostSwing": [30.00],
+			},
+			"rightHand": {
+				"averageCut": [15.00],
+				"averagePreSwing": [70.00],
+				"averagePostSwing": [30.00],
+			},
+			songInfo: undefined,
+			beatSaverData: undefined,
+			currentSongTime: 0,
+			currentScore: 0,
+			percentage: "100.00%",
+			isVisible: visible
+		});
+	}
+
+	handlers = {
+		"hello": (data) => {
+			console.log("Hello from HTTP Status!");
+			if (data.status) {
+				this.setState({songData: data});
+				if (data.status.beatmap) {
+					this.setBeatSaver(data.status.beatmap);
+				}
+			}
+		},
+		"scoreChanged": (data) => {
+			const { status } = data;
+			const { score, currentMaxScore } = status.performance;
+			const percent = currentMaxScore > 0 ? ((score / currentMaxScore) * 1000 / 10).toFixed(2) : 0.00;
+			this.setState({
+				currentScore: score,
+				percentage: this.state.failed ? percent * 2 : percent + "%"
+			})
+		},
+		"noteFullyCut": (data) => {
+			const { noteCut } = data;
+
+			// Left Saber
+			if (noteCut.saberType === 'SaberA') {
+				const data = this.state.leftHand;
+				if (data.averageCut.includes(15) && data.averageCut.length === 1) {
+					data.averageCut = [];
+				}
+				if (data.averagePreSwing.includes(70) && data.averagePreSwing.length === 1) {
+					data.averagePreSwing = [];
+				}
+				if (data.averagePostSwing.includes(30) && data.averagePostSwing.length === 1) {
+					data.averagePostSwing = [];
+				}
+				data.averagePreSwing.push(noteCut.initialScore > 70 ? 70 : noteCut.initialScore);
+				data.averagePostSwing.push(noteCut.finalScore - noteCut.initialScore);
+				data.averageCut.push(noteCut.cutDistanceScore);
+				this.setState({ leftHand: data });
+			}
+
+			// Left Saber
+			if (noteCut.saberType === 'SaberB') {
+				const data = this.state.rightHand;
+				if (data.averageCut.includes(15) && data.averageCut.length === 1) {
+					data.averageCut = [];
+				}
+				if (data.averagePreSwing.includes(70) && data.averagePreSwing.length === 1) {
+					data.averagePreSwing = [];
+				}
+				if (data.averagePostSwing.includes(30) && data.averagePostSwing.length === 1) {
+					data.averagePostSwing = [];
+				}
+				data.averagePreSwing.push(noteCut.initialScore > 70 ? 70 : noteCut.initialScore);
+				data.averagePostSwing.push(noteCut.finalScore - noteCut.initialScore);
+				data.averageCut.push(noteCut.cutDistanceScore);
+				this.setState({ rightHand: data });
+			}
+		},
+		"songStart": (data) => {
+			console.log("Going into level, resetting data.")
+			this.resetData(true);
+			this.setState({ songData: data, paused: false })
+			this.setBeatSaver(data.status.beatmap);
+		},
+		"finished": () => {
+			console.log("Exiting level, resetting data.")
+			this.resetData(false);
+		},
+		"softFail": () => {
+			this.setState({ failed: true });
+		},
+		"paused": () => {
+			this.setState({ paused: true });
+		},
+		"resume": () => {
+			this.setState({ paused: false });
+		},
+		"menu": () => {
+			console.log("Exiting level, resetting data.")
+			this.resetData(false);
+		},
+		"noteCut": () => {},
+		"noteMissed": () => {},
+		"noteSpawned": () => {},
+		"bombMissed": () => {},
+		"beatmapEvent": () => {}
 	}
 
 	render() {
@@ -91,12 +265,14 @@ export default class Home extends Component {
 				<p>Provide a valid scoresaber id</p>
 				<p>Example: {document.location.origin}?id=76561198449412074</p>
 				<p>Example with Score Info: {document.location.origin}?id=76561198449412074&scoreinfo=true</p>
-				<p>Example with Score Info and without Player Stats: {document.location.origin}?id=76561198449412074&scoreinfo=true&playerstats=false</p>
 				<div className={'info'}>
 					<div>
 						<h3>Options</h3>
 						<p>scoreinfo - Can be &quot;true&quot; if you want to show your current score (needs HTTP Status)</p>
 						<p>playerstats - Can be &quot;false&quot; if you disable showing your stats (pp, global pos, etc)</p>
+						<p>songinfo - Can be &quot;true&quot; if want to see information about the song (song name, bsr, song art, etc)</p>
+						<br />
+						<p>To use a option just add &key=value (eg: &songinfo=true)</p>
 					</div>
 					<div className={'info'}>
 						<p>If you use this overlay and like it, don&apos;t forget to star the project :3</p>
@@ -118,8 +294,10 @@ export default class Home extends Component {
 					""
 				}
 				{
-					this.state.showScore ? <ScoreStats /> :
-					""
+					this.state.showScore && this.state.isVisible ? <ScoreStats data={this.state} /> : ""
+				}
+				{
+					this.state.showSongInfo && this.state.beatSaverData !== undefined && this.state.isVisible ? <SongInfo data={this.state}/> : ""
 				}
 			</div>
 			}

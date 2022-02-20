@@ -8,10 +8,11 @@ import SongInfo from "../components/SongInfo";
 
 // Why do u have to proxy requests... it's so dumb LOL
 const SCORESABER_API_URL = Config.proxy_url + "/https://scoresaber.com/api/player/%s/full";
-const BEATSAVER_API_URL = Config.proxy_url + "/https://api.beatsaver.com/maps/hash/%s";
 const GITHUB_URL = "https://github.com/RealFascinated/beatsaber-overlay";
 
 export default class Home extends Component {
+
+	#_beatSaverURL = "";
 
 	constructor(props) {
 		super(props);
@@ -58,6 +59,7 @@ export default class Home extends Component {
 	}
 
 	async componentDidMount() {
+		this.#_beatSaverURL = document.location.origin + "/api/beatsaver/map?hash=%s";
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
 
@@ -110,7 +112,7 @@ export default class Home extends Component {
 
 	connectSocket() {
 		const socket = new WebSocket('ws://localhost:6557/socket');
-		socket.addEventListener('error' || 'close', () => {
+		socket.addEventListener('close', () => {
 			console.log("Attempting to re-connect to the HTTP Status socket in 30 seconds.");
 			setTimeout(() => this.connectSocket(), 30_000);
 		});
@@ -127,9 +129,8 @@ export default class Home extends Component {
 
 	async setBeatSaver(songData) {
 		console.log("Updating BeatSaver info")
-		const data = await fetch(BEATSAVER_API_URL.replace("%s", songData.levelId.replace("custom_level_", "")));
+		const data = await fetch(this.#_beatSaverURL.replace("%s", songData.levelId));
 		const json = await data.json();
-		console.log(json)
 		this.setState({ beatSaverData: json })
 	}
 

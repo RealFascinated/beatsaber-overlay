@@ -14,6 +14,10 @@ export default class ScoreStats extends Component {
         const data = this.props.data;
         
         return <div className={'score-stats'}>
+            <div className={'score-stats-info'}>
+                <p>{data.percentage}</p>
+                <p>{data.currentScore.toLocaleString()}</p>
+            </div>
             <p className={'score-stats-average-cut'}>Average Cut</p>
             <div className={'score-stats-hands'}>
                 <div className={'score-stats-left'}>
@@ -26,11 +30,6 @@ export default class ScoreStats extends Component {
                     <p>{this.getAverage(data.rightHand.averagePostSwing).toFixed(2)}</p>
                     <p>{this.getAverage(data.rightHand.averageCut).toFixed(2)}</p>
                 </div>
-            </div>
-
-            <div className={'score-stats-info'}>
-                <p>{data.percentage}</p>
-                <p>{data.currentScore.toLocaleString()}</p>
             </div>
         </div>
     }

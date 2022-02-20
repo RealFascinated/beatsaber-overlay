@@ -3,8 +3,9 @@ module.exports = {
   images: {
     domains: [
         'cdn.scoresaber.com',
-        'na.cdn.beatsaver.com',
-        'eu.cdn.beatsaver.com'
+        'bs-overlay.fascinated.cc',
+        'localhost:3000',
+        ''
     ],
   }
 }

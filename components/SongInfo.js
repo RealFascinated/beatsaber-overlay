@@ -1,5 +1,6 @@
 import {Component} from "react";
 import Image from 'next/image'
+import Config from "../config.json";
 
 export default class SongInfo extends Component {
 
@@ -34,7 +35,6 @@ export default class SongInfo extends Component {
     }
 
     msToMinSeconds(millis) {
-        console.log(millis)
         const minutes = Math.floor(millis / 60000);
         const seconds = Number(((millis % 60000) / 1000).toFixed(0));
         return seconds === 60 ? minutes + 1 + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
@@ -42,9 +42,9 @@ export default class SongInfo extends Component {
 
     render() {
         const data = this.props.data.songData.status.beatmap;
-        const beatSaverData = this.props.data.beatSaverData;
-        const { id: bsr } = beatSaverData;
-        const songArt = beatSaverData.versions[0].coverURL;
+        const beatSaverData = this.props.data.beatSaverData.data;
+        const songArt = beatSaverData.songArt;
+        const bsr = beatSaverData.bsr;
         const {
             songName,
             songAuthorName,
@@ -53,7 +53,7 @@ export default class SongInfo extends Component {
         const songTimerPercentage = ((this.props.data.currentSongTime / 1000) / (data.length / 1000)) * 100000;
 
         return <div className={'song-info-container'}>
-            <Image src={songArt} width={150} height={150}/>
+            <img src={songArt}/>
             <div className={'song-info'}>
                 <p className={'song-info-song-name'}>{songName}</p>
                 <p className={'song-info-song-author'}>{songAuthorName}</p>

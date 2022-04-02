@@ -21,4 +21,4 @@ npm run dev
 yarn dev
 ````
 
-Lastly, open the projeect with an IDE of your choice :)
+Lastly, open the project with an IDE of your choice :)

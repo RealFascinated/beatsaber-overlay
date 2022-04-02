@@ -54,6 +54,9 @@ export default class Home extends Component {
 	isCurrentSongTimeProvided = false;
 	// we don't need to reset this to false because it is highly unlikely for a player to swap mods within a browser session
 
+	/**
+	 * Setup the timer for the song time
+	 */
 	setupTimer() {
 		setInterval(() => {
 			if (this.isCurrentSongTimeProvided) {
@@ -65,12 +68,17 @@ export default class Home extends Component {
 		}, 1000);
 	}
 
+	/**
+	 * Update the current song time
+	 * 
+	 * @param {[]} data The song data
+	 */
 	handleCurrentSongTime(data) {
 		try {
 			const time = data.status.performance.currentSongTime
-			if (time!==undefined && time!=null) {
+			if (time !== undefined && time != null) {
 				this.isCurrentSongTimeProvided = true
-				this.setState({ currentSongTime: time})
+				this.setState({ currentSongTime: time })
 			}
 		} catch (e) {
 			// do nothing
@@ -113,6 +121,12 @@ export default class Home extends Component {
 		}, 30_000); // Update the scoresaber data every 30 seconds.
 	}
 
+	/**
+	 * Fetch and update the data from ScoreSaber
+	 * 
+	 * @param {string} id The scoresaber id of the player
+	 * @returns 
+	 */
 	async updateData(id) {
 		const data = await fetch(SCORESABER_API_URL.replace("%s", id), {
 			mode: 'cors'
@@ -129,6 +143,9 @@ export default class Home extends Component {
 		this.setState({ loading: false, id: id, data: json });
 	}
 
+	/**
+	 * Setup the HTTP Status connection
+	 */
 	connectSocket() {
 		const socket = new WebSocket('ws://localhost:6557/socket');
 		socket.addEventListener('close', () => {
@@ -147,6 +164,11 @@ export default class Home extends Component {
 		this.setState({ socket: socket });
 	}
 
+	/**
+	 * Set the current songs beat saver url in {@link #_beatSaverURL}
+	 * 
+	 * @param {[]} songData 
+	 */
 	async setBeatSaver(songData) {
 		console.log("Updating BeatSaver info")
 		const data = await fetch(this.#_beatSaverURL.replace("%s", songData.levelId));
@@ -154,6 +176,11 @@ export default class Home extends Component {
 		this.setState({ beatSaverData: json })
 	}
 
+	/**
+	 * Cleanup the data and get ready for the next song
+	 * 
+	 * @param {boolean} visible Whether to show info other than the player stats
+	 */
 	resetData(visible) {
 		console.log("Exiting level, resetting data.")
 		this.setState({
@@ -176,6 +203,7 @@ export default class Home extends Component {
 		});
 	}
 
+	// The HTTP Status handlers
 	handlers = {
 		"hello": (data) => {
 			console.log("Hello from HTTP Status!");
@@ -247,7 +275,7 @@ export default class Home extends Component {
 		"softFail": () => {
 			this.setState({ failed: true });
 		},
-		"paused": () => {
+		"pause": () => {
 			this.setState({ paused: true });
 		},
 		"resume": () => {

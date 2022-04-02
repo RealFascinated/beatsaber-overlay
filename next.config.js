@@ -4,8 +4,7 @@ module.exports = {
     domains: [
         'cdn.scoresaber.com',
         'bs-overlay.fascinated.cc',
-        'localhost:3000',
-        ''
+        'localhost:3000'
     ],
   }
 }

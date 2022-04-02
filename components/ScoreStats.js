@@ -6,8 +6,14 @@ export default class ScoreStats extends Component {
         super(params);
     }
 
-    getAverage(values) {
-        return values.reduce((p, c) => p + c, 0) / values.length;
+    /**
+     * Returns the average of the provided numbers list
+     * 
+     * @param {List<Number>} hitValues 
+     * @returns The average value
+     */
+    getAverage(hitValues) {
+        return hitValues.reduce((p, c) => p + c, 0) / hitValues.length;
     }
 
     render() {

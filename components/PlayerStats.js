@@ -1,7 +1,6 @@
 import ReactCountryFlag from "react-country-flag";
 
 const PlayerStats = (props) => {
-
     return <div className={'player-stats'}>
         <p>{props.pp}pp</p>
         <p>#{props.globalPos}</p>

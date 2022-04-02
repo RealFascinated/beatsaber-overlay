@@ -50,12 +50,31 @@ export default class Home extends Component {
 	}
 
 	// I'd love if HTTP Status just gave this data lmao
+	// HttpSiraStatus(https://github.com/denpadokei/HttpSiraStatus) does give this data.
+	isCurrentSongTimeProvided = false;
+	// we don't need to reset this to false because it is highly unlikely for a player to swap mods within a browser session
+
 	setupTimer() {
 		setInterval(() => {
+			if (this.isCurrentSongTimeProvided) {
+				return
+			}
 			if (!this.state.paused && this.state.beatSaverData !== undefined) {
 				this.setState({ currentSongTime: this.state.currentSongTime + 1 })
 			}
 		}, 1000);
+	}
+
+	handleCurrentSongTime(data) {
+		try {
+			const time = data.status.performance.currentSongTime
+			if (time!==undefined && time!=null) {
+				this.isCurrentSongTimeProvided = true
+				this.setState({ currentSongTime: time})
+			}
+		} catch (e) {
+			// do nothing
+		}
 	}
 
 	async componentDidMount() {
@@ -118,6 +137,7 @@ export default class Home extends Component {
 		});
 		socket.addEventListener('message', (message) => {
 			const json = JSON.parse(message.data);
+			this.handleCurrentSongTime(json)
 			if (!this.handlers[json.event]) {
 				console.log("Unhandled message from HTTP Status. (" + json.event + ")");
 				return;

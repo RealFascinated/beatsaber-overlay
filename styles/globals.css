@@ -76,7 +76,6 @@
 	top:0;
 	right:0;
 	margin-right: 5px;
-	margin-top: -5px;
 }
 
 .score-stats-right {
@@ -107,8 +106,8 @@
 	position: fixed;
 	bottom:0;
 	left:0;
-	margin-left: 10px;
-	margin-bottom: 10px;
+	margin-left: 5px;
+	margin-bottom: 5px;
 }
 
 .song-info-container img {

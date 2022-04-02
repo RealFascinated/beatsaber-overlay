@@ -1,9 +1,7 @@
 import {Component} from "react";
-import Image from 'next/image'
-import Config from "../config.json";
 
 export default class SongInfo extends Component {
-
+    
     constructor(params) {
         super(params);
         this.state = {
@@ -16,6 +14,11 @@ export default class SongInfo extends Component {
         this.formatDiff(data.difficulty);
     }
 
+    /**
+     * Update the difficulity color from the given difficulity
+     * 
+     * @param {string} diff 
+     */
     formatDiff(diff) {
         if (diff === "Expert+") {
             this.setState({ diffColor: "#8f48db" });
@@ -34,6 +37,12 @@ export default class SongInfo extends Component {
         }
     }
 
+    /**
+     * Format the given ms
+     * 
+     * @param {Number} millis 
+     * @returns The formatted time
+     */
     msToMinSeconds(millis) {
         const minutes = Math.floor(millis / 60000);
         const seconds = Number(((millis % 60000) / 1000).toFixed(0));

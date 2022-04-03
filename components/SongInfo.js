@@ -70,7 +70,7 @@ export default class SongInfo extends Component {
                     <p className={'song-info-diff'} style={{ backgroundColor: this.state.diffColor }}>{difficulty}</p>
                     <p className={'song-info-bsr'}>!bsr {bsr}</p>
                 </div>
-                <p className={'song-time-text'}>Song Time | {this.msToMinSeconds(this.props.data.currentSongTime * 1000)}/{this.msToMinSeconds(data.length)}</p>
+                <p className={'song-time-text'}>{this.msToMinSeconds(this.props.data.currentSongTime * 1000)}/{this.msToMinSeconds(data.length)}</p>
                 <div className={'song-time-container'}>
                     <div className={'song-time-background'}/>
                     <div className={'song-time'} style={{ width: songTimerPercentage + '%' }}/>

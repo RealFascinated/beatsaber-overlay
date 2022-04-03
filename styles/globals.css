@@ -7,6 +7,13 @@
 	line-height: 0.3em;
 }
 
+/* Needed to see the UI in the browser,
+ * when using OBS it overrides the background color anyway
+ */
+*, html, html * {
+	background-color: black;
+}
+
 .loading {
 	color: black;
 }

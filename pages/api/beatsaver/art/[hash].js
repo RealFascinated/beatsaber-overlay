@@ -14,9 +14,8 @@ export default async function handler(req, res) {
 
     const imagePath = cacheDir + path.sep + mapHash + "." + ext;
     const exists = fs.existsSync(imagePath);
-    console.log(`https://na.cdn.beatsaver.com/${mapHash}.${ext}`)
     if (!exists) {
-        const data = await fetch(`https://na.cdn.beatsaver.com/${mapHash}.${ext}` );
+        const data = await fetch(`https://eu.cdn.beatsaver.com/${mapHash}.${ext}` );
         let buffer = await data.buffer();
         buffer = await sharp(buffer).resize(150, 150).toBuffer()
         fs.writeFileSync(imagePath, buffer);

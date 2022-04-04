@@ -10,7 +10,7 @@
 /* Needed to see the UI in the browser,
  * when using OBS it overrides the background color anyway
  */
-*, html, html * {
+body {
 	background-color: black;
 }
 

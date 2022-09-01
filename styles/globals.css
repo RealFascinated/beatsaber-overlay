@@ -1,14 +1,14 @@
 * {
-    font-family: 'Roboto', sans-serif;
-	color: white;
-	font-size: xx-large;
-	line-height: 0.3em;
+    font-family: 'Roboto', sans-serif !important;
+	color: white !important;
+	font-size: xx-large !important;
+	line-height: 1.4em !important;
 }
 
 /* Needed to see the UI in the browser,
  * when using OBS it overrides the background color anyway
  */
-body {
+body, html {
 	background-color: black;
 }
 
@@ -61,7 +61,7 @@ body {
 }
 
 .player-country-icon {
-	margin-top: -11px;
+	margin-top: 7px;
 	border-radius: 30%;
 }
 
@@ -72,7 +72,6 @@ body {
 .player-stats {
 	display: block;
 	margin-left: 10px;
-	margin-top: -12px;
 }
 
 .score-stats {

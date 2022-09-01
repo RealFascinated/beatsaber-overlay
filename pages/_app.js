@@ -1,11 +1,16 @@
+// 1. import `NextUIProvider` component
+import { NextUIProvider } from '@nextui-org/react';
 import Head from 'next/head'
 
 import Config from '../config.json';
 
 import '../styles/globals.css'
 
+
 function MyApp({ Component, pageProps }) {
-  return <>
+  return (
+    // 2. Use at the root of your app
+    <NextUIProvider>
 		<Head>
 			<title>{Config.name}</title>
 			<meta name="twitter:title" content= {Config.name} />
@@ -14,8 +19,9 @@ function MyApp({ Component, pageProps }) {
 			<meta property="og:description" content= {Config.description} key="description" />
 			<meta name="theme-color" content= {Config.color} />
 		</Head>
-		<Component {...pageProps} />
-  	</>
+      	<Component {...pageProps} />
+    </NextUIProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

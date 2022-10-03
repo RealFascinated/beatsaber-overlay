@@ -136,21 +136,21 @@ body, html {
 
 .song-info-song-other-container {
 	display: flex;
-	margin-top: 5px;
 }
 
 .song-info-diff {
 	font-size: large;
-	padding: 9px 5px;
+	padding: 4px 4px;
 	width: fit-content;
 	border-radius: 5%;
 	font-weight: bold;
+	margin: auto;
 }
 
 .song-info-bsr {
 	font-size: large;
 	margin-left: 10px;
-	margin-top: 28px;
+	margin-top: 3px;
 }
 
 .song-time-container {

@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
 			<meta property="og:url" content= {Config.url} key="title" />
 			<meta property="og:description" content= {Config.description} key="description" />
 			<meta name="theme-color" content= {Config.color} />	
+			<meta name="description" content= {Config.description}></meta>
 			<noscript>
 			<img src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/pixel.gif" />
 			</noscript>

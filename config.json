@@ -1,6 +1,6 @@
 {
   "name": "BeatSaber Overlay",
-  "description": "Simple scoresaber overlay",
+  "description": "A simple scoresaber overlay for OBS",
   "color": "#0EBFE9",
   "url": "https://bs-overlay.fascinated.cc",
   "proxy_url": "https://bangor375.herokuapp.com"

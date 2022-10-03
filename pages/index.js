@@ -315,6 +315,7 @@ export default class Home extends Component {
 			</div>
 			: !isValidScoresaber ? 
 			<div className={'invalid-player'}>
+				<h1>BeatSaber Overlay</h1>
 				<div style={{ fontWeight: 'bold', marginBottom: '50px' }}>
 					<p>This is currently just a simple overlay for OBS displaying ScoreSaber stats.</p>
 					<p>If you have any suggestions you can message me on discord @ Fascinated#4719</p>

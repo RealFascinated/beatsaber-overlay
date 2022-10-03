@@ -1,8 +1,11 @@
 # ScoreSaber Overlay with real-time data
 
 The public url to view/use: https://bs-overlay.fascinated.cc</br>
-To use your scoresaber: https://bs-overlay.fascinated.cc/?id=YOUR STEAM ID</br>
 Need help? Feel free to message me at: Fascinated#4719
+
+## Usage
+You will need [HttpSiraStatus](https://github.com/denpadokei/HttpSiraStatus) if you wish to use the note cut and/or the song info</br>
+To get started go to https://bs-overlay.fascinated.cc and it is fairly self explanatory on how it all works</br>
 
 ## Getting Started with developent
 

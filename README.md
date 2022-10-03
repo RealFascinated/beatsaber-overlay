@@ -1,8 +1,8 @@
 # ScoreSaber Overlay with real-time data
 
-The public url to view/use this is: `https://bs-overlay.fascinated.cc`</br>
-To use your scoresaber: `https://bs-overlay.fascinated.cc/?id=76561198449412074`</br>
-Support Server: https://discord.gg/4FYVVhZPm7
+The public url to view/use: https://bs-overlay.fascinated.cc</br>
+To use your scoresaber: https://bs-overlay.fascinated.cc/?id=YOUR STEAM ID</br>
+Need help? Feel free to message me at: Fascinated#4719
 
 ## Getting Started with developent
 

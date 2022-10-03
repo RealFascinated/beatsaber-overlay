@@ -1,7 +1,7 @@
 * {
     font-family: 'Roboto', sans-serif !important;
 	color: white !important;
-	font-size: xx-large !important;
+	font-size: xx-large;
 	line-height: 1.4em !important;
 }
 
@@ -74,12 +74,20 @@ body, html {
 	margin-left: 10px;
 }
 
+.player-stats p {
+	font-size: xx-large;
+}
+
 .score-stats {
 	text-align: center;
 	position:absolute;
 	top:0;
 	right:0;
 	margin-right: 5px;
+}
+
+.score-stats p {
+	font-size: xx-large;
 }
 
 .score-stats-right {
@@ -93,7 +101,6 @@ body, html {
 
 .score-stats-hands {
 	display: flex;
-	margin-top: -30px;
 }
 
 .score-stats-hands div {
@@ -112,6 +119,7 @@ body, html {
 	left:0;
 	margin-left: 5px;
 	margin-bottom: 5px;
+	font-size: large !important;
 }
 
 .song-info-container img {
@@ -120,7 +128,10 @@ body, html {
 
 .song-info {
 	margin-left: 10px;
-	margin-top: -10px;
+}
+
+.song-info p {
+	font-size: x-large;
 }
 
 .song-info-song-name {
@@ -136,21 +147,20 @@ body, html {
 
 .song-info-song-other-container {
 	display: flex;
+	margin-top: 6px;
 }
 
 .song-info-diff {
 	font-size: large;
-	padding: 4px 4px;
+	padding: 0px 4px 0px 4px;
 	width: fit-content;
 	border-radius: 5%;
 	font-weight: bold;
-	margin: auto;
 }
 
 .song-info-bsr {
 	font-size: large;
 	margin-left: 10px;
-	margin-top: 3px;
 }
 
 .song-time-container {
@@ -176,6 +186,6 @@ body, html {
 }
 
 .song-time-text {
-	margin-top: 8px;
+	margin-top: 6px;
 	font-size: large;
 }

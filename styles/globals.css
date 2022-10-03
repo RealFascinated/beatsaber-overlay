@@ -152,7 +152,7 @@ body, html {
 
 .song-info-diff {
 	font-size: large;
-	padding: 0px 4px 0px 4px;
+	padding: 0px 4px;
 	width: fit-content;
 	border-radius: 5%;
 	font-weight: bold;

@@ -59,6 +59,7 @@ export default class SongInfo extends Component {
             songAuthorName,
             difficulty
         } = data
+        // what in the fuck is this?? LMFAO
         const songTimerPercentage = ((this.props.data.currentSongTime / 1000) / (data.length / 1000)) * 100000;
 
         return <div className={'song-info-container'}>

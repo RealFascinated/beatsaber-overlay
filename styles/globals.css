@@ -9,7 +9,7 @@
  * when using OBS it overrides the background color anyway
  */
 body, html {
-	background-color: black;
+	background-color: transparent;
 }
 
 .loading {
@@ -37,7 +37,7 @@ body, html {
 }
 
 .invalid-player p {
-	font-size: large;
+	font-size: large !important;
 	color: white;
 }
 

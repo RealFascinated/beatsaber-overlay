@@ -295,6 +295,7 @@ export default class Home extends Component {
 	render() {
 		const { loading, isValidScoresaber, data } = this.state;
 
+		// When in the main menu, show this colour so it's actually readable
 		if (!isValidScoresaber && !loading) {
 			const body = document.body;
 			body.style.backgroundColor = "#181a1b";
@@ -322,10 +323,6 @@ export default class Home extends Component {
 						<p>songinfo - Can be &quot;true&quot; if want to see information about the song (song name, bsr, song art, etc)</p>
 						<br />
 						<p>To use a option just add &key=value (eg: &songinfo=true)</p>
-					</div>
-					<div className={'info'}>
-						<p>If you use this overlay and like it, don&apos;t forget to star the project :3</p>
-						<p>Github link: <span><a href={GITHUB_URL}>{GITHUB_URL}</a></span></p>
 					</div>
 				</div>
 			</div> :

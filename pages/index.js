@@ -101,15 +101,22 @@ export default class Home extends Component {
 			this.setState({ showPlayerStats: false });
 		}
 
+		let shouldConnectSocket = false;
+
 		// Check if the player wants to show their current score information
 		if (params.scoreinfo === 'true') {
 			this.setState({ showScore: true });
-			this.connectSocket();
+			shouldConnectSocket = true;
 		}
 
 		// Check if the player wants to show the current song
 		if (params.songinfo === 'true') {
 			this.setState({ showSongInfo: true });
+			shouldConnectSocket = true;
+		}
+
+		if (shouldConnectSocket) {
+			this.connectSocket();
 		}
 
 		await this.updateData(id);

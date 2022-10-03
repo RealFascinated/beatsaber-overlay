@@ -1,17 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-
 * {
-    font-family: 'Roboto', sans-serif;
-	color: white;
+    font-family: 'Roboto', sans-serif !important;
+	color: white !important;
 	font-size: xx-large;
-	line-height: 0.3em;
+	line-height: 1.4em !important;
 }
 
 /* Needed to see the UI in the browser,
  * when using OBS it overrides the background color anyway
  */
-body {
-	background-color: black;
+body, html {
+	background-color: transparent;
 }
 
 .loading {
@@ -39,7 +37,7 @@ body {
 }
 
 .invalid-player p {
-	font-size: large;
+	font-size: large !important;
 	color: white;
 }
 
@@ -63,7 +61,7 @@ body {
 }
 
 .player-country-icon {
-	margin-top: -11px;
+	margin-top: 7px;
 	border-radius: 30%;
 }
 
@@ -74,7 +72,10 @@ body {
 .player-stats {
 	display: block;
 	margin-left: 10px;
-	margin-top: -12px;
+}
+
+.player-stats p {
+	font-size: xx-large;
 }
 
 .score-stats {
@@ -83,6 +84,10 @@ body {
 	top:0;
 	right:0;
 	margin-right: 5px;
+}
+
+.score-stats p {
+	font-size: xx-large;
 }
 
 .score-stats-right {
@@ -96,7 +101,6 @@ body {
 
 .score-stats-hands {
 	display: flex;
-	margin-top: -30px;
 }
 
 .score-stats-hands div {
@@ -115,6 +119,7 @@ body {
 	left:0;
 	margin-left: 5px;
 	margin-bottom: 5px;
+	font-size: large !important;
 }
 
 .song-info-container img {
@@ -123,7 +128,10 @@ body {
 
 .song-info {
 	margin-left: 10px;
-	margin-top: -10px;
+}
+
+.song-info p {
+	font-size: x-large;
 }
 
 .song-info-song-name {
@@ -139,12 +147,12 @@ body {
 
 .song-info-song-other-container {
 	display: flex;
-	margin-top: 5px;
+	margin-top: 6px;
 }
 
 .song-info-diff {
 	font-size: large;
-	padding: 9px 5px;
+	padding: 0px 4px;
 	width: fit-content;
 	border-radius: 5%;
 	font-weight: bold;
@@ -153,7 +161,6 @@ body {
 .song-info-bsr {
 	font-size: large;
 	margin-left: 10px;
-	margin-top: 28px;
 }
 
 .song-time-container {
@@ -179,6 +186,6 @@ body {
 }
 
 .song-time-text {
-	margin-top: 8px;
+	margin-top: 6px;
 	font-size: large;
 }

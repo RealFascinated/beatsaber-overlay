@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
+import fetch from 'node-fetch';
 
 const cacheDir = process.cwd() + path.sep + "cache";
 if (!fs.existsSync(cacheDir)) {
@@ -15,7 +16,7 @@ export default async function handler(req, res) {
     const imagePath = cacheDir + path.sep + mapHash + "." + ext;
     const exists = fs.existsSync(imagePath);
     if (!exists) {
-        const data = await fetch(`https://eu.cdn.beatsaver.com/${mapHash}.${ext}` );
+        const data = await fetch(`https://eu.cdn.beatsaver.com/${mapHash}.${ext}`);
         let buffer = await data.buffer();
         buffer = await sharp(buffer).resize(150, 150).toBuffer()
         fs.writeFileSync(imagePath, buffer);

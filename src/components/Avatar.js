@@ -1,14 +1,5 @@
 import Image from "next/image";
 
-/**
- * 
- * placeholder?: PlaceholderValue;
-    blurDataURL?: string;
-    unoptimized?: boolean;
- * @param {*} props 
- * @returns 
- */
-
 const Avatar = (props) => {
     return <>
         <Image 

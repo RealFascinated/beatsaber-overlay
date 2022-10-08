@@ -6,7 +6,7 @@ export default class Utils {
     /**
      * Returns the information for the given website type.
      * 
-     * @param {String} website 
+     * @param {WebsiteTypes} website 
      * @returns The website type's information.
      */
     getWebsiteApi(website) {

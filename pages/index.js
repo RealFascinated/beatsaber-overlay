@@ -4,7 +4,6 @@ import PlayerStats from '../src/components/PlayerStats';
 import ScoreStats from '../src/components/ScoreStats';
 import SongInfo from "../src/components/SongInfo";
 
-import Config from '../config.json';
 import Utils from '../src/utils/utils';
 
 export default class Home extends Component {

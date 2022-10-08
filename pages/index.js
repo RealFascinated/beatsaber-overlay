@@ -8,6 +8,7 @@ import SongInfo from "../components/SongInfo";
 
 // Why do u have to proxy requests... it's so dumb LOL
 const SCORESABER_API_URL = Config.proxy_url + "/https://scoresaber.com/api/player/%s/full";
+const BEATLEADER_API_URL = Config.proxy_url + "/https://api.beatleader.xyz/player/%s";
 const GITHUB_URL = "https://github.com/RealFascinated/beatsaber-overlay";
 
 export default class Home extends Component {
@@ -20,7 +21,8 @@ export default class Home extends Component {
 		this.state = {
 			loading: true,
 			id: undefined,
-			isValidScoresaber: true,
+			isValidSteamId: true,
+			websiteType: "scoresaber",
 			data: undefined,
 			showPlayerStats: true,
 			showScore: false,
@@ -92,8 +94,13 @@ export default class Home extends Component {
 
 		const id = params.id;
 		if (!id) { // Check if the id param is valid
-			this.setState({ loading: false, isValidScoresaber: false });
+			this.setState({ loading: false, isValidSteamId: false });
 			return;
+		}
+
+		// Check if the player wants to disable their stats (pp, global pos, etc)
+		if (params.beatleader === 'true') {
+			this.setState({ websiteType: "beatleader" });
 		}
 
 		// Check if the player wants to disable their stats (pp, global pos, etc)
@@ -121,30 +128,34 @@ export default class Home extends Component {
 
 		await this.updateData(id);
 		setTimeout(async () => {
-			if (!this.state.isValidScoresaber) {
+			if (!this.state.isValidSteamId) {
 				return;
 			}
 			await this.updateData(id);
-		}, 30_000); // Update the scoresaber data every 30 seconds.
+		}, 30_000); // Update the player data every 30 seconds.
 	}
 
 	/**
-	 * Fetch and update the data from ScoreSaber
+	 * Fetch and update the data from the respective platform
 	 * 
-	 * @param {string} id The scoresaber id of the player
+	 * @param {string} id The steam id of the player
 	 * @returns 
 	 */
 	async updateData(id) {
-		const data = await fetch(SCORESABER_API_URL.replace("%s", id), {
+		const data = await fetch(this.state.websiteType == "scoresaber" ? SCORESABER_API_URL.replace("%s", id) : BEATLEADER_API_URL.replace("%s", id), {
 			mode: 'cors'
 		});
-		if (data.status === 422) { // Invalid scoresaber account (I think??)
-			this.setState({ loading: false, isValidScoresaber: false });
-			return;
+		if (this.state.websiteType == "scoresaber") {
+			if (data.status === 422) { // Invalid steam account (I think??)
+				this.setState({ loading: false, isValidSteamId: false });
+				return;
+			}
+		} else { // Assume BeatLeader
+
 		}
 		const json = await data.json();
-		if (json.errorMessage) { // Invalid scoresaber account
-			this.setState({ loading: false, isValidScoresaber: false });
+		if (json.errorMessage) { // Invalid steam account
+			this.setState({ loading: false, isValidSteamId: false });
 			return;
 		}
 		this.setState({ loading: false, id: id, data: json });
@@ -300,10 +311,10 @@ export default class Home extends Component {
 	}
 
 	render() {
-		const { loading, isValidScoresaber, data } = this.state;
+		const { loading, isValidSteamId, data } = this.state;
 
 		// When in the main menu, show this colour so it's actually readable
-		if (!isValidScoresaber && !loading) {
+		if (!isValidSteamId && !loading) {
 			const body = document.body;
 			body.style.backgroundColor = "#181a1b";
 		}
@@ -313,14 +324,14 @@ export default class Home extends Component {
 			<div className={'loading'}>
 				<h2>Loading...</h2>
 			</div>
-			: !isValidScoresaber ? 
+			: !isValidSteamId ? 
 			<div className={'invalid-player'}>
 				<h1>BeatSaber Overlay</h1>
 				<div style={{ fontWeight: 'bold', marginBottom: '50px' }}>
-					<p>This is currently just a simple overlay for OBS displaying ScoreSaber stats.</p>
+					<p>This is currently just a simple overlay for OBS displaying ScoreSaber or BeatLeader stats.</p>
 					<p>If you have any suggestions you can message me on discord @ Fascinated#4719</p>
 				</div>
-				<p>Provide a valid scoresaber id</p>
+				<p>Provide a valid steam id for scoresaber or beatleader</p>
 				<p>Example: {document.location.origin}?id=76561198449412074</p>
 				<p>Example with Score Info: {document.location.origin}?id=76561198449412074&scoreinfo=true</p>
 				<div className={'info'}>

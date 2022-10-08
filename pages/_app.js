@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
     // 2. Use at the root of your app
     <NextUIProvider>
 		<Head>
-			<title>{Config.name}</title>
+			<title>{Config.title}</title>
 			<meta name="twitter:title" content= {Config.name} />
 			<meta property="og:site_name" content= {Config.name} key="title" />
 			<meta property="og:url" content= {Config.url} key="title" />

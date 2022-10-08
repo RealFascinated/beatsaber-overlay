@@ -19,6 +19,11 @@ function MyApp({ Component, pageProps }) {
 			<meta property="og:description" content= {Config.description} key="description" />
 			<meta name="theme-color" content= {Config.color} />	
 			<meta name="description" content= {Config.description}></meta>
+			<meta property="og:keywords" content="BeatSaber,Overlay,OBS,Twitch,YouTube,BeatSaber Overlay,Github," />
+
+			<meta name="twitter:card" content="summary_large_image" />
+			<meta property="og:image" content="https://cdn.fascinated.cc/YrATaLjUOP.png?raw=true" />
+
 			<noscript>
 			<img src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/pixel.gif" />
 			</noscript>

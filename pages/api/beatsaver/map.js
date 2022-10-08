@@ -1,11 +1,11 @@
-import Utils from '../../../utils/utils'
+import Utils from '../../../utils/utils';
 
 export default async function handler(req, res) {
     const mapHash = req.query.hash;
 
     const mapData = await Utils.getMapData(mapHash.replace("custom_level_", ""));
     if (mapData === undefined) { // Check if a map hash was provided
-        return res.json({ error: true, message: "Unknown map" })
+        return res.json({ error: true, message: "Unknown map" });
     }
     const data = { // The maps data from the provided map hash
         bsr: mapData.id,

@@ -1,14 +1,11 @@
 import {Component} from 'react'
-import Avatar from '../components/Avatar';
-import PlayerStats from '../components/PlayerStats';
-import ScoreStats from '../components/ScoreStats';
+import Avatar from '../src/components/Avatar';
+import PlayerStats from '../src/components/PlayerStats';
+import ScoreStats from '../src/components/ScoreStats';
+import SongInfo from "../src/components/SongInfo";
 
 import Config from '../config.json';
-import SongInfo from "../components/SongInfo";
-
-// Why do u have to proxy requests... it's so dumb LOL
-const SCORESABER_API_URL = Config.proxy_url + "/https://scoresaber.com/api/player/%s/full";
-const BEATLEADER_API_URL = Config.proxy_url + "/https://api.beatleader.xyz/player/%s";
+import Utils from '../src/utils/utils';
 
 export default class Home extends Component {
 
@@ -142,8 +139,8 @@ export default class Home extends Component {
 	 * @param {string} id The steam id of the player
 	 * @returns 
 	 */
-	async updateData(id) {
-		const data = await fetch(this.state.websiteType == "ScoreSaber" ? SCORESABER_API_URL.replace("%s", id) : BEATLEADER_API_URL.replace("%s", id), {
+	async updateData(id) { 
+		const data = await fetch(new Utils().getWebsiteApi(id == "test" ? "Test" : this.state.websiteType).ApiUrl.replace("%s", id), {
 			mode: 'cors'
 		});
 		const json = await data.json();
@@ -195,15 +192,15 @@ export default class Home extends Component {
 	resetData(visible) {
 		console.log("Exiting level, resetting data.")
 		this.setState({
-			"leftHand": {
-				"averageCut": [15.00],
-				"averagePreSwing": [70.00],
-				"averagePostSwing": [30.00],
+			leftHand: {
+				averageCut: [15.00],
+				averagePreSwing: [70.00],
+				averagePostSwing: [30.00],
 			},
-			"rightHand": {
-				"averageCut": [15.00],
-				"averagePreSwing": [70.00],
-				"averagePostSwing": [30.00],
+			rightHand: {
+				averageCut: [15.00],
+				averagePreSwing: [70.00],
+				averagePostSwing: [30.00],
 			},
 			songInfo: undefined,
 			beatSaverData: undefined,

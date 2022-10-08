@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 const cacheDir = process.cwd() + path.sep + "cache";
 if (!fs.existsSync(cacheDir)) {
     fs.mkdirSync(cacheDir);
-    console.log("Created cache directory")
+    console.log("Created cache directory");
 }
 
 export default async function handler(req, res) {
@@ -18,14 +18,14 @@ export default async function handler(req, res) {
     if (!exists) {
         const data = await fetch(`https://eu.cdn.beatsaver.com/${mapHash}.${ext}`);
         let buffer = await data.buffer();
-        buffer = await sharp(buffer).resize(150, 150).toBuffer()
+        buffer = await sharp(buffer).resize(150, 150).toBuffer();
         fs.writeFileSync(imagePath, buffer);
-        res.setHeader('Content-Type', 'image/' + ext)
+        res.setHeader('Content-Type', 'image/' + ext);
         res.send(buffer);
-        console.log("Song Cache - Added song \"" + mapHash + "\"")
+        console.log("Song Cache - Added song \"" + mapHash + "\"");
         return;
     }
     const buffer = fs.readFileSync(imagePath);
-    res.setHeader('Content-Type', 'image/jpg' + ext)
+    res.setHeader('Content-Type', 'image/jpg' + ext);
     res.send(buffer);
 }

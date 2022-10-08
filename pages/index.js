@@ -9,7 +9,6 @@ import SongInfo from "../components/SongInfo";
 // Why do u have to proxy requests... it's so dumb LOL
 const SCORESABER_API_URL = Config.proxy_url + "/https://scoresaber.com/api/player/%s/full";
 const BEATLEADER_API_URL = Config.proxy_url + "/https://api.beatleader.xyz/player/%s";
-const GITHUB_URL = "https://github.com/RealFascinated/beatsaber-overlay";
 
 export default class Home extends Component {
 
@@ -22,7 +21,7 @@ export default class Home extends Component {
 			loading: true,
 			id: undefined,
 			isValidSteamId: true,
-			websiteType: "scoresaber",
+			websiteType: "ScoreSaber",
 			data: undefined,
 			showPlayerStats: true,
 			showScore: false,
@@ -92,6 +91,11 @@ export default class Home extends Component {
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
 
+		// Check if the player wants to disable their stats (pp, global pos, etc)
+		if (params.beatleader === 'true') {
+			this.setState({ websiteType: "BeatLeader" });
+		}
+
 		const id = params.id;
 		if (!id) { // Check if the id param is valid
 			this.setState({ loading: false, isValidSteamId: false });
@@ -99,14 +103,19 @@ export default class Home extends Component {
 		}
 
 		// Check if the player wants to disable their stats (pp, global pos, etc)
-		if (params.beatleader === 'true') {
-			this.setState({ websiteType: "beatleader" });
-		}
-
-		// Check if the player wants to disable their stats (pp, global pos, etc)
 		if (params.playerstats === 'false') {
 			this.setState({ showPlayerStats: false });
 		}
+
+		setTimeout(async () => {
+			await this.updateData(id);
+		}, 10);
+		setTimeout(async () => {
+			if (!this.state.isValidSteamId) {
+				return;
+			}
+			await this.updateData(id);
+		}, 30_000); // Update the player data every 30 seconds.
 
 		let shouldConnectSocket = false;
 
@@ -125,14 +134,6 @@ export default class Home extends Component {
 		if (shouldConnectSocket) {
 			this.connectSocket();
 		}
-
-		await this.updateData(id);
-		setTimeout(async () => {
-			if (!this.state.isValidSteamId) {
-				return;
-			}
-			await this.updateData(id);
-		}, 30_000); // Update the player data every 30 seconds.
 	}
 
 	/**
@@ -142,17 +143,9 @@ export default class Home extends Component {
 	 * @returns 
 	 */
 	async updateData(id) {
-		const data = await fetch(this.state.websiteType == "scoresaber" ? SCORESABER_API_URL.replace("%s", id) : BEATLEADER_API_URL.replace("%s", id), {
+		const data = await fetch(this.state.websiteType == "ScoreSaber" ? SCORESABER_API_URL.replace("%s", id) : BEATLEADER_API_URL.replace("%s", id), {
 			mode: 'cors'
 		});
-		if (this.state.websiteType == "scoresaber") {
-			if (data.status === 422) { // Invalid steam account (I think??)
-				this.setState({ loading: false, isValidSteamId: false });
-				return;
-			}
-		} else { // Assume BeatLeader
-
-		}
 		const json = await data.json();
 		if (json.errorMessage) { // Invalid steam account
 			this.setState({ loading: false, isValidSteamId: false });
@@ -311,7 +304,7 @@ export default class Home extends Component {
 	}
 
 	render() {
-		const { loading, isValidSteamId, data } = this.state;
+		const { loading, isValidSteamId, data, websiteType } = this.state;
 
 		// When in the main menu, show this colour so it's actually readable
 		if (!isValidSteamId && !loading) {
@@ -337,6 +330,7 @@ export default class Home extends Component {
 				<div className={'info'}>
 					<div>
 						<h3>Options</h3>
+						<p>beatleader - Can be &quot;true&quot; if you wish to get player data from BeatLeader rather than scoresaber</p>
 						<p>scoreinfo - Can be &quot;true&quot; if you want to show your current score (needs HTTP Status)</p>
 						<p>playerstats - Can be &quot;false&quot; if you disable showing your stats (pp, global pos, etc)</p>
 						<p>songinfo - Can be &quot;true&quot; if want to see information about the song (song name, bsr, song art, etc)</p>
@@ -348,12 +342,13 @@ export default class Home extends Component {
 			<div className={'overlay'}>
 				{ this.state.showPlayerStats ?
 					<div className={'player-stats-container'}>
-						<Avatar url={data.profilePicture} />
+						<Avatar url={data.profilePicture || data.avatar} />
 						<PlayerStats
 							pp={data.pp.toLocaleString()}
 							globalPos={data.rank.toLocaleString()}
 							country={data.country}
 							countryRank={data.countryRank.toLocaleString()}
+							websiteType={websiteType}
 						/>
 					</div> :
 					""

@@ -13,6 +13,7 @@ export default class Home extends Component {
 		super(props);
 
 		this.state = {
+			loading: true,
 			steamId: undefined,
 			isPreviewVisible: false,
 			previewUrl: undefined,
@@ -46,6 +47,7 @@ export default class Home extends Component {
 			const json = JSON.parse(localStorage.getItem('values'))
 			this.setState({ steamId: json.steamId, values: json.values });
 		}
+		this.setState({ loading: false });
 	}
 
 	loadPreview() {
@@ -85,7 +87,8 @@ export default class Home extends Component {
 	}
 
 	render() {
-		return <div className={styles.main}>
+		return this.state.loading ? <h1>Loading...</h1> : 
+		<div className={styles.main}>
 			<NavBar></NavBar>
 
 			<Container css={{
@@ -184,5 +187,5 @@ export default class Home extends Component {
 
 			<ToastContainer />
 		</div>
-	}
+}
 }

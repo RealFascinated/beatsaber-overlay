@@ -1,6 +1,8 @@
-import { Component } from 'react'
+import { Card, Container, Grid } from '@nextui-org/react';
+import { Component } from 'react';
+import NavBar from '../src/components/Navbar';
 
-import '../styles/main.module.css'
+import styles from '../styles/main.module.css';
 
 export default class Home extends Component {
 
@@ -18,8 +20,22 @@ export default class Home extends Component {
 	}
 
 	render() {
-		return <div className={main}>
-			hi
+		return <div className={styles.main}>
+			<NavBar></NavBar>
+
+			<Container css={{
+				marginTop: '$15'
+			}}>
+				<Grid.Container>
+					<Grid xs={12}>
+						<Card>
+							<Card.Body>
+								hello!
+							</Card.Body>
+						</Card>
+					</Grid>
+				</Grid.Container>
+			</Container>
 		</div>
 	}
 }

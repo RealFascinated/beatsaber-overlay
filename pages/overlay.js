@@ -1,13 +1,11 @@
 import { Link } from '@nextui-org/react';
 import {Component} from 'react'
-import Avatar from '../src/components/Avatar';
 import PlayerStats from '../src/components/PlayerStats';
 import ScoreStats from '../src/components/ScoreStats';
 import SongInfo from "../src/components/SongInfo";
 
 import Utils from '../src/utils/utils';
 import styles from '../styles/overlay.module.css';
-import playerStatsStyles from '../styles/playerStats.module.css';
 
 export default class Overlay extends Component {
 

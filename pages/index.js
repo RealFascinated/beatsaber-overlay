@@ -105,13 +105,7 @@ export default class Home extends Component {
 
 		setTimeout(async () => {
 			await this.updateData(id);
-		}, 10);
-		setTimeout(async () => {
-			if (!this.state.isValidSteamId) {
-				return;
-			}
-			await this.updateData(id);
-		}, 30_000); // Update the player data every 30 seconds.
+		}, 10); // 10ms
 
 		let shouldConnectSocket = false;
 
@@ -188,8 +182,11 @@ export default class Home extends Component {
 	 * 
 	 * @param {boolean} visible Whether to show info other than the player stats
 	 */
-	resetData(visible) {
+	async resetData(visible) {
 		console.log("Exiting level, resetting data.")
+		setTimeout(async () => {
+			await this.updateData(id);
+		}, 250);
 		this.setState({
 			leftHand: {
 				averageCut: [15.00],
@@ -276,7 +273,6 @@ export default class Home extends Component {
 			this.setBeatSaver(data.status.beatmap);
 		},
 		"finished": () => {
-			console.log("Exiting level, resetting data.")
 			this.resetData(false);
 		},
 		"softFail": () => {
@@ -289,7 +285,6 @@ export default class Home extends Component {
 			this.setState({ paused: false });
 		},
 		"menu": () => {
-			console.log("Exiting level, resetting data.")
 			this.resetData(false);
 		},
 		"noteCut": () => {},

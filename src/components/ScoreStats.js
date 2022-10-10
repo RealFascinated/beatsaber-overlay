@@ -1,5 +1,7 @@
 import {Component} from "react";
 
+import styles from '../../styles/scoreStats.module.css';
+
 export default class ScoreStats extends Component {
 
     constructor(params) {
@@ -19,19 +21,19 @@ export default class ScoreStats extends Component {
     render() {
         const data = this.props.data;
         
-        return <div className={'score-stats'}>
-            <div className={'score-stats-info'}>
+        return <div className={styles.scoreStats}>
+            <div className={styles.scoreStatsInfo}>
                 <p>{data.percentage}</p>
                 <p>{data.currentScore.toLocaleString()}</p>
             </div>
-            <p className={'score-stats-average-cut'}>Average Cut</p>
-            <div className={'score-stats-hands'}>
-                <div className={'score-stats-left'}>
+            <p className={styles.scoreStatsAverageCut}>Average Cut</p>
+            <div className={styles.scoreStatsHands}>
+                <div className={styles.scoreStatsLeft}>
                     <p>{this.getAverage(data.leftHand.averagePreSwing).toFixed(2)}</p>
                     <p>{this.getAverage(data.leftHand.averagePostSwing).toFixed(2)}</p>
                     <p>{this.getAverage(data.leftHand.averageCut).toFixed(2)}</p>
                 </div>
-                <div className={'score-stats-right'}>
+                <div className={styles.scoreStatsRight}>
                     <p>{this.getAverage(data.rightHand.averagePreSwing).toFixed(2)}</p>
                     <p>{this.getAverage(data.rightHand.averagePostSwing).toFixed(2)}</p>
                     <p>{this.getAverage(data.rightHand.averageCut).toFixed(2)}</p>

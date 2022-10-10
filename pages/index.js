@@ -1,4 +1,7 @@
-import {Component} from 'react'
+import { Component } from 'react'
+
+import '../styles/main.module.css'
+
 export default class Home extends Component {
 
 	constructor(props) {
@@ -6,11 +9,17 @@ export default class Home extends Component {
 	}
 
 	async componentDidMount() {
+		const urlSearchParams = new URLSearchParams(window.location.search);
+		const params = Object.fromEntries(urlSearchParams.entries());
+
+		if (params.id) {
+			document.location.href = "/overlay/"+ window.location.search
+		}
 	}
 
 	render() {
-		return <>
+		return <div className={main}>
 			hi
-		</>
+		</div>
 	}
 }

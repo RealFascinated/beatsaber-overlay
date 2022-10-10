@@ -1,0 +1,77 @@
+.songInfoContainer {
+	display: flex;
+	position: fixed;
+	bottom:0;
+	left:0;
+	margin-left: 5px;
+	margin-bottom: 5px;
+	font-size: large !important;
+}
+
+.songInfoContainer img {
+	border-radius: 5%;
+}
+
+.songInfo {
+	margin-left: 10px;
+}
+
+.songInfo p {
+	font-size: x-large;
+}
+
+.songInfoSongName {
+	font-size: x-large;
+	font-weight: bold;
+}
+
+.songInfoSongAuthor {
+	font-size: large;
+	margin-top: -5px;
+	margin-bottom: -5px;
+}
+
+.songInfoSongOtherContainer {
+	display: flex;
+	margin-top: 6px;
+}
+
+.songInfoDiff {
+	font-size: large;
+	padding: 0px 4px;
+	width: fit-content;
+	border-radius: 5%;
+	font-weight: bold;
+}
+
+.songInfoBsr {
+	font-size: large;
+	margin-left: 10px;
+}
+
+.songTimeContainer {
+	width: 200px;
+	display: grid;
+}
+
+.songTimeBackground {
+	grid-column: 1;
+	grid-row: 1;
+	z-index: 1;
+	padding: 3px;
+	width: 100%;
+	background-color: white !important;
+}
+
+.songTime {
+	grid-column: 1;
+	grid-row: 1;
+	z-index: 2;
+	padding: 3px;
+	background-color: red !important;
+}
+
+.songTimeText {
+	margin-top: 6px;
+	font-size: large;
+}

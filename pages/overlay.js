@@ -6,8 +6,10 @@ import ScoreStats from '../src/components/ScoreStats';
 import SongInfo from "../src/components/SongInfo";
 
 import Utils from '../src/utils/utils';
+import styles from '../styles/overlay.module.css';
+import playerStatsStyles from '../styles/playerStats.module.css';
 
-export default class Home extends Component {
+export default class Overlay extends Component {
 
 	#_beatSaverURL = "";
 
@@ -122,7 +124,6 @@ export default class Home extends Component {
 			shouldConnectSocket = true;
 		}
 
-		console.log(`shouldConnectSocket = ${shouldConnectSocket}`);
 		if (shouldConnectSocket) {
 			this.connectSocket(params.socketaddress);
 		}
@@ -150,12 +151,15 @@ export default class Home extends Component {
 	 * Setup the HTTP Status connection
 	 */
 	connectSocket(socketAddress) {
-		socketAddress = socketAddress === undefined ? 'ws://localhost' : `ws://${socketAddress}:6557/socket`;
+		socketAddress = (socketAddress === undefined ? 'ws://localhost' : `ws://${socketAddress}`) + ":6557/socket";
 		console.log(`Connecting to ${socketAddress}`);
 		const socket = new WebSocket(socketAddress);
+        socket.addEventListener('open', () => {
+            console.log(`Connected to ${socketAddress}`);
+        });
 		socket.addEventListener('close', () => {
-			console.log("Attempting to re-connect to the HTTP Status socket in 30 seconds.");
-			setTimeout(() => this.connectSocket(), 30_000);
+			console.log("Attempting to re-connect to the HTTP Status socket in 10 seconds.");
+			setTimeout(() => this.connectSocket(), 10_000);
 		});
 		socket.addEventListener('message', (message) => {
 			const json = JSON.parse(message.data);
@@ -295,7 +299,8 @@ export default class Home extends Component {
 		"noteMissed": () => {},
 		"noteSpawned": () => {},
 		"bombMissed": () => {},
-		"beatmapEvent": () => {}
+		"beatmapEvent": () => {},
+        "energyChanged": () => {},
 	}
 
 	render() {
@@ -307,31 +312,29 @@ export default class Home extends Component {
 			body.style.backgroundColor = "#181a1b";
 		}
 
-		return <>
+		return <div className={styles.main}>
 			{ loading ? 
-			<div className={'loading'}>
+			<div className={styles.loading}>
 				<h2>Loading...</h2>
 			</div>
 			: !isValidSteamId ? 
-			<div className={'invalid-player'}>
+			<div className={styles.invalidPlayer}>
 				<h1>Invalid player, please visit the main page.</h1>
                 <Link href="/">
                     <a>Go Home</a>
                 </Link>
 			</div> :
-			<div className={'overlay'}>
-				{ this.state.showPlayerStats ?
-					<div className={'player-stats-container'}>
-						<Avatar url={data.profilePicture || data.avatar} />
-						<PlayerStats
-							pp={data.pp.toLocaleString()}
-							globalPos={data.rank.toLocaleString()}
-							country={data.country}
-							countryRank={data.countryRank.toLocaleString()}
-							websiteType={websiteType}
-						/>
-					</div> :
-					""
+			<div className={styles.overlay}>
+				{ 
+                    this.state.showPlayerStats ? <PlayerStats
+                        pp={data.pp.toLocaleString()}
+                        globalPos={data.rank.toLocaleString()}
+                        country={data.country}
+                        countryRank={data.countryRank.toLocaleString()}
+                        websiteType={websiteType}
+                        avatar={data.profilePicture || data.avatar}
+                        /> 
+                    : ""
 				}
 				{
 					this.state.showScore && this.state.isVisible ? <ScoreStats data={this.state} /> : ""
@@ -341,6 +344,6 @@ export default class Home extends Component {
 				}
 			</div>
 			}
-		</>
+		</div>
 	}
 }

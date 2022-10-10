@@ -1,9 +1,11 @@
 import Image from "next/image";
 
+import styles from '../../styles/avatar.module.css';
+
 const Avatar = (props) => {
     return <>
         <Image 
-            className={'player-avatar'}
+            className={styles.playerAvatar}
             src={props.url}
             width={180}
             height={180}

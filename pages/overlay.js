@@ -124,8 +124,8 @@ export default class Overlay extends Component {
 		}
 
         // Mainly used for the preview
-		if (params.bg) {
-			this.setState({ backgroundColor: params.bg });
+		if (params.withTc) {
+			this.setState({ backgroundColor: params.withTc });
 		}
 
 		if (shouldConnectSocket) {
@@ -318,7 +318,7 @@ export default class Overlay extends Component {
 
         if (this.state.backgroundColor !== undefined) {
             const body = document.body;
-			body.style.backgroundColor = "#" + this.state.backgroundColor;
+			body.style.color = "#" + this.state.backgroundColor;
         }
 
 		return <div className={styles.main}>

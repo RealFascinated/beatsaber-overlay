@@ -1,0 +1,41 @@
+.playerStatsContainer {
+	display: flex;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.playerStatsContainer p {
+	font-size: xx-large;
+	line-height: 1.4em !important;
+}
+
+.playerCountry {
+	display: flex;
+	line-height: normal;
+}
+
+.playerCountry span {
+	margin-top: 3px;
+}
+
+.playerCountry p {
+	margin: 0 6px 0 0;
+}
+
+.playerCountryIcon {
+	margin-top: 7px;
+	border-radius: 30%;
+}
+
+.playerAvatar {
+	border-radius: 5%;
+}
+
+.playerStats {
+	display: block;
+	margin-left: 10px;
+}
+
+.playerStats p {
+	font-size: xx-large;
+}

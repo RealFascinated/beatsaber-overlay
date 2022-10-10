@@ -1,0 +1,34 @@
+.scoreStats {
+	text-align: center;
+	position:absolute;
+	top:0;
+	right:0;
+	margin-right: 5px;
+}
+
+.scoreStats p {
+	font-size: xx-large;
+	line-height: 1.4em;
+}
+
+.scoreStatsRight {
+	margin-right: 10px;
+}
+
+.scoreStatsAverageCut {
+	font-weight: bold;
+	font-size: x-large;
+}
+
+.scoreStatsHands {
+	display: flex;
+}
+
+.scoreStatsHands div {
+	padding-left: 10px;
+}
+
+.scoreStatsInfo {
+	margin-right: 10px;
+	text-align: right;
+}

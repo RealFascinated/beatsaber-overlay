@@ -1,5 +1,7 @@
 import {Component} from "react";
 
+import styles from '../../styles/songInfo.module.css';
+
 export default class SongInfo extends Component {
     
     constructor(params) {
@@ -62,19 +64,19 @@ export default class SongInfo extends Component {
         // what in the fuck is this?? LMFAO
         const songTimerPercentage = ((this.props.data.currentSongTime / 1000) / (data.length / 1000)) * 100000;
 
-        return <div className={'song-info-container'}>
+        return <div className={styles.songInfoContainer}>
             <img src={songArt}/>
-            <div className={'song-info'}>
-                <p className={'song-info-song-name'}>{songName}</p>
-                <p className={'song-info-song-author'}>{songAuthorName}</p>
-                <div className={'song-info-song-other-container'}>
-                    <p className={'song-info-diff'} style={{ backgroundColor: this.state.diffColor }}>{difficulty}</p>
-                    <p className={'song-info-bsr'}>!bsr {bsr}</p>
+            <div className={styles.songInfo}>
+                <p className={styles.songInfoSongName}>{songName.length > 35 ? songName.substring(0, 35) + "..." : songName}</p>
+                <p className={styles.songInfoSongAuthor}>{songAuthorName}</p>
+                <div className={styles.songInfoSongOtherContainer}>
+                    <p className={styles.songInfoDiff} style={{ backgroundColor: this.state.diffColor }}>{difficulty}</p>
+                    <p className={styles.songInfoBsr}>!bsr {bsr}</p>
                 </div>
-                <p className={'song-time-text'}>{this.msToMinSeconds(this.props.data.currentSongTime * 1000)}/{this.msToMinSeconds(data.length)}</p>
-                <div className={'song-time-container'}>
-                    <div className={'song-time-background'}/>
-                    <div className={'song-time'} style={{ width: songTimerPercentage + '%' }}/>
+                <p className={styles.songTimeText}>{this.msToMinSeconds(this.props.data.currentSongTime * 1000)}/{this.msToMinSeconds(data.length)}</p>
+                <div className={styles.songTimeContainer}>
+                    <div className={styles.songTimeBackground}/>
+                    <div className={styles.songTime} style={{ width: songTimerPercentage + '%' }}/>
                 </div>
             </div>
         </div>

@@ -119,7 +119,7 @@ export default class Home extends Component {
 					<Grid xs={12}>
 						<Card>
 							<Card.Body>
-								<Text>Welcome to the Setup panel</Text>
+								<Text b>Welcome to the Setup panel</Text>
 								
 								<Spacer y={2} />	
 								
@@ -150,7 +150,7 @@ export default class Home extends Component {
 								<Switch onChange={event => this.updateValue("showScoreInfo", event.target.checked)} checked={this.state.values.showScoreInfo} size="md" />
 								<Text>Do you want to show Song Info (Song name, bsr, song art, etc)</Text>
 								<Switch onChange={event => this.updateValue("showSongInfo", event.target.checked)} checked={this.state.values.showSongInfo} size="md" />
-								<Spacer y={2} />
+								<Spacer y={1} />
 
 								<Button.Group>
 									<Button flat auto onClick={() => {

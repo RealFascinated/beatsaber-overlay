@@ -8,8 +8,8 @@ You will need [HttpSiraStatus](https://github.com/denpadokei/HttpSiraStatus) if 
 To get started go to https://bs-overlay.fascinated.cc and it is fairly self explanatory on how it all works</br>
 
 ## Preview:
-![Builder Menu](https://cdn.fascinated.cc/TRtxaPcjTN.png?raw=true)
 ![Overlay](https://cdn.fascinated.cc/UHjukWwHNL.png?raw=true)
+![Builder Menu](https://cdn.fascinated.cc/TRtxaPcjTN.png?raw=true)
 
 ## Getting Started with developent
 

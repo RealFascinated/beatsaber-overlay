@@ -23,6 +23,7 @@ export default class Overlay extends Component {
 			showPlayerStats: true,
 			showScore: false,
 			showSongInfo: false,
+            backgroundColor: undefined,
 
 			socket: undefined,
 			isVisible: false,
@@ -88,7 +89,7 @@ export default class Overlay extends Component {
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
 
-		// Check if the player wants to disable their stats (pp, global pos, etc)
+		// Check what website the player wants to use
 		if (params.beatleader === 'true') {
 			this.setState({ websiteType: "BeatLeader" });
 		}
@@ -122,6 +123,11 @@ export default class Overlay extends Component {
 			shouldConnectSocket = true;
 		}
 
+        // Mainly used for the preview
+		if (params.bg) {
+			this.setState({ backgroundColor: params.bg });
+		}
+
 		if (shouldConnectSocket) {
 			this.connectSocket(params.socketaddress);
 		}
@@ -138,7 +144,7 @@ export default class Overlay extends Component {
 			mode: 'cors'
 		});
 		const json = await data.json();
-		if (json.errorMessage) { // Invalid steam account
+		if (json.errorMessage) { // Invalid account
 			this.setState({ loading: false, isValidSteamId: false });
 			return;
 		}
@@ -309,6 +315,11 @@ export default class Overlay extends Component {
 			const body = document.body;
 			body.style.backgroundColor = "#181a1b";
 		}
+
+        if (this.state.backgroundColor !== undefined) {
+            const body = document.body;
+			body.style.backgroundColor = "#" + this.state.backgroundColor;
+        }
 
 		return <div className={styles.main}>
 			{ loading ? 

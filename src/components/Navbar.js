@@ -4,7 +4,7 @@ const NavBar = () => {
     return <Navbar isBordered variant={"sticky"}>
         <Navbar.Brand>
             <Text b color="inherit">
-                Beat Saber Overlay
+                BeatSaber Overlay
             </Text>
         </Navbar.Brand>
     </Navbar>

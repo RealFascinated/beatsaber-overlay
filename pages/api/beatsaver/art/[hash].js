@@ -22,7 +22,7 @@ export default async function handler(req, res) {
         fs.writeFileSync(imagePath, buffer);
         res.setHeader('Content-Type', 'image/' + ext);
         res.send(buffer);
-        console.log("Song Cache - Added song \"" + mapHash + "\"");
+        console.log("Song Art Cache - Added song \"" + mapHash + "\"");
         return;
     }
     const buffer = fs.readFileSync(imagePath);

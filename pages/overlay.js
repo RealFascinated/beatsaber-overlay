@@ -343,13 +343,15 @@ export default class Overlay extends Component {
                         websiteType={websiteType}
                         avatar={data.profilePicture || data.avatar}
                         /> 
-                    : ""
+                    : <></>
 				}
 				{
-					this.state.showScore && this.state.isVisible ? <ScoreStats data={this.state} /> : ""
+					this.state.showScore && this.state.isVisible ? 
+                        <ScoreStats data={this.state} /> : <></>
 				}
 				{
-					this.state.showSongInfo && this.state.beatSaverData !== undefined && this.state.isVisible ? <SongInfo data={this.state}/> : ""
+					this.state.showSongInfo && this.state.beatSaverData !== undefined && this.state.isVisible ? 
+                        <SongInfo data={this.state}/> : <></>
 				}
 			</div>
 			}

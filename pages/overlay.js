@@ -310,12 +310,6 @@ export default class Overlay extends Component {
 	render() {
 		const { loading, isValidSteamId, data, websiteType } = this.state;
 
-		// When in the main menu, show this colour so it's actually readable
-		if (!isValidSteamId && !loading) {
-			const body = document.body;
-			body.style.backgroundColor = "#181a1b";
-		}
-
         if (this.state.textColor !== undefined) {
             const element = document.querySelector("." + styles.main);
             element.style.color = this.state.textColor

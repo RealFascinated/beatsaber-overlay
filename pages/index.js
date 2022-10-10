@@ -65,7 +65,7 @@ export default class Home extends Component {
 			values += `&${value[0]}=${value[1]}`;
 		});
 
-		return window.location.origin + "/overlay?id=" + this.state.steamId + values + (withTc ? "&tc=black" : "");
+		return window.location.origin + "/overlay?id=" + this.state.steamId + values + (withTc ? "&textColor=black" : "");
 	}
 
 	updateValue(key, value) {

@@ -23,7 +23,7 @@ export default class Overlay extends Component {
 			showPlayerStats: true,
 			showScore: false,
 			showSongInfo: false,
-            backgroundColor: undefined,
+            textColor: undefined,
 
 			socket: undefined,
 			isVisible: false,
@@ -124,8 +124,8 @@ export default class Overlay extends Component {
 		}
 
         // Mainly used for the preview
-		if (params.withTc) {
-			this.setState({ backgroundColor: params.withTc });
+		if (params.textColor) {
+			this.setState({ textColor: params.textColor });
 		}
 
 		if (shouldConnectSocket) {
@@ -316,9 +316,9 @@ export default class Overlay extends Component {
 			body.style.backgroundColor = "#181a1b";
 		}
 
-        if (this.state.backgroundColor !== undefined) {
-            const body = document.body;
-			body.style.color = "#" + this.state.backgroundColor;
+        if (this.state.textColor !== undefined) {
+            const element = document.querySelector("." + styles.main);
+            element.style.color = this.state.textColor
         }
 
 		return <div className={styles.main}>

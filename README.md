@@ -7,6 +7,10 @@ Need help? Feel free to message me at: Fascinated#4719
 You will need [HttpSiraStatus](https://github.com/denpadokei/HttpSiraStatus) if you wish to use the note cut and/or the song info</br>
 To get started go to https://bs-overlay.fascinated.cc and it is fairly self explanatory on how it all works</br>
 
+## Preview:
+![Builder Menu](https://cdn.fascinated.cc/TRtxaPcjTN.png?raw=true)
+![Overlay](https://cdn.fascinated.cc/UHjukWwHNL.png?raw=true)
+
 ## Getting Started with developent
 
 First, install the node dependencies:

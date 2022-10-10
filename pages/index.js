@@ -121,8 +121,9 @@ export default class Home extends Component {
 			shouldConnectSocket = true;
 		}
 
+		console.log(`shouldConnectSocket = ${shouldConnectSocket}`);
 		if (shouldConnectSocket) {
-			this.connectSocket();
+			this.connectSocket(params.socketaddress);
 		}
 	}
 
@@ -147,8 +148,10 @@ export default class Home extends Component {
 	/**
 	 * Setup the HTTP Status connection
 	 */
-	connectSocket() {
-		const socket = new WebSocket('ws://localhost:6557/socket');
+	connectSocket(socketAddress) {
+		socketAddress = socketAddress === undefined ? 'ws://localhost' : `ws://${socketAddress}:6557/socket`;
+		console.log(`Connecting to ${socketAddress}`);
+		const socket = new WebSocket(socketAddress);
 		socket.addEventListener('close', () => {
 			console.log("Attempting to re-connect to the HTTP Status socket in 30 seconds.");
 			setTimeout(() => this.connectSocket(), 30_000);
@@ -318,13 +321,16 @@ export default class Home extends Component {
 				<p>Provide a valid steam id for scoresaber or beatleader</p>
 				<p>Example: {document.location.origin}?id=76561198449412074</p>
 				<p>Example with Score Info: {document.location.origin}?id=76561198449412074&scoreinfo=true</p>
+				<p>Example with Multiple PCs: {document.location.origin}?id=76561198449412074&scoreinfo=true&socketaddress=192.168.1.15</p>
 				<div className={'info'}>
 					<div>
 						<h3>Options</h3>
-						<p>beatleader - Can be &quot;true&quot; if you wish to get player data from BeatLeader rather than scoresaber</p>
-						<p>scoreinfo - Can be &quot;true&quot; if you want to show your current score (needs HTTP Status)</p>
-						<p>playerstats - Can be &quot;false&quot; if you disable showing your stats (pp, global pos, etc)</p>
-						<p>songinfo - Can be &quot;true&quot; if want to see information about the song (song name, bsr, song art, etc)</p>
+						<p><b>beatleader</b> - Can be &quot;true&quot; if you wish to get player data from BeatLeader rather than scoresaber</p>
+						<p><b>scoreinfo</b> - Can be &quot;true&quot; if you want to show your current score (needs HTTP Status)</p>
+						<p><b>playerstats</b> - Can be &quot;false&quot; if you disable showing your stats (pp, global pos, etc)</p>
+						<p><b>songinfo</b> - Can be &quot;true&quot; if want to see information about the song (song name, bsr, song art, etc)</p>
+						<p><b>socketaddress</b> - If you use multiple computers to stream (main pc, streaming pc) then this is for you.</p>
+						<p>You can set it to the local address of the pc (eg: 192.168.1.15)</p>
 						<br />
 						<p>To use a option just add &key=value (eg: &songinfo=true)</p>
 					</div>

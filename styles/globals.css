@@ -41,6 +41,11 @@ body, html {
 	color: white;
 }
 
+.invalid-player b {
+	font-size: large !important;
+	color: white;
+}
+
 .player-stats-container {
 	display: flex;
 	margin-left: -5px;

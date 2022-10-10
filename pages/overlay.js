@@ -193,7 +193,7 @@ export default class Overlay extends Component {
 	async resetData(visible) {
 		console.log("Exiting level, resetting data.")
 		setTimeout(async () => {
-			await this.updateData(id);
+			await this.updateData(this.state.id);
 		}, 250);
 		this.setState({
 			leftHand: {

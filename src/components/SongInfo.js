@@ -67,7 +67,7 @@ export default class SongInfo extends Component {
         return <div className={styles.songInfoContainer}>
             <img src={songArt}/>
             <div className={styles.songInfo}>
-                <p className={styles.songInfoSongName}>{songName}</p>
+                <p className={styles.songInfoSongName}>{songName.length > 35 ? songName.substring(0, 35) + "..." : songName}</p>
                 <p className={styles.songInfoSongAuthor}>{songAuthorName}</p>
                 <div className={styles.songInfoSongOtherContainer}>
                     <p className={styles.songInfoDiff} style={{ backgroundColor: this.state.diffColor }}>{difficulty}</p>

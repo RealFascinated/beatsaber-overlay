@@ -1,8 +1,14 @@
 .main {
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'Teko', sans-serif !important;
 	color: white;
 	font-size: xx-large;
 	line-height: 1.4em !important;
+}
+
+.main p {
+	font-family: 'Teko', sans-serif !important;
+	color: white;
+	letter-spacing: normal;
 }
 
 .loading {

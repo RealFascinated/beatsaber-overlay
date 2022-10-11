@@ -18,14 +18,14 @@
 
 
 .songInfoSongName {
-	font-size: x-large;
+	font-size: 26px;
 	font-weight: bold;
 }
 
 .songInfoSongAuthor {
 	font-size: large;
-	margin-top: -5px;
-	margin-bottom: -5px;
+	margin-top: -12px;
+	margin-bottom: -7px;
 }
 
 .songInfoSongOtherContainer {
@@ -34,7 +34,7 @@
 }
 
 .songInfoDiff {
-	font-size: large;
+	font-size: 22px;
 	padding: 0px 4px;
 	width: fit-content;
 	border-radius: 5%;
@@ -42,7 +42,7 @@
 }
 
 .songInfoBsr {
-	font-size: large;
+	font-size: 22px;
 	margin-left: 10px;
 }
 
@@ -69,6 +69,6 @@
 }
 
 .songTimeText {
-	margin-top: 6px;
-	font-size: large;
+	margin-top: 2px;
+	font-size: 20px;
 }

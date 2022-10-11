@@ -4,6 +4,7 @@
 	top:0;
 	right:0;
 	margin-right: 5px;
+	min-width: 135px;
 }
 
 .scoreStats p {
@@ -22,6 +23,11 @@
 
 .scoreStatsHands {
 	display: flex;
+	justify-content: center;
+}
+
+.scoreStatsHands p {
+	min-width: 57px;
 }
 
 .scoreStatsHands div {

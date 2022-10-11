@@ -85,6 +85,7 @@ export default class Overlay extends Component {
 	}
 
 	async componentDidMount() {
+        console.log("Initializing...");
 		this.#_beatSaverURL = document.location.origin + "/api/beatsaver/map?hash=%s";
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
@@ -101,7 +102,7 @@ export default class Overlay extends Component {
 		}
 
 		// Check if the player wants to disable their stats (pp, global pos, etc)
-		if (params.playerstats === 'false') {
+		if (params.showPlayerStats === 'false' || params.playerstats === 'false') {
 			this.setState({ showPlayerStats: false });
 		}
 
@@ -112,13 +113,13 @@ export default class Overlay extends Component {
 		let shouldConnectSocket = false;
 
 		// Check if the player wants to show their current score information
-		if (params.scoreinfo === 'true') {
+		if (params.showScoreInfo === 'true' || params.scoreinfo === 'true') {
 			this.setState({ showScore: true });
 			shouldConnectSocket = true;
 		}
 
 		// Check if the player wants to show the current song
-		if (params.songinfo === 'true') {
+		if (params.showSongInfo === 'true' || params.songinfo === 'true') {
 			this.setState({ showSongInfo: true });
 			shouldConnectSocket = true;
 		}

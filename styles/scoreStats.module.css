@@ -8,12 +8,17 @@
 }
 
 .scoreStats p {
-	font-size: xx-large;
+	font-size: 38px;
 	line-height: 1.2em;
+}
+
+.scoreStatsLeft {
+	text-align: right;
 }
 
 .scoreStatsRight {
 	margin-right: 10px;
+	text-align: right;
 }
 
 .scoreStatsAverageCut {
@@ -27,7 +32,7 @@
 }
 
 .scoreStatsHands p {
-	min-width: 57px;
+	min-width: 68px;
 }
 
 .scoreStatsHands div {

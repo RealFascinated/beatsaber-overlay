@@ -16,6 +16,7 @@ export default class Overlay extends Component {
 
 		this.state = {
 			loading: true,
+			isConnectedToSocket: false,
 			id: undefined,
 			isValidSteamId: true,
 			websiteType: "ScoreSaber",
@@ -130,6 +131,7 @@ export default class Overlay extends Component {
 		}
 
 		if (shouldConnectSocket) {
+			if (this.state.isConnectedToSocket) return;
 			this.connectSocket(params.socketaddress);
 		}
 	}
@@ -157,13 +159,17 @@ export default class Overlay extends Component {
 	 */
 	connectSocket(socketAddress) {
 		socketAddress = (socketAddress === undefined ? 'ws://localhost' : `ws://${socketAddress}`) + ":6557/socket";
+		if (this.state.isConnectedToSocket) return;
+
 		console.log(`Connecting to ${socketAddress}`);
 		const socket = new WebSocket(socketAddress);
         socket.addEventListener('open', () => {
             console.log(`Connected to ${socketAddress}`);
+			this.setState({ isConnectedToSocket: true });
         });
 		socket.addEventListener('close', () => {
 			console.log("Attempting to re-connect to the HTTP Status socket in 10 seconds.");
+			this.setState({ isConnectedToSocket: false });
 			setTimeout(() => this.connectSocket(), 10_000);
 		});
 		socket.addEventListener('message', (message) => {
@@ -196,7 +202,6 @@ export default class Overlay extends Component {
 	 * @param {boolean} visible Whether to show info other than the player stats
 	 */
 	async resetData(visible) {
-		console.log("Exiting level, resetting data.")
 		setTimeout(async () => {
 			await this.updateData(this.state.id);
 		}, 250);

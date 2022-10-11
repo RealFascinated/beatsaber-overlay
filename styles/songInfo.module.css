@@ -5,7 +5,6 @@
 	left:0;
 	margin-left: 5px;
 	margin-bottom: 5px;
-	font-size: large !important;
 }
 
 .songInfoContainer img {
@@ -16,16 +15,17 @@
 	margin-left: 10px;
 }
 
-
 .songInfoSongName {
-	font-size: 26px;
+	font-size: 30px;
 	font-weight: bold;
 }
 
 .songInfoSongAuthor {
-	font-size: large;
+	font-size: 22px;
 	margin-top: -12px;
-	margin-bottom: -7px;
+	margin-bottom: -3px;
+
+	line-height: 1.2em;
 }
 
 .songInfoSongOtherContainer {
@@ -39,11 +39,16 @@
 	width: fit-content;
 	border-radius: 5%;
 	font-weight: bold;
+	margin-bottom: 12px;
+
+	line-height: 1.2em;
 }
 
 .songInfoBsr {
 	font-size: 22px;
 	margin-left: 10px;
+
+	line-height: 1.2em;
 }
 
 .songTimeContainer {
@@ -69,6 +74,6 @@
 }
 
 .songTimeText {
-	margin-top: 2px;
+	margin-top: -10px;
 	font-size: 20px;
 }

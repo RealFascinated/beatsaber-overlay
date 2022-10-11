@@ -6,7 +6,7 @@
 
 .playerStatsContainer p {
 	font-size: xx-large;
-	line-height: 1.4em !important;
+	line-height: 1.2em;
 }
 
 .playerCountry {
@@ -15,7 +15,7 @@
 }
 
 .playerCountry span {
-	margin-top: 3px;
+	margin-top: 5px;
 }
 
 .playerCountry p {
@@ -23,7 +23,7 @@
 }
 
 .playerCountryIcon {
-	margin-top: 7px;
+	margin-top: 3px;
 	border-radius: 30%;
 }
 

@@ -24,7 +24,7 @@ export default class Overlay extends Component {
 			showPlayerStats: true,
 			showScore: false,
 			showSongInfo: false,
-            textColor: undefined,
+			textColor: undefined,
 
 			socket: undefined,
 			isVisible: false,
@@ -248,6 +248,8 @@ export default class Overlay extends Component {
 		"noteFullyCut": (data) => {
 			const { noteCut } = data;
 
+			console.log(noteCut)
+
 			// Left Saber
 			if (noteCut.saberType === 'SaberA') {
 				const data = this.state.leftHand;
@@ -260,8 +262,8 @@ export default class Overlay extends Component {
 				if (data.averagePostSwing.includes(30) && data.averagePostSwing.length === 1) {
 					data.averagePostSwing = [];
 				}
-				data.averagePreSwing.push(noteCut.initialScore > 70 ? 70 : noteCut.initialScore);
-				data.averagePostSwing.push(noteCut.finalScore - noteCut.initialScore);
+				data.averagePreSwing.push(noteCut.beforeSwingRating * 70);
+				data.averagePostSwing.push(noteCut.afterSwingRating * 30);
 				data.averageCut.push(noteCut.cutDistanceScore);
 				this.setState({ leftHand: data });
 			}
@@ -278,8 +280,8 @@ export default class Overlay extends Component {
 				if (data.averagePostSwing.includes(30) && data.averagePostSwing.length === 1) {
 					data.averagePostSwing = [];
 				}
-				data.averagePreSwing.push(noteCut.initialScore > 70 ? 70 : noteCut.initialScore);
-				data.averagePostSwing.push(noteCut.finalScore - noteCut.initialScore);
+				data.averagePreSwing.push(noteCut.beforeSwingRating * 70);
+				data.averagePostSwing.push(noteCut.afterSwingRating * 30);
 				data.averageCut.push(noteCut.cutDistanceScore);
 				this.setState({ rightHand: data });
 			}

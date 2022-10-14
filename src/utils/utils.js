@@ -1,15 +1,15 @@
 import WebsiteTypes from "../consts/WebsiteType";
 
 export default class Utils {
-    constructor() {};
+	constructor() {}
 
-    /**
-     * Returns the information for the given website type.
-     * 
-     * @param {WebsiteTypes} website 
-     * @returns The website type's information.
-     */
-    getWebsiteApi(website) {
-        return WebsiteTypes[website]
-    }
+	/**
+	 * Returns the information for the given website type.
+	 *
+	 * @param {WebsiteTypes} website
+	 * @returns The website type's information.
+	 */
+	getWebsiteApi(website) {
+		return WebsiteTypes[website];
+	}
 }

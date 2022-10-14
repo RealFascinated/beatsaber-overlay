@@ -1,14 +1,13 @@
-import { Link } from '@nextui-org/react';
-import {Component} from 'react'
-import PlayerStats from '../src/components/PlayerStats';
-import ScoreStats from '../src/components/ScoreStats';
+import { Link } from "@nextui-org/react";
+import { Component } from "react";
+import PlayerStats from "../src/components/PlayerStats";
+import ScoreStats from "../src/components/ScoreStats";
 import SongInfo from "../src/components/SongInfo";
 
-import Utils from '../src/utils/utils';
-import styles from '../styles/overlay.module.css';
+import Utils from "../src/utils/utils";
+import styles from "../styles/overlay.module.css";
 
 export default class Overlay extends Component {
-
 	#_beatSaverURL = "";
 
 	constructor(props) {
@@ -36,16 +35,16 @@ export default class Overlay extends Component {
 			percentage: "100.00%",
 			failed: false,
 			leftHand: {
-				averageCut: [15.00],
-				averagePreSwing: [70.00],
-				averagePostSwing: [30.00],
+				averageCut: [15.0],
+				averagePreSwing: [70.0],
+				averagePostSwing: [30.0],
 			},
 			rightHand: {
-				averageCut: [15.00],
-				averagePreSwing: [70.00],
-				averagePostSwing: [30.00],
-			}
-		}
+				averageCut: [15.0],
+				averagePreSwing: [70.0],
+				averagePostSwing: [30.0],
+			},
+		};
 		this.setupTimer();
 	}
 
@@ -60,25 +59,25 @@ export default class Overlay extends Component {
 	setupTimer() {
 		setInterval(() => {
 			if (this.isCurrentSongTimeProvided) {
-				return
+				return;
 			}
 			if (!this.state.paused && this.state.beatSaverData !== undefined) {
-				this.setState({ currentSongTime: this.state.currentSongTime + 1 })
+				this.setState({ currentSongTime: this.state.currentSongTime + 1 });
 			}
 		}, 1000);
 	}
 
 	/**
 	 * Update the current song time
-	 * 
+	 *
 	 * @param {[]} data The song data
 	 */
 	handleCurrentSongTime(data) {
 		try {
-			const time = data.status.performance.currentSongTime
+			const time = data.status.performance.currentSongTime;
 			if (time !== undefined && time != null) {
-				this.isCurrentSongTimeProvided = true
-				this.setState({ currentSongTime: time })
+				this.isCurrentSongTimeProvided = true;
+				this.setState({ currentSongTime: time });
 			}
 		} catch (e) {
 			// do nothing
@@ -86,24 +85,26 @@ export default class Overlay extends Component {
 	}
 
 	async componentDidMount() {
-        console.log("Initializing...");
-		this.#_beatSaverURL = document.location.origin + "/api/beatsaver/map?hash=%s";
+		console.log("Initializing...");
+		this.#_beatSaverURL =
+			document.location.origin + "/api/beatsaver/map?hash=%s";
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
 
 		// Check what website the player wants to use
-		if (params.beatleader === 'true') {
+		if (params.beatleader === "true") {
 			this.setState({ websiteType: "BeatLeader" });
 		}
 
 		const id = params.id;
-		if (!id) { // Check if the id param is valid
+		if (!id) {
+			// Check if the id param is valid
 			this.setState({ loading: false, isValidSteamId: false });
 			return;
 		}
 
 		// Check if the player wants to disable their stats (pp, global pos, etc)
-		if (params.showPlayerStats === 'false' || params.playerstats === 'false') {
+		if (params.showPlayerStats === "false" || params.playerstats === "false") {
 			this.setState({ showPlayerStats: false });
 		}
 
@@ -114,18 +115,18 @@ export default class Overlay extends Component {
 		let shouldConnectSocket = false;
 
 		// Check if the player wants to show their current score information
-		if (params.showScoreInfo === 'true' || params.scoreinfo === 'true') {
+		if (params.showScoreInfo === "true" || params.scoreinfo === "true") {
 			this.setState({ showScore: true });
 			shouldConnectSocket = true;
 		}
 
 		// Check if the player wants to show the current song
-		if (params.showSongInfo === 'true' || params.songinfo === 'true') {
+		if (params.showSongInfo === "true" || params.songinfo === "true") {
 			this.setState({ showSongInfo: true });
 			shouldConnectSocket = true;
 		}
 
-        // Mainly used for the preview
+		// Mainly used for the preview
 		if (params.textColor) {
 			this.setState({ textColor: params.textColor });
 		}
@@ -138,16 +139,22 @@ export default class Overlay extends Component {
 
 	/**
 	 * Fetch and update the data from the respective platform
-	 * 
+	 *
 	 * @param {string} id The steam id of the player
-	 * @returns 
+	 * @returns
 	 */
-	async updateData(id) { 
-		const data = await fetch(new Utils().getWebsiteApi(id == "test" ? "Test" : this.state.websiteType).ApiUrl.replace("%s", id), {
-			mode: 'cors'
-		});
+	async updateData(id) {
+		const data = await fetch(
+			new Utils()
+				.getWebsiteApi(id == "test" ? "Test" : this.state.websiteType)
+				.ApiUrl.replace("%s", id),
+			{
+				mode: "cors",
+			}
+		);
 		const json = await data.json();
-		if (json.errorMessage) { // Invalid account
+		if (json.errorMessage) {
+			// Invalid account
 			this.setState({ loading: false, isValidSteamId: false });
 			return;
 		}
@@ -158,7 +165,10 @@ export default class Overlay extends Component {
 	 * Setup the HTTP Status connection
 	 */
 	connectSocket(socketAddress) {
-		socketAddress = (socketAddress === undefined ? 'ws://localhost' : `ws://${socketAddress}`) + ":6557/socket";
+		socketAddress =
+			(socketAddress === undefined
+				? "ws://localhost"
+				: `ws://${socketAddress}`) + ":6557/socket";
 		if (this.state.isConnectedToSocket) return;
 
 		if (this.state.isVisible) {
@@ -167,42 +177,46 @@ export default class Overlay extends Component {
 
 		console.log(`Connecting to ${socketAddress}`);
 		const socket = new WebSocket(socketAddress);
-        socket.addEventListener('open', () => {
-            console.log(`Connected to ${socketAddress}`);
+		socket.addEventListener("open", () => {
+			console.log(`Connected to ${socketAddress}`);
 			this.setState({ isConnectedToSocket: true });
-        });
-		socket.addEventListener('close', () => {
-			console.log("Attempting to re-connect to the HTTP Status socket in 10 seconds.");
+		});
+		socket.addEventListener("close", () => {
+			console.log(
+				"Attempting to re-connect to the HTTP Status socket in 10 seconds."
+			);
 			this.setState({ isConnectedToSocket: false });
 			setTimeout(() => this.connectSocket(), 10_000);
 		});
-		socket.addEventListener('message', (message) => {
+		socket.addEventListener("message", (message) => {
 			const json = JSON.parse(message.data);
-			this.handleCurrentSongTime(json)
+			this.handleCurrentSongTime(json);
 			if (!this.handlers[json.event]) {
 				console.log("Unhandled message from HTTP Status. (" + json.event + ")");
 				return;
 			}
 			this.handlers[json.event](json || []);
-		})
+		});
 		this.setState({ socket: socket });
 	}
 
 	/**
 	 * Set the current songs beat saver url in {@link #_beatSaverURL}
-	 * 
-	 * @param {[]} songData 
+	 *
+	 * @param {[]} songData
 	 */
 	async setBeatSaver(songData) {
-		console.log("Updating BeatSaver info")
-		const data = await fetch(this.#_beatSaverURL.replace("%s", songData.levelId));
+		console.log("Updating BeatSaver info");
+		const data = await fetch(
+			this.#_beatSaverURL.replace("%s", songData.levelId)
+		);
 		const json = await data.json();
-		this.setState({ beatSaverData: json })
+		this.setState({ beatSaverData: json });
 	}
 
 	/**
 	 * Cleanup the data and get ready for the next song
-	 * 
+	 *
 	 * @param {boolean} visible Whether to show info other than the player stats
 	 */
 	async resetData(visible) {
@@ -211,59 +225,68 @@ export default class Overlay extends Component {
 		}, 250);
 		this.setState({
 			leftHand: {
-				averageCut: [15.00],
-				averagePreSwing: [70.00],
-				averagePostSwing: [30.00],
+				averageCut: [15.0],
+				averagePreSwing: [70.0],
+				averagePostSwing: [30.0],
 			},
 			rightHand: {
-				averageCut: [15.00],
-				averagePreSwing: [70.00],
-				averagePostSwing: [30.00],
+				averageCut: [15.0],
+				averagePreSwing: [70.0],
+				averagePostSwing: [30.0],
 			},
 			songInfo: undefined,
 			beatSaverData: undefined,
 			currentSongTime: 0,
 			currentScore: 0,
 			percentage: "100.00%",
-			isVisible: visible
+			isVisible: visible,
 		});
 	}
 
 	// The HTTP Status handlers
 	handlers = {
-		"hello": (data) => {
+		hello: (data) => {
 			console.log("Hello from HTTP Status!");
 			if (data.status) {
-				this.setState({songData: data});
+				this.setState({ songData: data });
 				if (data.status.beatmap) {
 					this.setBeatSaver(data.status.beatmap);
 				}
 			}
 		},
-		"scoreChanged": (data) => {
+		scoreChanged: (data) => {
 			const { status } = data;
 			const { score, currentMaxScore } = status.performance;
-			const percent = currentMaxScore > 0 ? ((score / currentMaxScore) * 1000 / 10).toFixed(2) : 0.00;
+			const percent =
+				currentMaxScore > 0
+					? (((score / currentMaxScore) * 1000) / 10).toFixed(2)
+					: 0.0;
 			this.setState({
 				currentScore: score,
-				percentage: this.state.failed ? percent * 2 : percent + "%"
-			})
+				percentage: this.state.failed ? percent * 2 : percent + "%",
+			});
 		},
-		"noteFullyCut": (data) => {
+		noteFullyCut: (data) => {
 			const { noteCut } = data;
 
-			console.log(noteCut)
+			console.log(noteCut);
 
 			// Left Saber
-			if (noteCut.saberType === 'SaberA') {
+			if (noteCut.saberType === "SaberA") {
 				const data = this.state.leftHand;
 				if (data.averageCut.includes(15) && data.averageCut.length === 1) {
 					data.averageCut = [];
 				}
-				if (data.averagePreSwing.includes(70) && data.averagePreSwing.length === 1) {
+				if (
+					data.averagePreSwing.includes(70) &&
+					data.averagePreSwing.length === 1
+				) {
 					data.averagePreSwing = [];
 				}
-				if (data.averagePostSwing.includes(30) && data.averagePostSwing.length === 1) {
+				if (
+					data.averagePostSwing.includes(30) &&
+					data.averagePostSwing.length === 1
+				) {
 					data.averagePostSwing = [];
 				}
 				data.averagePreSwing.push(noteCut.beforeSwingRating * 70);
@@ -273,15 +296,21 @@ export default class Overlay extends Component {
 			}
 
 			// Left Saber
-			if (noteCut.saberType === 'SaberB') {
+			if (noteCut.saberType === "SaberB") {
 				const data = this.state.rightHand;
 				if (data.averageCut.includes(15) && data.averageCut.length === 1) {
 					data.averageCut = [];
 				}
-				if (data.averagePreSwing.includes(70) && data.averagePreSwing.length === 1) {
+				if (
+					data.averagePreSwing.includes(70) &&
+					data.averagePreSwing.length === 1
+				) {
 					data.averagePreSwing = [];
 				}
-				if (data.averagePostSwing.includes(30) && data.averagePostSwing.length === 1) {
+				if (
+					data.averagePostSwing.includes(30) &&
+					data.averagePostSwing.length === 1
+				) {
 					data.averagePostSwing = [];
 				}
 				data.averagePreSwing.push(noteCut.beforeSwingRating * 70);
@@ -290,77 +319,85 @@ export default class Overlay extends Component {
 				this.setState({ rightHand: data });
 			}
 		},
-		"songStart": (data) => {
-			console.log("Going into level, resetting data.")
+		songStart: (data) => {
+			console.log("Going into level, resetting data.");
 			this.resetData(true);
-			this.setState({ songData: data, paused: false })
+			this.setState({ songData: data, paused: false });
 			this.setBeatSaver(data.status.beatmap);
 		},
-		"finished": () => {
+		finished: () => {
 			this.resetData(false);
 		},
-		"softFail": () => {
+		softFail: () => {
 			this.setState({ failed: true });
 		},
-		"pause": () => {
+		pause: () => {
 			this.setState({ paused: true });
 		},
-		"resume": () => {
+		resume: () => {
 			this.setState({ paused: false });
 		},
-		"menu": () => {
+		menu: () => {
 			this.resetData(false);
 		},
-		"noteCut": () => {},
-		"noteMissed": () => {},
-		"noteSpawned": () => {},
-		"bombMissed": () => {},
-		"beatmapEvent": () => {},
-        "energyChanged": () => {},
-	}
+		noteCut: () => {},
+		noteMissed: () => {},
+		noteSpawned: () => {},
+		bombMissed: () => {},
+		beatmapEvent: () => {},
+		energyChanged: () => {},
+	};
 
 	render() {
 		const { loading, isValidSteamId, data, websiteType } = this.state;
 
-        if (this.state.textColor !== undefined) {
-            const element = document.querySelector("." + styles.main);
-            element.style.color = this.state.textColor
-        }
+		if (this.state.textColor !== undefined) {
+			const element = document.querySelector("." + styles.main);
+			element.style.color = this.state.textColor;
+		}
 
-		return <div className={styles.main}>
-			{ loading ? 
-			<div className={styles.loading}>
-				<h2>Loading...</h2>
+		return (
+			<div className={styles.main}>
+				{loading ? (
+					<div className={styles.loading}>
+						<h2>Loading...</h2>
+					</div>
+				) : !isValidSteamId ? (
+					<div className={styles.invalidPlayer}>
+						<h1>Invalid player, please visit the main page.</h1>
+						<Link href="/">
+							<a>Go Home</a>
+						</Link>
+					</div>
+				) : (
+					<div className={styles.overlay}>
+						{this.state.showPlayerStats ? (
+							<PlayerStats
+								pp={data.pp.toLocaleString()}
+								globalPos={data.rank.toLocaleString()}
+								country={data.country}
+								countryRank={data.countryRank.toLocaleString()}
+								websiteType={websiteType}
+								avatar={data.profilePicture || data.avatar}
+							/>
+						) : (
+							<></>
+						)}
+						{this.state.showScore && this.state.isVisible ? (
+							<ScoreStats data={this.state} />
+						) : (
+							<></>
+						)}
+						{this.state.showSongInfo &&
+						this.state.beatSaverData !== undefined &&
+						this.state.isVisible ? (
+							<SongInfo data={this.state} />
+						) : (
+							<></>
+						)}
+					</div>
+				)}
 			</div>
-			: !isValidSteamId ? 
-			<div className={styles.invalidPlayer}>
-				<h1>Invalid player, please visit the main page.</h1>
-                <Link href="/">
-                    <a>Go Home</a>
-                </Link>
-			</div> :
-			<div className={styles.overlay}>
-				{ 
-                    this.state.showPlayerStats ? <PlayerStats
-                        pp={data.pp.toLocaleString()}
-                        globalPos={data.rank.toLocaleString()}
-                        country={data.country}
-                        countryRank={data.countryRank.toLocaleString()}
-                        websiteType={websiteType}
-                        avatar={data.profilePicture || data.avatar}
-                        /> 
-                    : <></>
-				}
-				{
-					this.state.showScore && this.state.isVisible ? 
-                        <ScoreStats data={this.state} /> : <></>
-				}
-				{
-					this.state.showSongInfo && this.state.beatSaverData !== undefined && this.state.isVisible ? 
-                        <SongInfo data={this.state}/> : <></>
-				}
-			</div>
-			}
-		</div>
+		);
 	}
 }

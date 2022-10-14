@@ -161,6 +161,10 @@ export default class Overlay extends Component {
 		socketAddress = (socketAddress === undefined ? 'ws://localhost' : `ws://${socketAddress}`) + ":6557/socket";
 		if (this.state.isConnectedToSocket) return;
 
+		if (this.state.isVisible) {
+			this.resetData(false);
+		}
+
 		console.log(`Connecting to ${socketAddress}`);
 		const socket = new WebSocket(socketAddress);
         socket.addEventListener('open', () => {

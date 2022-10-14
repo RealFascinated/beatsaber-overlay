@@ -115,13 +115,22 @@ export default class Home extends Component {
 					</Modal> : <></>
 				}
 
-				<Grid.Container gap={2}>
+				<Grid.Container gap={2} justify='center'>
+					<Grid xs={12} css={{
+						color: 'black'
+					}} justify='center'>
+						<div style={{
+							textAlign: 'center',
+						}}>
+							<Text h1>BeatSaber Overlay</Text>
+							<Text h4>Welcome to the Setup panel</Text>
+						</div>
+					</Grid>
+
 					<Grid xs={12}>
 						<Card>
-							<Card.Body>
-								<Text b>Welcome to the Setup panel</Text>
-								
-								<Spacer y={2} />	
+							<Card.Body>	
+								<Spacer y={1} />	
 								
 								<Input
 									underlined

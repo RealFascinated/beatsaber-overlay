@@ -107,9 +107,11 @@ export default class Overlay extends Component {
 			this.setState({ showPlayerStats: false });
 		}
 
-		setTimeout(async () => {
-			await this.updateData(id);
-		}, 10); // 10ms
+		if (this.state.showPlayerStats == true) {
+			setTimeout(async () => {
+				await this.updateData(id);
+			}, 10); // 10ms
+		}
 
 		let shouldConnectSocket = false;
 
@@ -221,9 +223,11 @@ export default class Overlay extends Component {
 	 * @param {boolean} visible Whether to show info other than the player stats
 	 */
 	async resetData(visible) {
-		setTimeout(async () => {
-			await this.updateData(this.state.id);
-		}, 1000); // 1 second
+		if (this.state.showPlayerStats == true) {
+			setTimeout(async () => {
+				await this.updateData(this.state.id);
+			}, 1000); // 1 second
+		}
 		this.setState({
 			leftHand: {
 				averageCut: [15.0],

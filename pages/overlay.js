@@ -223,7 +223,7 @@ export default class Overlay extends Component {
 	async resetData(visible) {
 		setTimeout(async () => {
 			await this.updateData(this.state.id);
-		}, 250);
+		}, 1000); // 1 second
 		this.setState({
 			leftHand: {
 				averageCut: [15.0],

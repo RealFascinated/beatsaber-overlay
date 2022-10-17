@@ -1,8 +1,8 @@
 {
-  "name": "BeatSaber Overlay",
-  "title": "BeatSaber Overlay - Simple and easy to use BeatSaber overlay",
-  "description": "Free, simple, and easy to use beat saber overlay for OBS",
-  "color": "#0EBFE9",
-  "url": "https://bs-overlay.fascinated.cc",
-  "proxy_url": "https://bangor375.herokuapp.com"
+	"name": "BeatSaber Overlay",
+	"title": "BeatSaber Overlay - Simple and easy to use BeatSaber overlay",
+	"description": "Free, simple, and easy to use beat saber overlay for OBS",
+	"color": "#0EBFE9",
+	"url": "https://bs-overlay.fascinated.cc",
+	"proxy_url": "https://proxy.fascinated.cc"
 }

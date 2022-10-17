@@ -9,7 +9,7 @@ export default class Utils {
 	 * @param {WebsiteTypes} website
 	 * @returns The website type's information.
 	 */
-	getWebsiteApi(website) {
+	static getWebsiteApi(website) {
 		return WebsiteTypes[website];
 	}
 }

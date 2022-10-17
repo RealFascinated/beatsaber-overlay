@@ -3,8 +3,8 @@ import { Component } from "react";
 import PlayerStats from "../src/components/PlayerStats";
 import ScoreStats from "../src/components/ScoreStats";
 import SongInfo from "../src/components/SongInfo";
-
 import Utils from "../src/utils/utils";
+
 import styles from "../styles/overlay.module.css";
 
 export default class Overlay extends Component {
@@ -12,12 +12,11 @@ export default class Overlay extends Component {
 
 	constructor(props) {
 		super(props);
-
 		this.state = {
 			loading: true,
 			isConnectedToSocket: false,
 			id: undefined,
-			isValidSteamId: true,
+			isValidSteamId: false,
 			websiteType: "ScoreSaber",
 			data: undefined,
 			showPlayerStats: true,
@@ -145,11 +144,13 @@ export default class Overlay extends Component {
 	 */
 	async updateData(id) {
 		const data = await fetch(
-			new Utils()
-				.getWebsiteApi(id == "test" ? "Test" : this.state.websiteType)
-				.ApiUrl.replace("%s", id),
+			Utils.getWebsiteApi(
+				id == "test" ? "Test" : this.state.websiteType
+			).ApiUrl.replace("%s", id),
 			{
-				mode: "cors",
+				headers: {
+					"X-Requested-With": "BeatSaber Overlay",
+				},
 			}
 		);
 		const json = await data.json();
@@ -158,7 +159,7 @@ export default class Overlay extends Component {
 			this.setState({ loading: false, isValidSteamId: false });
 			return;
 		}
-		this.setState({ loading: false, id: id, data: json });
+		this.setState({ loading: false, id: id, data: json, isValidSteamId: true });
 	}
 
 	/**
@@ -183,10 +184,10 @@ export default class Overlay extends Component {
 		});
 		socket.addEventListener("close", () => {
 			console.log(
-				"Attempting to re-connect to the HTTP Status socket in 10 seconds."
+				"Attempting to re-connect to the HTTP Status socket in 60 seconds."
 			);
 			this.setState({ isConnectedToSocket: false });
-			setTimeout(() => this.connectSocket(), 10_000);
+			setTimeout(() => this.connectSocket(), 60_000);
 		});
 		socket.addEventListener("message", (message) => {
 			const json = JSON.parse(message.data);

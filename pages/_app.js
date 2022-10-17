@@ -1,4 +1,3 @@
-// 1. import `NextUIProvider` component
 import { NextUIProvider } from "@nextui-org/react";
 import { NextSeo } from "next-seo";
 import Head from "next/head";
@@ -9,7 +8,6 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
 	return (
-		// 2. Use at the root of your app
 		<NextUIProvider>
 			<NextSeo
 				title={Config.name}

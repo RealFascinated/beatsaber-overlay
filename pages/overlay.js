@@ -328,7 +328,9 @@ export default class Overlay extends Component {
 			console.log("Going into level, resetting data.");
 			this.resetData(true);
 			this.setState({ songData: data, paused: false });
-			this.setBeatSaver(data.status.beatmap);
+			if (this.state.showScore) {
+        this.setBeatSaver(data.status.beatmap);
+      }
 		},
 		finished: () => {
 			this.resetData(false);

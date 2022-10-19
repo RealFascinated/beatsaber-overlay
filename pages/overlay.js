@@ -384,7 +384,7 @@ export default class Overlay extends Component {
 					<div className={styles.loading}>
 						<h2>Loading...</h2>
 					</div>
-				) : !isValidSteamId ? (
+				) : !isValidSteamId && !loadingPlayerData ? (
 					<div className={styles.invalidPlayer}>
 						<h1>Invalid player, please visit the main page.</h1>
 						<Link href="/">

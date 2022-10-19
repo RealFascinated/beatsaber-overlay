@@ -44,8 +44,8 @@ export default class Overlay extends Component {
 			},
 			rightHand: {
 				averageCut: [15.0],
-				averagePreSwing: [70.0],dd
-				averagePostSwing: [30.0],d
+				averagePreSwing: [70.0],
+				averagePostSwing: [30.0],
 			},
 		};
 		this.setupTimer();

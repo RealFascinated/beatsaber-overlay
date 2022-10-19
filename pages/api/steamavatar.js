@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 		let buffer = await data.buffer();
 		buffer = await sharp(buffer).resize(150, 150).toBuffer();
 		fs.writeFileSync(imagePath, buffer);
-		res.setHeader("Content-Type", "image/" + ext);
+		res.setHeader("Content-Type", "image/jpg");
 		res.send(buffer);
 		console.log('Steam Avatar Cache - Added avatar "' + mapHash + '"');
 		return;

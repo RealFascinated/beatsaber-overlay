@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 	const exists = fs.existsSync(imagePath);
 	if (!exists) {
 		const data = await fetch(`https://eu.cdn.beatsaver.com/${mapHash}.${ext}`);
-		let buffer = await data.buffer();
+		let buffer = await data.buffer(); // Change to arrayBuffer at some point to make it shush
 		buffer = await sharp(buffer).resize(150, 150).toBuffer();
 		fs.writeFileSync(imagePath, buffer);
 		res.setHeader("Content-Type", "image/" + ext);

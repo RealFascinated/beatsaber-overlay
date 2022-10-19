@@ -1,3 +1,4 @@
+import { Image } from "@nextui-org/react";
 import { Component } from "react";
 
 import styles from "../../styles/songInfo.module.css";
@@ -64,7 +65,7 @@ export default class SongInfo extends Component {
 
 		return (
 			<div className={styles.songInfoContainer}>
-				<img src={songArt} />
+				<Image alt="Song art-work" src={songArt} />
 				<div className={styles.songInfo}>
 					<p className={styles.songInfoSongName}>
 						{songName.length > 35

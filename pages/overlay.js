@@ -108,7 +108,7 @@ export default class Overlay extends Component {
 			this.setState({ showPlayerStats: false });
 		}
 
-		if (this.state.showPlayerStats == true) {
+		if (this.state.showPlayerStats == true || params.playerstats == "true") {
 			setTimeout(async () => {
 				await this.updateData(id);
 			}, 10); // 10ms

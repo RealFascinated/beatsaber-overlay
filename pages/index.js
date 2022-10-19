@@ -6,6 +6,7 @@ import {
 	Input,
 	Link,
 	Modal,
+	Radio,
 	Spacer,
 	Switch,
 	Text,
@@ -31,7 +32,7 @@ export default class Home extends Component {
 
 			values: {
 				socketAddr: undefined,
-				useBeatLeader: false,
+				leaderboard: "ScoreSaber",
 				showPlayerStats: true,
 				showScoreInfo: false,
 				showSongInfo: false,
@@ -58,7 +59,15 @@ export default class Home extends Component {
 			);
 		} else {
 			const json = JSON.parse(localStorage.getItem("values"));
-			this.setState({ steamId: json.steamId, values: json.values });
+			let values = {};
+			Object.entries(json.values).forEach((value) => {
+				if (value[0] === undefined) {
+					return;
+				}
+				values[value[0]] = value[1];
+			});
+
+			this.setState({ steamId: json.steamId, values: values });
 		}
 		this.setState({ loading: false });
 	}
@@ -76,8 +85,8 @@ export default class Home extends Component {
 			if (value[1] === undefined) {
 				return;
 			}
-			if (value[0] == "useBeatLeader" && value[1] === true) {
-				values += `&beatLeader=${value[1]}`;
+			if (value[0] == "leaderboard" && value[1] === "BeatLeader") {
+				values += `&beatLeader=true`;
 				return;
 			}
 			values += `&${value[0]}=${value[1]}`;
@@ -112,7 +121,6 @@ export default class Home extends Component {
 	}
 
 	render() {
-		console.log(this.state.steamId);
 		return this.state.loading ? (
 			<h1>Loading...</h1>
 		) : (
@@ -171,7 +179,7 @@ export default class Home extends Component {
 						<Grid xs={12} lg={9}>
 							<Card>
 								<Card.Body>
-									<Spacer y={1} />
+									<Spacer y={1.2} />
 
 									<Input
 										underlined
@@ -195,27 +203,42 @@ export default class Home extends Component {
 										}}
 									/>
 									<Spacer y={1} />
-									<Text>
-										Do you want to use BeatLeader rather than ScoreSaber?
-									</Text>
-									<Switch
-										onChange={(event) =>
-											this.updateValue("useBeatLeader", event.target.checked)
-										}
-										checked={this.state.values.useBeatLeader}
-										size="md"
-									/>
+									<Text>Ranked leaderboard</Text>
+									<Radio.Group
+										defaultValue={this.state.values.leaderboard || "ScoreSaber"}
+										onChange={(value) => {
+											this.updateValue("leaderboard", value);
+										}}
+									>
+										<Radio
+											value="ScoreSaber"
+											description="Uses the leaderboard from https://scoresaber.com/"
+											size="sm"
+										>
+											ScoreSaber
+										</Radio>
+										<Radio
+											value="BeatLeader"
+											description="Uses the leaderboard from https://www.beatleader.xyz/"
+											size="sm"
+										>
+											BeatLeader
+										</Radio>
+									</Radio.Group>
+									<Spacer y={1} />
 									<Text>
 										Do you want to show Player Stats (Current PP, global pos,
 										etc)
 									</Text>
 									<Switch
+										label="Ranked leaderboard"
 										onChange={(event) =>
 											this.updateValue("showPlayerStats", event.target.checked)
 										}
 										checked={this.state.values.showPlayerStats}
 										size="md"
 									/>
+									<Spacer y={1.2} />
 									<Text>
 										Do you want to show Score Info (Current swing values, total
 										score, etc)
@@ -227,6 +250,7 @@ export default class Home extends Component {
 										checked={this.state.values.showScoreInfo}
 										size="md"
 									/>
+									<Spacer y={1.2} />
 									<Text>
 										Do you want to show Song Info (Song name, bsr, song art,
 										etc)
@@ -238,13 +262,13 @@ export default class Home extends Component {
 										checked={this.state.values.showSongInfo}
 										size="md"
 									/>
-									<Spacer y={1} />
+									<Spacer y={1.2} />
 
 									<Button.Group>
 										<Button
 											flat
 											auto
-											onClick={() => {
+											onPress={() => {
 												if (!this.state.steamId) {
 													toast.error("Please provide a Steam ID");
 													return;
@@ -257,7 +281,7 @@ export default class Home extends Component {
 										<Button
 											flat
 											auto
-											onClick={() => {
+											onPress={() => {
 												if (!this.state.steamId) {
 													toast.error("Please provide a Steam ID");
 													return;

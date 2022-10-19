@@ -371,6 +371,7 @@ export default class Overlay extends Component {
 			websiteType,
 			showPlayerStats,
 			loadingPlayerData,
+      id
 		} = this.state;
 
 		if (this.state.textColor !== undefined) {
@@ -400,7 +401,7 @@ export default class Overlay extends Component {
 								country={data.country}
 								countryRank={data.countryRank.toLocaleString()}
 								websiteType={websiteType}
-								avatar={data.profilePicture || data.avatar}
+								avatar={`/api/steamavatar?steamid=${id}`}
 							/>
 						) : (
 							<></>

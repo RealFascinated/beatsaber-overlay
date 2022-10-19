@@ -2,12 +2,7 @@ import fs from "fs";
 import fetch from "node-fetch";
 import path from "path";
 import sharp from "sharp";
-
-const cacheDir = process.cwd() + path.sep + "cache";
-if (!fs.existsSync(cacheDir)) {
-	fs.mkdirSync(cacheDir);
-	console.log("Created cache directory");
-}
+import cacheDir from "../../../../src/caches/SongArtCacheDir";
 
 export default async function handler(req, res) {
 	const mapHash = req.query.hash.replace("custom_level_", "").toLowerCase();

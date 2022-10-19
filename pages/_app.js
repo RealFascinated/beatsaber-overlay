@@ -1,4 +1,4 @@
-import { createTheme, NextUIProvider } from "@nextui-org/react";
+import { createTheme, Image, NextUIProvider } from "@nextui-org/react";
 import { NextSeo } from "next-seo";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import Head from "next/head";
@@ -61,10 +61,13 @@ function MyApp({ Component, pageProps }) {
 					/>
 
 					<noscript>
-						<img src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/pixel.gif" />
+						<Image
+							alt="For page analytics"
+							src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/pixel.gif"
+						/>
 					</noscript>
 					<script
-						defer
+						defer={true}
 						src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/script.js"
 					></script>
 				</Head>

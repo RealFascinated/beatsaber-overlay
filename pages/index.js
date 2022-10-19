@@ -8,6 +8,7 @@ import {
 	Modal,
 	Radio,
 	Spacer,
+	Spinner,
 	Switch,
 	Text,
 } from "@nextui-org/react";
@@ -64,7 +65,7 @@ export default class Home extends Component {
 			let values = {};
 			Object.entries(json.values).forEach((value) => {
 				if (value[0] !== undefined) {
-          values[value[0]] = value[1];
+					values[value[0]] = value[1];
 				}
 			});
 
@@ -142,7 +143,9 @@ export default class Home extends Component {
 
 	render() {
 		return this.state.loading ? (
-			<h1>Loading...</h1>
+			<div className={styles.loading}>
+				<Spinner size={"xl"}></Spinner>
+			</div>
 		) : (
 			<div className={styles.main}>
 				<NavBar avatarUrl={this.state.avatarUrl}></NavBar>

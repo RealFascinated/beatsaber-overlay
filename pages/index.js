@@ -25,6 +25,7 @@ export default class Home extends Component {
 	constructor(props) {
 		super(props);
 
+		this._mounted = false;
 		this.state = {
 			loading: true,
 			steamId: undefined,
@@ -44,6 +45,11 @@ export default class Home extends Component {
 	}
 
 	async componentDidMount() {
+		if (this._mounted === true) {
+			return;
+		}
+		this._mounted = true;
+
 		const urlSearchParams = new URLSearchParams(window.location.search);
 		const params = Object.fromEntries(urlSearchParams.entries());
 

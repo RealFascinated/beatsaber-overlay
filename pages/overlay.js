@@ -12,8 +12,8 @@ export default class Overlay extends Component {
 
 	constructor(props) {
 		super(props);
-		this._mounted = false;
 
+		this._mounted = false;
 		this.state = {
 			hasError: false,
 
@@ -44,8 +44,8 @@ export default class Overlay extends Component {
 			},
 			rightHand: {
 				averageCut: [15.0],
-				averagePreSwing: [70.0],
-				averagePostSwing: [30.0],
+				averagePreSwing: [70.0],dd
+				averagePostSwing: [30.0],d
 			},
 		};
 		this.setupTimer();
@@ -128,7 +128,6 @@ export default class Overlay extends Component {
 
 	// Handle Errors
 	static getDerivedStateFromError(error) {
-		console.log(error);
 		return this.setState({ hasError: true });
 	}
 	componentDidCatch(error, errorInfo) {
@@ -210,8 +209,6 @@ export default class Overlay extends Component {
 	async validateSteamId(id) {
 		const data = await fetch(`/api/validateid?steamid=${id}`);
 		const json = await data.json();
-		console.log(json);
-
 		return json.message === "Valid" ? true : false;
 	}
 

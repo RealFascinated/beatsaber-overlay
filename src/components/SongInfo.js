@@ -66,7 +66,9 @@ export default class SongInfo extends Component {
 		return (
 			<div className={styles.songInfoContainer}>
 				<Image
-					alt="Song art-work"
+					width={180}
+					height={180}
+					alt="Song artwork"
 					src={songArt}
 					loading="lazy"
 					placeholder="blur"

@@ -1,4 +1,4 @@
-# ScoreSaber Overlay with real-time data
+# BeatSaber Overlay with real-time data from HttpSiraStatus
 
 The public url to view/use: https://bs-overlay.fascinated.cc</br>
 Need help? Feel free to message me at: Fascinated#4719

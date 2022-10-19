@@ -12,8 +12,9 @@ export default class Overlay extends Component {
 
 	constructor(props) {
 		super(props);
+		this._mounted = false;
+
 		this.state = {
-			loading: true,
 			hasError: false,
 
 			loadingPlayerData: true,
@@ -51,14 +52,15 @@ export default class Overlay extends Component {
 	}
 
 	async componentDidMount() {
+		if (this._mounted === true) {
+			return;
+		}
+		this._mounted = true;
+
 		if (this.state.hasError) {
 			// Reload the page if there has been an error
+			console.log("There has been an error and the page was reloaded.");
 			return Router.reload(window.location.pathname);
-		}
-
-		if (this.state.loading === false) {
-			// Just in-case the component decides to reload
-			return;
 		}
 
 		console.log("Initializing...");
@@ -75,9 +77,18 @@ export default class Overlay extends Component {
 		const id = params.id;
 		if (!id) {
 			// Check if the id param is valid
-			this.setState({ loading: false, isValidSteamId: false });
+			this.setState({ isValidSteamId: false });
+
 			return;
 		}
+
+		// Checks if the steam id is valid
+		const isValid = await this.validateSteamId(id);
+		if (!isValid) {
+			this.setState({ isValidSteamId: false });
+			return;
+		}
+		this.setState({ id: id, isValidSteamId: true });
 
 		// Check if the player wants to disable their stats (pp, global pos, etc)
 		if (params.showPlayerStats === "false" || params.playerstats === "false") {
@@ -113,17 +124,17 @@ export default class Overlay extends Component {
 			if (this.state.isConnectedToSocket) return;
 			this.connectSocket(params.socketaddress);
 		}
-
-		this.setState({ loading: false });
 	}
 
+	// Handle Errors
 	static getDerivedStateFromError(error) {
-		return { hasError: true };
+		console.log(error);
+		return this.setState({ hasError: true });
 	}
-
 	componentDidCatch(error, errorInfo) {
 		console.log({ error, errorInfo });
 	}
+	// ---
 
 	// I'd love if HTTP Status just gave this data lmao
 	// HttpSiraStatus(https://github.com/denpadokei/HttpSiraStatus) does give this data.
@@ -178,18 +189,30 @@ export default class Overlay extends Component {
 				},
 			}
 		);
-		const json = await data.json();
-		if (json.errorMessage) {
-			// Invalid account
-			this.setState({ loadingPlayerData: false, isValidSteamId: false });
-			return;
+		try {
+			const json = await data.json();
+			this.setState({
+				loadingPlayerData: false,
+				id: id,
+				data: json,
+			});
+		} catch (e) {
+			// Catch error and use last known data
+			console.error(e);
 		}
-		this.setState({
-			loadingPlayerData: false,
-			id: id,
-			data: json,
-			isValidSteamId: true,
-		});
+	}
+
+	/**
+	 * Checks if the given steam id is valid or not
+	 *
+	 * @param {id} The Steam ID of the player to validate
+	 */
+	async validateSteamId(id) {
+		const data = await fetch(`/api/validateid?steamid=${id}`);
+		const json = await data.json();
+		console.log(json);
+
+		return json.message === "Valid" ? true : false;
 	}
 
 	/**
@@ -383,7 +406,6 @@ export default class Overlay extends Component {
 
 	render() {
 		const {
-			loading,
 			isValidSteamId,
 			data,
 			websiteType,
@@ -399,11 +421,7 @@ export default class Overlay extends Component {
 
 		return (
 			<div className={styles.main}>
-				{loading ? (
-					<div className={styles.loading}>
-						<h2>Loading...</h2>
-					</div>
-				) : !isValidSteamId && !loadingPlayerData ? (
+				{!isValidSteamId && !loadingPlayerData ? (
 					<div className={styles.invalidPlayer}>
 						<h1>Invalid player, please visit the main page.</h1>
 						<Link href="/">

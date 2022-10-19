@@ -14,6 +14,8 @@ export default class Overlay extends Component {
 		super(props);
 		this.state = {
 			loading: true,
+			hasError: false,
+
 			loadingPlayerData: true,
 			isConnectedToSocket: false,
 			id: undefined,
@@ -48,43 +50,17 @@ export default class Overlay extends Component {
 		this.setupTimer();
 	}
 
-	// I'd love if HTTP Status just gave this data lmao
-	// HttpSiraStatus(https://github.com/denpadokei/HttpSiraStatus) does give this data.
-	isCurrentSongTimeProvided = false;
-	// we don't need to reset this to false because it is highly unlikely for a player to swap mods within a browser session
-
-	/**
-	 * Setup the timer for the song time
-	 */
-	setupTimer() {
-		setInterval(() => {
-			if (this.isCurrentSongTimeProvided) {
-				return;
-			}
-			if (!this.state.paused && this.state.beatSaverData !== undefined) {
-				this.setState({ currentSongTime: this.state.currentSongTime + 1 });
-			}
-		}, 1000);
-	}
-
-	/**
-	 * Update the current song time
-	 *
-	 * @param {[]} data The song data
-	 */
-	handleCurrentSongTime(data) {
-		try {
-			const time = data.status.performance.currentSongTime;
-			if (time !== undefined && time != null) {
-				this.isCurrentSongTimeProvided = true;
-				this.setState({ currentSongTime: time });
-			}
-		} catch (e) {
-			// do nothing
-		}
-	}
-
 	async componentDidMount() {
+		if (this.state.hasError) {
+			// Reload the page if there has been an error
+			return Router.reload(window.location.pathname);
+		}
+
+		if (this.state.loading === false) {
+			// Just in-case the component decides to reload
+			return;
+		}
+
 		console.log("Initializing...");
 		this.#_beatSaverURL =
 			document.location.origin + "/api/beatsaver/map?hash=%s";
@@ -139,6 +115,50 @@ export default class Overlay extends Component {
 		}
 
 		this.setState({ loading: false });
+	}
+
+	static getDerivedStateFromError(error) {
+		return { hasError: true };
+	}
+
+	componentDidCatch(error, errorInfo) {
+		console.log({ error, errorInfo });
+	}
+
+	// I'd love if HTTP Status just gave this data lmao
+	// HttpSiraStatus(https://github.com/denpadokei/HttpSiraStatus) does give this data.
+	isCurrentSongTimeProvided = false;
+	// we don't need to reset this to false because it is highly unlikely for a player to swap mods within a browser session
+
+	/**
+	 * Setup the timer for the song time
+	 */
+	setupTimer() {
+		setInterval(() => {
+			if (this.isCurrentSongTimeProvided) {
+				return;
+			}
+			if (!this.state.paused && this.state.beatSaverData !== undefined) {
+				this.setState({ currentSongTime: this.state.currentSongTime + 1 });
+			}
+		}, 1000);
+	}
+
+	/**
+	 * Update the current song time
+	 *
+	 * @param {[]} data The song data
+	 */
+	handleCurrentSongTime(data) {
+		try {
+			const time = data.status.performance.currentSongTime;
+			if (time !== undefined && time != null) {
+				this.isCurrentSongTimeProvided = true;
+				this.setState({ currentSongTime: time });
+			}
+		} catch (e) {
+			// do nothing
+		}
 	}
 
 	/**
@@ -369,7 +389,7 @@ export default class Overlay extends Component {
 			websiteType,
 			showPlayerStats,
 			loadingPlayerData,
-      id
+			id,
 		} = this.state;
 
 		if (this.state.textColor !== undefined) {

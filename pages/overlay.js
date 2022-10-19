@@ -1,4 +1,4 @@
-import { Link } from "@nextui-org/react";
+import { Link, Spinner } from "@nextui-org/react";
 import { Component } from "react";
 import PlayerStats from "../src/components/PlayerStats";
 import ScoreStats from "../src/components/ScoreStats";
@@ -309,14 +309,15 @@ export default class Overlay extends Component {
 		},
 		scoreChanged: (data) => {
 			const { status } = data;
-			const { score, currentMaxScore } = status.performance;
-			const percent =
-				currentMaxScore > 0
-					? (((score / currentMaxScore) * 1000) / 10).toFixed(2)
-					: 0.0;
+			const { score, relativeScore } = status.performance;
+			let finalScore = score;
+			if (finalScore == 0) {
+				finalScore = this.state.currentScore;
+			}
+			const percent = relativeScore * 100;
 			this.setState({
-				currentScore: score,
-				percentage: this.state.failed ? percent * 2 : percent + "%",
+				currentScore: finalScore,
+				percentage: percent.toFixed(2) + "%",
 			});
 		},
 		noteFullyCut: (data) => {
@@ -416,9 +417,13 @@ export default class Overlay extends Component {
 			element.style.color = this.state.textColor;
 		}
 
+		if (loadingPlayerData) {
+			return <Spinner size="xl" color="white"></Spinner>;
+		}
+
 		return (
 			<div className={styles.main}>
-				{!isValidSteamId && !loadingPlayerData ? (
+				{!isValidSteamId ? (
 					<div className={styles.invalidPlayer}>
 						<h1>Invalid player, please visit the main page.</h1>
 						<Link href="/">

@@ -91,7 +91,7 @@ export default class Overlay extends Component {
 		const params = Object.fromEntries(urlSearchParams.entries());
 
 		// Check what website the player wants to use
-		if (params.beatleader === "true") {
+		if (params.beatleader === "true" || params.beatLeader === "true") {
 			this.setState({ websiteType: "BeatLeader" });
 		}
 
@@ -329,8 +329,8 @@ export default class Overlay extends Component {
 			this.resetData(true);
 			this.setState({ songData: data, paused: false });
 			if (this.state.showScore) {
-        this.setBeatSaver(data.status.beatmap);
-      }
+				this.setBeatSaver(data.status.beatmap);
+			}
 		},
 		finished: () => {
 			this.resetData(false);

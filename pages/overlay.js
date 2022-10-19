@@ -14,6 +14,7 @@ export default class Overlay extends Component {
 		super(props);
 		this.state = {
 			loading: true,
+			loadingPlayerData: true,
 			isConnectedToSocket: false,
 			id: undefined,
 			isValidSteamId: false,
@@ -136,6 +137,8 @@ export default class Overlay extends Component {
 			if (this.state.isConnectedToSocket) return;
 			this.connectSocket(params.socketaddress);
 		}
+
+		this.setState({ loading: false });
 	}
 
 	/**
@@ -158,10 +161,15 @@ export default class Overlay extends Component {
 		const json = await data.json();
 		if (json.errorMessage) {
 			// Invalid account
-			this.setState({ loading: false, isValidSteamId: false });
+			this.setState({ loadingPlayerData: false, isValidSteamId: false });
 			return;
 		}
-		this.setState({ loading: false, id: id, data: json, isValidSteamId: true });
+		this.setState({
+			loadingPlayerData: false,
+			id: id,
+			data: json,
+			isValidSteamId: true,
+		});
 	}
 
 	/**
@@ -356,7 +364,14 @@ export default class Overlay extends Component {
 	};
 
 	render() {
-		const { loading, isValidSteamId, data, websiteType } = this.state;
+		const {
+			loading,
+			isValidSteamId,
+			data,
+			websiteType,
+			showPlayerStats,
+			loadingPlayerData,
+		} = this.state;
 
 		if (this.state.textColor !== undefined) {
 			const element = document.querySelector("." + styles.main);
@@ -378,7 +393,7 @@ export default class Overlay extends Component {
 					</div>
 				) : (
 					<div className={styles.overlay}>
-						{this.state.showPlayerStats ? (
+						{showPlayerStats && !loadingPlayerData ? (
 							<PlayerStats
 								pp={data.pp.toLocaleString()}
 								globalPos={data.rank.toLocaleString()}

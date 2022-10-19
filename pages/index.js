@@ -30,6 +30,7 @@ export default class Home extends Component {
 			isPreviewVisible: false,
 			previewUrl: undefined,
 			overlayUrl: undefined,
+			avatarUrl: undefined,
 
 			values: {
 				socketAddr: undefined,
@@ -69,6 +70,7 @@ export default class Home extends Component {
 			});
 
 			this.setState({ steamId: json.steamId, values: values });
+			this.validateSteamId(json.steamId);
 		}
 		this.setState({ loading: false });
 	}
@@ -121,14 +123,32 @@ export default class Home extends Component {
 		}, 5);
 	}
 
+	async validateSteamId(steamId) {
+		if (steamId.length < 16) {
+			// Steam ID is invalid
+			return this.setState({ avatarUrl: undefined });
+		}
+
+		const data = await fetch("/api/validateid?steamid=" + steamId);
+		const json = await data.json();
+
+		console.log(json);
+
+		if (json.message === "Valid") {
+			this.setState({
+				avatarUrl: `https://cdn.scoresaber.com/avatars/${steamId}.jpg`,
+			});
+		} else {
+			this.setState({ avatarUrl: undefined });
+		}
+	}
+
 	render() {
 		return this.state.loading ? (
 			<h1>Loading...</h1>
 		) : (
 			<div className={styles.main}>
-				<NavBar
-					avatarUrl={`https://cdn.scoresaber.com/avatars/${this.state.steamId}.jpg`}
-				></NavBar>
+				<NavBar avatarUrl={this.state.avatarUrl}></NavBar>
 
 				<Container
 					css={{
@@ -198,8 +218,10 @@ export default class Home extends Component {
 										labelPlaceholder="Steam Id"
 										initialValue=""
 										value={this.state.steamId}
-										onChange={(event) => {
-											this.setState({ steamId: event.target.value });
+										onChange={async (event) => {
+											const id = event.target.value;
+											await this.validateSteamId(id);
+											this.setState({ steamId: id });
 											this.updateStorage();
 										}}
 									/>

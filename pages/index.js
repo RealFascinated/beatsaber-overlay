@@ -300,8 +300,7 @@ export default class Home extends Component {
 										}}
 									>
 										<Link
-											onClick={(event) => {
-												event.preventDefault();
+											onPress={(event) => {
 												Utils.openInNewTab(
 													"https://github.com/RealFascinated/beatsaber-overlay"
 												);

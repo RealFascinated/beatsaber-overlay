@@ -50,7 +50,6 @@ export default class Utils {
 	}
 
 	static async checkLeaderboard(url, steamId) {
-		console.log(url.replace("%s", steamId));
 		const data = await fetch(url.replace("%s", steamId), {
 			headers: {
 				"X-Requested-With": "BeatSaber Overlay",
@@ -60,7 +59,6 @@ export default class Utils {
 			return true; // Just assume it's true is we are rate limited
 		}
 		const json = await data.json();
-
 		return !!json.pp;
 	}
 }

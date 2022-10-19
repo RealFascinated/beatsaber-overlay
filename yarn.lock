@@ -33,7 +33,7 @@
   resolved "https://registry.yarnpkg.com/@emotion/memoize/-/memoize-0.8.0.tgz#f580f9beb67176fa57aae70b08ed510e1b18980f"
   integrity sha512-G/YwXTkv7Den9mXDO7AhLWkE3q+I92B+VqAE+dYG4NGPaHZGvt3G8Q0p9vmE+sq7rTGphUbAvmQ9YpbfMQGGlA==
 
-"@emotion/server@^11.4.0":
+"@emotion/server@^11.10.0":
   version "11.10.0"
   resolved "https://registry.yarnpkg.com/@emotion/server/-/server-11.10.0.tgz#3edc075b672c75426f682d56aadc6404fb1f6648"
   integrity sha512-MTvJ21JPo9aS02GdjFW4nhdwOi2tNNpMmAM/YED0pkxzjDNi5WbiTwXqaCnvLc2Lr8NFtjhT0az1vTJyLIHYcw==

@@ -282,8 +282,6 @@ export default class Overlay extends Component {
 		noteFullyCut: (data) => {
 			const { noteCut } = data;
 
-			console.log(noteCut);
-
 			// Left Saber
 			if (noteCut.saberType === "SaberA") {
 				const data = this.state.leftHand;

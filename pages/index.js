@@ -124,15 +124,13 @@ export default class Home extends Component {
 	}
 
 	async validateSteamId(steamId) {
-		if (steamId.length < 16) {
+		if (steamId.length !== 17) {
 			// Steam ID is invalid
 			return this.setState({ avatarUrl: undefined });
 		}
 
 		const data = await fetch("/api/validateid?steamid=" + steamId);
 		const json = await data.json();
-
-		console.log(json);
 
 		if (json.message === "Valid") {
 			this.setState({

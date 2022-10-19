@@ -63,14 +63,13 @@ export default class Home extends Component {
 			const json = JSON.parse(localStorage.getItem("values"));
 			let values = {};
 			Object.entries(json.values).forEach((value) => {
-				if (value[0] === undefined) {
-					return;
+				if (value[0] !== undefined) {
+          values[value[0]] = value[1];
 				}
-				values[value[0]] = value[1];
 			});
 
 			this.setState({ steamId: json.steamId, values: values });
-			this.validateSteamId(json.steamId);
+			this.validateSteamId(json.steamId || "");
 		}
 		this.setState({ loading: false });
 	}

@@ -1,4 +1,4 @@
-import { Container, Grid, Image, Text } from "@nextui-org/react";
+import { Container, Grid, Image, Link, Text } from "@nextui-org/react";
 import { Component } from "react";
 
 export default class Home extends Component {
@@ -8,9 +8,11 @@ export default class Home extends Component {
 
 	render() {
 		return (
-			<Container css={{
-        marginTop: '$15'
-      }}>
+			<Container
+				css={{
+					marginTop: "$15",
+				}}
+			>
 				<Grid.Container gap={2}>
 					<Grid
 						xs={12}
@@ -25,12 +27,11 @@ export default class Home extends Component {
 								marginTop: "30px",
 							}}
 						>
-							<Text h2 b>Whoops! This page is unknown!</Text>
+							<Text h2 b>
+								Whoops! This page is unknown!
+							</Text>
 							<Text h3>
-								To visit the main website click{" "}
-								<span>
-									<a href="/">here</a>
-								</span>
+								<Link href="/">Click here to visit the main website</Link>
 							</Text>
 						</div>
 					</Grid>

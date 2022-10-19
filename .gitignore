@@ -2,6 +2,7 @@
 
 # Other
 /cache
+/avatar_cache
 
 # dependencies
 /node_modules

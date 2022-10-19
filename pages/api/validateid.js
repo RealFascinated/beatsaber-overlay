@@ -41,6 +41,9 @@ async function checkLeaderboard(url, steamId) {
 			"X-Requested-With": "BeatSaber Overlay",
 		},
 	});
+	if (data.status === 429) {
+		return true; // Just assume it's true is we are rate limited
+	}
 	const json = await data.json();
 
 	return !!json.pp;

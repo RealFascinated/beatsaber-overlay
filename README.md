@@ -9,7 +9,7 @@ To get started go to https://bs-overlay.fascinated.cc and it is fairly self expl
 
 ## Preview:
 ![Overlay](https://cdn.fascinated.cc/HCrnvhsHGG.png?raw=true)
-![Builder Menu](https://cdn.fascinated.cc/TRtxaPcjTN.png?raw=true)
+![Builder Menu](https://cdn.fascinated.cc/QwGTQLhJsq.png?raw=true)
 
 ## Getting Started with developent
 

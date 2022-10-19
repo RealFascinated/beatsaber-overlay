@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }) {
 						site_name: Config.name,
 						images: [
 							{
-								url: "https://cdn.fascinated.cc/YrATaLjUOP.png?raw=true",
+								url: "https://cdn.fascinated.cc/fHknFPctAC.png?raw=true",
 								alt: "Site Example",
 							},
 						],

@@ -21,6 +21,6 @@ export default async function handler(req, res) {
 		return;
 	}
 	const buffer = fs.readFileSync(imagePath);
-	res.setHeader("Content-Type", "image/jpg" + ext);
+	res.setHeader("Content-Type", "image/" + ext);
 	res.send(buffer);
 }

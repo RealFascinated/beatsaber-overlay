@@ -12,4 +12,8 @@ export default class Utils {
 	static getWebsiteApi(website) {
 		return WebsiteTypes[website];
 	}
+
+	static openInNewTab(url) {
+		window.open(url, "_blank");
+	}
 }

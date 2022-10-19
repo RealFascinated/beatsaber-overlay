@@ -17,6 +17,7 @@ import NavBar from "../src/components/Navbar";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import Utils from "../src/utils/utils";
 import styles from "../styles/main.module.css";
 
 export default class Home extends Component {
@@ -293,16 +294,23 @@ export default class Home extends Component {
 										</Button>
 									</Button.Group>
 
-									{this.state.overlayUrl !== undefined ? (
-										<>
-											<Text b>Url</Text>
-											<Link href={this.state.overlayUrl}>
-												{this.state.overlayUrl}
-											</Link>
-										</>
-									) : (
-										<></>
-									)}
+									<Text
+										css={{
+											marginTop: "10px",
+										}}
+									>
+										<Link
+											onClick={(event) => {
+												event.preventDefault();
+												Utils.openInNewTab(
+													"https://github.com/RealFascinated/beatsaber-overlay"
+												);
+											}}
+										>
+											If you like this project and want to support it. Come
+											check out the project on GitHub!
+										</Link>
+									</Text>
 								</Card.Body>
 							</Card>
 						</Grid>

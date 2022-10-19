@@ -13,6 +13,7 @@
     "@nextui-org/react": "^1.0.0-beta.10",
     "next": "12",
     "next-seo": "^5.5.0",
+    "next-themes": "^0.2.1",
     "node-fetch": "^3.2.10",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

@@ -112,11 +112,14 @@ export default class Home extends Component {
 	}
 
 	render() {
+		console.log(this.state.steamId);
 		return this.state.loading ? (
 			<h1>Loading...</h1>
 		) : (
 			<div className={styles.main}>
-				<NavBar></NavBar>
+				<NavBar
+					avatarUrl={`https://cdn.scoresaber.com/avatars/${this.state.steamId}.jpg`}
+				></NavBar>
 
 				<Container
 					css={{
@@ -156,12 +159,16 @@ export default class Home extends Component {
 									textAlign: "center",
 								}}
 							>
-								<Text h1>BeatSaber Overlay</Text>
-								<Text h4>Welcome to the Setup panel</Text>
+								<Text h1 css={{ color: "$text" }}>
+									BeatSaber Overlay
+								</Text>
+								<Text h4 css={{ color: "$text" }}>
+									Welcome to the Setup panel
+								</Text>
 							</div>
 						</Grid>
 
-						<Grid xs={12}>
+						<Grid xs={12} lg={9}>
 							<Card>
 								<Card.Body>
 									<Spacer y={1} />

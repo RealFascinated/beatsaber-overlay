@@ -1,7 +1,6 @@
-import { createTheme, Image, NextUIProvider } from "@nextui-org/react";
+import { createTheme, NextUIProvider } from "@nextui-org/react";
 import { NextSeo } from "next-seo";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-import Head from "next/head";
 
 import Config from "../config.json";
 

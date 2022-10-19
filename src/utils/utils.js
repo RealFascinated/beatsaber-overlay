@@ -1,9 +1,9 @@
 import SteamIdCache from "../../src/caches/SteamIdCache";
-import WebsiteTypes from "../consts/WebsiteType";
+import LeaderboardType from "../consts/LeaderboardType";
 
 const TO_CHECK = [
-	WebsiteTypes.ScoreSaber.ApiUrl,
-	WebsiteTypes.BeatLeader.ApiUrl,
+	LeaderboardType.ScoreSaber.ApiUrl,
+	LeaderboardType.BeatLeader.ApiUrl,
 ];
 
 export default class Utils {
@@ -12,11 +12,11 @@ export default class Utils {
 	/**
 	 * Returns the information for the given website type.
 	 *
-	 * @param {WebsiteTypes} website
+	 * @param {LeaderboardType} website
 	 * @returns The website type's information.
 	 */
 	static getWebsiteApi(website) {
-		return WebsiteTypes[website];
+		return LeaderboardType[website];
 	}
 
 	static openInNewTab(url) {

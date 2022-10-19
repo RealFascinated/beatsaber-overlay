@@ -27,6 +27,9 @@ export default class Utils {
 		if (!steamId) {
 			return false;
 		}
+		if (steamId.length !== 17) {
+			return false;
+		}
 
 		if (SteamIdCache.has(steamId)) {
 			return SteamIdCache.get(steamId);

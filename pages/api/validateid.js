@@ -1,3 +1,4 @@
+import SteamIdCache from "../../src/caches/SteamIdCache";
 import WebsiteTypes from "../../src/consts/WebsiteType";
 
 const TO_CHECK = [
@@ -15,6 +16,13 @@ export default async function handler(req, res) {
 		});
 	}
 
+	if (SteamIdCache.has(steamId)) {
+		return res.json({
+			status: "OK",
+			message: SteamIdCache.get(steamId) ? `Invalid` : "Valid",
+		});
+	}
+
 	let invalid = false;
 	for (const url of TO_CHECK) {
 		const isValid = await checkLeaderboard(url, steamId);
@@ -28,6 +36,7 @@ export default async function handler(req, res) {
 		}
 	}
 
+	SteamIdCache.set(steamId, invalid);
 	return res.json({
 		status: "OK",
 		message: invalid ? `Invalid` : "Valid",

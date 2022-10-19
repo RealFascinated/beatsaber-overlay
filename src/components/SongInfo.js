@@ -65,7 +65,14 @@ export default class SongInfo extends Component {
 
 		return (
 			<div className={styles.songInfoContainer}>
-				<Image alt="Song art-work" src={songArt} />
+				<Image
+					alt="Song art-work"
+					src={songArt}
+					loading="lazy"
+					placeholder="blur"
+					blurDataURL="https://cdn.fascinated.cc/IkQFyodbZv.jpg?raw=true"
+					unoptimized={true}
+				/>
 				<div className={styles.songInfo}>
 					<p className={styles.songInfoSongName}>
 						{songName.length > 35

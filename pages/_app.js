@@ -52,25 +52,6 @@ function MyApp({ Component, pageProps }) {
 						site: "@BeatSaber Overlay",
 					}}
 				/>
-
-				<Head>
-					<meta name="theme-color" content={Config.color} />
-					<meta
-						property="og:keywords"
-						content="BeatSaber,Overlay,OBS,Twitch,YouTube,BeatSaber Overlay,Github,"
-					/>
-
-					<noscript>
-						<Image
-							alt="For page analytics"
-							src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/pixel.gif"
-						/>
-					</noscript>
-					<script
-						defer={true}
-						src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/script.js"
-					></script>
-				</Head>
 				<Component {...pageProps} />
 			</NextUIProvider>
 		</NextThemesProvider>

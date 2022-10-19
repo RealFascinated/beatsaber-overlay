@@ -1,4 +1,4 @@
-import { CssBaseline } from "@nextui-org/react";
+import { CssBaseline, Image } from "@nextui-org/react";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 
@@ -24,6 +24,24 @@ class MyDocument extends Document {
 						href="https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap"
 						rel="stylesheet"
 					/>
+					<link rel="shortcut icon" href="/favicon.ico" />
+
+					<meta name="theme-color" content={Config.color} />
+					<meta
+						property="og:keywords"
+						content="BeatSaber,Overlay,OBS,Twitch,YouTube,BeatSaber Overlay,Github,"
+					/>
+
+					<noscript>
+						<Image
+							alt="For page analytics"
+							src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/pixel.gif"
+						/>
+					</noscript>
+					<script
+						defer={true}
+						src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/script.js"
+					></script>
 				</Head>
 				<body>
 					<Main />

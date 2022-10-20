@@ -36,7 +36,7 @@ const WebsiteTypes = {
 			return Math.pow(Math.log10(l / (l - acc)) / Math.log10(l / (l - a)), f);
 		},
 		ppFromAcc(acc, stars) {
-			if (stars === undefined) {
+			if (stars === undefined || acc === undefined) {
 				return undefined;
 			}
 			const pp = this.curve(acc / 100, stars - 0.5) * (stars + 0.5) * 42;

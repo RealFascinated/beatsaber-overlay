@@ -84,11 +84,11 @@ export default class Home extends Component {
 	loadPreview() {
 		this.setState({
 			isPreviewVisible: true,
-			previewUrl: this.generateUrl(true),
+			previewUrl: this.generateUrl(),
 		});
 	}
 
-	generateUrl(withTc = false) {
+	generateUrl() {
 		let values = "";
 		Object.entries(this.state.values).forEach((value) => {
 			if (value[1] === undefined) {
@@ -102,11 +102,7 @@ export default class Home extends Component {
 		});
 
 		return (
-			window.location.origin +
-			"/overlay?id=" +
-			this.state.steamId +
-			values +
-			(withTc ? "&textColor=black" : "")
+			window.location.origin + "/overlay?id=" + this.state.steamId + values
 		);
 	}
 

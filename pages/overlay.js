@@ -26,7 +26,6 @@ export default class Overlay extends Component {
 			showPlayerStats: true,
 			showScore: false,
 			showSongInfo: false,
-			textColor: undefined,
 
 			socket: undefined,
 			isVisible: false,
@@ -113,11 +112,6 @@ export default class Overlay extends Component {
 		if (params.showSongInfo === "true" || params.songinfo === "true") {
 			this.setState({ showSongInfo: true });
 			shouldConnectSocket = true;
-		}
-
-		// Mainly used for the preview
-		if (params.textColor) {
-			this.setState({ textColor: params.textColor });
 		}
 
 		if (shouldConnectSocket) {
@@ -411,11 +405,6 @@ export default class Overlay extends Component {
 			loadingPlayerData,
 			id,
 		} = this.state;
-
-		if (this.state.textColor !== undefined) {
-			const element = document.querySelector("." + styles.main);
-			element.style.color = this.state.textColor;
-		}
 
 		if (loadingPlayerData) {
 			return <Spinner size="xl" color="white"></Spinner>;

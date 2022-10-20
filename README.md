@@ -6,7 +6,8 @@ Need help? Feel free to message me at: Fascinated#4719
 ## Usage
 
 You will need [HttpSiraStatus](https://github.com/denpadokei/HttpSiraStatus) if you wish to use the note cut and/or the song info</br>
-To get started go to <https://bs-overlay.fascinated.cc> and it is fairly self explanatory on how it all works</br>
+To get started go to <https://bs-overlay.fascinated.cc> and fill the forum in then go to OBS (or your streaming software) and click Open Overlay</br>
+Then create a browser window and set the height to 1920 and the width to 1080 then put the URL in the browser window and bam! it should all work
 
 ## Preview
 
@@ -17,7 +18,6 @@ To get started go to <https://bs-overlay.fascinated.cc> and it is fairly self ex
 
 - Cache BeatSaver data
 - Add toggle for showing pp
-- Cleanup the API (or just re-do it)
 - Change the song time to a circular style in the song art
 
 ## Getting Started with developent

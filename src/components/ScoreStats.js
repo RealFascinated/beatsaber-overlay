@@ -6,6 +6,7 @@ import Utils from "../utils/utils";
 export default class ScoreStats extends Component {
 	constructor(params) {
 		super(params);
+		this.lastKnownPP = undefined;
 	}
 
 	/**
@@ -20,11 +21,14 @@ export default class ScoreStats extends Component {
 
 	render() {
 		const data = this.props.data;
-		const currentPP = Utils.calculatePP(
+		let currentPP = Utils.calculatePP(
 			data.mapStarCount,
 			data.percentage.replace("%", ""),
 			data.websiteType
 		);
+		if (this.lastKnownPP === undefined || this.lastKnownPP < currentPP) {
+			currentPP = this.lastKnownPP;
+		}
 
 		return (
 			<div className={styles.scoreStats}>

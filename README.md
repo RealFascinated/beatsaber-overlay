@@ -15,11 +15,7 @@ To get started go to <https://bs-overlay.fascinated.cc> and it is fairly self ex
 
 ## Todo
 
-- Move caches to Redis
-- Move media to my CDN server
 - Cache BeatSaver data
-- Add cache status in the response headers
-- Move configuration files to ENV files
 - Add toggle for showing pp
 - Cleanup the API (or just re-do it)
 - Change the song time to a circular style in the song art

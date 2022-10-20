@@ -9,7 +9,7 @@ const client = new Redis({
 client.connect().catch(() => {});
 
 async function setValue(key, value, expireAt = 86400) {
-	await client.set(key, value);
+	await client.set(key, value, "EX", expireAt);
 }
 
 async function getValue(key) {

@@ -1,9 +1,12 @@
 import SteamIdCache from "../../src/caches/SteamIdCache";
-import LeaderboardType from "../consts/LeaderboardType";
+import {
+	default as LeaderboardType,
+	default as WebsiteTypes,
+} from "../consts/LeaderboardType";
 
 const TO_CHECK = [
-	LeaderboardType.ScoreSaber.ApiUrl,
-	LeaderboardType.BeatLeader.ApiUrl,
+	LeaderboardType.ScoreSaber.ApiUrl.PlayerData,
+	LeaderboardType.BeatLeader.ApiUrl.PlayerData,
 ];
 
 export default class Utils {
@@ -63,5 +66,12 @@ export default class Utils {
 		}
 		const json = await data.json();
 		return !!json.pp;
+	}
+
+	static calculatePP(stars, acc, type) {
+		if (type === "BeatLeader") {
+			return WebsiteTypes.BeatLeader.ppFromAcc(acc, stars);
+		}
+		return undefined;
 	}
 }

@@ -3,6 +3,7 @@ import { Component } from "react";
 import PlayerStats from "../src/components/PlayerStats";
 import ScoreStats from "../src/components/ScoreStats";
 import SongInfo from "../src/components/SongInfo";
+import LeaderboardType from "../src/consts/LeaderboardType";
 import Utils from "../src/utils/utils";
 
 import styles from "../styles/overlay.module.css";
@@ -26,7 +27,7 @@ export default class Overlay extends Component {
 			showPlayerStats: true,
 			showScore: false,
 			showSongInfo: false,
-      loadedDuringSong: false,
+			loadedDuringSong: false,
 
 			socket: undefined,
 			isVisible: false,
@@ -37,6 +38,7 @@ export default class Overlay extends Component {
 			currentScore: 0,
 			percentage: "100.00%",
 			failed: false,
+			mapStarCount: undefined,
 			leftHand: {
 				averageCut: [15.0],
 				averagePreSwing: [70.0],
@@ -175,7 +177,7 @@ export default class Overlay extends Component {
 		const data = await fetch(
 			Utils.getWebsiteApi(
 				id == "test" ? "Test" : this.state.websiteType
-			).ApiUrl.replace("%s", id),
+			).ApiUrl.PlayerData.replace("%s", id),
 			{
 				headers: {
 					"X-Requested-With": "BeatSaber Overlay",
@@ -234,6 +236,7 @@ export default class Overlay extends Component {
 			console.log(
 				"Attempting to re-connect to the HTTP Status socket in 60 seconds."
 			);
+			this.resetData(false);
 			this.setState({ isConnectedToSocket: false });
 			setTimeout(() => this.connectSocket(), 60_000);
 		});
@@ -261,6 +264,17 @@ export default class Overlay extends Component {
 		);
 		const json = await data.json();
 		this.setState({ beatSaverData: json });
+
+		if (this.state.websiteType == "BeatLeader") {
+			const { characteristic, levelId, difficulty } = songData;
+			let mapHash = levelId.replace("custom_level_", "");
+			const mapStars = await LeaderboardType.BeatLeader.getMapStarCount(
+				mapHash,
+				difficulty,
+				characteristic
+			);
+			this.setState({ mapStarCount: mapStars });
+		}
 	}
 
 	/**
@@ -291,7 +305,8 @@ export default class Overlay extends Component {
 			currentScore: 0,
 			percentage: "100.00%",
 			isVisible: visible,
-      loadedDuringSong: loadedDuringSong
+			loadedDuringSong: loadedDuringSong,
+			mapStarCount: undefined,
 		});
 	}
 
@@ -299,15 +314,15 @@ export default class Overlay extends Component {
 	handlers = {
 		hello: (data) => {
 			console.log("Hello from HTTP Status!");
-			if (data.status) {
-				if (this.state.songData === undefined) {
-					console.log("Going into level during song, resetting data.");
-					this.resetData(true, true);
-					this.setState({ songData: data, paused: false });
-					if (data.status.beatmap) {
-						this.setBeatSaver(data.status.beatmap);
-					}
-				}
+			if (
+				data.status &&
+				data.status.beatmap &&
+				this.state.songData === undefined
+			) {
+				console.log("Going into level during song, resetting data.");
+				this.resetData(true, true);
+				this.setState({ songData: data, paused: false });
+				this.setBeatSaver(data.status.beatmap);
 			}
 		},
 		scoreChanged: (data) => {
@@ -438,7 +453,7 @@ export default class Overlay extends Component {
 								countryRank={data.countryRank.toLocaleString()}
 								websiteType={websiteType}
 								avatar={`/api/steamavatar?steamid=${id}`}
-                loadedDuringSong={this.state.loadedDuringSong}
+								loadedDuringSong={this.state.loadedDuringSong}
 							/>
 						) : (
 							<></>

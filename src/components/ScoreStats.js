@@ -1,6 +1,7 @@
 import { Component } from "react";
 
 import styles from "../../styles/scoreStats.module.css";
+import Utils from "../utils/utils";
 
 export default class ScoreStats extends Component {
 	constructor(params) {
@@ -19,12 +20,18 @@ export default class ScoreStats extends Component {
 
 	render() {
 		const data = this.props.data;
+		const currentPP = Utils.calculatePP(
+			data.mapStarCount,
+			data.percentage.replace("%", ""),
+			data.websiteType
+		);
 
 		return (
 			<div className={styles.scoreStats}>
 				<div className={styles.scoreStatsInfo}>
 					<p>{data.percentage}</p>
 					<p>{data.currentScore.toLocaleString()}</p>
+					{currentPP !== undefined ? <p>{currentPP.toFixed(0)}pp</p> : null}
 				</div>
 				<div>
 					<p className={styles.scoreStatsAverageCut}>Average Cut</p>

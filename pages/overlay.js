@@ -209,7 +209,6 @@ export default class Overlay extends Component {
 		}
 		const data = await fetch(`/api/validateid?steamid=${id}`);
 		const json = await data.json();
-		console.log(json.message);
 		return json.message === "Valid";
 	}
 

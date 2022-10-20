@@ -29,6 +29,16 @@ const PlayerStats = (props) => {
 						countryCode={props.country}
 					/>
 				</div>
+				{props.loadedDuringSong ? (
+					<>
+						<p className={styles.connectedDuringSong}>
+							Connected during song, some data
+						</p>
+						<p className={styles.connectedDuringSong}>
+							may be incorrect for this song.
+						</p>
+					</>
+				) : null}
 			</div>
 		</div>
 	);

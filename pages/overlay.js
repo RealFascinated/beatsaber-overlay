@@ -26,6 +26,7 @@ export default class Overlay extends Component {
 			showPlayerStats: true,
 			showScore: false,
 			showSongInfo: false,
+      loadedDuringSong: false,
 
 			socket: undefined,
 			isVisible: false,
@@ -267,7 +268,7 @@ export default class Overlay extends Component {
 	 *
 	 * @param {boolean} visible Whether to show info other than the player stats
 	 */
-	async resetData(visible) {
+	async resetData(visible, loadedDuringSong = false) {
 		if (this.state.showPlayerStats == true) {
 			setTimeout(async () => {
 				await this.updateData(this.state.id);
@@ -290,6 +291,7 @@ export default class Overlay extends Component {
 			currentScore: 0,
 			percentage: "100.00%",
 			isVisible: visible,
+      loadedDuringSong: loadedDuringSong
 		});
 	}
 
@@ -298,9 +300,13 @@ export default class Overlay extends Component {
 		hello: (data) => {
 			console.log("Hello from HTTP Status!");
 			if (data.status) {
-				this.setState({ songData: data });
-				if (data.status.beatmap) {
-					this.setBeatSaver(data.status.beatmap);
+				if (this.state.songData === undefined) {
+					console.log("Going into level during song, resetting data.");
+					this.resetData(true, true);
+					this.setState({ songData: data, paused: false });
+					if (data.status.beatmap) {
+						this.setBeatSaver(data.status.beatmap);
+					}
 				}
 			}
 		},
@@ -432,6 +438,7 @@ export default class Overlay extends Component {
 								countryRank={data.countryRank.toLocaleString()}
 								websiteType={websiteType}
 								avatar={`/api/steamavatar?steamid=${id}`}
+                loadedDuringSong={this.state.loadedDuringSong}
 							/>
 						) : (
 							<></>

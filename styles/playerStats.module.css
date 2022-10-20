@@ -39,3 +39,7 @@
 .playerStats p {
 	font-size: 37px;
 }
+
+.connectedDuringSong {
+	font-size: 25px !important;
+}

@@ -5,6 +5,11 @@
 	right: 0;
 	margin-right: 5px;
 	min-width: 135px;
+
+	display: flex;
+	justify-content: right;
+	flex-direction: column;
+	align-items: right;
 }
 
 .scoreStats p {

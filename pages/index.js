@@ -221,7 +221,7 @@ export default class Home extends Component {
 									<Spacer y={2} />
 									<Input
 										underlined
-										labelPlaceholder="Steam Id"
+										labelPlaceholder="Steam Id (NOT Username)"
 										initialValue=""
 										value={this.state.steamId}
 										onChange={async (event) => {

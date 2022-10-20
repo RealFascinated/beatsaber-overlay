@@ -12,6 +12,6 @@ export default async function handler(req, res) {
 	const isValid = await Utils.isValidSteamId(steamId);
 	return res.json({
 		status: "OK",
-		message: isValid ? `Invalid` : "Valid",
+		message: !isValid ? `Valid` : "Invalid",
 	});
 }

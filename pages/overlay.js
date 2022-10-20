@@ -76,15 +76,14 @@ export default class Overlay extends Component {
 		const id = params.id;
 		if (!id) {
 			// Check if the id param is valid
-			this.setState({ isValidSteamId: false });
-
+			this.setState({ isValidSteamId: false, loadingPlayerData: false });
 			return;
 		}
 
 		// Checks if the steam id is valid
 		const isValid = await this.validateSteamId(id);
 		if (!isValid) {
-			this.setState({ isValidSteamId: false });
+			this.setState({ isValidSteamId: false, loadingPlayerData: false });
 			return;
 		}
 		this.setState({ id: id, isValidSteamId: true });
@@ -201,9 +200,13 @@ export default class Overlay extends Component {
 	 * @param {id} The Steam ID of the player to validate
 	 */
 	async validateSteamId(id) {
+		if (id.length !== 17) {
+			return false;
+		}
 		const data = await fetch(`/api/validateid?steamid=${id}`);
 		const json = await data.json();
-		return json.message === "Valid" ? true : false;
+		console.log(json.message);
+		return json.message === "Valid";
 	}
 
 	/**

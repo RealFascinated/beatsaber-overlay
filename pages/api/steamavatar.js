@@ -26,7 +26,7 @@ export default async function handler(req, res) {
 		fs.writeFileSync(imagePath, buffer);
 		res.setHeader("Content-Type", "image/jpg");
 		res.send(buffer);
-		console.log('Steam Avatar Cache - Added avatar "' + mapHash + '"');
+		console.log('Steam Avatar Cache - Added avatar "' + steamId + '"');
 		return;
 	}
 	const buffer = fs.readFileSync(imagePath);

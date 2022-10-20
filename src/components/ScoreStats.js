@@ -26,10 +26,11 @@ export default class ScoreStats extends Component {
 			data.percentage.replace("%", ""),
 			data.websiteType
 		);
+		console.log(this.lastKnownPP);
 		if (this.lastKnownPP === undefined) {
 			this.lastKnownPP = currentPP;
 		}
-		if (currentPP < this.lastKnownPP || currentPP === undefined) {
+		if (currentPP === undefined) {
 			currentPP = this.lastKnownPP;
 		}
 		this.lastKnownPP = currentPP;

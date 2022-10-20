@@ -20,7 +20,7 @@ export default class ScoreStats extends Component {
 
 	render() {
 		const data = this.props.data;
-		const currentPP = Utils.calculatePP(
+		let currentPP = Utils.calculatePP(
 			data.mapStarCount,
 			data.percentage.replace("%", ""),
 			data.websiteType

@@ -40,7 +40,7 @@ const WebsiteTypes = {
 				return undefined;
 			}
 			const pp = this.curve(acc / 100, stars - 0.5) * (stars + 0.5) * 42;
-			return pp == NaN ? undefined : pp;
+			return Number.isNaN(pp) ? undefined : pp;
 		},
 	},
 	Test: {

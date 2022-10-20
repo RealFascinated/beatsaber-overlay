@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 	const exists = await RedisUtils.exists(`${KEY}${mapHash}`);
 	if (exists) {
 		const data = await RedisUtils.getValue(
-			`${KEY}-${difficulty}-${characteristic}-${mapHash}`
+			`${KEY}${difficulty}-${characteristic}-${mapHash}`
 		);
 		res.setHeader("Cache-Status", "hit");
 
@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 	}
 	const json = await data.json();
 	RedisUtils.setValue(
-		`${KEY}-${difficulty}-${characteristic}-${mapHash}`,
+		`${KEY}${difficulty}-${characteristic}-${mapHash}`,
 		json.difficulty.stars
 	);
 	res.setHeader("Cache-Status", "miss");

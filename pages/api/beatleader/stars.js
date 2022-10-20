@@ -15,11 +15,10 @@ export default async function handler(req, res) {
 	const difficulty = req.query.difficulty.replace(" ", "");
 	const characteristic = req.query.characteristic;
 
-	const exists = await RedisUtils.exists(`${KEY}${mapHash}`);
+	const key = `${KEY}${difficulty}-${characteristic}-${mapHash}`;
+	const exists = await RedisUtils.exists(key);
 	if (exists) {
-		const data = await RedisUtils.getValue(
-			`${KEY}${difficulty}-${characteristic}-${mapHash}`.replace(" ", "")
-		);
+		const data = await RedisUtils.getValue(key);
 		res.setHeader("Cache-Status", "hit");
 
 		return res.status(200).json({
@@ -46,10 +45,7 @@ export default async function handler(req, res) {
 		});
 	}
 	const json = await data.json();
-	RedisUtils.setValue(
-		`${KEY}${difficulty}-${characteristic}-${mapHash}`.replace(" ", ""),
-		json.difficulty.stars
-	);
+	RedisUtils.setValue(key, json.difficulty.stars);
 	res.setHeader("Cache-Status", "miss");
 	return res.status(200).json({
 		status: "OK",

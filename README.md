@@ -10,7 +10,7 @@ To get started go to <https://bs-overlay.fascinated.cc> and it is fairly self ex
 
 ## Preview
 
-![Overlay](https://cdn.fascinated.cc/HCrnvhsHGG.png?raw=true)
+![Overlay](https://cdn.fascinated.cc/bAmrOfUvLv.png?raw=true)
 ![Builder Menu](https://cdn.fascinated.cc/QwGTQLhJsq.png?raw=true)
 
 ## Todo

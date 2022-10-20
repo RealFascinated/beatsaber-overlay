@@ -175,9 +175,10 @@ export default class Overlay extends Component {
 	 */
 	async updateData(id) {
 		const data = await fetch(
-			Utils.getWebsiteApi(
-				id == "test" ? "Test" : this.state.websiteType
-			).ApiUrl.PlayerData.replace("%s", id),
+			Utils.getWebsiteApi(this.state.websiteType).ApiUrl.PlayerData.replace(
+				"%s",
+				id
+			),
 			{
 				headers: {
 					"X-Requested-With": "BeatSaber Overlay",

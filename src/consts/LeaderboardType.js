@@ -36,9 +36,6 @@ const WebsiteTypes = {
 			return Number.isNaN(pp) ? undefined : pp;
 		},
 	},
-	Test: {
-		ApiUrl: "/api/mockdata",
-	},
 };
 
 export default WebsiteTypes;

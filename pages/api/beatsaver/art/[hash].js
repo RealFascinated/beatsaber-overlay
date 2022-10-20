@@ -14,7 +14,7 @@ export default async function handler(req, res) {
 	const mapHash = req.query.hash.replace("custom_level_", "").toLowerCase();
 	const ext = req.query.ext || "jpg";
 
-	const exists = await RedisUtils.exists(`${KEY}${mapHash}`);
+	const exists = await RedisUtils.exists(`${KEY}${mapHash}`.replace(" ", ""));
 	if (exists) {
 		const data = await RedisUtils.getValue(`${KEY}${mapHash}`);
 		const buffer = Buffer.from(data, "base64");
@@ -38,7 +38,7 @@ export default async function handler(req, res) {
 	buffer = await sharp(buffer).resize(150, 150).toBuffer();
 	const bytes = buffer.toString("base64");
 
-	await RedisUtils.setValue(`${KEY}${mapHash}`, bytes);
+	await RedisUtils.setValue(`${KEY}${mapHash}`.replace(" ", ""), bytes);
 	res.setHeader("Cache-Status", "miss");
 	res.setHeader("Content-Type", "image/" + ext);
 	res.status(200).send(buffer);

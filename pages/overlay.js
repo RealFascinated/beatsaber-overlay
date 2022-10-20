@@ -271,7 +271,7 @@ export default class Overlay extends Component {
 			let mapHash = levelId.replace("custom_level_", "");
 			const mapStars = await LeaderboardType.BeatLeader.getMapStarCount(
 				mapHash,
-				difficulty,
+				difficulty.replace("+", "Plus"),
 				characteristic
 			);
 			this.setState({ mapStarCount: mapStars });

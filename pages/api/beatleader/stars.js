@@ -12,25 +12,26 @@ const KEY = "BL_MAP_STAR_";
  */
 export default async function handler(req, res) {
 	const mapHash = req.query.hash.replace("custom_level_", "").toLowerCase();
-	const difficulty = req.query.difficulty;
+	const difficulty = req.query.difficulty.replace(" ", "");
 	const characteristic = req.query.characteristic;
 
 	const exists = await RedisUtils.exists(`${KEY}${mapHash}`);
 	if (exists) {
 		const data = await RedisUtils.getValue(
-			`${KEY}${difficulty}-${characteristic}-${mapHash}`
+			`${KEY}${difficulty}-${characteristic}-${mapHash}`.replace(" ", "")
 		);
 		res.setHeader("Cache-Status", "hit");
 
 		return res.status(200).json({
 			status: "OK",
 			stars: Number.parseFloat(data),
+			difficulty: difficulty,
 		});
 	}
 
 	const data = await fetch(
 		WebsiteTypes.BeatLeader.ApiUrl.MapData.replace("%h", mapHash)
-			.replace("%d", difficulty.replace("+", "Plus"))
+			.replace("%d", difficulty)
 			.replace("%m", characteristic),
 		{
 			headers: {
@@ -46,7 +47,7 @@ export default async function handler(req, res) {
 	}
 	const json = await data.json();
 	RedisUtils.setValue(
-		`${KEY}${difficulty}-${characteristic}-${mapHash}`,
+		`${KEY}${difficulty}-${characteristic}-${mapHash}`.replace(" ", ""),
 		json.difficulty.stars
 	);
 	res.setHeader("Cache-Status", "miss");

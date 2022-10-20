@@ -41,25 +41,17 @@ export default class ScoreStats extends Component {
 					<p>{data.currentScore.toLocaleString()}</p>
 					{currentPP !== undefined ? <p>{currentPP.toFixed(0)}pp</p> : null}
 				</div>
-				<div>
-					<p className={styles.scoreStatsAverageCut}>Average Cut</p>
-					<div className={styles.scoreStatsHands}>
-						<div className={styles.scoreStatsLeft}>
-							<p>{this.getAverage(data.leftHand.averagePreSwing).toFixed(2)}</p>
-							<p>
-								{this.getAverage(data.leftHand.averagePostSwing).toFixed(2)}
-							</p>
-							<p>{this.getAverage(data.leftHand.averageCut).toFixed(2)}</p>
-						</div>
-						<div className={styles.scoreStatsRight}>
-							<p>
-								{this.getAverage(data.rightHand.averagePreSwing).toFixed(2)}
-							</p>
-							<p>
-								{this.getAverage(data.rightHand.averagePostSwing).toFixed(2)}
-							</p>
-							<p>{this.getAverage(data.rightHand.averageCut).toFixed(2)}</p>
-						</div>
+				<p className={styles.scoreStatsAverageCut}>Average Cut</p>
+				<div className={styles.scoreStatsHands}>
+					<div className={styles.scoreStatsLeft}>
+						<p>{this.getAverage(data.leftHand.averagePreSwing).toFixed(2)}</p>
+						<p>{this.getAverage(data.leftHand.averagePostSwing).toFixed(2)}</p>
+						<p>{this.getAverage(data.leftHand.averageCut).toFixed(2)}</p>
+					</div>
+					<div className={styles.scoreStatsRight}>
+						<p>{this.getAverage(data.rightHand.averagePreSwing).toFixed(2)}</p>
+						<p>{this.getAverage(data.rightHand.averagePostSwing).toFixed(2)}</p>
+						<p>{this.getAverage(data.rightHand.averageCut).toFixed(2)}</p>
 					</div>
 				</div>
 			</div>

@@ -1,9 +1,6 @@
 import { createTheme, NextUIProvider } from "@nextui-org/react";
 import { NextSeo } from "next-seo";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
-
-import Config from "../config.json";
-
 import "../styles/globals.css";
 
 const lightTheme = createTheme({
@@ -32,13 +29,13 @@ function MyApp({ Component, pageProps }) {
 		>
 			<NextUIProvider>
 				<NextSeo
-					title={Config.name}
-					description={Config.description}
+					title={process.env.SITE_NAME}
+					description={process.env.SITE_DESCRIPTION}
 					openGraph={{
-						url: Config.url,
-						title: Config.name,
-						description: Config.description,
-						site_name: Config.name,
+						url: process.env.SITE_URL,
+						title: process.env.SITE_NAME,
+						description: process.env.SITE_DESCRIPTION,
+						site_name: process.env.SITE_NAME,
 						images: [
 							{
 								url: "https://cdn.fascinated.cc/fHknFPctAC.png?raw=true",

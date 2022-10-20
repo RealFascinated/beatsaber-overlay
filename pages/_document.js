@@ -2,8 +2,6 @@ import { CssBaseline, Image } from "@nextui-org/react";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
 
-import Config from "../config.json";
-
 class MyDocument extends Document {
 	static async getInitialProps(ctx) {
 		const initialProps = await Document.getInitialProps(ctx);
@@ -28,7 +26,7 @@ class MyDocument extends Document {
 					/>
 					<link rel="shortcut icon" href="/favicon.ico" />
 
-					<meta name="theme-color" content={Config.color} />
+					<meta name="theme-color" content={process.env.SITE_COLOR} />
 					<meta
 						property="og:keywords"
 						content="BeatSaber,Overlay,OBS,Twitch,YouTube,BeatSaber Overlay,Github,"

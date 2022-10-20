@@ -1,17 +1,18 @@
-import Config from "../../config.json";
-
 const WebsiteTypes = {
 	ScoreSaber: {
 		ApiUrl: {
 			PlayerData:
-				Config.proxy_url + "/https://scoresaber.com/api/player/%s/basic",
+				process.env.NEXT_PUBLIC_HTTP_PROXY +
+				"/https://scoresaber.com/api/player/%s/basic",
 		},
 	},
 	BeatLeader: {
 		ApiUrl: {
-			PlayerData: Config.proxy_url + "/https://api.beatleader.xyz/player/%s",
+			PlayerData:
+				process.env.NEXT_PUBLIC_HTTP_PROXY +
+				"/https://api.beatleader.xyz/player/%s",
 			MapData:
-				Config.proxy_url +
+				process.env.NEXT_PUBLIC_HTTP_PROXY +
 				"/https://api.beatleader.xyz/leaderboard/hash/%h/%d/%m",
 		},
 		async getMapStarCount(mapHash, mapDiff, characteristic) {

@@ -1,10 +1,9 @@
-import Config from "../config.json";
-
 const mapCache = new Map();
 
 module.exports = {
 	BEATSAVER_MAP_API:
-		Config.proxy_url + "/https://api.beatsaver.com/maps/hash/%s",
+		process.env.NEXT_PUBLIC_HTTP_PROXY +
+		"/https://api.beatsaver.com/maps/hash/%s",
 
 	/**
 	 * Gets a specified maps data from BeatSaver

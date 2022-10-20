@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 	const mapData = await Utils.getMapData(mapHash.replace("custom_level_", ""));
 	if (mapData === undefined) {
 		// Check if a map hash was provided
-		return res.json({ error: true, message: "Unknown map" });
+		return res.status(200).json({ error: true, message: "Unknown map" });
 	}
 	const data = {
 		// The maps data from the provided map hash
@@ -15,5 +15,5 @@ export default async function handler(req, res) {
 			mapData.versions[0].coverURL.split("/")[3].split(".")[1]
 		}`,
 	};
-	res.json({ error: false, data: data });
+	res.status(200).json({ error: false, data: data });
 }

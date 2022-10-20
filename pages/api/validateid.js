@@ -1,17 +1,17 @@
-import Utils from "../../src/utils/utils";
+import { isValidSteamId } from "../../src/helpers/validateSteamId";
 
 export default async function handler(req, res) {
 	const steamId = req.query.steamid;
 	if (!steamId) {
-		return res.json({
+		return res.status(404).json({
 			status: 404,
-			message: "Steam id not provided: Provide in the query.",
+			message: "Steam ID not provided",
 		});
 	}
 
-	const isValid = await Utils.isValidSteamId(steamId);
-	return res.json({
+	const isValid = await isValidSteamId(steamId);
+	return res.status(200).json({
 		status: "OK",
-		message: !isValid ? `Valid` : "Invalid",
+		message: isValid ? `Valid` : "Invalid",
 	});
 }

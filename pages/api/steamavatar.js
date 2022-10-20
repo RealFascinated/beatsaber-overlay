@@ -1,35 +1,55 @@
-import fs from "fs";
 import fetch from "node-fetch";
-import path from "path";
 import sharp from "sharp";
-import cacheDir from "../../src/caches/SteamAvatarCacheDir";
-import Utils from "../../src/utils/utils";
+import { isValidSteamId } from "../../src/helpers/validateSteamId";
+import RedisUtils from "../../src/utils/redisUtils";
 
+const KEY = "STEAM_AVATAR_";
+const ext = "jpg";
+
+/**
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @returns
+ */
 export default async function handler(req, res) {
 	const steamId = req.query.steamid;
-	const isValid = await Utils.isValidSteamId(steamId);
-	if (isValid == true) {
-		return res.json({
-			status: "OK",
-			message: `Invalid steam id`,
+	const isValid = await isValidSteamId(steamId);
+	if (isValid == false) {
+		return res.status(404).json({
+			status: 404,
+			message: "Unknown Steam Avatar",
 		});
 	}
 
-	const imagePath = cacheDir + path.sep + steamId + ".jpg";
-	const exists = fs.existsSync(imagePath);
-	if (!exists) {
-		const data = await fetch(
-			`https://cdn.scoresaber.com/avatars/${steamId}.jpg`
-		);
-		let buffer = await data.buffer();
-		buffer = await sharp(buffer).resize(150, 150).toBuffer();
-		fs.writeFileSync(imagePath, buffer);
-		res.setHeader("Content-Type", "image/jpg");
-		res.send(buffer);
-		console.log('Steam Avatar Cache - Added avatar "' + steamId + '"');
-		return;
+	const exists = await RedisUtils.exists(`${KEY}${steamId}`);
+	if (exists) {
+		const data = await RedisUtils.getValue(`${KEY}${steamId}`);
+		const buffer = Buffer.from(data, "base64");
+		res.writeHead(200, {
+			"Content-Type": "image/" + ext,
+			"Content-Length": buffer.length,
+			"Cache-Status": "hit",
+		});
+		return res.end(buffer);
 	}
-	const buffer = fs.readFileSync(imagePath);
-	res.setHeader("Content-Type", "image/jpg");
-	res.send(buffer);
+
+	const data = await fetch(
+		`https://cdn.scoresaber.com/avatars/${steamId}.${ext}`
+	);
+	if (data.status === 404) {
+		return res.status(404).json({
+			status: 404,
+			message: "Unknown Steam Avatar",
+		});
+	}
+
+	let buffer = await data.buffer(); // Change to arrayBuffer at some point to make it shush
+	buffer = await sharp(buffer).resize(150, 150).toBuffer();
+	const bytes = buffer.toString("base64");
+
+	await RedisUtils.setValue(`${KEY}${steamId}`, bytes);
+	res.setHeader("Cache-Status", "miss");
+	res.setHeader("Content-Type", "image/" + ext);
+	res.status(200).send(buffer);
 }

@@ -1,17 +1,28 @@
 import fetch from "node-fetch";
-import BLMapStarCache from "../../../src/caches/BLMapStarCache";
 import WebsiteTypes from "../../../src/consts/LeaderboardType";
+import RedisUtils from "../../../src/utils/redisUtils";
 
+const KEY = "BL_MAP_STAR_";
+
+/**
+ *
+ * @param {Request} req
+ * @param {Response} res
+ * @returns
+ */
 export default async function handler(req, res) {
 	const mapHash = req.query.hash.replace("custom_level_", "").toLowerCase();
 	const difficulty = req.query.difficulty;
 	const characteristic = req.query.characteristic;
 
-	if (BLMapStarCache.has(mapHash)) {
-		return res.json({
+	const exists = await RedisUtils.exists(`${KEY}${mapHash}`);
+	if (exists) {
+		const data = await RedisUtils.getValue(`${KEY}${mapHash}`);
+		res.setHeader("Cache-Status", "hit");
+
+		return res.status(200).json({
 			status: "OK",
-			message: "Cache hit for " + mapHash,
-			stars: BLMapStarCache.get(mapHash),
+			stars: Number.parseFloat(data),
 		});
 	}
 
@@ -26,16 +37,16 @@ export default async function handler(req, res) {
 		}
 	);
 	if (data.status === 404) {
-		return res.json({
+		return res.status(404).json({
 			status: 404,
-			message: "Unknown hash",
+			message: "Unknown Map Hash",
 		});
 	}
 	const json = await data.json();
-	BLMapStarCache.set(mapHash, json.difficulty.stars);
-	return res.json({
+	RedisUtils.setValue(`${KEY}${mapHash}`, json.difficulty.stars);
+	res.setHeader("Cache-Status", "miss");
+	return res.status(200).json({
 		status: "OK",
-		message: "Cache miss for " + mapHash,
 		stars: json.difficulty.stars,
 	});
 }

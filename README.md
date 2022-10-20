@@ -11,7 +11,7 @@ Then create a browser window and set the height to 1920 and the width to 1080 th
 
 ## Preview
 
-![Overlay](https://cdn.fascinated.cc/HCrnvhsHGG.png?raw=true)
+![Overlay](https://cdn.fascinated.cc/bAmrOfUvLv.png?raw=true)
 ![Builder Menu](https://cdn.fascinated.cc/QwGTQLhJsq.png?raw=true)
 
 ## Todo

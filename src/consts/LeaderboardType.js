@@ -16,17 +16,10 @@ const WebsiteTypes = {
 		},
 		async getMapStarCount(mapHash, mapDiff, characteristic) {
 			const data = await fetch(
-				this.ApiUrl.MapData.replace("%h", mapHash)
-					.replace("%d", mapDiff.replace("+", "Plus"))
-					.replace("%m", characteristic),
-				{
-					headers: {
-						"X-Requested-With": "BeatSaber Overlay",
-					},
-				}
+				`/api/beatleader/stars?hash=${mapHash}&difficulty=${mapDiff}&characteristic=${characteristic}`
 			);
 			const json = await data.json();
-			return json.difficulty.stars || undefined;
+			return json.stars || undefined;
 		},
 		curve(acc, stars) {
 			var l = 1 - (0.03 * (stars - 3.0)) / 11.0;

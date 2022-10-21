@@ -1,11 +1,8 @@
-import {
-	default as LeaderboardType,
-	default as WebsiteTypes,
-} from "../consts/LeaderboardType";
+import { default as LeaderboardType } from "../consts/LeaderboardType";
+import BeatLeaderCurve from "../curve/BeatLeaderCurve";
+import ScoreSaberCurve from "../curve/ScoreSaberCurve";
 
 export default class Utils {
-	constructor() {}
-
 	/**
 	 * Returns the information for the given website type.
 	 *
@@ -35,7 +32,10 @@ export default class Utils {
 
 	static calculatePP(stars, acc, type) {
 		if (type === "BeatLeader") {
-			return WebsiteTypes.BeatLeader.ppFromAcc(acc, stars);
+			return BeatLeaderCurve.getPP(acc, stars);
+		}
+		if (type === "ScoreSaber") {
+			return ScoreSaberCurve.getPP(acc, stars);
 		}
 		return undefined;
 	}

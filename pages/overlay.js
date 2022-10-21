@@ -266,16 +266,24 @@ export default class Overlay extends Component {
 		const json = await data.json();
 		this.setState({ beatSaverData: json });
 
-		if (this.state.websiteType == "BeatLeader") {
-			const { characteristic, levelId, difficulty } = songData;
-			let mapHash = levelId.replace("custom_level_", "");
-			const mapStars = await LeaderboardType.BeatLeader.getMapStarCount(
+		const { characteristic, levelId, difficulty } = songData;
+		let mapHash = levelId.replace("custom_level_", "");
+		let mapStars = undefined;
+		if (this.state.websiteType === "BeatLeader") {
+			mapStars = await LeaderboardType.BeatLeader.getMapStarCount(
 				mapHash,
 				difficulty.replace("+", "Plus"),
 				characteristic
 			);
-			this.setState({ mapStarCount: mapStars });
 		}
+		if (this.state.websiteType === "ScoreSaber") {
+			mapStars = await LeaderboardType.ScoreSaber.getMapStarCount(
+				mapHash,
+				difficulty.replace("+", "Plus"),
+				characteristic
+			);
+		}
+		this.setState({ mapStarCount: mapStars });
 	}
 
 	/**

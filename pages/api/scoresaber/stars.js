@@ -48,7 +48,6 @@ export default async function handler(req, res) {
 		});
 	}
 	const json = await data.json();
-	console.log(json);
 	let starCount = json.stars;
 	if (starCount === undefined) {
 		return res.status(404).json({

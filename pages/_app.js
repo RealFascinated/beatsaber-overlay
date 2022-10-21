@@ -29,13 +29,13 @@ function MyApp({ Component, pageProps }) {
 		>
 			<NextUIProvider>
 				<NextSeo
-					title={process.env.SITE_NAME}
-					description={process.env.SITE_DESCRIPTION}
+					title={process.env.NEXT_PUBLIC_SITE_NAME}
+					description={process.env.NEXT_PUBLIC_SITE_DESCRIPTION}
 					openGraph={{
-						url: process.env.SITE_URL,
-						title: process.env.SITE_NAME,
-						description: process.env.SITE_DESCRIPTION,
-						site_name: process.env.SITE_NAME,
+						url: process.env.NEXT_PUBLIC_SITE_URL,
+						title: process.env.NEXT_PUBLIC_SITE_NAME,
+						description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
+						site_name: process.env.NEXT_PUBLIC_SITE_NAME,
 						images: [
 							{
 								url: "https://cdn.fascinated.cc/fHknFPctAC.png?raw=true",

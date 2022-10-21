@@ -26,7 +26,10 @@ class MyDocument extends Document {
 					/>
 					<link rel="shortcut icon" href="/favicon.ico" />
 
-					<meta name="theme-color" content={process.env.SITE_COLOR} />
+					<meta
+						name="theme-color"
+						content={process.env.NEXT_PUBLIC_SITE_COLOR}
+					/>
 					<meta
 						property="og:keywords"
 						content="BeatSaber,Overlay,OBS,Twitch,YouTube,BeatSaber Overlay,Github,"

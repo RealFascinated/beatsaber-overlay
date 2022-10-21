@@ -40,12 +40,12 @@ export default class Overlay extends Component {
 			percentage: "100.00%",
 			failed: false,
 			mapStarCount: undefined,
-			leftHand: {
+			SaberA: {
 				averageCut: [15.0],
 				averagePreSwing: [70.0],
 				averagePostSwing: [30.0],
 			},
-			rightHand: {
+			SaberB: {
 				averageCut: [15.0],
 				averagePreSwing: [70.0],
 				averagePostSwing: [30.0],
@@ -342,53 +342,26 @@ export default class Overlay extends Component {
 		noteFullyCut: (data) => {
 			const { noteCut } = data;
 
-			// Left Saber
-			if (noteCut.saberType === "SaberA") {
-				const data = this.state.leftHand;
-				if (data.averageCut.includes(15) && data.averageCut.length === 1) {
-					data.averageCut = [];
-				}
-				if (
-					data.averagePreSwing.includes(70) &&
-					data.averagePreSwing.length === 1
-				) {
-					data.averagePreSwing = [];
-				}
-				if (
-					data.averagePostSwing.includes(30) &&
-					data.averagePostSwing.length === 1
-				) {
-					data.averagePostSwing = [];
-				}
-				data.averagePreSwing.push(noteCut.beforeSwingRating * 70);
-				data.averagePostSwing.push(noteCut.afterSwingRating * 30);
-				data.averageCut.push(noteCut.cutDistanceScore);
-				this.setState({ leftHand: data });
+			const cutData = this.state[noteCut.saberType];
+			if (cutData.averageCut.includes(15) && cutData.averageCut.length === 1) {
+				cutData.averageCut = [];
 			}
-
-			// Left Saber
-			if (noteCut.saberType === "SaberB") {
-				const data = this.state.rightHand;
-				if (data.averageCut.includes(15) && data.averageCut.length === 1) {
-					data.averageCut = [];
-				}
-				if (
-					data.averagePreSwing.includes(70) &&
-					data.averagePreSwing.length === 1
-				) {
-					data.averagePreSwing = [];
-				}
-				if (
-					data.averagePostSwing.includes(30) &&
-					data.averagePostSwing.length === 1
-				) {
-					data.averagePostSwing = [];
-				}
-				data.averagePreSwing.push(noteCut.beforeSwingRating * 70);
-				data.averagePostSwing.push(noteCut.afterSwingRating * 30);
-				data.averageCut.push(noteCut.cutDistanceScore);
-				this.setState({ rightHand: data });
+			if (
+				cutData.averagePreSwing.includes(70) &&
+				cutData.averagePreSwing.length === 1
+			) {
+				cutData.averagePreSwing = [];
 			}
+			if (
+				cutData.averagePostSwing.includes(30) &&
+				cutData.averagePostSwing.length === 1
+			) {
+				cutData.averagePostSwing = [];
+			}
+			cutData.averagePreSwing.push(noteCut.beforeCutScore);
+			cutData.averagePostSwing.push(noteCut.afterCutScore);
+			cutData.averageCut.push(noteCut.cutDistanceScore);
+			this.setState({ [noteCut.saberType]: cutData });
 		},
 		songStart: (data) => {
 			console.log("Going into level, resetting data.");

@@ -44,14 +44,14 @@ export default class ScoreStats extends Component {
 				<p className={styles.scoreStatsAverageCut}>Average Cut</p>
 				<div className={styles.scoreStatsHands}>
 					<div className={styles.scoreStatsLeft}>
-						<p>{this.getAverage(data.leftHand.averagePreSwing).toFixed(2)}</p>
-						<p>{this.getAverage(data.leftHand.averagePostSwing).toFixed(2)}</p>
-						<p>{this.getAverage(data.leftHand.averageCut).toFixed(2)}</p>
+						<p>{this.getAverage(data.SaberA.averagePreSwing).toFixed(2)}</p>
+						<p>{this.getAverage(data.SaberA.averagePostSwing).toFixed(2)}</p>
+						<p>{this.getAverage(data.SaberA.averageCut).toFixed(2)}</p>
 					</div>
 					<div className={styles.scoreStatsRight}>
-						<p>{this.getAverage(data.rightHand.averagePreSwing).toFixed(2)}</p>
-						<p>{this.getAverage(data.rightHand.averagePostSwing).toFixed(2)}</p>
-						<p>{this.getAverage(data.rightHand.averageCut).toFixed(2)}</p>
+						<p>{this.getAverage(data.SaberB.averagePreSwing).toFixed(2)}</p>
+						<p>{this.getAverage(data.SaberB.averagePostSwing).toFixed(2)}</p>
+						<p>{this.getAverage(data.SaberB.averageCut).toFixed(2)}</p>
 					</div>
 				</div>
 			</div>

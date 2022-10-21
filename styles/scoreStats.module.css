@@ -19,16 +19,15 @@
 
 .scoreStatsLeft {
 	text-align: right;
+	margin-right: 3px;
 }
 
 .scoreStatsRight {
-	margin-right: 10px;
-	text-align: right;
+	text-align: left;
 }
 
 .scoreStatsAverageCut {
 	font-weight: bold;
-	font-size: x-large;
 }
 
 .scoreStatsHands {

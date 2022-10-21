@@ -77,6 +77,7 @@ export default class ScoreSaberCurve {
 			ScoreSaberCurve.ppCurve
 		);
 
-		return modifier * ppValue;
+		const finalPP = modifier * ppValue;
+		return Number.isNaN(finalPP) ? undefined : finalPP;
 	}
 }

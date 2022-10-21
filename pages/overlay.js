@@ -418,6 +418,8 @@ export default class Overlay extends Component {
 		bombMissed: () => {},
 		beatmapEvent: () => {},
 		energyChanged: () => {},
+		obstacleEnter: () => {},
+		obstacleExit: () => {},
 	};
 
 	render() {

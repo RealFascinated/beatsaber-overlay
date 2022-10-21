@@ -16,7 +16,6 @@ Then create a browser window and set the height to 1920 and the width to 1080 th
 
 ## Todo
 
-- Cache BeatSaver data
 - Make BeatLeader pp count check for modifiers
 - Add toggle for showing pp
 - Change the song time to a circular style in the song art

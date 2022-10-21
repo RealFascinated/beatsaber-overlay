@@ -28,6 +28,7 @@ export default async function handler(req, res) {
 		});
 	}
 
+	const before = Date.now();
 	const data = await fetch(
 		WebsiteTypes.BeatLeader.ApiUrl.MapData.replace("%h", mapHash)
 			.replace("%d", difficulty)
@@ -45,10 +46,30 @@ export default async function handler(req, res) {
 		});
 	}
 	const json = await data.json();
-	RedisUtils.setValue(key, json.difficulty.stars);
+	let starCount = undefined;
+	for (const diff of json.difficulties) {
+		if (
+			diff.difficultyName === difficulty &&
+			diff.modeName === characteristic
+		) {
+			starCount = diff.stars;
+		}
+	}
+	if (starCount === undefined) {
+		return res.status(404).json({
+			status: 404,
+			message: "Unknown Map Hash",
+		});
+	}
+	await RedisUtils.setValue(key, starCount);
+	console.log(
+		`[Cache]: Cached BL Star Count for hash ${mapHash} in ${
+			Date.now() - before
+		}ms`
+	);
 	res.setHeader("Cache-Status", "miss");
 	return res.status(200).json({
 		status: "OK",
-		stars: json.difficulty.stars,
+		stars: starCount,
 	});
 }

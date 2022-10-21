@@ -34,6 +34,7 @@ export default async function handler(req, res) {
 		return res.end(buffer);
 	}
 
+	const before = Date.now();
 	const data = await fetch(
 		`https://cdn.scoresaber.com/avatars/${steamId}.${ext}`
 	);
@@ -49,6 +50,9 @@ export default async function handler(req, res) {
 	const bytes = buffer.toString("base64");
 
 	await RedisUtils.setValue(`${KEY}${steamId}`, bytes);
+	console.log(
+		`[Cache]: Cached Avatar for id ${steamId} in ${Date.now() - before}ms`
+	);
 	res.setHeader("Cache-Status", "miss");
 	res.setHeader("Content-Type", "image/" + ext);
 	res.status(200).send(buffer);

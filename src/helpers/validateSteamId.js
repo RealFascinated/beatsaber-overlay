@@ -22,6 +22,7 @@ async function isValidSteamId(steamId) {
 		return Boolean(data);
 	}
 
+	const before = Date.now();
 	let valid = false;
 	for (const url of TO_CHECK) {
 		const isValid = await Utils.checkLeaderboard(url, steamId);
@@ -32,6 +33,9 @@ async function isValidSteamId(steamId) {
 	}
 
 	await RedisUtils.setValue(`${KEY}${steamId}`, valid);
+	console.log(
+		`[Cache]: Cached Steam ID for id ${steamId} in ${Date.now() - before}ms`
+	);
 	return valid;
 }
 

@@ -26,6 +26,7 @@ export default async function handler(req, res) {
 		return res.end(buffer);
 	}
 
+	const before = Date.now();
 	const data = await fetch(`https://eu.cdn.beatsaver.com/${mapHash}.${ext}`);
 	if (data.status === 404) {
 		return res.status(404).json({
@@ -39,6 +40,11 @@ export default async function handler(req, res) {
 	const bytes = buffer.toString("base64");
 
 	await RedisUtils.setValue(`${KEY}${mapHash}`.replace(" ", ""), bytes);
+	console.log(
+		`[Cache]: Cached BS Song Art for hash ${mapHash} in ${
+			Date.now() - before
+		}ms`
+	);
 	res.setHeader("Cache-Status", "miss");
 	res.setHeader("Content-Type", "image/" + ext);
 	res.status(200).send(buffer);

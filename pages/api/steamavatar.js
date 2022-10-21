@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import sharp from "sharp";
 import { isValidSteamId } from "../../src/helpers/validateSteamId";
-import RedisUtils from "../../src/utils/redisUtils";
+import { getValue, setValue, valueExists } from "../../src/utils/redisUtils";
 
 const KEY = "STEAM_AVATAR_";
 const ext = "jpg";
@@ -22,9 +22,9 @@ export default async function handler(req, res) {
 		});
 	}
 
-	const exists = await RedisUtils.exists(`${KEY}${steamId}`);
+	const exists = await valueExists(`${KEY}${steamId}`);
 	if (exists) {
-		const data = await RedisUtils.getValue(`${KEY}${steamId}`);
+		const data = await getValue(`${KEY}${steamId}`);
 		const buffer = Buffer.from(data, "base64");
 		res.writeHead(200, {
 			"Content-Type": "image/" + ext,
@@ -49,7 +49,7 @@ export default async function handler(req, res) {
 	buffer = await sharp(buffer).resize(400, 400).toBuffer();
 	const bytes = buffer.toString("base64");
 
-	await RedisUtils.setValue(`${KEY}${steamId}`, bytes);
+	await setValue(`${KEY}${steamId}`, bytes);
 	console.log(
 		`[Cache]: Cached Avatar for id ${steamId} in ${Date.now() - before}ms`
 	);

@@ -1,6 +1,10 @@
 import fetch from "node-fetch";
 import sharp from "sharp";
-import RedisUtils from "../../../../src/utils/redisUtils";
+import {
+	getValue,
+	setValue,
+	valueExists,
+} from "../../../../src/utils/redisUtils";
 
 const KEY = "BS_MAP_ART_";
 
@@ -14,9 +18,9 @@ export default async function handler(req, res) {
 	const mapHash = req.query.hash.replace("custom_level_", "").toLowerCase();
 	const ext = req.query.ext || "jpg";
 
-	const exists = await RedisUtils.exists(`${KEY}${mapHash}`.replace(" ", ""));
+	const exists = await valueExists(`${KEY}${mapHash}`.replace(" ", ""));
 	if (exists) {
-		const data = await RedisUtils.getValue(`${KEY}${mapHash}`);
+		const data = await getValue(`${KEY}${mapHash}`);
 		const buffer = Buffer.from(data, "base64");
 		res.writeHead(200, {
 			"Content-Type": "image/" + ext,
@@ -39,7 +43,7 @@ export default async function handler(req, res) {
 	buffer = await sharp(buffer).resize(400, 400).toBuffer();
 	const bytes = buffer.toString("base64");
 
-	await RedisUtils.setValue(`${KEY}${mapHash}`.replace(" ", ""), bytes);
+	await setValue(`${KEY}${mapHash}`.replace(" ", ""), bytes);
 	console.log(
 		`[Cache]: Cached BS Song Art for hash ${mapHash} in ${
 			Date.now() - before

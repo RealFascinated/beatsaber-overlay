@@ -1,9 +1,9 @@
-import Utils from "../../../utils/utils";
+import { getMapData } from "../../../src/helpers/beatSaverHelpers";
 
 export default async function handler(req, res) {
 	const mapHash = req.query.hash;
 
-	const mapData = await Utils.getMapData(mapHash.replace("custom_level_", ""));
+	const mapData = await getMapData(mapHash);
 	if (mapData === undefined) {
 		// Check if a map hash was provided
 		return res.status(404).json({

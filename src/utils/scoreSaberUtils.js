@@ -1,8 +1,4 @@
-function diffToScoreSaberDiff(diff) {
-	console.log(
-		"🚀 ~ file: scoreSaberUtils.js ~ line 2 ~ diffToScoreSaberDiff ~ diff",
-		diff
-	);
+export function diffToScoreSaberDiff(diff) {
 	switch (diff) {
 		case "Easy": {
 			return 1;
@@ -24,7 +20,3 @@ function diffToScoreSaberDiff(diff) {
 		}
 	}
 }
-
-module.exports = {
-	diffToScoreSaberDiff,
-};

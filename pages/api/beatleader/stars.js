@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import WebsiteTypes from "../../../src/consts/LeaderboardType";
-import RedisUtils from "../../../src/utils/redisUtils";
+import { getValue, setValue, valueExists } from "../../../src/utils/redisUtils";
 
 const KEY = "BL_MAP_STAR_";
 
@@ -16,9 +16,9 @@ export default async function handler(req, res) {
 	const characteristic = req.query.characteristic;
 
 	const key = `${KEY}${difficulty}-${characteristic}-${mapHash}`;
-	const exists = await RedisUtils.exists(key);
+	const exists = await valueExists(key);
 	if (exists) {
-		const data = await RedisUtils.getValue(key);
+		const data = await getValue(key);
 		res.setHeader("Cache-Status", "hit");
 
 		return res.status(200).json({
@@ -59,7 +59,7 @@ export default async function handler(req, res) {
 			message: "Unknown Map Hash",
 		});
 	}
-	await RedisUtils.setValue(key, starCount);
+	await setValue(key, starCount);
 	console.log(
 		`[Cache]: Cached BL Star Count for hash ${mapHash} in ${
 			Date.now() - before

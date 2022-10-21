@@ -1,6 +1,6 @@
 import { default as LeaderboardType } from "../consts/LeaderboardType";
-import BeatLeaderCurve from "../curve/BeatLeaderCurve";
-import ScoreSaberCurve from "../curve/ScoreSaberCurve";
+import { getBeatLeaderPP } from "../curve/BeatLeaderCurve";
+import { getScoreSaberPP } from "../curve/ScoreSaberCurve";
 
 export default class Utils {
 	/**
@@ -32,10 +32,10 @@ export default class Utils {
 
 	static calculatePP(stars, acc, type) {
 		if (type === "BeatLeader") {
-			return BeatLeaderCurve.getPP(acc, stars);
+			return getBeatLeaderPP(acc, stars);
 		}
 		if (type === "ScoreSaber") {
-			return ScoreSaberCurve.getPP(acc, stars);
+			return getScoreSaberPP(acc, stars);
 		}
 		return undefined;
 	}

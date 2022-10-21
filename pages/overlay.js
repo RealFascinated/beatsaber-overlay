@@ -433,7 +433,10 @@ export default class Overlay extends Component {
 						<div className={styles.overlay}>
 							{showPlayerStats && !loadingPlayerData ? (
 								<PlayerStats
-									pp={data.pp.toLocaleString()}
+									pp={data.pp.toLocaleString("en-US", {
+										maximumFractionDigits: 2,
+										minimumFractionDigits: 2,
+									})}
 									globalPos={data.rank.toLocaleString()}
 									country={data.country}
 									countryRank={data.countryRank.toLocaleString()}

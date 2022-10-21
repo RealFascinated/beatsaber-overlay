@@ -73,7 +73,6 @@ export default class SongInfo extends Component {
 					loading="lazy"
 					placeholder="blur"
 					blurDataURL="https://cdn.fascinated.cc/IkQFyodbZv.jpg?raw=true"
-					unoptimized={"true"}
 				/>
 				<div className={styles.songInfo}>
 					<p className={styles.songInfoSongName}>

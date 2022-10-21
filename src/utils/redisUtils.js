@@ -9,10 +9,18 @@ const client = new Redis({
 client.connect().catch(() => {});
 
 async function setValue(key, value, expireAt = 86400) {
+	if (client.status === "close" || client.status === "end") {
+		await client.connect().catch(() => {});
+	}
+
 	await client.set(key, value, "EX", expireAt);
 }
 
 async function getValue(key) {
+	if (client.status === "close" || client.status === "end") {
+		await client.connect().catch(() => {});
+	}
+
 	const yes = new Promise((reject, resolve) => {
 		client.get(key, (err, result) => {
 			if (err !== null) {
@@ -27,6 +35,10 @@ async function getValue(key) {
 }
 
 async function exists(key) {
+	if (client.status === "close" || client.status === "end") {
+		await client.connect().catch(() => {});
+	}
+
 	const yes = new Promise((reject, resolve) => {
 		client.exists(key, (err, result) => {
 			if (err !== null) {

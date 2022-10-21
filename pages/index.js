@@ -18,6 +18,7 @@ import NavBar from "../src/components/Navbar";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { NextSeo } from "next-seo";
 import Utils from "../src/utils/utils";
 import styles from "../styles/main.module.css";
 
@@ -151,6 +152,8 @@ export default class Home extends Component {
 		) : (
 			<div className={styles.main}>
 				<NavBar avatarUrl={this.state.avatarUrl}></NavBar>
+
+				<NextSeo title="Builder"></NextSeo>
 
 				<Container
 					css={{

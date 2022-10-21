@@ -1,4 +1,5 @@
 import { Link, Spinner } from "@nextui-org/react";
+import { NextSeo } from "next-seo";
 import { Component } from "react";
 import PlayerStats from "../src/components/PlayerStats";
 import ScoreStats from "../src/components/ScoreStats";
@@ -437,44 +438,47 @@ export default class Overlay extends Component {
 		}
 
 		return (
-			<div className={styles.main}>
-				{!isValidSteamId ? (
-					<div className={styles.invalidPlayer}>
-						<h1>Invalid player, please visit the main page.</h1>
-						<Link href="/">
-							<a>Go Home</a>
-						</Link>
-					</div>
-				) : (
-					<div className={styles.overlay}>
-						{showPlayerStats && !loadingPlayerData ? (
-							<PlayerStats
-								pp={data.pp.toLocaleString()}
-								globalPos={data.rank.toLocaleString()}
-								country={data.country}
-								countryRank={data.countryRank.toLocaleString()}
-								websiteType={websiteType}
-								avatar={`/api/steamavatar?steamid=${id}`}
-								loadedDuringSong={this.state.loadedDuringSong}
-							/>
-						) : (
-							<></>
-						)}
-						{this.state.showScore && this.state.isVisible ? (
-							<ScoreStats data={this.state} />
-						) : (
-							<></>
-						)}
-						{this.state.showSongInfo &&
-						this.state.beatSaverData !== undefined &&
-						this.state.isVisible ? (
-							<SongInfo data={this.state} />
-						) : (
-							<></>
-						)}
-					</div>
-				)}
-			</div>
+			<>
+				<NextSeo title="Overlay"></NextSeo>
+				<div className={styles.main}>
+					{!isValidSteamId ? (
+						<div className={styles.invalidPlayer}>
+							<h1>Invalid player, please visit the main page.</h1>
+							<Link href="/">
+								<a>Go Home</a>
+							</Link>
+						</div>
+					) : (
+						<div className={styles.overlay}>
+							{showPlayerStats && !loadingPlayerData ? (
+								<PlayerStats
+									pp={data.pp.toLocaleString()}
+									globalPos={data.rank.toLocaleString()}
+									country={data.country}
+									countryRank={data.countryRank.toLocaleString()}
+									websiteType={websiteType}
+									avatar={`/api/steamavatar?steamid=${id}`}
+									loadedDuringSong={this.state.loadedDuringSong}
+								/>
+							) : (
+								<></>
+							)}
+							{this.state.showScore && this.state.isVisible ? (
+								<ScoreStats data={this.state} />
+							) : (
+								<></>
+							)}
+							{this.state.showSongInfo &&
+							this.state.beatSaverData !== undefined &&
+							this.state.isVisible ? (
+								<SongInfo data={this.state} />
+							) : (
+								<></>
+							)}
+						</div>
+					)}
+				</div>
+			</>
 		);
 	}
 }

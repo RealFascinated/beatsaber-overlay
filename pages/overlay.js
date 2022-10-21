@@ -331,7 +331,9 @@ export default class Overlay extends Component {
 				console.log("Going into level during song, resetting data.");
 				this.resetData(true, true);
 				this.setState({ songData: data, paused: false });
-				this.setBeatSaver(data.status.beatmap);
+				if (this.state.showScore || this.state.showSongInfo) {
+					this.setBeatSaver(data.status.beatmap);
+				}
 			}
 		},
 		scoreChanged: (data) => {
@@ -375,7 +377,7 @@ export default class Overlay extends Component {
 			console.log("Going into level, resetting data.");
 			this.resetData(true);
 			this.setState({ songData: data, paused: false });
-			if (this.state.showScore) {
+			if (this.state.showScore || this.state.showSongInfo) {
 				this.setBeatSaver(data.status.beatmap);
 			}
 		},

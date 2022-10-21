@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 	}
 
 	let buffer = await data.buffer(); // Change to arrayBuffer at some point to make it shush
-	buffer = await sharp(buffer).resize(150, 150).toBuffer();
+	buffer = await sharp(buffer).resize(400, 400).toBuffer();
 	const bytes = buffer.toString("base64");
 
 	await RedisUtils.setValue(`${KEY}${steamId}`, bytes);

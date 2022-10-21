@@ -13,7 +13,7 @@ const WebsiteTypes = {
 				"/https://api.beatleader.xyz/player/%s",
 			MapData:
 				process.env.NEXT_PUBLIC_HTTP_PROXY +
-				"/https://api.beatleader.xyz/leaderboard/hash/%h/%d/%m",
+				"/https://api.beatleader.xyz/map/hash/%h",
 		},
 		async getMapStarCount(mapHash, mapDiff, characteristic) {
 			const data = await fetch(

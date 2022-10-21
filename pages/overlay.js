@@ -290,12 +290,12 @@ export default class Overlay extends Component {
 			}, 1000); // 1 second
 		}
 		this.setState({
-			leftHand: {
+			SaberA: {
 				averageCut: [15.0],
 				averagePreSwing: [70.0],
 				averagePostSwing: [30.0],
 			},
-			rightHand: {
+			SaberB: {
 				averageCut: [15.0],
 				averagePreSwing: [70.0],
 				averagePostSwing: [30.0],

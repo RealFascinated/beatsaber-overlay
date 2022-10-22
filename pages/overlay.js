@@ -443,7 +443,7 @@ export default class Overlay extends Component {
 									country={data.country}
 									countryRank={data.countryRank.toLocaleString()}
 									websiteType={websiteType}
-									avatar={`/api/steamavatar?steamid=${id}`}
+									avatar={`https://cdn.scoresaber.com/avatars/${id}.jpg`}
 									loadedDuringSong={this.state.loadedDuringSong}
 								/>
 							) : (

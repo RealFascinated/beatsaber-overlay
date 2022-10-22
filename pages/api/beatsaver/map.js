@@ -11,12 +11,5 @@ export default async function handler(req, res) {
 			message: "Unknown Map Hash",
 		});
 	}
-	const data = {
-		// The maps data from the provided map hash
-		bsr: mapData.id,
-		songArt: `http://${req.headers.host}/api/beatsaver/art/${mapHash}?ext=${
-			mapData.versions[0].coverURL.split("/")[3].split(".")[1]
-		}`,
-	};
-	res.status(200).json({ error: false, data: data });
+	res.status(200).json({ status: "OK", data: mapData });
 }

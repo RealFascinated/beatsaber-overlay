@@ -56,12 +56,11 @@ export default class SongInfo extends Component {
 	render() {
 		const data = this.props.data.songData.status.beatmap;
 		const beatSaverData = this.props.data.beatSaverData.data;
-		const songArt = beatSaverData.songArt;
+		const mapArt = beatSaverData.mapArt;
 		const bsr = beatSaverData.bsr;
 		const { songName, songAuthorName, difficulty } = data;
-		// what in the fuck is this?? LMFAO
 		const songTimerPercentage =
-			(this.props.data.currentSongTime / 1000 / (data.length / 1000)) * 100000;
+			(this.props.data.currentSongTime / data.length) * 100;
 
 		return (
 			<div className={styles.songInfoContainer}>
@@ -69,7 +68,7 @@ export default class SongInfo extends Component {
 					width={150}
 					height={150}
 					alt="Song artwork"
-					src={songArt}
+					src={mapArt}
 					loading="lazy"
 					placeholder="blur"
 					blurDataURL="https://cdn.fascinated.cc/IkQFyodbZv.jpg?raw=true"

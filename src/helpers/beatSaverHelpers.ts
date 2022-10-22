@@ -28,7 +28,7 @@ type MapData = {
  * @param {string} hash
  * @returns The map data
  */
-export async function getMapData(hash): Promise<MapData | undefined> {
+export async function getMapData(hash: string): Promise<MapData | undefined> {
 	const mapHash = hash.replace("custom_level_", "").toLowerCase();
 
 	const key = `${KEY}${mapHash}`;

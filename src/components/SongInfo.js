@@ -60,7 +60,7 @@ export default class SongInfo extends Component {
 		const bsr = beatSaverData.bsr;
 		const { songName, songAuthorName, difficulty } = data;
 		const songTimerPercentage =
-			(this.props.data.currentSongTime / data.length) * 100;
+			(this.props.data.currentSongTime / data.length) * 100000;
 
 		return (
 			<div className={styles.songInfoContainer}>

@@ -137,7 +137,7 @@ export default class Home extends Component {
 
 		if (json.message === "Valid") {
 			this.setState({
-				avatarUrl: `/api/steamavatar?steamid=${steamId}`,
+				avatarUrl: `https://cdn.scoresaber.com/avatars/${steamId}.jpg`,
 			});
 		} else {
 			this.setState({ avatarUrl: undefined });

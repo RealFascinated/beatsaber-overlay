@@ -1,4 +1,4 @@
-import { isValidSteamId } from "../../src/helpers/validateSteamId";
+import { isValidSteamId } from "../../../src/helpers/validateSteamId";
 
 export default async function handler(req, res) {
 	const steamId = req.query.steamid;

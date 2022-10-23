@@ -13,14 +13,14 @@ import {
 	Text,
 } from "@nextui-org/react";
 import { Component } from "react";
-import NavBar from "../src/components/Navbar";
 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { NextSeo } from "next-seo";
-import Utils from "../src/utils/utils";
+import NavBar from "../components/Navbar";
 import styles from "../styles/main.module.css";
+import Utils from "../utils/utils";
 
 export default class Home extends Component {
 	constructor(props) {

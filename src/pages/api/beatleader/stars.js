@@ -1,9 +1,12 @@
 import fetch from "node-fetch";
-import WebsiteTypes from "../../../src/consts/LeaderboardType";
-import { getValue, setValue, valueExists } from "../../../src/utils/redisUtils";
-import { diffToScoreSaberDiff } from "../../../src/utils/scoreSaberUtils";
+import WebsiteTypes from "../../../../src/consts/LeaderboardType";
+import {
+	getValue,
+	setValue,
+	valueExists,
+} from "../../../../src/utils/redisUtils";
 
-const KEY = "SS_MAP_STAR_";
+const KEY = "BL_MAP_STAR_";
 
 /**
  *
@@ -31,10 +34,7 @@ export default async function handler(req, res) {
 
 	const before = Date.now();
 	const data = await fetch(
-		WebsiteTypes.ScoreSaber.ApiUrl.MapData.replace("%h", mapHash).replace(
-			"%d",
-			diffToScoreSaberDiff(difficulty)
-		),
+		WebsiteTypes.BeatLeader.ApiUrl.MapData.replace("%h", mapHash),
 		{
 			headers: {
 				"X-Requested-With": "BeatSaber Overlay",
@@ -48,7 +48,15 @@ export default async function handler(req, res) {
 		});
 	}
 	const json = await data.json();
-	let starCount = json.stars;
+	let starCount = undefined;
+	for (const diff of json.difficulties) {
+		if (
+			diff.difficultyName === difficulty &&
+			diff.modeName === characteristic
+		) {
+			starCount = diff.stars;
+		}
+	}
 	if (starCount === undefined) {
 		return res.status(404).json({
 			status: 404,
@@ -57,7 +65,7 @@ export default async function handler(req, res) {
 	}
 	await setValue(key, starCount);
 	console.log(
-		`[Cache]: Cached SS Star Count for hash ${mapHash} in ${
+		`[Cache]: Cached BL Star Count for hash ${mapHash} in ${
 			Date.now() - before
 		}ms`
 	);

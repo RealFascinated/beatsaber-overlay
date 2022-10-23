@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-import styles from "../../styles/scoreStats.module.css";
+import styles from "../styles/scoreStats.module.css";
 import Utils from "../utils/utils";
 
 export default class ScoreStats extends Component {

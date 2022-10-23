@@ -1,4 +1,4 @@
-import { getMapData } from "../../../src/helpers/beatSaverHelpers";
+import { getMapData } from "../../../../src/helpers/beatSaverHelpers";
 
 export default async function handler(req, res) {
 	const mapHash = req.query.hash;

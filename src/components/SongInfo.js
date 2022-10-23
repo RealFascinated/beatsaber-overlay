@@ -1,7 +1,7 @@
 import { Image } from "@nextui-org/react";
 import { Component } from "react";
 
-import styles from "../../styles/songInfo.module.css";
+import styles from "../styles/songInfo.module.css";
 
 export default class SongInfo extends Component {
 	constructor(params) {

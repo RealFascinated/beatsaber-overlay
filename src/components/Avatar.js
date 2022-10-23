@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import styles from "../../styles/avatar.module.css";
+import styles from "../styles/avatar.module.css";
 
 const Avatar = (props) => {
 	return (

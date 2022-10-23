@@ -1,11 +1,11 @@
 import { Link, Spinner } from "@nextui-org/react";
 import { NextSeo } from "next-seo";
 import { Component } from "react";
-import PlayerStats from "../src/components/PlayerStats";
-import ScoreStats from "../src/components/ScoreStats";
-import SongInfo from "../src/components/SongInfo";
-import LeaderboardType from "../src/consts/LeaderboardType";
-import Utils from "../src/utils/utils";
+import PlayerStats from "../../src/components/PlayerStats";
+import ScoreStats from "../../src/components/ScoreStats";
+import SongInfo from "../../src/components/SongInfo";
+import LeaderboardType from "../../src/consts/LeaderboardType";
+import Utils from "../../src/utils/utils";
 
 import styles from "../styles/overlay.module.css";
 

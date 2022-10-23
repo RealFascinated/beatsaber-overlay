@@ -1,6 +1,6 @@
 import ReactCountryFlag from "react-country-flag";
 
-import styles from "../../styles/playerStats.module.css";
+import styles from "../styles/playerStats.module.css";
 import Avatar from "./Avatar";
 
 const PlayerStats = (props) => {

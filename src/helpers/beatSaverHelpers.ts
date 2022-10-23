@@ -8,12 +8,10 @@ const BEATSAVER_MAP_API =
 const KEY = "BS_MAP_DATA_";
 
 function getLatestMapArt(data: BeatSaverMapData) {
-	console.log(data);
 	let url: string | undefined = undefined;
 	for (const version of data.versions) {
 		url = version.coverURL;
 	}
-	console.log(url);
 	return url;
 }
 

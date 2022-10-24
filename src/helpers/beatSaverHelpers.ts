@@ -50,7 +50,7 @@ export async function getMapData(hash: string): Promise<MapData | undefined> {
 		bsr: jsonResponse.id,
 		mapArt: getLatestMapArt(jsonResponse),
 	};
-	await setValue(key, JSON.stringify(json));
+	await setValue(key, JSON.stringify(json), 86400 * 7); // Expire in a week
 	console.log(
 		`[Cache]: Cached BS Map Data for hash ${mapHash} in ${
 			Date.now() - before

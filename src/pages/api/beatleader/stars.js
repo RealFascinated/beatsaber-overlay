@@ -15,6 +15,12 @@ const KEY = "BL_MAP_STAR_";
  * @returns
  */
 export default async function handler(req, res) {
+	if (!req.query.hash || !req.query.difficulty || !req.query.characteristic) {
+		return res.status(404).json({
+			status: 404,
+			message: "Invalid request",
+		});
+	}
 	const mapHash = req.query.hash.replace("custom_level_", "").toLowerCase();
 	const difficulty = req.query.difficulty.replace(" ", "");
 	const characteristic = req.query.characteristic;

@@ -32,7 +32,7 @@ export async function isValidSteamId(steamId) {
 		}
 	}
 
-	await setValue(`${KEY}${steamId}`, valid);
+	await setValue(`${KEY}${steamId}`, valid, valid ? 86400 * 7 : 86400); // Expire in a week if is valid
 	console.log(
 		`[Cache]: Cached Steam ID for id ${steamId} in ${Date.now() - before}ms`
 	);

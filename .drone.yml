@@ -11,6 +11,10 @@ steps:
     image: node:18-alpine
     commands:
       - npm run lint
+  - name: build
+    image: node:18-alpine
+    commands:
+      - npm run build
   - name: deploy
     image: node:18-alpine
     commands:

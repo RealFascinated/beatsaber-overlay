@@ -4,7 +4,7 @@
 	"scripts": {
 		"dev": "set APP_ENV=development && next dev",
 		"build": "next build",
-		"start": "APP_ENV=production npm i && next build && next start -p 3001",
+		"start": "APP_ENV=production next start -p 3001",
 		"lint": "next lint"
 	},
 	"dependencies": {

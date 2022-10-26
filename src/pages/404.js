@@ -1,5 +1,5 @@
 import { Container, Grid, Link, Text } from "@nextui-org/react";
-import { Image } from "next/future/image";
+import Image from "next/future/image";
 import { Component } from "react";
 
 export default class Home extends Component {

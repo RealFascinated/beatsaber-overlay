@@ -19,16 +19,6 @@ steps:
     commands:
       - npm install
 
-  # Other branches
-  - name: test
-    image: node:18
-    when:
-      branch:
-        exclude:
-          - main
-    commands:
-      - npm run lint
-
   - name: rebuild-cache
     image: drillster/drone-volume-cache
     volumes:
@@ -38,6 +28,16 @@ steps:
       rebuild: true
       mount:
         - ./node_modules
+
+  # Other branches
+  - name: test
+    image: node:18
+    when:
+      branch:
+        exclude:
+          - main
+    commands:
+      - npm run lint
 
   # Main branches
   - name: docker

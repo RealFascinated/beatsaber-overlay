@@ -1,6 +1,7 @@
 kind: pipeline
 type: docker
 name: default
+ports: [3001]
 
 steps:
   - name: install dependencies
@@ -17,5 +18,6 @@ steps:
       - npm run build
   - name: deploy
     image: node:18-alpine
+    detach: true
     commands:
       - npm run start

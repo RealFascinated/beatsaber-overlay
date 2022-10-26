@@ -10,6 +10,7 @@ export default class Utils {
 	 * @returns The website type's information.
 	 */
 	static getWebsiteApi(website) {
+		console.log(process.env);
 		return LeaderboardType[website];
 	}
 

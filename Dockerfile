@@ -63,5 +63,6 @@ EXPOSE 3000
 
 ENV PORT 3000
 
+COPY entrypoint.sh ./
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["node", "server.js"]

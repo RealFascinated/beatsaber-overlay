@@ -185,11 +185,6 @@ export default class Overlay extends Component {
 	 * @returns
 	 */
 	async updateData(id) {
-		console.log(
-			`Using url: ${
-				Utils.getWebsiteApi(this.state.websiteType).ApiUrl.PlayerData
-			}`
-		);
 		const data = await fetch(
 			Utils.getWebsiteApi(this.state.websiteType).ApiUrl.PlayerData.replace(
 				"%s",
@@ -202,9 +197,7 @@ export default class Overlay extends Component {
 			}
 		);
 		try {
-			console.log(`status code: ${data.status}`);
 			const json = await data.json();
-			console.log(json);
 			this.setState({
 				loadingPlayerData: false,
 				id: id,

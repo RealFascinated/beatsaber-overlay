@@ -16,10 +16,12 @@ steps:
     image: node:18-alpine
     commands:
       - npm run build
-  - name: docker  
+  - name: docker
     image: plugins/docker
     settings:
-      username: from_secret: dockerhub_username
-      password: from_secret: dockerhub_password
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
       repo: fascinated/beatsaber-overlay
       tags: latest

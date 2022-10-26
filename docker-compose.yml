@@ -1,0 +1,15 @@
+services:
+  beatsaber-overlay:
+    image: fascinated/beatsaber-overlay:latest
+    env_file:
+      - .env.production
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
+
+  redis:
+    image: bitnami/redis:latest
+    environment:
+      - REDIS_PASSWORD=<PASSWORD>
+    command: /opt/bitnami/scripts/redis/run.sh --maxmemory 512mb

@@ -4,6 +4,12 @@ FROM node:18-alpine AS deps
 RUN apk add libc6-compat
 WORKDIR /app
 
+# Copy cached files
+COPY ./node_modules ./node_modules
+
+# Install dependencies
+RUN yarn 
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -24,9 +30,6 @@ COPY . .
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
-
-# Install dependencies
-RUN yarn 
 
 # Build the project
 RUN yarn build 

@@ -1,10 +1,11 @@
 module.exports = {
-  reactStrictMode: true,
-  images: {
-    domains: [
-        'cdn.scoresaber.com',
-        'bs-overlay.fascinated.cc',
-        'localhost:3000'
-    ],
-  }
-}
+	// reactStrictMode: true,
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "**.scoresaber.com",
+			},
+		],
+	},
+};

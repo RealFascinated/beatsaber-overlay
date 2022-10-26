@@ -7,7 +7,7 @@ const PlayerStats = (props) => {
 	return (
 		<div className={styles.playerStatsContainer}>
 			<div>
-				<Avatar url={props.avatar} />
+				<Avatar url={`https://cdn.scoresaber.com/avatars/${props.id}.jpg`} />
 			</div>
 			<div className={styles.playerStats}>
 				<p>

@@ -19,7 +19,7 @@ const darkTheme = createTheme({
 
 function MyApp({ Component, pageProps }) {
 	return (
-		<>
+		<div>
 			<DefaultSeo
 				titleTemplate={`${process.env.NEXT_PUBLIC_SITE_NAME} | %s`}
 				description={process.env.NEXT_PUBLIC_SITE_DESCRIPTION}
@@ -52,7 +52,7 @@ function MyApp({ Component, pageProps }) {
 					<Component {...pageProps} />
 				</NextUIProvider>
 			</NextThemesProvider>
-		</>
+		</div>
 	);
 }
 

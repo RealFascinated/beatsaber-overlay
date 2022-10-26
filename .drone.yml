@@ -14,15 +14,12 @@ steps:
       mount:
         - ./node_modules
 
-  # Other branches
   - name: install depends
     image: node:18
-    when:
-      branch:
-        exclude:
-          - main
     commands:
       - npm install
+
+  # Other branches
   - name: test
     image: node:18
     when:

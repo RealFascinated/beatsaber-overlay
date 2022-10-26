@@ -16,6 +16,15 @@ class MyDocument extends Document {
 			<Html lang="en">
 				<Head>
 					{CssBaseline.flush()}
+
+					<link
+						href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+						rel="stylesheet"
+					/>
+					<link
+						href="https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap"
+						rel="stylesheet"
+					/>
 					<link rel="shortcut icon" href="/favicon.ico" />
 
 					<meta

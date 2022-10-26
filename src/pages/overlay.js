@@ -1,4 +1,3 @@
-import { Teko } from "@next/font/google";
 import { Link, Spinner } from "@nextui-org/react";
 import { NextSeo } from "next-seo";
 import { Component } from "react";
@@ -9,11 +8,6 @@ import LeaderboardType from "../../src/consts/LeaderboardType";
 import Utils from "../../src/utils/utils";
 
 import styles from "../styles/overlay.module.css";
-
-const teko = Teko({
-	weight: "300",
-	subsets: ["latin"],
-});
 
 export default class Overlay extends Component {
 	#_beatSaverURL = "";
@@ -446,7 +440,7 @@ export default class Overlay extends Component {
 		}
 
 		return (
-			<div className={teko.className}>
+			<>
 				<NextSeo title="Overlay"></NextSeo>
 				<div className={styles.main}>
 					{!isValidSteamId ? (
@@ -460,7 +454,6 @@ export default class Overlay extends Component {
 						<div className={styles.overlay}>
 							{showPlayerStats && !loadingPlayerData ? (
 								<PlayerStats
-									id={id}
 									pp={data.pp.toLocaleString("en-US", {
 										maximumFractionDigits: 2,
 										minimumFractionDigits: 2,
@@ -469,6 +462,7 @@ export default class Overlay extends Component {
 									country={data.country}
 									countryRank={data.countryRank.toLocaleString()}
 									websiteType={websiteType}
+									avatar={`https://cdn.scoresaber.com/avatars/${id}.jpg`}
 									loadedDuringSong={this.state.loadedDuringSong}
 								/>
 							) : (
@@ -489,7 +483,7 @@ export default class Overlay extends Component {
 						</div>
 					)}
 				</div>
-			</div>
+			</>
 		);
 	}
 }

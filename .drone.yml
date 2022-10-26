@@ -4,6 +4,16 @@ name: default
 ports: [3001]
 
 steps:
+  - name: restore-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      restore: true
+      mount:
+        - ./node_modules
+
   # Other branches
   - name: install depends
     image: node:18
@@ -22,6 +32,16 @@ steps:
     commands:
       - npm run lint
 
+  - name: rebuild-cache
+    image: drillster/drone-volume-cache
+    volumes:
+      - name: cache
+        path: /cache
+    settings:
+      rebuild: true
+      mount:
+        - ./node_modules
+
   # Main branches
   - name: docker
     image: plugins/docker
@@ -35,3 +55,8 @@ steps:
         from_secret: dockerhub_password
       repo: fascinated/beatsaber-overlay
       tags: latest
+
+volumes:
+  - name: cache
+    host:
+      path: /tmp/cache

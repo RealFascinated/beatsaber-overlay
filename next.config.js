@@ -1,11 +1,12 @@
-module.exports = {
-	// reactStrictMode: true,
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+	experimental: {
+		optimizeCss: true,
+		swcMinify: true,
+	},
 	images: {
-		remotePatterns: [
-			{
-				protocol: "https",
-				hostname: "**.scoresaber.com",
-			},
-		],
+		domains: ["cdn.scoresaber.com", "*.cdn.beatsaver.com", "cdn.fascinated.cc"],
 	},
 };
+
+module.exports = nextConfig;

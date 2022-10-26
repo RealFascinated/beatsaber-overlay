@@ -1,26 +1,26 @@
 #!/bin/sh
 
-echo "Check that we have NEXT_PUBLIC_API_URL vars"
+echo "Checking that NEXT_PUBLIC_API_URL env var"
 test -n "$NEXT_PUBLIC_HTTP_PROXY"
-echo "Check that we have NEXT_PUBLIC_SITE_NAME vars"
+echo "Checking that NEXT_PUBLIC_SITE_NAME env var"
 test -n "$NEXT_PUBLIC_SITE_NAME"
-echo "Check that we have NEXT_PUBLIC_SITE_TITLE vars"
+echo "Checking that NEXT_PUBLIC_SITE_TITLE env var"
 test -n "$NEXT_PUBLIC_SITE_TITLE"
-echo "Check that we have NEXT_PUBLIC_SITE_DESCRIPTION vars"
+echo "Checking that NEXT_PUBLIC_SITE_DESCRIPTION env var"
 test -n "$NEXT_PUBLIC_SITE_DESCRIPTION"
-echo "Check that we have NEXT_PUBLIC_SITE_COLOR vars"
+echo "Checking that NEXT_PUBLIC_SITE_COLOR env var"
 test -n "$NEXT_PUBLIC_SITE_COLOR"
-echo "Check that we have NEXT_PUBLIC_SITE_URL vars"
+echo "Checking that NEXT_PUBLIC_SITE_URL env var"
 test -n "$NEXT_PUBLIC_SITE_URL"
 
 files = $(find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0)
 
-files sed -i "s#APP_NEXT_PUBLIC_HTTP_PROXY#$NEXT_PUBLIC_HTTP_PROXY#g"
-files sed -i "s#APP_NEXT_PUBLIC_SITE_NAME#$NEXT_PUBLIC_SITE_NAME#g"
-files sed -i "s#APP_NEXT_PUBLIC_SITE_TITLE#$NEXT_PUBLIC_SITE_TITLE#g"
-files sed -i "s#APP_NEXT_PUBLIC_SITE_DESCRIPTION#$NEXT_PUBLIC_SITE_DESCRIPTION#g"
-files sed -i "s#APP_NEXT_PUBLIC_SITE_COLOR#$NEXT_PUBLIC_SITE_COLOR#g"
-files sed -i "s#APP_NEXT_PUBLIC_SITE_URL#$NEXT_NEXT_PUBLIC_SITE_URL#g"
+$files sed -i "s#APP_NEXT_PUBLIC_HTTP_PROXY#$NEXT_PUBLIC_HTTP_PROXY#g"
+$files sed -i "s#APP_NEXT_PUBLIC_SITE_NAME#$NEXT_PUBLIC_SITE_NAME#g"
+$files sed -i "s#APP_NEXT_PUBLIC_SITE_TITLE#$NEXT_PUBLIC_SITE_TITLE#g"
+$files sed -i "s#APP_NEXT_PUBLIC_SITE_DESCRIPTION#$NEXT_PUBLIC_SITE_DESCRIPTION#g"
+$files sed -i "s#APP_NEXT_PUBLIC_SITE_COLOR#$NEXT_PUBLIC_SITE_COLOR#g"
+$files sed -i "s#APP_NEXT_PUBLIC_SITE_URL#$NEXT_NEXT_PUBLIC_SITE_URL#g"
 
 echo "Starting NextJS"
 exec "$@"

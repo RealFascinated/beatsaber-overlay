@@ -35,7 +35,6 @@ RUN \
   NEXT_PUBLIC_SITE_URL=APP_NEXT_PUBLIC_SITE_URL \
   yarn build 
 
-ENTRYPOINT ["/app/entrypoint.sh"]
 
 # If using npm comment out above and use below instead
 # RUN npm run build
@@ -64,4 +63,5 @@ EXPOSE 3000
 
 ENV PORT 3000
 
+ENTRYPOINT ["/app/entrypoint.sh"]
 CMD ["node", "server.js"]

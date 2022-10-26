@@ -7,6 +7,10 @@ steps:
     image: node:18-alpine
     commands:
       - npm run lint
+  - name: install dependencies
+    image: node:18-alpine
+    commands:
+      - npm install
   - name: deploy
     image: node:18-alpine
     commands:

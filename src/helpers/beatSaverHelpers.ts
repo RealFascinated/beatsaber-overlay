@@ -1,9 +1,10 @@
 import env from "@beam-australia/react-env";
+import { VARS } from "../consts/EnvVars";
 import { BeatSaverMapData } from "../types/BeatSaverMapData";
 import { getValue, setValue, valueExists } from "../utils/redisUtils";
 
 const BEATSAVER_MAP_API =
-	env("HTTP_PROXY") + "/https://api.beatsaver.com/maps/hash/%s";
+	env(VARS.HTTP_PROXY) + "/https://api.beatsaver.com/maps/hash/%s";
 
 const KEY = "BS_MAP_DATA_";
 

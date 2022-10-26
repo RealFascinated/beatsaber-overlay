@@ -2,6 +2,7 @@ import env from "@beam-australia/react-env";
 import { createTheme, NextUIProvider } from "@nextui-org/react";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
+import { VARS } from "../consts/EnvVars";
 import "../styles/globals.css";
 
 const lightTheme = createTheme({
@@ -22,13 +23,13 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<>
 			<DefaultSeo
-				titleTemplate={`${env("SITE_NAME")} | %s`}
-				description={env("SITE_DESCRIPTION}")}
+				titleTemplate={`${env(VARS.SITE_NAME)} | %s`}
+				description={env(VARS.SITE_DESCRIPTION)}
 				openGraph={{
-					url: env("SITE_URL"),
-					title: env("SITE_NAME"),
-					description: env("SITE_DESCRIPTION"),
-					site_name: env("SITE_NAME"),
+					url: env(VARS.SITE_URL),
+					title: env(VARS.SITE_NAME),
+					description: env(VARS.SITE_DESCRIPTION),
+					site_name: env(VARS.SITE_NAME),
 					images: [
 						{
 							url: "https://cdn.fascinated.cc/fHknFPctAC.png?raw=true",

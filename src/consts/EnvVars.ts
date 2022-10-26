@@ -1,0 +1,17 @@
+type Vars = {
+	HTTP_PROXY: string;
+	SITE_NAME: string;
+	SITE_TITLE: string;
+	SITE_DESCRIPTION: string;
+	SITE_COLOR: string;
+	SITE_URL: string;
+};
+
+export const VARS: Vars = {
+	HTTP_PROXY: "HTTP_PROXY",
+	SITE_NAME: "SITE_NAME",
+	SITE_TITLE: "SITE_TITLE",
+	SITE_DESCRIPTION: "SITE_DESCRIPTION",
+	SITE_COLOR: "SITE_COLOR",
+	SITE_URL: "SITE_URL",
+};

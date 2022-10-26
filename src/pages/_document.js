@@ -2,6 +2,7 @@ import env from "@beam-australia/react-env";
 import { CssBaseline, Image } from "@nextui-org/react";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
+import { VARS } from "../consts/EnvVars";
 
 class MyDocument extends Document {
 	static async getInitialProps(ctx) {
@@ -29,7 +30,7 @@ class MyDocument extends Document {
 					/>
 					<link rel="shortcut icon" href="/favicon.ico" />
 
-					<meta name="theme-color" content={"#" + env("SITE_COLOR")} />
+					<meta name="theme-color" content={"#" + env(VARS.SITE_COLOR)} />
 					<meta
 						property="og:keywords"
 						content="BeatSaber,Overlay,OBS,Twitch,YouTube,BeatSaber Overlay,Github,"

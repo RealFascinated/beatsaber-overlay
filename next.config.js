@@ -2,8 +2,8 @@
 const nextConfig = {
 	experimental: {
 		optimizeCss: true,
-		swcMinify: true,
 	},
+	swcMinify: true,
 	images: {
 		domains: ["cdn.scoresaber.com", "*.cdn.beatsaver.com", "cdn.fascinated.cc"],
 	},

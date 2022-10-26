@@ -29,7 +29,7 @@ class MyDocument extends Document {
 
 					<meta
 						name="theme-color"
-						content={process.env.NEXT_PUBLIC_SITE_COLOR}
+						content={"#" + process.env.NEXT_PUBLIC_SITE_COLOR}
 					/>
 					<meta
 						property="og:keywords"

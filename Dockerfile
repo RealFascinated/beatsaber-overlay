@@ -4,12 +4,6 @@ FROM node:18-alpine AS deps
 RUN apk add libc6-compat
 WORKDIR /app
 
-# Copy cached files
-COPY ./node_modules ./node_modules
-
-# Install dependencies
-RUN yarn 
-
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -19,6 +13,11 @@ RUN \
   else echo "Lockfile not found." && exit 1; \
   fi
 
+# Copy cached files
+COPY node_modules ./
+
+# Install dependencies
+RUN yarn 
 
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder

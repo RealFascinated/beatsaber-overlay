@@ -1,7 +1,6 @@
 import env from "@beam-australia/react-env";
 import { CssBaseline } from "@nextui-org/react";
 import Document, { Head, Html, Main, NextScript } from "next/document";
-import { Image } from 'next/future/image';
 import React from "react";
 import { VARS } from "../consts/EnvVars";
 
@@ -37,12 +36,6 @@ class MyDocument extends Document {
 						content="BeatSaber,Overlay,OBS,Twitch,YouTube,BeatSaber Overlay,Github,"
 					/>
 
-					<noscript>
-						<Image
-							alt="For page analytics"
-							src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/pixel.gif"
-						/>
-					</noscript>
 					<script
 						defer={true}
 						src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/script.js"

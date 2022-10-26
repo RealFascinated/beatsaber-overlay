@@ -1,4 +1,5 @@
 # BeatSaber Overlay with real-time data from HttpSiraStatus
+[![Build Status](https://drone.fascinated.cc/api/badges/RealFascinated/beatsaber-overlay/status.svg)](https://drone.fascinated.cc/RealFascinated/beatsaber-overlay)
 
 The public url to view/use: <https://bs-overlay.fascinated.cc></br>
 Need help? Feel free to message me at: Fascinated#4719

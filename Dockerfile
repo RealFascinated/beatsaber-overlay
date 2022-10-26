@@ -25,7 +25,17 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn build
+
+RUN \
+  NEXT_PUBLIC_HTTP_PROXY=APP_NEXT_PUBLIC_HTTP_PROXY \
+  NEXT_PUBLIC_SITE_NAME=APP_NEXT_PUBLIC_SITE_NAME \
+  NEXT_PUBLIC_SITE_TITLE=APP_NEXT_PUBLIC_SITE_TITLE \
+  NEXT_PUBLIC_SITE_DESCRIPTION=APP_NEXT_PUBLIC_SITE_DESCRIPTION \
+  NEXT_PUBLIC_SITE_COLOR=APP_NEXT_NEXT_PUBLIC_SITE_COLOR \
+  NEXT_PUBLIC_SITE_URL=APP_NEXT_PUBLIC_SITE_URL \
+  yarn build 
+
+ENTRYPOINT ["/app/entrypoint.sh"]
 
 # If using npm comment out above and use below instead
 # RUN npm run build

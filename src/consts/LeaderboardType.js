@@ -1,11 +1,9 @@
-import getConfig from "next/config";
-const { publicRuntimeConfig: config } = getConfig();
-
 const WebsiteTypes = {
 	ScoreSaber: {
 		ApiUrl: {
 			PlayerData:
-				config.httpProxy + "/https://scoresaber.com/api/player/%s/basic",
+				process.env.NEXT_PUBLIC_HTTP_PROXY +
+				"/https://scoresaber.com/api/player/%s/basic",
 			MapData:
 				"https://scoresaber.com/api/leaderboard/by-hash/%h/info?difficulty=%d",
 		},

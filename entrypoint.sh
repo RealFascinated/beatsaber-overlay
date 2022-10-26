@@ -17,8 +17,8 @@ find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 se
 find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s#APP_NEXT_PUBLIC_SITE_NAME#$NEXT_PUBLIC_SITE_NAME#g"
 find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s#APP_NEXT_PUBLIC_SITE_TITLE#$NEXT_PUBLIC_SITE_TITLE#g"
 find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s#APP_NEXT_PUBLIC_SITE_DESCRIPTION#$NEXT_PUBLIC_SITE_DESCRIPTION#g"
-find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s#APP_NEXT_NEXT_PUBLIC_SITE_COLOR#$NEXT_PUBLIC_SITE_COLOR#g"
-find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s#APP_NEXT_NEXT_PUBLIC_SITE_URL#$NEXT_NEXT_PUBLIC_SITE_URL#g"
+find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s#APP_NEXT_PUBLIC_SITE_COLOR#$NEXT_PUBLIC_SITE_COLOR#g"
+find /app/.next \( -type d -name .git -prune \) -o -type f -print0 | xargs -0 sed -i "s#APP_NEXT_PUBLIC_SITE_URL#$NEXT_NEXT_PUBLIC_SITE_URL#g"
 
 echo "Starting NextJS"
 exec "$@"

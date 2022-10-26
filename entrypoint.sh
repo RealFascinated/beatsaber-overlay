@@ -2,16 +2,27 @@
 
 echo "Checking that NEXT_PUBLIC_API_URL env-var exists"
 test -n "$NEXT_PUBLIC_HTTP_PROXY"
+echo "Found $NEXT_PUBLIC_HTTP_PROXY"
+
 echo "Checking that NEXT_PUBLIC_SITE_NAME env-var exists"
 test -n "$NEXT_PUBLIC_SITE_NAME"
+echo "Found $NEXT_PUBLIC_SITE_NAME"
+
 echo "Checking that NEXT_PUBLIC_SITE_TITLE env-var exists"
 test -n "$NEXT_PUBLIC_SITE_TITLE"
+echo "Found $NEXT_PUBLIC_SITE_TITLE"
+
 echo "Checking that NEXT_PUBLIC_SITE_DESCRIPTION env-var exists"
 test -n "$NEXT_PUBLIC_SITE_DESCRIPTION"
+echo "Found $NEXT_PUBLIC_SITE_DESCRIPTION"
+
 echo "Checking that NEXT_PUBLIC_SITE_COLOR env-var exists"
 test -n "$NEXT_PUBLIC_SITE_COLOR"
+echo "Found $NEXT_PUBLIC_SITE_COLOR"
+
 echo "Checking that NEXT_PUBLIC_SITE_URL env-var exists"
 test -n "$NEXT_PUBLIC_SITE_URL"
+echo "Found $NEXT_PUBLIC_SITE_URL"
 
 echo "Ignore permission errors below"
 

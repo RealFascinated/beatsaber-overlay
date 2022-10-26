@@ -10,7 +10,7 @@ steps:
     when:
       branch:
         exclude:
-          - master
+          - main
     commands:
       - npm install
   - name: test
@@ -18,7 +18,7 @@ steps:
     when:
       branch:
         exclude:
-          - master
+          - main
     commands:
       - npm run lint
 

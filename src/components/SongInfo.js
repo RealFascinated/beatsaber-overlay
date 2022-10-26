@@ -1,4 +1,4 @@
-import { Image } from "@nextui-org/react";
+import Image from "next/future/image";
 import { Component } from "react";
 
 import styles from "../styles/songInfo.module.css";

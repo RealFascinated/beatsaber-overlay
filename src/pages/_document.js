@@ -1,6 +1,7 @@
 import env from "@beam-australia/react-env";
-import { CssBaseline, Image } from "@nextui-org/react";
+import { CssBaseline } from "@nextui-org/react";
 import Document, { Head, Html, Main, NextScript } from "next/document";
+import { Image } from 'next/future/image';
 import React from "react";
 import { VARS } from "../consts/EnvVars";
 

@@ -44,7 +44,7 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/public ./public
 
 # Allow the server to see the environment variables
-COPY --from=builder /app/.env.pruduction ./.env.pruduction
+COPY --from=builder .env.pruduction /app/.env.pruduction
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing

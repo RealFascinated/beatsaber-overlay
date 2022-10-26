@@ -1,3 +1,4 @@
+import env from "@beam-australia/react-env";
 import { CssBaseline, Image } from "@nextui-org/react";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
@@ -15,6 +16,7 @@ class MyDocument extends Document {
 		return (
 			<Html lang="en">
 				<Head>
+					<script defer src="/__ENV.js" />
 					{CssBaseline.flush()}
 
 					<link
@@ -27,10 +29,7 @@ class MyDocument extends Document {
 					/>
 					<link rel="shortcut icon" href="/favicon.ico" />
 
-					<meta
-						name="theme-color"
-						content={"#" + process.env.NEXT_PUBLIC_SITE_COLOR}
-					/>
+					<meta name="theme-color" content={"#" + env("SITE_COLOR")} />
 					<meta
 						property="og:keywords"
 						content="BeatSaber,Overlay,OBS,Twitch,YouTube,BeatSaber Overlay,Github,"

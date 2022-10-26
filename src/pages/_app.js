@@ -1,3 +1,4 @@
+import env from "@beam-australia/react-env";
 import { createTheme, NextUIProvider } from "@nextui-org/react";
 import { DefaultSeo } from "next-seo";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
@@ -21,13 +22,13 @@ function MyApp({ Component, pageProps }) {
 	return (
 		<>
 			<DefaultSeo
-				titleTemplate={`${process.env.NEXT_PUBLIC_SITE_NAME} | %s`}
-				description={process.env.NEXT_PUBLIC_SITE_DESCRIPTION}
+				titleTemplate={`${env("SITE_NAME")} | %s`}
+				description={env("SITE_DESCRIPTION}")}
 				openGraph={{
-					url: process.env.NEXT_PUBLIC_SITE_URL,
-					title: process.env.NEXT_PUBLIC_SITE_NAME,
-					description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
-					site_name: process.env.NEXT_PUBLIC_SITE_NAME,
+					url: env("SITE_URL"),
+					title: env("SITE_NAME"),
+					description: env("SITE_DESCRIPTION"),
+					site_name: env("SITE_NAME"),
 					images: [
 						{
 							url: "https://cdn.fascinated.cc/fHknFPctAC.png?raw=true",

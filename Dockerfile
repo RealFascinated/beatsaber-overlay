@@ -25,16 +25,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-
-RUN \
-  NEXT_PUBLIC_HTTP_PROXY=APP_NEXT_PUBLIC_HTTP_PROXY \
-  NEXT_PUBLIC_SITE_NAME=APP_NEXT_PUBLIC_SITE_NAME \
-  NEXT_PUBLIC_SITE_TITLE=APP_NEXT_PUBLIC_SITE_TITLE \
-  NEXT_PUBLIC_SITE_DESCRIPTION=APP_NEXT_PUBLIC_SITE_DESCRIPTION \
-  NEXT_PUBLIC_SITE_COLOR=APP_NEXT_NEXT_PUBLIC_SITE_COLOR \
-  NEXT_PUBLIC_SITE_URL=APP_NEXT_PUBLIC_SITE_URL \
-  yarn build 
-
+RUN yarn build 
 
 # If using npm comment out above and use below instead
 # RUN npm run build
@@ -59,9 +50,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./.next/static
 
-COPY --from=builder --chown=nextjs:nodejs /app/entrypoint.sh ./entrypoint.sh
-RUN chmod 777 /app/entrypoint.sh
-
 RUN chown -R nextjs:nodejs /app
 
 USER nextjs
@@ -70,5 +58,5 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+ENTRYPOINT yarn react-env --env APP_ENV
 CMD ["node", "server.js"]

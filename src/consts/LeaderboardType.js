@@ -1,9 +1,10 @@
+import env from "@beam-australia/react-env";
+
 const WebsiteTypes = {
 	ScoreSaber: {
 		ApiUrl: {
 			PlayerData:
-				process.env.NEXT_PUBLIC_HTTP_PROXY +
-				"/https://scoresaber.com/api/player/%s/basic",
+				env("HTTP_PROXY") + "/https://scoresaber.com/api/player/%s/basic",
 			MapData:
 				"https://scoresaber.com/api/leaderboard/by-hash/%h/info?difficulty=%d",
 		},
@@ -17,9 +18,7 @@ const WebsiteTypes = {
 	},
 	BeatLeader: {
 		ApiUrl: {
-			PlayerData:
-				process.env.NEXT_PUBLIC_HTTP_PROXY +
-				"/https://api.beatleader.xyz/player/%s",
+			PlayerData: env("HTTP_PROXY") + "/https://api.beatleader.xyz/player/%s",
 			MapData: "https://api.beatleader.xyz/map/hash/%h",
 		},
 		async getMapStarCount(mapHash, mapDiff, characteristic) {

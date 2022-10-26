@@ -3,14 +3,14 @@ type: docker
 name: default
 
 steps:
-  - name: test
-    image: node:18-alpine
-    commands:
-      - npm run lint
   - name: install dependencies
     image: node:18-alpine
     commands:
       - npm install
+  - name: test
+    image: node:18-alpine
+    commands:
+      - npm run lint
   - name: deploy
     image: node:18-alpine
     commands:

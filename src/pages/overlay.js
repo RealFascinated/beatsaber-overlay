@@ -15,6 +15,16 @@ export default class Overlay extends Component {
 	constructor(props) {
 		super(props);
 
+		this.cutData = [];
+		this.cutData.SaberA = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
+		this.cutData.SaberB = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
+
 		this._mounted = false;
 		this.state = {
 			hasError: false,
@@ -41,14 +51,14 @@ export default class Overlay extends Component {
 			failed: false,
 			mapStarCount: undefined,
 			SaberA: {
-				averageCut: [15.0],
-				averagePreSwing: [70.0],
-				averagePostSwing: [30.0],
+				cutDistanceScore: 0.0,
+				averagePreSwing: 0.0,
+				averagePostSwing: 0.0,
 			},
 			SaberB: {
-				averageCut: [15.0],
-				averagePreSwing: [70.0],
-				averagePostSwing: [30.0],
+				cutDistanceScore: 0.0,
+				averagePreSwing: 0.0,
+				averagePostSwing: 0.0,
 			},
 		};
 		this.setupTimer();
@@ -297,16 +307,25 @@ export default class Overlay extends Component {
 				await this.updateData(this.state.id);
 			}, 1000); // 1 second
 		}
+		this.cutData = [];
+		this.cutData.SaberA = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
+		this.cutData.SaberB = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
 		this.setState({
 			SaberA: {
-				averageCut: [15.0],
-				averagePreSwing: [70.0],
-				averagePostSwing: [30.0],
+				cutDistanceScore: 0.0,
+				averagePreSwing: 0.0,
+				averagePostSwing: 0.0,
 			},
 			SaberB: {
-				averageCut: [15.0],
-				averagePreSwing: [70.0],
-				averagePostSwing: [30.0],
+				cutDistanceScore: 0.0,
+				averagePreSwing: 0.0,
+				averagePostSwing: 0.0,
 			},
 			songInfo: undefined,
 			beatSaverData: undefined,
@@ -352,25 +371,25 @@ export default class Overlay extends Component {
 		noteFullyCut: (data) => {
 			const { noteCut } = data;
 
+			let beforeCutScore = 0.0;
+			let afterCutScore = 0.0;
+			let cutDistanceScore = 0.0;
+
+			const cutDataSaber = this.cutData[noteCut.saberType];
+			cutDataSaber.count[0]++;
+			cutDataSaber.count[1]++;
+			cutDataSaber.count[2]++;
+			cutDataSaber.totalScore[0] += noteCut.beforeCutScore;
+			cutDataSaber.totalScore[1] += noteCut.afterCutScore;
+			cutDataSaber.totalScore[2] += noteCut.cutDistanceScore;
+			beforeCutScore = cutDataSaber.totalScore[0] / cutDataSaber.count[0];
+			afterCutScore = cutDataSaber.totalScore[1] / cutDataSaber.count[1];
+			cutDistanceScore = cutDataSaber.totalScore[2] / cutDataSaber.count[2];
+
 			const cutData = this.state[noteCut.saberType];
-			if (cutData.averageCut.includes(15) && cutData.averageCut.length === 1) {
-				cutData.averageCut = [];
-			}
-			if (
-				cutData.averagePreSwing.includes(70) &&
-				cutData.averagePreSwing.length === 1
-			) {
-				cutData.averagePreSwing = [];
-			}
-			if (
-				cutData.averagePostSwing.includes(30) &&
-				cutData.averagePostSwing.length === 1
-			) {
-				cutData.averagePostSwing = [];
-			}
-			cutData.averagePreSwing.push(noteCut.beforeCutScore);
-			cutData.averagePostSwing.push(noteCut.afterCutScore);
-			cutData.averageCut.push(noteCut.cutDistanceScore);
+			cutData.averagePreSwing = beforeCutScore;
+			cutData.averagePostSwing = afterCutScore;
+			cutData.cutDistanceScore = cutDistanceScore;
 			this.setState({ [noteCut.saberType]: cutData });
 		},
 		songStart: (data) => {

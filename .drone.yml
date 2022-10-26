@@ -4,18 +4,6 @@ name: default
 ports: [3001]
 
 steps:
-  - name: install dependencies
-    image: node:18-alpine
-    commands:
-      - npm install
-  - name: test
-    image: node:18-alpine
-    commands:
-      - npm run lint
-  - name: build
-    image: node:18-alpine
-    commands:
-      - npm run build
   - name: docker
     image: plugins/docker
     settings:

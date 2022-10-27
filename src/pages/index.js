@@ -41,6 +41,7 @@ export default class Home extends Component {
 				showPlayerStats: true,
 				showScoreInfo: false,
 				showSongInfo: false,
+				shouldReplacePlayerInfoWithScore: false,
 			},
 		};
 	}
@@ -254,10 +255,7 @@ export default class Home extends Component {
 										</Radio>
 									</Radio.Group>
 									<Spacer y={1} />
-									<Text>
-										Do you want to show Player Stats (Current PP, global pos,
-										etc)
-									</Text>
+									<Text>Show player stats (Current PP, global pos, etc)</Text>
 									<Switch
 										label="Ranked leaderboard"
 										onChange={(event) =>
@@ -268,8 +266,7 @@ export default class Home extends Component {
 									/>
 									<Spacer y={1.2} />
 									<Text>
-										Do you want to show Score Info (Current swing values, total
-										score, etc)
+										Show score info (Current swing values, total score, etc)
 									</Text>
 									<Switch
 										onChange={(event) =>
@@ -279,15 +276,27 @@ export default class Home extends Component {
 										size="md"
 									/>
 									<Spacer y={1.2} />
-									<Text>
-										Do you want to show Song Info (Song name, bsr, song art,
-										etc)
-									</Text>
+									<Text>Show song info (Song name, bsr, song art, etc)</Text>
 									<Switch
 										onChange={(event) =>
 											this.updateValue("showSongInfo", event.target.checked)
 										}
 										checked={this.state.values.showSongInfo}
+										size="md"
+									/>
+									<Spacer y={1.2} />
+									<Text>
+										Hide player info to hide when a song starts (Show song info
+										Required)
+									</Text>
+									<Switch
+										onChange={(event) =>
+											this.updateValue(
+												"shouldReplacePlayerInfoWithScore",
+												event.target.checked
+											)
+										}
+										checked={this.state.values.shouldReplacePlayerInfoWithScore}
 										size="md"
 									/>
 									<Spacer y={1.2} />

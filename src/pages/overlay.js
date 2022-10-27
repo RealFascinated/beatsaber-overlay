@@ -29,28 +29,37 @@ export default class Overlay extends Component {
 		this.state = {
 			hasError: false,
 
+			// Steam ID
+			id: undefined,
+
+			// Values from the query parameters
 			loadingPlayerData: true,
 			isConnectedToSocket: false,
-			id: undefined,
 			isValidSteamId: false,
 			websiteType: "ScoreSaber",
-			data: undefined,
 			showPlayerStats: true,
 			showScore: false,
 			showSongInfo: false,
-			loadedDuringSong: false,
+			shouldReplacePlayerInfoWithScore: false,
 
+			// Internal
+			loadedDuringSong: false,
 			socket: undefined,
-			isVisible: false,
-			isPlayerInfoVisible: false,
-			songInfo: undefined,
+			data: undefined,
 			beatSaverData: undefined,
-			currentSongTime: 0,
+			songInfo: undefined,
+			mapStarCount: undefined,
+
+			// UI elements
+			isPlayerInfoVisible: false,
+			isVisible: false,
+
+			// Score data
 			paused: true,
+			failed: false,
+			currentSongTime: 0,
 			currentScore: 0,
 			percentage: "100.00%",
-			failed: false,
-			mapStarCount: undefined,
 			SaberA: {
 				cutDistanceScore: 0.0,
 				averagePreSwing: 0.0,
@@ -121,6 +130,10 @@ export default class Overlay extends Component {
 		if (params.showScoreInfo === "true" || params.scoreinfo === "true") {
 			this.setState({ showScore: true });
 			shouldConnectSocket = true;
+		}
+
+		if (params.shouldReplacePlayerInfoWithScore === "true") {
+			this.setState({ shouldReplacePlayerInfoWithScore: true });
 		}
 
 		// Check if the player wants to show the current song
@@ -310,7 +323,7 @@ export default class Overlay extends Component {
 			}, 1000); // 1 second
 		}
 
-		if (visible) {
+		if (visible && this.state.shouldReplacePlayerInfoWithScore) {
 			this.setState({ isPlayerInfoVisible: false });
 		} else {
 			this.setState({ isPlayerInfoVisible: true });
@@ -442,6 +455,7 @@ export default class Overlay extends Component {
 			showPlayerStats,
 			loadingPlayerData,
 			isPlayerInfoVisible,
+			shouldReplacePlayerInfoWithScore,
 			id,
 		} = this.state;
 
@@ -462,7 +476,10 @@ export default class Overlay extends Component {
 						</div>
 					) : (
 						<div className={styles.overlay}>
-							{showPlayerStats && !loadingPlayerData && isPlayerInfoVisible ? (
+							{showPlayerStats &&
+							!loadingPlayerData &&
+							isPlayerInfoVisible &&
+							!shouldReplacePlayerInfoWithScore ? (
 								<PlayerStats
 									pp={data.pp.toLocaleString("en-US", {
 										maximumFractionDigits: 2,
@@ -485,8 +502,7 @@ export default class Overlay extends Component {
 							)}
 							{this.state.showSongInfo &&
 							this.state.beatSaverData !== undefined &&
-							this.state.isVisible &&
-							!isPlayerInfoVisible ? (
+							this.state.isVisible ? (
 								<SongInfo data={this.state} />
 							) : (
 								<></>

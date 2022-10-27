@@ -16,7 +16,6 @@
 		"critters": "^0.0.16",
 		"ioredis": "^5.2.3",
 		"next": "12",
-		"next-redux-wrapper": "^8.0.0",
 		"next-seo": "^5.9.0",
 		"next-themes": "^0.2.1",
 		"node-fetch": "^3.2.10",
@@ -25,7 +24,6 @@
 		"react-country-flag": "^3.0.2",
 		"react-dom": "^18.2.0",
 		"react-toastify": "^9.0.8",
-		"redux": "^4.2.0",
 		"sharp": "^0.31.1"
 	},
 	"devDependencies": {

@@ -1,8 +1,10 @@
 .songInfoContainer {
+	--pos: 0;
+
 	display: flex;
 	position: fixed;
-	bottom: 0;
-	left: 0;
+	bottom: var(--pos);
+	left: var(--pos);
 	margin-left: 5px;
 	margin-bottom: 5px;
 }

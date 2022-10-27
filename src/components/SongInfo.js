@@ -62,6 +62,17 @@ export default class SongInfo extends Component {
 		const songTimerPercentage =
 			(this.props.data.currentSongTime / data.length) * 100000;
 
+		const cssVars = document.querySelector("." + styles.songInfoContainer);
+		if (cssVars) {
+			if (!this.props.data.isPlayerInfoVisible) {
+				cssVars.style.setProperty("margin-top", "5px");
+				cssVars.style.setProperty("--pos", "none");
+			} else {
+				cssVars.style.setProperty("margin-top", "0px");
+				cssVars.style.setProperty("--pos", 0);
+			}
+		}
+
 		return (
 			<div className={styles.songInfoContainer}>
 				<Image

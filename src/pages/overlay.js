@@ -42,6 +42,7 @@ export default class Overlay extends Component {
 
 			socket: undefined,
 			isVisible: false,
+			isPlayerInfoVisible: false,
 			songInfo: undefined,
 			beatSaverData: undefined,
 			currentSongTime: 0,
@@ -111,6 +112,7 @@ export default class Overlay extends Component {
 			setTimeout(async () => {
 				await this.updateData(id);
 			}, 10); // 10ms
+			this.setState({ isPlayerInfoVisible: true });
 		}
 
 		let shouldConnectSocket = false;
@@ -307,6 +309,13 @@ export default class Overlay extends Component {
 				await this.updateData(this.state.id);
 			}, 1000); // 1 second
 		}
+
+		if (visible) {
+			this.setState({ isPlayerInfoVisible: false });
+		} else {
+			this.setState({ isPlayerInfoVisible: true });
+		}
+
 		this.cutData = [];
 		this.cutData.SaberA = {
 			count: [0, 0, 0],
@@ -432,6 +441,7 @@ export default class Overlay extends Component {
 			websiteType,
 			showPlayerStats,
 			loadingPlayerData,
+			isPlayerInfoVisible,
 			id,
 		} = this.state;
 
@@ -452,7 +462,7 @@ export default class Overlay extends Component {
 						</div>
 					) : (
 						<div className={styles.overlay}>
-							{showPlayerStats && !loadingPlayerData ? (
+							{showPlayerStats && !loadingPlayerData && isPlayerInfoVisible ? (
 								<PlayerStats
 									pp={data.pp.toLocaleString("en-US", {
 										maximumFractionDigits: 2,
@@ -475,7 +485,8 @@ export default class Overlay extends Component {
 							)}
 							{this.state.showSongInfo &&
 							this.state.beatSaverData !== undefined &&
-							this.state.isVisible ? (
+							this.state.isVisible &&
+							!isPlayerInfoVisible ? (
 								<SongInfo data={this.state} />
 							) : (
 								<></>

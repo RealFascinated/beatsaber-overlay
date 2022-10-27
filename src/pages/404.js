@@ -39,6 +39,8 @@ export default class Home extends Component {
 					<Grid xs={12} sm={6} justify="center">
 						<Image
 							alt="Helpful doggo"
+							width={800}
+							height={450}
 							src="https://cdn.fascinated.cc/fPKqSysuqz.jpg?raw=true"
 							css={{
 								borderRadius: "5%",

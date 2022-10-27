@@ -6,7 +6,11 @@ const nextConfig = {
 	output: "standalone",
 	swcMinify: true,
 	images: {
-		domains: ["cdn.scoresaber.com", "*.cdn.beatsaver.com", "cdn.fascinated.cc"],
+		domains: [
+			"cdn.scoresaber.com",
+			"eu.cdn.beatsaver.com",
+			"cdn.fascinated.cc",
+		],
 	},
 };
 

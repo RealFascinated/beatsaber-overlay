@@ -12,5 +12,10 @@ services:
     image: bitnami/redis:latest
     restart: always
     environment:
+      - PUID=1000
+      - PGID=1000
       - REDIS_PASSWORD=<PASSWORD>
+    volumes:
+      - /home/<folder>/redis:/bitnami/redis/data
+
     command: /opt/bitnami/scripts/redis/run.sh --maxmemory 512mb

@@ -286,8 +286,8 @@ export default class Home extends Component {
 									/>
 									<Spacer y={1.2} />
 									<Text>
-										Hide player info to hide when a song starts (Show song info
-										Required)
+										Replace Player info with Song info when a song starts (Show
+										song info Required)
 									</Text>
 									<Switch
 										onChange={(event) =>

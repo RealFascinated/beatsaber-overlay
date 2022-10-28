@@ -4,6 +4,9 @@ import { Component } from "react";
 import PlayerStats from "../../src/components/PlayerStats";
 import ScoreStats from "../../src/components/ScoreStats";
 import SongInfo from "../../src/components/SongInfo";
+import SpeedStats from "../../src/components/SpeedStats";
+import TimingStats from "../../src/components/TimingStats";
+import DistanceStats from "../../src/components/DistanceStats";
 import LeaderboardType from "../../src/consts/LeaderboardType";
 import Utils from "../../src/utils/utils";
 
@@ -19,10 +22,16 @@ export default class Overlay extends Component {
 		this.cutData.SaberA = {
 			count: [0, 0, 0],
 			totalScore: [0, 0, 0],
+			totalDistance: 0.0,
+			totalSpeed: 0.0,
+			totalTiming: 0.0,
 		};
 		this.cutData.SaberB = {
 			count: [0, 0, 0],
 			totalScore: [0, 0, 0],
+			totalDistance: 0.0,
+			totalSpeed: 0.0,
+			totalTiming: 0.0,
 		};
 
 		this._mounted = false;
@@ -60,15 +69,29 @@ export default class Overlay extends Component {
 			currentSongTime: 0,
 			currentScore: 0,
 			percentage: "100.00%",
+			rank: "SSS",
+			combo: 0,
 			SaberA: {
 				cutDistanceScore: 0.0,
 				averagePreSwing: 0.0,
 				averagePostSwing: 0.0,
+				averageDistanceToCenter: 0.0,
+				averageTiming: 0.0,
+				averageSpeed: 0.0,
+				distanceToCenter: 0.0,
+				timing: 0.0,
+				speed: 0.0,
 			},
 			SaberB: {
 				cutDistanceScore: 0.0,
 				averagePreSwing: 0.0,
 				averagePostSwing: 0.0,
+				averageDistanceToCenter: 0.0,
+				averageTiming: 0.0,
+				averageSpeed: 0.0,
+				distanceToCenter: 0.0,
+				timing: 0.0,
+				speed: 0.0,
 			},
 		};
 		this.setupTimer();
@@ -333,27 +356,47 @@ export default class Overlay extends Component {
 		this.cutData.SaberA = {
 			count: [0, 0, 0],
 			totalScore: [0, 0, 0],
+			totalDistance: 0.0,
+			totalSpeed: 0.0,
+			totalTiming: 0.0,
 		};
 		this.cutData.SaberB = {
 			count: [0, 0, 0],
 			totalScore: [0, 0, 0],
+			totalDistance: 0.0,
+			totalSpeed: 0.0,
+			totalTiming: 0.0,
 		};
 		this.setState({
 			SaberA: {
 				cutDistanceScore: 0.0,
 				averagePreSwing: 0.0,
 				averagePostSwing: 0.0,
+				averageDistanceToCenter: 0.0,
+				averageTiming: 0.0,
+				averageSpeed: 0.0,
+				distanceToCenter: 0.0,
+				timing: 0.0,
+				speed: 0.0,
 			},
 			SaberB: {
 				cutDistanceScore: 0.0,
 				averagePreSwing: 0.0,
 				averagePostSwing: 0.0,
+				averageDistanceToCenter: 0.0,
+				averageTiming: 0.0,
+				averageSpeed: 0.0,
+				distanceToCenter: 0.0,
+				timing: 0.0,
+				speed: 0.0,
 			},
 			songInfo: undefined,
 			beatSaverData: undefined,
 			currentSongTime: 0,
 			currentScore: 0,
 			percentage: "100.00%",
+			rank: "SSS",
+			combo: 0,
 			isVisible: visible,
 			loadedDuringSong: loadedDuringSong,
 			mapStarCount: undefined,
@@ -388,14 +431,12 @@ export default class Overlay extends Component {
 			this.setState({
 				currentScore: finalScore,
 				percentage: percent.toFixed(2) + "%",
+				rank: status.performance.rank,
+				combo: status.performance.combo,
 			});
 		},
 		noteFullyCut: (data) => {
 			const { noteCut } = data;
-
-			let beforeCutScore = 0.0;
-			let afterCutScore = 0.0;
-			let cutDistanceScore = 0.0;
 
 			const cutDataSaber = this.cutData[noteCut.saberType];
 			cutDataSaber.count[0]++;
@@ -404,14 +445,20 @@ export default class Overlay extends Component {
 			cutDataSaber.totalScore[0] += noteCut.beforeCutScore;
 			cutDataSaber.totalScore[1] += noteCut.afterCutScore;
 			cutDataSaber.totalScore[2] += noteCut.cutDistanceScore;
-			beforeCutScore = cutDataSaber.totalScore[0] / cutDataSaber.count[0];
-			afterCutScore = cutDataSaber.totalScore[1] / cutDataSaber.count[1];
-			cutDistanceScore = cutDataSaber.totalScore[2] / cutDataSaber.count[2];
+			cutDataSaber.totalDistance += noteCut.cutDistanceToCenter;
+			cutDataSaber.totalSpeed += noteCut.saberSpeed;
+			cutDataSaber.totalTiming += noteCut.timeDeviation;
 
 			const cutData = this.state[noteCut.saberType];
-			cutData.averagePreSwing = beforeCutScore;
-			cutData.averagePostSwing = afterCutScore;
-			cutData.cutDistanceScore = cutDistanceScore;
+			cutData.averagePreSwing = cutDataSaber.totalScore[0] / cutDataSaber.count[0];
+			cutData.averagePostSwing = cutDataSaber.totalScore[1] / cutDataSaber.count[1];
+			cutData.cutDistanceScore = cutDataSaber.totalScore[2] / cutDataSaber.count[2];
+			cutData.averageDistanceToCenter = cutDataSaber.totalDistance / cutDataSaber.count[0] * 100;
+			cutData.averageTiming = cutDataSaber.totalTiming / cutDataSaber.count[0] * 1000;
+			cutData.averageSpeed = cutDataSaber.totalSpeed / cutDataSaber.count[0];
+			cutData.distanceToCenter = noteCut.cutDistanceToCenter * 100;
+			cutData.timing = noteCut.timeDeviation * 1000;
+			cutData.speed = noteCut.saberSpeed;
 			this.setState({ [noteCut.saberType]: cutData });
 		},
 		songStart: (data) => {
@@ -478,8 +525,7 @@ export default class Overlay extends Component {
 						<div className={styles.overlay}>
 							{showPlayerStats &&
 							!loadingPlayerData &&
-							isPlayerInfoVisible &&
-							!shouldReplacePlayerInfoWithScore ? (
+							isPlayerInfoVisible ? (
 								<PlayerStats
 									pp={data.pp.toLocaleString("en-US", {
 										maximumFractionDigits: 2,
@@ -492,6 +538,21 @@ export default class Overlay extends Component {
 									avatar={`https://cdn.scoresaber.com/avatars/${id}.jpg`}
 									loadedDuringSong={this.state.loadedDuringSong}
 								/>
+							) : (
+								<></>
+							)}
+							{this.state.showScore && this.state.isVisible ? (
+								<SpeedStats data={this.state} />
+							) : (
+								<></>
+							)}
+							{this.state.showScore && this.state.isVisible ? (
+								<DistanceStats data={this.state} />
+							) : (
+								<></>
+							)}
+							{this.state.showScore && this.state.isVisible ? (
+								<TimingStats data={this.state} />
 							) : (
 								<></>
 							)}

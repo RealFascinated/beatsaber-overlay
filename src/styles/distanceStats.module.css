@@ -1,0 +1,44 @@
+.distanceStats {
+	text-align: center;
+	position: absolute;
+	top: 350px;
+	right: 0;
+	margin-right: 5px;
+	min-width: 135px;
+
+	display: flex;
+	justify-content: right;
+	flex-direction: column;
+	align-items: right;
+}
+
+.distanceStats p {
+	font-size: 38px;
+	line-height: 1.2em;
+}
+
+.distanceStatsLeft {
+	text-align: right;
+	margin-right: 3px;
+}
+
+.distanceStatsRight {
+	text-align: left;
+}
+
+.distanceStatsdistance {
+	font-weight: bold;
+}
+
+.distanceStatsHands {
+	display: flex;
+	justify-content: center;
+}
+
+.distanceStatsHands p {
+	min-width: 68px;
+}
+
+.distanceStatsHands div {
+	padding-left: 10px;
+}

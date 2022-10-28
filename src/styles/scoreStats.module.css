@@ -44,6 +44,27 @@
 }
 
 .scoreStatsInfo {
-	margin-right: 10px;
-	text-align: right;
+	text-align: left;
+	position: absolute;
+	top: 220px;
+	left: 0;
+	margin-left: 5px;
+	min-width: 135px;
+
+	display: flex;
+	justify-content: left;
+	flex-direction: column;
+	align-items: left;
+}
+
+.scoreStatsBig p {
+	line-height: 1.2em;
+	margin-left: 10px;
+	font-size: 60px;
+}
+
+.scoreStatsMed p {
+	line-height: 1.2em;
+	margin-left: 10px;
+	font-size: 40px;
 }

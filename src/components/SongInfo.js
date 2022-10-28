@@ -1,118 +1,125 @@
 import Image from "next/future/image";
-import { Component } from "react";
+import { useSettingsStore } from "../store/overlaySettingsStore";
+import { useSongDataStore } from "../store/songDataStore";
 
 import styles from "../styles/songInfo.module.css";
 
-export default class SongInfo extends Component {
-	constructor(params) {
-		super(params);
-		this.state = {
-			diffColor: undefined,
-		};
+/**
+ * Format the given ms
+ *
+ * @param {Number} millis
+ * @returns The formatted time
+ */
+function msToMinSeconds(millis) {
+	const minutes = Math.floor(millis / 60000);
+	const seconds = Number(((millis % 60000) / 1000).toFixed(0));
+	return seconds === 60
+		? minutes + 1 + ":00"
+		: minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+}
+
+/**
+ * Update the difficulity color from the given difficulity
+ *
+ * @param {string} diff
+ */
+function formatDiff(diff) {
+	if (diff === "ExpertPlus") {
+		return "#8f48db";
+	}
+	if (diff === "Expert") {
+		return "#bf2a42";
+	}
+	if (diff === "Hard") {
+		return "tomato";
+	}
+	if (diff === "Normal") {
+		return "#59b0f4";
+	}
+	if (diff === "Easy") {
+		return "MediumSeaGreen";
+	}
+}
+
+export default function SongInfo() {
+	const [showSongInfo, shouldReplacePlayerInfoWithScore] = useSettingsStore(
+		(store) => [store.showSongInfo, store.shouldReplacePlayerInfoWithScore]
+	);
+	const [
+		isLoading,
+		bsr,
+		mapArt,
+		songTitle,
+		songSubTitle,
+		songDifficulty,
+		currentSongTime,
+		songLength,
+	] = useSongDataStore((store) => [
+		store.isLoading,
+		store.bsr,
+		store.mapArt,
+		store.songTitle,
+		store.songSubTitle,
+		store.songDifficulty,
+		store.currentSongTime,
+		store.songLength,
+	]);
+
+	if (!showSongInfo) {
+		return null;
 	}
 
-	componentDidMount() {
-		const data = this.props.data.songData.status.beatmap;
-		this.formatDiff(data.difficulty);
+	if (isLoading) {
+		return null;
 	}
 
-	/**
-	 * Update the difficulity color from the given difficulity
-	 *
-	 * @param {string} diff
-	 */
-	formatDiff(diff) {
-		if (diff === "Expert+") {
-			this.setState({ diffColor: "#8f48db" });
-		}
-		if (diff === "Expert") {
-			this.setState({ diffColor: "#bf2a42" });
-		}
-		if (diff === "Hard") {
-			this.setState({ diffColor: "tomato" });
-		}
-		if (diff === "Normal") {
-			this.setState({ diffColor: "#59b0f4" });
-		}
-		if (diff === "Easy") {
-			this.setState({ diffColor: "MediumSeaGreen" });
-		}
-	}
+	const songTimerPercentage = (currentSongTime / songLength) * 100000;
+	const diffColor = formatDiff(songDifficulty);
 
-	/**
-	 * Format the given ms
-	 *
-	 * @param {Number} millis
-	 * @returns The formatted time
-	 */
-	msToMinSeconds(millis) {
-		const minutes = Math.floor(millis / 60000);
-		const seconds = Number(((millis % 60000) / 1000).toFixed(0));
-		return seconds === 60
-			? minutes + 1 + ":00"
-			: minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-	}
-
-	render() {
-		const data = this.props.data.songData.status.beatmap;
-		const beatSaverData = this.props.data.beatSaverData.data;
-		const mapArt = beatSaverData.mapArt;
-		const bsr = beatSaverData.bsr;
-		const { songName, songAuthorName, difficulty } = data;
-		const songTimerPercentage =
-			(this.props.data.currentSongTime / data.length) * 100000;
-
-		const cssVars = document.querySelector("." + styles.songInfoContainer);
-		if (cssVars) {
-			if (!this.props.data.isPlayerInfoVisible) {
-				cssVars.style.setProperty("margin-top", "5px");
-				cssVars.style.setProperty("--pos", "none");
-			} else {
-				cssVars.style.setProperty("margin-top", "0px");
-				cssVars.style.setProperty("--pos", 0);
-			}
-		}
-
-		return (
-			<div className={styles.songInfoContainer}>
-				<Image
-					width={150}
-					height={150}
-					alt="Song artwork"
-					src={mapArt}
-					loading="lazy"
-					placeholder="blur"
-					blurDataURL="https://cdn.fascinated.cc/IkQFyodbZv.jpg?raw=true"
-				/>
-				<div className={styles.songInfo}>
-					<p className={styles.songInfoSongName}>
-						{songName.length > 35
-							? songName.substring(0, 35) + "..."
-							: songName}
+	return (
+		<div
+			className={styles.songInfoContainer}
+			style={{
+				bottom: shouldReplacePlayerInfoWithScore ? "" : 0,
+				left: shouldReplacePlayerInfoWithScore ? "" : 0,
+			}}
+		>
+			<Image
+				width={150}
+				height={150}
+				alt="Song artwork"
+				src={mapArt}
+				loading="lazy"
+				placeholder="blur"
+				blurDataURL="https://cdn.fascinated.cc/IkQFyodbZv.jpg?raw=true"
+			/>
+			<div className={styles.songInfo}>
+				<p className={styles.songInfoSongName}>
+					{songTitle.length > 35
+						? songTitle.substring(0, 35) + "..."
+						: songTitle}
+				</p>
+				<p className={styles.songInfoSongSubName}>{songSubTitle}</p>
+				<div className={styles.songInfoSongOtherContainer}>
+					<p
+						className={styles.songInfoDiff}
+						style={{ backgroundColor: diffColor }}
+					>
+						{songDifficulty.replace("Plus", "+")}
 					</p>
-					<p className={styles.songInfoSongAuthor}>{songAuthorName}</p>
-					<div className={styles.songInfoSongOtherContainer}>
-						<p
-							className={styles.songInfoDiff}
-							style={{ backgroundColor: this.state.diffColor }}
-						>
-							{difficulty}
-						</p>
-						<p className={styles.songInfoBsr}>!bsr {bsr}</p>
-					</div>
-					<p className={styles.songTimeText}>
-						{this.msToMinSeconds(this.props.data.currentSongTime * 1000)}/
-						{this.msToMinSeconds(data.length)}
-					</p>
-					<div className={styles.songTimeContainer}>
-						<div className={styles.songTimeBackground} />
-						<div
-							className={styles.songTime}
-							style={{ width: songTimerPercentage + "%" }}
-						/>
-					</div>
+					<p className={styles.songInfoBsr}>!bsr {bsr}</p>
+				</div>
+				<p className={styles.songTimeText}>
+					{msToMinSeconds(currentSongTime * 1000)}/{msToMinSeconds(songLength)}
+				</p>
+				<div className={styles.songTimeContainer}>
+					<div className={styles.songTimeBackground} />
+					<div
+						className={styles.songTime}
+						style={{ width: songTimerPercentage + "%" }}
+					/>
 				</div>
 			</div>
-		);
-	}
+		</div>
+	);
 }

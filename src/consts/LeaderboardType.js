@@ -1,7 +1,7 @@
 import env from "@beam-australia/react-env";
 import { VARS } from "./EnvVars";
 
-const WebsiteTypes = {
+const LeaderboardType = {
 	ScoreSaber: {
 		ApiUrl: {
 			PlayerData:
@@ -33,4 +33,4 @@ const WebsiteTypes = {
 	},
 };
 
-export default WebsiteTypes;
+export default LeaderboardType;

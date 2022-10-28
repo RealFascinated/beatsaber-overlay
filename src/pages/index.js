@@ -37,7 +37,7 @@ export default class Home extends Component {
 
 			values: {
 				socketAddr: undefined,
-				leaderboard: "ScoreSaber",
+				leaderboardType: "ScoreSaber",
 				showPlayerStats: true,
 				showScoreInfo: false,
 				showSongInfo: false,
@@ -72,7 +72,10 @@ export default class Home extends Component {
 			const json = JSON.parse(localStorage.getItem("values"));
 			let values = {};
 			Object.entries(json.values).forEach((value) => {
-				if (value[0] !== undefined) {
+				if (
+					value[0] !== undefined &&
+					this.state.values[value[0]] !== undefined
+				) {
 					values[value[0]] = value[1];
 				}
 			});
@@ -94,10 +97,6 @@ export default class Home extends Component {
 		let values = "";
 		Object.entries(this.state.values).forEach((value) => {
 			if (value[1] === undefined) {
-				return;
-			}
-			if (value[0] == "leaderboard" && value[1] === "BeatLeader") {
-				values += `&beatLeader=true`;
 				return;
 			}
 			values += `&${value[0]}=${value[1]}`;
@@ -234,9 +233,11 @@ export default class Home extends Component {
 									<Spacer y={1} />
 									<Text>Ranked leaderboard</Text>
 									<Radio.Group
-										defaultValue={this.state.values.leaderboard || "ScoreSaber"}
+										defaultValue={
+											this.state.values.leaderboardType || "ScoreSaber"
+										}
 										onChange={(value) => {
-											this.updateValue("leaderboard", value);
+											this.updateValue("leaderboardType", value);
 										}}
 									>
 										<Radio

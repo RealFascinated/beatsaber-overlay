@@ -15,6 +15,12 @@
 		"jsx": "preserve",
 		"incremental": true
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"src/helpers/web/getPlayerData.js",
+		"src/helpers/web/getPlayerData.js"
+	],
 	"exclude": ["node_modules"]
 }

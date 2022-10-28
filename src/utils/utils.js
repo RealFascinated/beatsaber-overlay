@@ -6,7 +6,7 @@ export default class Utils {
 	/**
 	 * Returns the information for the given website type.
 	 *
-	 * @param {LeaderboardType} website
+	 * @param {string} website
 	 * @returns The website type's information.
 	 */
 	static getWebsiteApi(website) {
@@ -43,4 +43,23 @@ export default class Utils {
 	static base64ToArrayBuffer(base64) {
 		return Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
 	}
+
+	static stringToBoolean = (stringValue) => {
+		switch (stringValue?.toLowerCase()?.trim()) {
+			case "true":
+			case "yes":
+			case "1":
+				return true;
+
+			case "false":
+			case "no":
+			case "0":
+			case null:
+			case undefined:
+				return false;
+
+			default:
+				return JSON.parse(stringValue);
+		}
+	};
 }

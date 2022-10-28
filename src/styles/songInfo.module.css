@@ -1,12 +1,9 @@
 .songInfoContainer {
-	--pos: 0;
-
 	display: flex;
 	position: fixed;
-	bottom: var(--pos);
-	left: var(--pos);
 	margin-left: 5px;
 	margin-bottom: 5px;
+	margin-top: 5px;
 }
 
 .songInfoContainer img {
@@ -22,7 +19,7 @@
 	font-weight: bold;
 }
 
-.songInfoSongAuthor {
+.songInfoSongSubName {
 	font-size: 22px;
 	margin-top: -12px;
 	margin-bottom: -3px;

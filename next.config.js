@@ -10,6 +10,7 @@ const nextConfig = {
 			"cdn.scoresaber.com",
 			"eu.cdn.beatsaver.com",
 			"cdn.fascinated.cc",
+			"avatars.akamai.steamstatic.com",
 		],
 	},
 };

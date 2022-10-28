@@ -35,23 +35,30 @@ export default class ScoreStats extends Component {
 		this.lastKnownPP = currentPP;
 
 		return (
-			<div className={styles.scoreStats}>
+			<div>
 				<div className={styles.scoreStatsInfo}>
-					<p>{data.percentage}</p>
-					<p>{data.currentScore.toLocaleString()}</p>
-					{currentPP !== undefined ? <p>{currentPP.toFixed(0)}pp</p> : null}
-				</div>
-				<p className={styles.scoreStatsAverageCut}>Average Cut</p>
-				<div className={styles.scoreStatsHands}>
-					<div className={styles.scoreStatsLeft}>
-						<p>{data.SaberA.averagePreSwing.toFixed(2)}</p>
-						<p>{data.SaberA.averagePostSwing.toFixed(2)}</p>
-						<p>{data.SaberA.cutDistanceScore.toFixed(2)}</p>
+					<div className={styles.scoreStatsBig}>
+						<p>{data.currentScore.toLocaleString()}</p>
 					</div>
-					<div className={styles.scoreStatsRight}>
-						<p>{data.SaberB.averagePreSwing.toFixed(2)}</p>
-						<p>{data.SaberB.averagePostSwing.toFixed(2)}</p>
-						<p>{data.SaberB.cutDistanceScore.toFixed(2)}</p>
+					<div className={styles.scoreStatsMed}>
+						<p>{"Combo : " + data.combo.toLocaleString()}</p>
+						<p>{data.rank + " " + data.percentage}</p>
+						{currentPP !== undefined ? <p>{currentPP.toFixed(0)}pp</p> : null}
+					</div>
+				</div>
+				<div className={styles.scoreStats}>
+					<p className={styles.scoreStatsAverageCut}>Average Cut</p>
+					<div className={styles.scoreStatsHands}>
+						<div className={styles.scoreStatsLeft}>
+							<p>{data.SaberA.averagePreSwing.toFixed(2)}</p>
+							<p>{data.SaberA.averagePostSwing.toFixed(2)}</p>
+							<p>{data.SaberA.cutDistanceScore.toFixed(2)}</p>
+						</div>
+						<div className={styles.scoreStatsRight}>
+							<p>{data.SaberB.averagePreSwing.toFixed(2)}</p>
+							<p>{data.SaberB.averagePostSwing.toFixed(2)}</p>
+							<p>{data.SaberB.cutDistanceScore.toFixed(2)}</p>
+						</div>
 					</div>
 				</div>
 			</div>

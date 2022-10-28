@@ -8,8 +8,8 @@ const Avatar = (props) => {
 			<Image
 				className={styles.playerAvatar}
 				src={props.url}
-				width={180}
-				height={180}
+				width={200}
+				height={200}
 				alt={"Avatar image"}
 				loading="lazy"
 				placeholder="blur"

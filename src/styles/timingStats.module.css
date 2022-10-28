@@ -1,0 +1,44 @@
+.timingStats {
+	text-align: center;
+	position: absolute;
+	top: 500px;
+	right: 0;
+	margin-right: 5px;
+	min-width: 135px;
+
+	display: flex;
+	justify-content: right;
+	flex-direction: column;
+	align-items: right;
+}
+
+.timingStats p {
+	font-size: 38px;
+	line-height: 1.2em;
+}
+
+.timingStatsLeft {
+	text-align: right;
+	margin-right: 3px;
+}
+
+.timingStatsRight {
+	text-align: left;
+}
+
+.timingStatsTiming {
+	font-weight: bold;
+}
+
+.timingStatsHands {
+	display: flex;
+	justify-content: center;
+}
+
+.timingStatsHands p {
+	min-width: 68px;
+}
+
+.timingStatsHands div {
+	padding-left: 10px;
+}

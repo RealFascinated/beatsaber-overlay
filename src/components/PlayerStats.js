@@ -14,7 +14,7 @@ const PlayerStats = (props) => {
 					{props.pp}pp{" "}
 					<span
 						style={{
-							fontSize: "23px",
+							fontSize: "25px",
 						}}
 					>
 						({props.websiteType})

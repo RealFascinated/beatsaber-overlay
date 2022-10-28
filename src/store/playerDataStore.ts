@@ -42,7 +42,7 @@ export const usePlayerDataStore = create<PlayerDataState>()((set) => ({
 			id: playerId,
 			isLoading: false,
 			pp: data.pp,
-			avatar: data.avatar || data.profilePicture,
+			avatar: `https://cdn.scoresaber.com/avatars/${playerId}.jpg`,
 			globalPos: data.rank,
 			countryRank: data.countryRank,
 			country: data.country,

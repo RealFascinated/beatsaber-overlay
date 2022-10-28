@@ -7,9 +7,13 @@ Need help? Feel free to message me at: Fascinated#4719
 
 ## Usage
 
-You will need [HttpSiraStatus](https://github.com/denpadokei/HttpSiraStatus) if you wish to use the note cut and/or the song info</br>
-To get started go to <https://bs-overlay.fascinated.cc> and fill the forum in then go to OBS (or your streaming software) and click Open Overlay</br>
-Then create a browser window and set the height to 1920 and the width to 1080 then put the URL in the browser window and bam! it should all work
+- Install [HttpSiraStatus](https://github.com/denpadokei/HttpSiraStatus)
+- Go to <https://bs-overlay.fascinated.cc>
+- Set the values in the configuratator
+- Click on Open Overlay
+- Create a browser window in your streaming software of choice
+- Set the height to 1920 and width to 1080
+- Set the URL to the newly opened window in your browser
 
 ## Preview
 
@@ -24,7 +28,7 @@ Then create a browser window and set the height to 1920 and the width to 1080 th
 
 ## Getting started with developent
 
-- Clone repo
+- Clone the repo
 - Move into the cloned directory
 - Run `npm install`
 - Rename the `.env-example` to `.env`

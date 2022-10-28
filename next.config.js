@@ -8,6 +8,7 @@ const nextConfig = {
 	images: {
 		domains: [
 			"cdn.scoresaber.com",
+			"cdn.beatleader.xyz",
 			"eu.cdn.beatsaver.com",
 			"cdn.fascinated.cc",
 			"avatars.akamai.steamstatic.com",

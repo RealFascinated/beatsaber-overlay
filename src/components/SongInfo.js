@@ -67,17 +67,19 @@ export default class SongInfo extends Component {
 			if (!this.props.data.isPlayerInfoVisible) {
 				cssVars.style.setProperty("margin-top", "5px");
 				cssVars.style.setProperty("--pos", "none");
+				cssVars.style.setProperty("top", 0);
 			} else {
 				cssVars.style.setProperty("margin-top", "0px");
 				cssVars.style.setProperty("--pos", 0);
+				cssVars.style.setProperty("top", "none");
 			}
 		}
 
 		return (
 			<div className={styles.songInfoContainer}>
 				<Image
-					width={150}
-					height={150}
+					width={200}
+					height={200}
 					alt="Song artwork"
 					src={mapArt}
 					loading="lazy"

@@ -11,10 +11,6 @@
 	letter-spacing: normal;
 }
 
-.loading {
-	color: black;
-}
-
 .invalidPlayer {
 	display: flex;
 	flex-direction: column;

@@ -1,4 +1,5 @@
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { useDataStore } from "../store/overlayDataStore";
 import { useSettingsStore } from "../store/overlaySettingsStore";
 import { usePlayerDataStore } from "../store/playerDataStore";
 import { useSongDataStore } from "../store/songDataStore";
@@ -6,7 +7,6 @@ import Utils from "../utils/utils";
 import { getMapHashFromLevelId } from "./map/mapHelpers";
 
 const ip = useSettingsStore.getState().socketAddr;
-let hasConnected = false;
 
 let cutData: any = [];
 cutData.saberA = {
@@ -20,33 +20,21 @@ cutData.saberB = {
 
 const updatePlayerData = usePlayerDataStore.getState().updatePlayerData;
 
-export function connectClient() {
+export function connectClient(attempt: number = 1) {
 	const client = new W3CWebSocket(`ws://${ip}:6557/socket`);
-
-	if (hasConnected) {
-		return;
-	}
+	const retryTime = 30_000 * attempt > 60_000 ? 60_000 : 30_000 * attempt;
 
 	client.onopen = () => {
 		console.log("WebSocket Client Connected");
-		hasConnected = true;
 	};
 	client.onclose = () => {
-		if (hasConnected) {
-			console.log(
-				"Lost connection to HTTPSiraStatus, attempting to reconnect."
-			);
-			connectClient();
-		} else {
-			hasConnected = false;
-			console.log(
-				"Unable to connect to HTTPSiraStatus, retrying in 30 seconds."
-			);
+		console.log(
+			`Unable to connect to HTTPSiraStatus, retrying in ${retryTime} seconds. (Attempt: ${attempt})`
+		);
 
-			setTimeout(() => {
-				connectClient();
-			}, 30_000);
-		}
+		setTimeout(() => {
+			connectClient(attempt + 1);
+		}, retryTime);
 	};
 	client.onmessage = (message: any) => {
 		const data: string = message.data;
@@ -83,6 +71,7 @@ const handlers: any = {
 			} = data.status.beatmap;
 			state.reset();
 			state.setInSong(true);
+			useDataStore.setState({ loadedDuringSong: true });
 			state.updateMapData(
 				getMapHashFromLevelId(levelId),
 				difficultyEnum,
@@ -187,12 +176,14 @@ const handlers: any = {
 		state.reset();
 		state.setInSong(false);
 		updatePlayerData();
+		useDataStore.setState({ loadedDuringSong: false });
 	},
 	menu: () => {
 		const state = useSongDataStore.getState();
 		state.reset();
 		state.setInSong(false);
 		updatePlayerData();
+		useDataStore.setState({ loadedDuringSong: false });
 	},
 	softFail: () => {
 		const state = useSongDataStore.getState();

@@ -20,7 +20,7 @@ interface SongDataState {
 	failed: boolean;
 	currentSongTime: number;
 	currentScore: number;
-	percentage: string;
+	percentage: number;
 	combo: number;
 	currentPP: number | undefined;
 	saberA: {
@@ -45,7 +45,7 @@ interface SongDataState {
 	setFailed: (failed: boolean) => void;
 	setPaused: (paused: boolean) => void;
 	setCurrentScore: (score: number) => void;
-	setPercent: (percent: string) => void;
+	setPercent: (percent: number) => void;
 	setCombo: (combo: number) => void;
 	setPp: (percent: number) => void;
 	setInSong: (isInSong: boolean) => void;
@@ -68,7 +68,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 	failed: false,
 	currentSongTime: 0,
 	currentScore: 0,
-	percentage: "100",
+	percentage: 100,
 	combo: 0,
 	currentPP: undefined,
 	saberA: {
@@ -132,7 +132,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		set({ currentScore: score });
 	},
 
-	setPercent: (percent: string) => {
+	setPercent: (percent: number) => {
 		set({ percentage: percent });
 	},
 
@@ -178,7 +178,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			failed: false,
 			currentSongTime: 0,
 			currentScore: 0,
-			percentage: "100",
+			percentage: 100,
 			combo: 0,
 			currentPP: undefined,
 			saberA: {

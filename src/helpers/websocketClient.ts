@@ -83,7 +83,7 @@ const handlers: any = {
 			const percent = relativeScore * 100;
 
 			state.setCurrentScore(finalScore);
-			state.setPercent(percent.toFixed(2));
+			state.setPercent(percent);
 			state.setPp(percent);
 
 			state.updateMapData(
@@ -133,7 +133,7 @@ const handlers: any = {
 		const percent = relativeScore * 100;
 
 		state.setCurrentScore(finalScore);
-		state.setPercent(percent.toFixed(2));
+		state.setPercent(percent);
 		state.setCombo(data.status.performance.combo);
 		state.setPp(percent);
 	},

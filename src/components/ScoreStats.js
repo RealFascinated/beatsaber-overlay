@@ -38,14 +38,7 @@ export default function ScoreStats() {
 				<div>
 					<p>Combo: {combo}</p>
 					<p>
-						<span
-							style={{
-								marginRight: "6px",
-							}}
-						>
-							{getFormattedScorePercent(percentage)}
-						</span>
-						{percentage}%
+						{getFormattedScorePercent(percentage)} {percentage}%
 					</p>
 					{currentPP !== undefined ? <p>{currentPP.toFixed(0)}pp</p> : null}
 				</div>

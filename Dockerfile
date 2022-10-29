@@ -16,6 +16,9 @@ RUN \
 # Copy cached files
 COPY node_modules ./
 
+# Install dependencies
+RUN yarn 
+
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
 WORKDIR /app
@@ -27,14 +30,8 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-# Install dependencies
-RUN yarn 
-
 # Build the project
 RUN yarn build 
-
-# If using npm comment out above and use below instead
-# RUN npm run build
 
 # Production image, copy all the files and run next
 FROM node:18-alpine AS runner

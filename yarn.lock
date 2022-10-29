@@ -17,7 +17,8 @@
 
 "@beam-australia/react-env@^3.1.1":
   version "3.1.1"
-  resolved "https://registry.npmjs.org/@beam-australia/react-env/-/react-env-3.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/@beam-australia/react-env/-/react-env-3.1.1.tgz#63cb8316861b8fbdb4b9c550a62139cd90675e40"
+  integrity sha512-LdWzgqmu116t9+sOvONyB21bBmI8dm8g8s3KhnJVzCcK93GrdSisuIOtOkQPMYgenmVGTWQwWnbLAgoka/jAFw==
   dependencies:
     cross-spawn "^6.0.5"
     dotenv "^8.0.0"

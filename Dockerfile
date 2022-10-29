@@ -27,6 +27,9 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+# Install dependencies
+RUN yarn 
+
 # Build the project
 RUN yarn build 
 
@@ -53,8 +56,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./.next/static
 
-# Install dependencies
-RUN yarn 
 
 RUN chown -R nextjs:nodejs /app
 
@@ -64,5 +65,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-ENTRYPOINT yarn react-env
-CMD ["node", "server.js"]
+CMD ["npm", "run", "start"]

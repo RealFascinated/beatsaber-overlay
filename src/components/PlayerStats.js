@@ -4,6 +4,7 @@ import { useSettingsStore } from "../store/overlaySettingsStore";
 import { usePlayerDataStore } from "../store/playerDataStore";
 import Avatar from "./Avatar";
 
+import { Loading } from "@nextui-org/react";
 import { useSongDataStore } from "../store/songDataStore";
 import styles from "../styles/playerStats.module.css";
 
@@ -36,7 +37,11 @@ const PlayerStats = () => {
 	}
 
 	if (isLoading) {
-		return <div className={styles.playerStatsContainer}>Loading...</div>;
+		return (
+			<div className={styles.playerStatsContainer}>
+				<Loading size="lg" />
+			</div>
+		);
 	}
 
 	return (

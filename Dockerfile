@@ -5,7 +5,7 @@ RUN apk add libc6-compat
 WORKDIR /app
 
 # Copy cached files
-COPY node_modules ./
+COPY node_modules /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -63,4 +63,4 @@ RUN yarn add @beam-australia/react-env
 
 ENTRYPOINT yarn react-env --env APP_ENV
 
-CMD ["npm", "run", "start"]
+CMD ["node", "server.js"]

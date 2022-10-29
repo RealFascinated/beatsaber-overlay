@@ -31,6 +31,8 @@ yarn-error.log*
 .env.production.local
 .env
 
+/public/__ENV.js
+
 # vercel
 .vercel
 

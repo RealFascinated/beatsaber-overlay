@@ -59,6 +59,8 @@ EXPOSE 3000
 
 ENV PORT 3000
 
+RUN yarn add @beam-australia/react-env
+
 ENTRYPOINT yarn react-env --env APP_ENV
 
 CMD ["npm", "run", "start"]

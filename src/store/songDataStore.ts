@@ -68,7 +68,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 	failed: false,
 	currentSongTime: 0,
 	currentScore: 0,
-	percentage: "100%",
+	percentage: "100",
 	combo: 0,
 	currentPP: undefined,
 	saberA: {
@@ -178,7 +178,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			failed: false,
 			currentSongTime: 0,
 			currentScore: 0,
-			percentage: "100%",
+			percentage: "100",
 			combo: 0,
 			currentPP: undefined,
 			saberA: {

@@ -26,7 +26,12 @@ export default function ScoreStats() {
 		<div className={styles.scoreStats}>
 			<div className={styles.scoreStatsInfo}>
 				<p>{percentage}</p>
-				<p>{currentScore.toLocaleString()}</p>
+				<p>
+					{currentScore.toLocaleString("en-us", {
+						maximumSignificantDigits: 2,
+						minimumSignificantDigits: 2,
+					})}
+				</p>
 				{currentPP !== undefined ? <p>{currentPP.toFixed(0)}pp</p> : null}
 			</div>
 			<p className={styles.scoreStatsAverageCut}>Average Cut</p>

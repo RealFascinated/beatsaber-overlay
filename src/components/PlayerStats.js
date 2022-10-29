@@ -46,7 +46,11 @@ const PlayerStats = () => {
 			</div>
 			<div className={styles.playerStats}>
 				<p>
-					{pp}pp{" "}
+					{pp.toLocaleString("en-us", {
+						maximumSignificantDigits: 2,
+						minimumSignificantDigits: 2,
+					})}
+					pp{" "}
 					<span
 						style={{
 							fontSize: "23px",
@@ -55,9 +59,21 @@ const PlayerStats = () => {
 						({leaderboardType})
 					</span>
 				</p>
-				<p>#{globalPos}</p>
+				<p>
+					#
+					{globalPos.toLocaleString("en-us", {
+						maximumSignificantDigits: 2,
+						minimumSignificantDigits: 2,
+					})}
+				</p>
 				<div className={styles.playerCountry}>
-					<p>#{countryRank}</p>
+					<p>
+						#
+						{countryRank.toLocaleString("en-us", {
+							maximumSignificantDigits: 2,
+							minimumSignificantDigits: 2,
+						})}
+					</p>
 					<ReactCountryFlag
 						className={styles.playerCountryIcon}
 						svg

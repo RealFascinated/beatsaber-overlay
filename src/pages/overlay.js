@@ -58,11 +58,11 @@ export default function Overlay(props) {
 
 	return (
 		<div className={styles.main}>
-			<NextSeo title="Overlay"></NextSeo>
+			<NextSeo title="Overlay" />
 			<PlayerStats />
-			<CutStats />
-			<ScoreStats />
 			<SongInfo />
+			<ScoreStats />
+			<CutStats />
 		</div>
 	);
 }

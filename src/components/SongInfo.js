@@ -82,6 +82,7 @@ export default function SongInfo() {
 			style={{
 				bottom: shouldReplacePlayerInfoWithScore ? "" : 0,
 				left: shouldReplacePlayerInfoWithScore ? "" : 0,
+				position: shouldReplacePlayerInfoWithScore ? "" : "fixed",
 			}}
 		>
 			<Image

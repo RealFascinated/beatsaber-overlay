@@ -16,9 +16,6 @@ RUN \
 # Copy cached files
 COPY node_modules ./
 
-# Install dependencies
-RUN yarn 
-
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
 WORKDIR /app
@@ -55,6 +52,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./.next/static
+
+# Install dependencies
+RUN yarn 
 
 RUN chown -R nextjs:nodejs /app
 

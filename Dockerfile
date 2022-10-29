@@ -60,6 +60,4 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-ENTRYPOINT npx react-env --env APP_ENV
-
-CMD yarn start
+CMD npx react-env --env APP_ENV && yarn start

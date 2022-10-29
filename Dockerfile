@@ -24,6 +24,8 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+RUN npm i
+
 # Build the project
 RUN yarn build 
 
@@ -50,7 +52,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/public ./.next/static
 # Copy cached files
 COPY node_modules ./
 
-RUN npm i
 
 RUN chown -R nextjs:nodejs /app
 

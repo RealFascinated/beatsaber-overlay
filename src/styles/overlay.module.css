@@ -3,6 +3,7 @@
 	color: white;
 	font-size: xx-large;
 	line-height: 1.4em !important;
+	height: fit-content;
 }
 
 .main p {

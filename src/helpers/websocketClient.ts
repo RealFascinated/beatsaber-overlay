@@ -3,7 +3,6 @@ import { useDataStore } from "../store/overlayDataStore";
 import { useSettingsStore } from "../store/overlaySettingsStore";
 import { usePlayerDataStore } from "../store/playerDataStore";
 import { useSongDataStore } from "../store/songDataStore";
-import Utils from "../utils/utils";
 import { getMapHashFromLevelId } from "./map/mapHelpers";
 
 const ip = useSettingsStore.getState().socketAddr;
@@ -29,7 +28,9 @@ export function connectClient(attempt: number = 1) {
 	};
 	client.onclose = () => {
 		console.log(
-			`Unable to connect to HTTPSiraStatus, retrying in ${retryTime} seconds. (Attempt: ${attempt})`
+			`Unable to connect to HTTPSiraStatus, retrying in ${
+				retryTime / 1000
+			} seconds. (Attempt: ${attempt})`
 		);
 
 		setTimeout(() => {
@@ -71,15 +72,8 @@ const handlers: any = {
 			} = data.status.beatmap;
 			state.reset();
 			state.setInSong(true);
+			state.setCombo(data.status.performance.combo);
 			useDataStore.setState({ loadedDuringSong: true });
-			state.updateMapData(
-				getMapHashFromLevelId(levelId),
-				difficultyEnum,
-				characteristic,
-				songName,
-				songSubName || levelAuthorName,
-				length
-			);
 
 			const { score, relativeScore } = data.status.performance;
 			let finalScore = score;
@@ -89,7 +83,17 @@ const handlers: any = {
 			const percent = relativeScore * 100;
 
 			state.setCurrentScore(finalScore);
-			state.setPercent(percent.toFixed(2) + "%");
+			state.setPercent(percent.toFixed(2));
+			state.setPp(percent);
+
+			state.updateMapData(
+				getMapHashFromLevelId(levelId),
+				difficultyEnum,
+				characteristic,
+				songName,
+				songSubName || levelAuthorName,
+				length
+			);
 		}
 	},
 
@@ -128,19 +132,9 @@ const handlers: any = {
 		const percent = relativeScore * 100;
 
 		state.setCurrentScore(finalScore);
-		state.setPercent(percent.toFixed(2) + "%");
-
-		const leaderboardType = useSettingsStore.getState().leaderboardType;
-		let currentPP = Utils.calculatePP(
-			state.mapStarCount,
-			percent,
-			leaderboardType
-		);
-		if (currentPP === undefined) {
-			return;
-		}
-
-		state.setPp(currentPP);
+		state.setPercent(percent.toFixed(2));
+		state.setCombo(data.status.performance.combo);
+		state.setPp(percent);
 	},
 
 	noteFullyCut: (data: any) => {

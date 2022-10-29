@@ -1,6 +1,7 @@
 import axios from "axios";
 import { NextSeo } from "next-seo";
 import { useEffect } from "react";
+import CutStats from "../components/CutStats";
 import PlayerStats from "../components/PlayerStats";
 import ScoreStats from "../components/ScoreStats";
 import SongInfo from "../components/SongInfo";
@@ -59,6 +60,7 @@ export default function Overlay(props) {
 		<div className={styles.main}>
 			<NextSeo title="Overlay"></NextSeo>
 			<PlayerStats />
+			<CutStats />
 			<ScoreStats />
 			<SongInfo />
 		</div>

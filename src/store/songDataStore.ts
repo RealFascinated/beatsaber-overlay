@@ -21,6 +21,7 @@ interface SongDataState {
 	currentSongTime: number;
 	currentScore: number;
 	percentage: string;
+	combo: number;
 	currentPP: number | undefined;
 	saberA: {
 		cutDistanceScore: number;
@@ -45,7 +46,8 @@ interface SongDataState {
 	setPaused: (paused: boolean) => void;
 	setCurrentScore: (score: number) => void;
 	setPercent: (percent: string) => void;
-	setPp: (pp: number) => void;
+	setCombo: (combo: number) => void;
+	setPp: (percent: number) => void;
 	setInSong: (isInSong: boolean) => void;
 	setSaberData: (saberType: string, cutData: any) => void;
 }
@@ -67,6 +69,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 	currentSongTime: 0,
 	currentScore: 0,
 	percentage: "100%",
+	combo: 0,
 	currentPP: undefined,
 	saberA: {
 		cutDistanceScore: 0.0,
@@ -133,6 +136,10 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		set({ percentage: percent });
 	},
 
+	setCombo: (combo: number) => {
+		set({ combo: combo });
+	},
+
 	setSaberData: (saberType: string, saberData: any) => {
 		if (saberType === "saberA") {
 			set({ saberA: saberData });
@@ -141,7 +148,14 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		}
 	},
 
-	setPp: (pp: number) => {
+	setPp: (percent: number) => {
+		const leaderboardType = useSettingsStore.getState().leaderboardType;
+		const mapStarCount = useSongDataStore.getState().mapStarCount;
+
+		let pp = Utils.calculatePP(mapStarCount, percent, leaderboardType);
+		if (pp === undefined) {
+			return;
+		}
 		set({ currentPP: pp });
 	},
 
@@ -165,6 +179,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			currentSongTime: 0,
 			currentScore: 0,
 			percentage: "100%",
+			combo: 0,
 			currentPP: undefined,
 			saberA: {
 				cutDistanceScore: 0.0,

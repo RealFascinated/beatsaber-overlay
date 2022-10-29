@@ -19,7 +19,6 @@
 
 .cutStatsLeft {
 	text-align: right;
-	margin-right: 3px;
 }
 
 .cutStatsRight {
@@ -28,6 +27,7 @@
 
 .cutStatsAverageCut {
 	font-weight: bold;
+	margin-left: 5px;
 }
 
 .cutStatsHands {

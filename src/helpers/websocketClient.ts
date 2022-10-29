@@ -5,7 +5,7 @@ import { usePlayerDataStore } from "../store/playerDataStore";
 import { useSongDataStore } from "../store/songDataStore";
 import { getMapHashFromLevelId } from "./map/mapHelpers";
 
-const ip = useSettingsStore.getState().socketAddr;
+const ip = useSettingsStore.getState().socketAddr || "localhost";
 
 let cutData: any = [];
 cutData.saberA = {

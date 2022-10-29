@@ -4,7 +4,7 @@
 	"scripts": {
 		"dev": "react-env -- next",
 		"build": "next build",
-		"start": "react-env -- && APP_ENV=production node server.js",
+		"start": "APP_ENV=production node server.js",
 		"lint": "next lint"
 	},
 	"dependencies": {

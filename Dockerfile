@@ -4,6 +4,9 @@ FROM node:18-alpine AS deps
 RUN apk add libc6-compat
 WORKDIR /app
 
+# Copy cached files
+COPY node_modules ./
+
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 RUN \
@@ -12,9 +15,6 @@ RUN \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
-
-# Copy cached files
-COPY node_modules ./
 
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
@@ -58,5 +58,7 @@ USER nextjs
 EXPOSE 3000
 
 ENV PORT 3000
+
+ENTRYPOINT yarn react-env --env APP_ENV
 
 CMD ["npm", "run", "start"]

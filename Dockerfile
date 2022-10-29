@@ -10,8 +10,6 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 # Copy cached files
 COPY node_modules ./
 
-RUN npm i
-
 # RUN \
 #   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
 #   elif [ -f package-lock.json ]; then npm ci; \
@@ -52,6 +50,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./.next/static
+
+RUN npm i
 
 RUN chown -R nextjs:nodejs /app
 

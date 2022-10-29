@@ -106,6 +106,7 @@ const handlers: any = {
 			characteristic,
 			songName,
 			songSubName,
+			levelAuthorName,
 			length,
 		} = data.status.beatmap;
 
@@ -116,7 +117,7 @@ const handlers: any = {
 			difficultyEnum,
 			characteristic,
 			songName,
-			songSubName,
+			songSubName || levelAuthorName,
 			length
 		);
 	},

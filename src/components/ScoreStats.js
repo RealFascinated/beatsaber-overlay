@@ -28,8 +28,8 @@ export default function ScoreStats() {
 				<p>{percentage}</p>
 				<p>
 					{currentScore.toLocaleString("en-us", {
-						maximumSignificantDigits: 2,
-						minimumSignificantDigits: 2,
+						maximumFractionDigits: 2,
+						minimumFractionDigits: 2,
 					})}
 				</p>
 				{currentPP !== undefined ? <p>{currentPP.toFixed(0)}pp</p> : null}

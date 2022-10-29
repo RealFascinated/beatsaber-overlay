@@ -47,8 +47,8 @@ const PlayerStats = () => {
 			<div className={styles.playerStats}>
 				<p>
 					{pp.toLocaleString("en-us", {
-						maximumSignificantDigits: 2,
-						minimumSignificantDigits: 2,
+						maximumFractionDigits: 2,
+						minimumFractionDigits: 2,
 					})}
 					pp{" "}
 					<span
@@ -62,16 +62,16 @@ const PlayerStats = () => {
 				<p>
 					#
 					{globalPos.toLocaleString("en-us", {
-						maximumSignificantDigits: 2,
-						minimumSignificantDigits: 2,
+						maximumFractionDigits: 2,
+						minimumFractionDigits: 2,
 					})}
 				</p>
 				<div className={styles.playerCountry}>
 					<p>
 						#
 						{countryRank.toLocaleString("en-us", {
-							maximumSignificantDigits: 2,
-							minimumSignificantDigits: 2,
+							maximumFractionDigits: 2,
+							minimumFractionDigits: 2,
 						})}
 					</p>
 					<ReactCountryFlag

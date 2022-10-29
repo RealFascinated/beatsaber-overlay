@@ -1,10 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-	experimental: {
-		optimizeCss: true,
-	},
 	output: "standalone",
 	swcMinify: true,
+	compress: true,
 	images: {
 		domains: [
 			"cdn.scoresaber.com",
@@ -13,6 +11,9 @@ const nextConfig = {
 			"cdn.fascinated.cc",
 			"avatars.akamai.steamstatic.com",
 		],
+	},
+	experimental: {
+		optimizeCss: true,
 	},
 };
 

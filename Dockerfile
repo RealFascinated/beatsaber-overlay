@@ -16,9 +16,6 @@ RUN \
 # Copy cached files
 COPY node_modules ./
 
-# Install dependencies
-RUN yarn 
-
 # Rebuild the source code only when needed
 FROM node:18-alpine AS builder
 WORKDIR /app

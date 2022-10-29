@@ -58,7 +58,7 @@ const PlayerStats = () => {
 					pp{" "}
 					<span
 						style={{
-							fontSize: "23px",
+							fontSize: "25px",
 						}}
 					>
 						({leaderboardType})

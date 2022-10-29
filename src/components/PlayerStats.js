@@ -62,16 +62,16 @@ const PlayerStats = () => {
 				<p>
 					#
 					{globalPos.toLocaleString("en-us", {
-						maximumFractionDigits: 2,
-						minimumFractionDigits: 2,
+						maximumFractionDigits: 0,
+						minimumFractionDigits: 0,
 					})}
 				</p>
 				<div className={styles.playerCountry}>
 					<p>
 						#
 						{countryRank.toLocaleString("en-us", {
-							maximumFractionDigits: 2,
-							minimumFractionDigits: 2,
+							maximumFractionDigits: 0,
+							minimumFractionDigits: 0,
 						})}
 					</p>
 					<ReactCountryFlag

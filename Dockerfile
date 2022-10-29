@@ -4,9 +4,6 @@ FROM node:18-alpine AS deps
 RUN apk add libc6-compat
 WORKDIR /app
 
-# Copy cached files
-COPY node_modules /app
-
 # # Install dependencies based on the preferred package manager
 # COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 # RUN \
@@ -49,6 +46,9 @@ COPY --from=builder --chown=nextjs:nodejs /app/next.config.js ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./.next/static
+
+# Copy cached files
+COPY node_modules ./
 
 RUN npm i
 

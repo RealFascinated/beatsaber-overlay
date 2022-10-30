@@ -30,7 +30,11 @@ export const usePlayerDataStore = create<PlayerDataState>()((set) => ({
 		const apiUrl = Utils.getWebsiteApi(
 			leaderboardType
 		).ApiUrl.PlayerData.replace("%s", playerId);
-		const response = await axios.get(apiUrl);
+		const response = await axios.get(apiUrl, {
+			headers: {
+				"x-requested-with": "BeatSaber Overlay",
+			},
+		});
 		if (response.status !== 200) {
 			return;
 		}

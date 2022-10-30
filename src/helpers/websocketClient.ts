@@ -6,6 +6,7 @@ import { useSongDataStore } from "../store/songDataStore";
 import { getMapHashFromLevelId } from "./map/mapHelpers";
 
 const ip = useSettingsStore.getState().socketAddr || "localhost";
+const updatePlayerData = usePlayerDataStore.getState().updatePlayerData;
 
 let cutData: any = [];
 cutData.saberA = {
@@ -16,8 +17,6 @@ cutData.saberB = {
 	count: [0, 0, 0],
 	totalScore: [0, 0, 0],
 };
-
-const updatePlayerData = usePlayerDataStore.getState().updatePlayerData;
 
 export function connectClient(attempt: number = 1) {
 	const client = new W3CWebSocket(`ws://${ip}:6557/socket`);
@@ -85,7 +84,6 @@ const handlers: any = {
 			state.setCurrentScore(finalScore);
 			state.setPercent(percent);
 			state.setPp(percent);
-
 			state.updateMapData(
 				getMapHashFromLevelId(levelId),
 				difficultyEnum,

@@ -31,6 +31,9 @@ export default class Utils {
 	}
 
 	static calculatePP(stars, acc, type) {
+		if (stars <= 0) {
+			return undefined;
+		}
 		if (type === "BeatLeader") {
 			return getBeatLeaderPP(acc, stars);
 		}

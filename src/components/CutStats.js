@@ -3,7 +3,7 @@ import { useSongDataStore } from "../store/songDataStore";
 import styles from "../styles/cutStats.module.css";
 
 export default function CutStats() {
-	const [showScoreInfo] = useSettingsStore((store) => [store.showScoreInfo]);
+	const [showCutStats] = useSettingsStore((store) => [store.showCutStats]);
 	const [saberA, saberB, isLoading] = useSongDataStore((store) => [
 		store.saberA,
 		store.saberB,
@@ -14,7 +14,7 @@ export default function CutStats() {
 		return null;
 	}
 
-	if (!showScoreInfo) {
+	if (!showCutStats) {
 		return null;
 	}
 

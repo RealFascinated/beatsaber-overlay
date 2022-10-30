@@ -41,6 +41,7 @@ export default class Home extends Component {
 				showPlayerStats: true,
 				showScoreInfo: false,
 				showSongInfo: false,
+				showCutStats: false,
 				shouldReplacePlayerInfoWithScore: false,
 			},
 		};
@@ -283,6 +284,15 @@ export default class Home extends Component {
 											this.updateValue("showSongInfo", event.target.checked)
 										}
 										checked={this.state.values.showSongInfo}
+										size="md"
+									/>
+									<Spacer y={1.2} />
+									<Text>Show cut stats (Average cut)</Text>
+									<Switch
+										onChange={(event) =>
+											this.updateValue("showCutStats", event.target.checked)
+										}
+										checked={this.state.values.showCutStats}
 										size="md"
 									/>
 									<Spacer y={1.2} />

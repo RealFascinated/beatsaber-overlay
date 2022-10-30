@@ -9,6 +9,7 @@ interface SettingsState {
 	showPlayerStats: boolean;
 	showScoreInfo: boolean;
 	showSongInfo: boolean;
+	showCutStats: boolean;
 	shouldReplacePlayerInfoWithScore: boolean;
 	setMounted: (isMounted: boolean) => void;
 	setOverlaySettings: (params: string) => void;
@@ -22,6 +23,7 @@ export const useSettingsStore = create<SettingsState>()((set) => ({
 	showPlayerStats: true,
 	showScoreInfo: false,
 	showSongInfo: false,
+	showCutStats: false,
 	shouldReplacePlayerInfoWithScore: false,
 
 	setMounted: (isMounted: boolean) => set(() => ({ mounted: isMounted })),

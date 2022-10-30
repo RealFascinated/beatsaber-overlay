@@ -5,7 +5,6 @@ import {
 	Grid,
 	Input,
 	Link,
-	Modal,
 	Radio,
 	Spacer,
 	Spinner,
@@ -30,8 +29,6 @@ export default class Home extends Component {
 		this.state = {
 			loading: true,
 			steamId: undefined,
-			isPreviewVisible: false,
-			previewUrl: undefined,
 			overlayUrl: undefined,
 			avatarUrl: undefined,
 
@@ -85,13 +82,6 @@ export default class Home extends Component {
 			this.validateSteamId(json.steamId || "");
 		}
 		this.setState({ loading: false });
-	}
-
-	loadPreview() {
-		this.setState({
-			isPreviewVisible: true,
-			previewUrl: this.generateUrl(),
-		});
 	}
 
 	generateUrl() {
@@ -161,26 +151,6 @@ export default class Home extends Component {
 						marginTop: "$8",
 					}}
 				>
-					{/* Preview */}
-					{this.state.isPreviewVisible ? (
-						<Modal
-							closeButton
-							open={this.state.isPreviewVisible}
-							width={"100%"}
-							blur
-							onClose={() => this.setState({ isPreviewVisible: false })}
-						>
-							<Modal.Header>
-								<Text size={18}>Overlay Preview</Text>
-							</Modal.Header>
-							<Modal.Body>
-								<iframe height={600} src={this.state.previewUrl}></iframe>
-							</Modal.Body>
-						</Modal>
-					) : (
-						<></>
-					)}
-
 					<Grid.Container gap={2} justify="center">
 						<Grid
 							xs={12}
@@ -325,19 +295,6 @@ export default class Home extends Component {
 											}}
 										>
 											Open Overlay
-										</Button>
-										<Button
-											flat
-											auto
-											onPress={() => {
-												if (!this.state.steamId) {
-													toast.error("Please provide a Steam ID");
-													return;
-												}
-												this.loadPreview();
-											}}
-										>
-											Preview
 										</Button>
 									</Button.Group>
 

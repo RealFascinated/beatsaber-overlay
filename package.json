@@ -24,7 +24,7 @@
 		"react": "^18.2.0",
 		"react-country-flag": "^3.0.2",
 		"react-dom": "^18.2.0",
-		"react-toastify": "^9.0.8",
+		"react-toastify": "^9.1.0",
 		"sharp": "^0.31.1",
 		"websocket": "^1.0.34",
 		"zustand": "^4.1.3"

@@ -16,7 +16,7 @@
 		"core-js-pure": "^3.26.0",
 		"critters": "^0.0.16",
 		"ioredis": "^5.2.3",
-		"next": "12",
+		"next": "13",
 		"next-seo": "^5.13.0",
 		"next-themes": "^0.2.1",
 		"node-fetch": "^3.2.10",

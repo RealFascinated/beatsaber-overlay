@@ -19,7 +19,7 @@
 		"next": "12",
 		"next-seo": "^5.14.1",
 		"next-themes": "^0.2.1",
-		"node-fetch": "^3.2.10",
+		"node-fetch": "^3.3.0",
 		"prop-types": "^15.8.1",
 		"react": "^18.2.0",
 		"react-country-flag": "^3.0.2",

@@ -1142,13 +1142,10 @@ concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.npmjs.org/concat-map/-/concat-map-0.0.1.tgz"
 
-core-js-pure@^3.20.2:
-  version "3.21.0"
-  resolved "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.21.0.tgz"
-
-core-js-pure@^3.26.0:
-  version "3.26.0"
-  resolved "https://registry.npmjs.org/core-js-pure/-/core-js-pure-3.26.0.tgz"
+core-js-pure@^3.20.2, core-js-pure@^3.26.1:
+  version "3.26.1"
+  resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.26.1.tgz#653f4d7130c427820dcecd3168b594e8bb095a33"
+  integrity sha512-VVXcDpp/xJ21KdULRq/lXdLzQAtX7+37LzpyfFM973il0tWSsDEoyzG38G14AjTpK9VTfiNM9jnFauq/CpaWGQ==
 
 core-util-is@~1.0.0:
   version "1.0.3"

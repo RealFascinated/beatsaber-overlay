@@ -70,6 +70,14 @@ const handlers: any = {
 				length,
 			} = data.status.beatmap;
 			state.reset();
+			cutData.saberA = {
+				count: [0, 0, 0],
+				totalScore: [0, 0, 0],
+			};
+			cutData.saberB = {
+				count: [0, 0, 0],
+				totalScore: [0, 0, 0],
+			};
 			state.setInSong(true);
 			state.setCombo(data.status.performance.combo);
 			useDataStore.setState({ loadedDuringSong: true });
@@ -109,6 +117,14 @@ const handlers: any = {
 		} = data.status.beatmap;
 
 		state.reset();
+		cutData.saberA = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
+		cutData.saberB = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
 		state.setInSong(true);
 		state.updateMapData(
 			getMapHashFromLevelId(levelId),
@@ -167,6 +183,14 @@ const handlers: any = {
 	finished: () => {
 		const state = useSongDataStore.getState();
 		state.reset();
+		cutData.saberA = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
+		cutData.saberB = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
 		state.setInSong(false);
 		updatePlayerData();
 		useDataStore.setState({ loadedDuringSong: false });
@@ -174,6 +198,14 @@ const handlers: any = {
 	menu: () => {
 		const state = useSongDataStore.getState();
 		state.reset();
+		cutData.saberA = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
+		cutData.saberB = {
+			count: [0, 0, 0],
+			totalScore: [0, 0, 0],
+		};
 		state.setInSong(false);
 		updatePlayerData();
 		useDataStore.setState({ loadedDuringSong: false });

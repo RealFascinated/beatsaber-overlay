@@ -17,7 +17,7 @@
 		"critters": "^0.0.16",
 		"ioredis": "^5.2.4",
 		"next": "13",
-		"next-seo": "^5.14.1",
+		"next-seo": "^5.15.0",
 		"next-themes": "^0.2.1",
 		"node-fetch": "^3.3.0",
 		"prop-types": "^15.8.1",

@@ -12,12 +12,12 @@
 		"@emotion/cache": "^11.10.5",
 		"@emotion/server": "^11.10.0",
 		"@nextui-org/react": "^1.0.0-beta.10",
-		"axios": "^1.1.3",
+		"axios": "^1.2.1",
 		"core-js-pure": "^3.26.1",
 		"critters": "^0.0.16",
 		"ioredis": "^5.2.4",
 		"next": "13",
-		"next-seo": "^5.14.1",
+		"next-seo": "^5.15.0",
 		"next-themes": "^0.2.1",
 		"node-fetch": "^3.3.0",
 		"prop-types": "^15.8.1",
@@ -27,14 +27,14 @@
 		"react-toastify": "^9.1.1",
 		"sharp": "^0.31.2",
 		"websocket": "^1.0.34",
-		"zustand": "^4.1.4"
+		"zustand": "^4.1.5"
 	},
 	"devDependencies": {
-		"@types/node": "^18.11.9",
-		"@types/react": "^18.0.25",
+		"@types/node": "^18.11.12",
+		"@types/react": "^18.0.26",
 		"@types/websocket": "^1.0.5",
-		"eslint": "8.27.0",
-		"eslint-config-next": "13.0.3",
-		"typescript": "^4.8.4"
+		"eslint": "8.29.0",
+		"eslint-config-next": "13.0.6",
+		"typescript": "^4.9.3"
 	}
 }

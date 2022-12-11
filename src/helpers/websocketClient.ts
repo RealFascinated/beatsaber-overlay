@@ -9,14 +9,18 @@ const ip = useSettingsStore.getState().socketAddr || "localhost";
 const updatePlayerData = usePlayerDataStore.getState().updatePlayerData;
 
 let cutData: any = [];
-cutData.saberA = {
-	count: [0, 0, 0],
-	totalScore: [0, 0, 0],
-};
-cutData.saberB = {
-	count: [0, 0, 0],
-	totalScore: [0, 0, 0],
-};
+resetCutState();
+
+function resetCutState() {
+	cutData.saberA = {
+		count: [0, 0, 0],
+		totalScore: [0, 0, 0],
+	};
+	cutData.saberB = {
+		count: [0, 0, 0],
+		totalScore: [0, 0, 0],
+	};
+}
 
 export function connectClient(attempt: number = 1) {
 	const client = new W3CWebSocket(`ws://${ip}:6557/socket`);
@@ -70,14 +74,7 @@ const handlers: any = {
 				length,
 			} = data.status.beatmap;
 			state.reset();
-			cutData.saberA = {
-				count: [0, 0, 0],
-				totalScore: [0, 0, 0],
-			};
-			cutData.saberB = {
-				count: [0, 0, 0],
-				totalScore: [0, 0, 0],
-			};
+			resetCutState();
 			state.setInSong(true);
 			state.setCombo(data.status.performance.combo);
 			useDataStore.setState({ loadedDuringSong: true });
@@ -183,14 +180,7 @@ const handlers: any = {
 	finished: () => {
 		const state = useSongDataStore.getState();
 		state.reset();
-		cutData.saberA = {
-			count: [0, 0, 0],
-			totalScore: [0, 0, 0],
-		};
-		cutData.saberB = {
-			count: [0, 0, 0],
-			totalScore: [0, 0, 0],
-		};
+		resetCutState();
 		state.setInSong(false);
 		updatePlayerData();
 		useDataStore.setState({ loadedDuringSong: false });
@@ -198,14 +188,7 @@ const handlers: any = {
 	menu: () => {
 		const state = useSongDataStore.getState();
 		state.reset();
-		cutData.saberA = {
-			count: [0, 0, 0],
-			totalScore: [0, 0, 0],
-		};
-		cutData.saberB = {
-			count: [0, 0, 0],
-			totalScore: [0, 0, 0],
-		};
+		resetCutState();
 		state.setInSong(false);
 		updatePlayerData();
 		useDataStore.setState({ loadedDuringSong: false });

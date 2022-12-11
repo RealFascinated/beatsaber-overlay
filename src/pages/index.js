@@ -167,8 +167,12 @@ export default class Home extends Component {
 								<Text h1 css={{ color: "$text" }}>
 									BeatSaber Overlay
 								</Text>
-								<Text h4 css={{ color: "$text" }}>
+								<Text h4 css={{ color: "$text", marginTop: "-15px" }}>
 									Welcome to the Setup panel
+								</Text>
+
+								<Text h5 css={{ color: "$text" }}>
+									Now featuring BeatLeader score modifier support!
 								</Text>
 							</div>
 						</Grid>

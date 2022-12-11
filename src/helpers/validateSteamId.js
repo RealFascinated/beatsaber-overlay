@@ -25,7 +25,7 @@ export async function isValidSteamId(steamId) {
 	const before = Date.now();
 	let valid = false;
 	for (const url of TO_CHECK) {
-		const isValid = await Utils.checkLeaderboard(url, steamId);
+		const isValid = await Utils.isLeaderboardValid(url, steamId);
 		if (isValid) {
 			valid = true;
 			break;

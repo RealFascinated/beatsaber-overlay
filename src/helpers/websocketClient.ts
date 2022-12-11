@@ -136,10 +136,10 @@ const handlers: any = {
 		if (finalScore == 0) {
 			finalScore = state.currentScore;
 		}
-		const percent = relativeScore * 100;
+		const percent = relativeScore;
 
 		state.setCurrentScore(finalScore);
-		state.setPercent(percent);
+		state.setPercent(percent * 100);
 		state.setCombo(data.status.performance.combo);
 		state.setPp(percent);
 	},

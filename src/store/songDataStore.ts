@@ -105,7 +105,6 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		const mapLeaderboardData = await Utils.getWebsiteApi(
 			leaderboardType
 		).getMapLeaderboardData(mapHash, mapDiff, characteristic);
-		console.log(mapLeaderboardData);
 
 		const mapData = await axios.get(
 			`${env("SITE_URL")}/api/beatsaver/map?hash=${mapHash}`
@@ -118,7 +117,10 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		set({
 			isLoading: false,
 			hasError: hasError,
-			mapLeaderboardData: mapLeaderboardData,
+			mapLeaderboardData: {
+				stars: mapLeaderboardData.stars,
+				modifiers: mapLeaderboardData.modifiers,
+			},
 			bsr: bsr,
 			mapArt: mapArt,
 			songDifficulty: mapDiff,

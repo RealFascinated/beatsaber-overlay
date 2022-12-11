@@ -18,7 +18,7 @@ export default class Utils {
 		window.open(url, "_blank");
 	}
 
-	static async checkLeaderboard(url, steamId) {
+	static async isLeaderboardValid(url, steamId) {
 		const data = await fetch(url.replace("%s", steamId), {
 			headers: {
 				"X-Requested-With": "BeatSaber Overlay",
@@ -50,6 +50,7 @@ export default class Utils {
 			useSongDataStore.getState().mapLeaderboardData.modifiers;
 		let bonus = 0;
 
+		// No Fail
 		if (
 			songMods.noFail == true &&
 			modifierMulipliers.nf < 0 &&
@@ -58,8 +59,12 @@ export default class Utils {
 			bonus -= modifierMulipliers.nf;
 		}
 
+		// Speed Modifiers
 		if (songMods.songSpeed != "Normal") {
-			if (songMods.songSpeed == "FasterSong" && modifierMulipliers.fs > 0) {
+			if (songMods.songSpeed == "SuperSlow" && modifierMulipliers.ss > 0) {
+				bonus -= modifierMulipliers.ss;
+			}
+			if (songMods.songSpeed == "Faster" && modifierMulipliers.fs > 0) {
 				bonus += modifierMulipliers.fs;
 			}
 			if (songMods.songSpeed == "SuperFast" && modifierMulipliers.sf > 0) {
@@ -67,21 +72,31 @@ export default class Utils {
 			}
 		}
 
+		// Disappearing Arrows
 		if (songMods.disappearingArrows == true && modifierMulipliers.da > 0) {
 			bonus += modifierMulipliers.da;
 		}
 
+		// Ghost Notes
 		if (songMods.ghostNotes == true && modifierMulipliers.gn > 0) {
 			toAdd += modifierMulipliers.gn;
 		}
 
+		// No Arrows
 		if (songMods.noArrows == true && modifierMulipliers.na < 0) {
 			bonus -= modifierMulipliers.na;
 		}
 
+		// No Bombs
 		if (songMods.noBombs == true && modifierMulipliers.nb < 0) {
 			bonus -= modifierMulipliers.nb;
 		}
+
+		// No Obstacles
+		if (songMods.obstacles == false && modifierMulipliers.no < 0) {
+			bonus -= modifierMulipliers.no;
+		}
+
 		return bonus;
 	}
 

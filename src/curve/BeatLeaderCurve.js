@@ -9,6 +9,6 @@ export function getBeatLeaderPP(acc, stars) {
 	if (stars === undefined || acc === undefined) {
 		return undefined;
 	}
-	const pp = curve(acc / 100, stars - 0.5) * (stars + 0.5) * 42;
+	const pp = curve(acc, stars - 0.5) * (stars + 0.5) * 42;
 	return Number.isNaN(pp) ? undefined : pp;
 }

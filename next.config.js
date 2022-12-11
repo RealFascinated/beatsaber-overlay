@@ -12,9 +12,9 @@ const nextConfig = {
 			"avatars.akamai.steamstatic.com",
 		],
 	},
-	experimental: {
-		optimizeCss: true,
-	},
+	// experimental: {
+	// 	optimizeCss: true,
+	// },
 };
 
 module.exports = nextConfig;

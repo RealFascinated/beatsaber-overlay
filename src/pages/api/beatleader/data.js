@@ -1,13 +1,8 @@
 import fetch from "node-fetch";
-import WebsiteTypes from "../../../../src/consts/LeaderboardType";
-import {
-	getValue,
-	setValue,
-	valueExists,
-} from "../../../../src/utils/redisUtils";
-import { diffToScoreSaberDiff } from "../../../../src/utils/scoreSaberUtils";
+import WebsiteTypes from "../../../consts/LeaderboardType";
+import { getValue, setValue, valueExists } from "../../../utils/redisUtils";
 
-const KEY = "SS_MAP_STAR_";
+const KEY = "BL_MAP_DATA_";
 
 /**
  *
@@ -16,7 +11,7 @@ const KEY = "SS_MAP_STAR_";
  * @returns
  */
 export default async function handler(req, res) {
-	if (!req.query.hash) {
+	if (!req.query.hash || !req.query.difficulty || !req.query.characteristic) {
 		return res.status(404).json({
 			status: 404,
 			message: "Invalid request",
@@ -30,21 +25,20 @@ export default async function handler(req, res) {
 	const exists = await valueExists(key);
 	if (exists) {
 		const data = await getValue(key);
+		const json = JSON.parse(data);
 		res.setHeader("Cache-Status", "hit");
 
 		return res.status(200).json({
 			status: "OK",
-			stars: Number.parseFloat(data),
 			difficulty: difficulty,
+			stars: json.stars,
+			modifiers: json.modifiers,
 		});
 	}
 
 	const before = Date.now();
 	const data = await fetch(
-		WebsiteTypes.ScoreSaber.ApiUrl.MapData.replace("%h", mapHash).replace(
-			"%d",
-			diffToScoreSaberDiff(difficulty)
-		),
+		WebsiteTypes.BeatLeader.ApiUrl.MapData.replace("%h", mapHash),
 		{
 			headers: {
 				"X-Requested-With": "BeatSaber Overlay",
@@ -58,22 +52,40 @@ export default async function handler(req, res) {
 		});
 	}
 	const json = await data.json();
-	let starCount = json.stars;
+	let starCount = undefined;
+	let modifiers = undefined;
+	for (const diff of json.difficulties) {
+		if (
+			diff.difficultyName === difficulty &&
+			diff.modeName === characteristic
+		) {
+			starCount = diff.stars;
+			modifiers = diff.modifierValues;
+		}
+	}
 	if (starCount === undefined) {
 		return res.status(404).json({
 			status: 404,
 			message: "Unknown Map Hash",
 		});
 	}
-	await setValue(key, starCount);
+	await setValue(
+		key,
+		JSON.stringify({
+			stars: starCount,
+			modifiers: modifiers,
+		})
+	);
 	console.log(
-		`[Cache]: Cached SS Star Count for hash ${mapHash} in ${
+		`[Cache]: Cached BL Star Count for hash ${mapHash} in ${
 			Date.now() - before
 		}ms`
 	);
 	res.setHeader("Cache-Status", "miss");
 	return res.status(200).json({
 		status: "OK",
+		difficulty: difficulty,
 		stars: starCount,
+		modifiers: modifiers,
 	});
 }

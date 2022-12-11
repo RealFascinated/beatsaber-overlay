@@ -77,6 +77,7 @@ const handlers: any = {
 			resetCutState();
 			state.setInSong(true);
 			state.setCombo(data.status.performance.combo);
+			state.setModifiers(data.status.mod);
 			useDataStore.setState({ loadedDuringSong: true });
 
 			const { score, relativeScore } = data.status.performance;
@@ -114,15 +115,9 @@ const handlers: any = {
 		} = data.status.beatmap;
 
 		state.reset();
-		cutData.saberA = {
-			count: [0, 0, 0],
-			totalScore: [0, 0, 0],
-		};
-		cutData.saberB = {
-			count: [0, 0, 0],
-			totalScore: [0, 0, 0],
-		};
+		resetCutState();
 		state.setInSong(true);
+		state.setModifiers(data.status.mod);
 		state.updateMapData(
 			getMapHashFromLevelId(levelId),
 			difficultyEnum,

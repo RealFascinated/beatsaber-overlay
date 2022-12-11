@@ -22,7 +22,6 @@ Need help? Feel free to message me at: Fascinated#4719
 
 ## Todo
 
-- Make BeatLeader pp count check for modifiers
 - Add toggle for showing pp
 - Change the song time to a circular style in the song art
 

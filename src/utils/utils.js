@@ -1,6 +1,7 @@
 import { default as LeaderboardType } from "../consts/LeaderboardType";
 import { getBeatLeaderPP } from "../curve/BeatLeaderCurve";
 import { getScoreSaberPP } from "../curve/ScoreSaberCurve";
+import { useSongDataStore } from "../store/songDataStore";
 
 export default class Utils {
 	/**
@@ -35,12 +36,53 @@ export default class Utils {
 			return undefined;
 		}
 		if (type === "BeatLeader") {
-			return getBeatLeaderPP(acc, stars);
+			return getBeatLeaderPP(acc, stars) * (1 + this.calculateModifierBonus());
 		}
 		if (type === "ScoreSaber") {
 			return getScoreSaberPP(acc, stars);
 		}
 		return undefined;
+	}
+
+	static calculateModifierBonus() {
+		const songMods = useSongDataStore.getState().songModifiers;
+		const modifierMulipliers =
+			useSongDataStore.getState().mapLeaderboardData.modifiers;
+		let bonus = 0;
+
+		if (
+			songMods.noFail == true &&
+			modifierMulipliers.nf < 0 &&
+			useSongDataStore.getState().failed
+		) {
+			bonus -= modifierMulipliers.nf;
+		}
+
+		if (songMods.songSpeed != "Normal") {
+			if (songMods.songSpeed == "FasterSong" && modifierMulipliers.fs > 0) {
+				bonus += modifierMulipliers.fs;
+			}
+			if (songMods.songSpeed == "SuperFast" && modifierMulipliers.sf > 0) {
+				bonus += modifierMulipliers.sf;
+			}
+		}
+
+		if (songMods.disappearingArrows == true && modifierMulipliers.da > 0) {
+			bonus += modifierMulipliers.da;
+		}
+
+		if (songMods.ghostNotes == true && modifierMulipliers.gn > 0) {
+			toAdd += modifierMulipliers.gn;
+		}
+
+		if (songMods.noArrows == true && modifierMulipliers.na < 0) {
+			bonus -= modifierMulipliers.na;
+		}
+
+		if (songMods.noBombs == true && modifierMulipliers.nb < 0) {
+			bonus -= modifierMulipliers.nb;
+		}
+		return bonus;
 	}
 
 	static base64ToArrayBuffer(base64) {

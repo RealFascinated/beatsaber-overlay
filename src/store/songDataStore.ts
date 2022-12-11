@@ -12,7 +12,11 @@ interface SongDataState {
 	songSubTitle: string;
 	songLength: number;
 	songDifficulty: string;
-	mapStarCount: number;
+	songModifiers: Object;
+	mapLeaderboardData: {
+		stars: Number;
+		modifiers: Object;
+	};
 	mapArt: string;
 	bsr: string;
 
@@ -50,6 +54,7 @@ interface SongDataState {
 	setPp: (percent: number) => void;
 	setInSong: (isInSong: boolean) => void;
 	setSaberData: (saberType: string, cutData: any) => void;
+	setModifiers: (modifiers: Map<string, object>) => void;
 }
 
 export const useSongDataStore = create<SongDataState>()((set) => ({
@@ -60,7 +65,11 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 	songSubTitle: "",
 	songLength: 0,
 	songDifficulty: "",
-	mapStarCount: 0,
+	songModifiers: {},
+	mapLeaderboardData: {
+		stars: 0,
+		modifiers: {},
+	},
 	mapArt: "",
 	bsr: "",
 
@@ -93,11 +102,10 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		let hasError = false;
 		const leaderboardType = useSettingsStore.getState().leaderboardType;
 
-		const mapStars = await Utils.getWebsiteApi(leaderboardType).getMapStarCount(
-			mapHash,
-			mapDiff,
-			characteristic
-		);
+		const mapLeaderboardData = await Utils.getWebsiteApi(
+			leaderboardType
+		).getMapLeaderboardData(mapHash, mapDiff, characteristic);
+		console.log(mapLeaderboardData);
 
 		const mapData = await axios.get(
 			`${env("SITE_URL")}/api/beatsaver/map?hash=${mapHash}`
@@ -110,7 +118,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		set({
 			isLoading: false,
 			hasError: hasError,
-			mapStarCount: mapStars,
+			mapLeaderboardData: mapLeaderboardData,
 			bsr: bsr,
 			mapArt: mapArt,
 			songDifficulty: mapDiff,
@@ -150,7 +158,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 
 	setPp: (percent: number) => {
 		const leaderboardType = useSettingsStore.getState().leaderboardType;
-		const mapStarCount = useSongDataStore.getState().mapStarCount;
+		const mapStarCount = useSongDataStore.getState().mapLeaderboardData.stars;
 
 		let pp = Utils.calculatePP(mapStarCount, percent, leaderboardType);
 		if (pp === undefined) {
@@ -163,6 +171,10 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		set({ inSong: isInSong });
 	},
 
+	setModifiers(modifiers: Map<string, object>) {
+		set({ songModifiers: modifiers });
+	},
+
 	reset: () =>
 		set({
 			isLoading: true,
@@ -170,7 +182,11 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			songTitle: "",
 			songSubTitle: "",
 			songDifficulty: "",
-			mapStarCount: 0,
+			songModifiers: {},
+			mapLeaderboardData: {
+				stars: 0,
+				modifiers: {},
+			},
 			mapArt: "",
 			bsr: "",
 

@@ -19,7 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { NextSeo } from "next-seo";
 import NavBar from "../components/Navbar";
 import styles from "../styles/main.module.css";
-import Utils from "../utils/utils";
 
 export default class Home extends Component {
 	constructor(props) {
@@ -307,15 +306,11 @@ export default class Home extends Component {
 											marginTop: "10px",
 										}}
 									>
-										<Link
-											onPress={(event) => {
-												Utils.openInNewTab(
-													"https://github.com/RealFascinated/beatsaber-overlay"
-												);
-											}}
-										>
-											If you like this project and want to support it. Come
-											check out the project on GitHub!
+										<Link href="https://github.com/RealFascinated/beatsaber-overlay">
+											<a>
+												If you like this project and want to support it. Come
+												check out the project on GitHub!
+											</a>
 										</Link>
 									</Text>
 								</Card.Body>

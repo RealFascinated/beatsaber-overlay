@@ -13,7 +13,7 @@ const Avatar = (props) => {
 				alt={"Avatar image"}
 				loading="lazy"
 				placeholder="blur"
-				blurDataURL="https://cdn.fascinated.cc/IkQFyodbZv.jpg?raw=true"
+				blurDataURL="https://cdn.fascinated.cc/yb4fgdc1.jpg"
 			/>
 		</>
 	);

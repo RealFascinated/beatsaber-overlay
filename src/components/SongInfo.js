@@ -92,7 +92,7 @@ export default function SongInfo() {
 				src={mapArt}
 				loading="lazy"
 				placeholder="blur"
-				blurDataURL="https://cdn.fascinated.cc/IkQFyodbZv.jpg?raw=true"
+				blurDataURL="https://cdn.fascinated.cc/yb4fgdc1.jpg"
 			/>
 			<div className={styles.songInfo}>
 				<p className={styles.songInfoSongName}>

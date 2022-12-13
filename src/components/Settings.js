@@ -9,8 +9,7 @@ import {
 const Avatar = (props) => {
 	const { isDark } = useTheme();
 
-	const avatarUrl =
-		props.avatarUrl || "https://cdn.fascinated.cc/IkQFyodbZv.jpg?raw=true";
+	const avatarUrl = props.avatarUrl || "https://cdn.fascinated.cc/yb4fgdc1.jpg";
 
 	const handleChange = () => {
 		const nextTheme = isDark ? "light" : "dark";

@@ -30,11 +30,11 @@
 		"zustand": "^4.1.5"
 	},
 	"devDependencies": {
-		"@types/node": "^18.11.12",
+		"@types/node": "^18.11.13",
 		"@types/react": "^18.0.26",
 		"@types/websocket": "^1.0.5",
 		"eslint": "8.29.0",
 		"eslint-config-next": "13.0.6",
-		"typescript": "^4.9.3"
+		"typescript": "^4.9.4"
 	}
 }

@@ -30,7 +30,7 @@
 		"zustand": "^4.1.5"
 	},
 	"devDependencies": {
-		"@types/node": "^18.11.13",
+		"@types/node": "^18.11.14",
 		"@types/react": "^18.0.26",
 		"@types/websocket": "^1.0.5",
 		"eslint": "8.29.0",

@@ -42,9 +42,12 @@ function formatDiff(diff) {
 }
 
 export default function SongInfo() {
-	const [showSongInfo, shouldReplacePlayerInfoWithScore] = useSettingsStore(
-		(store) => [store.showSongInfo, store.shouldReplacePlayerInfoWithScore]
-	);
+	const [showSongInfo, shouldReplacePlayerInfoWithScore, songTimeHex] =
+		useSettingsStore((store) => [
+			store.showSongInfo,
+			store.shouldReplacePlayerInfoWithScore,
+			store.songTimeHex,
+		]);
 	const [
 		isLoading,
 		bsr,
@@ -117,7 +120,10 @@ export default function SongInfo() {
 					<div className={styles.songTimeBackground} />
 					<div
 						className={styles.songTime}
-						style={{ width: songTimerPercentage + "%" }}
+						style={{
+							width: songTimerPercentage + "%",
+							backgroundColor: "#" + songTimeHex,
+						}}
 					/>
 				</div>
 			</div>

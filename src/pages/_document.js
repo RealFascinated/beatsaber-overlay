@@ -37,8 +37,9 @@ class MyDocument extends Document {
 					/>
 
 					<script
-						defer={true}
-						src="https://analytics.fascinated.cc/ingress/4bc413fa-a126-4860-9a6a-22d10d5cf2fb/script.js"
+						defer
+						data-domain="bs-overlay.fascinated.cc"
+						src="https://analytics.fascinated.cc/js/script.js"
 					></script>
 				</Head>
 				<body>

@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 # Copy cached files
-COPY node_modules ./
+#COPY node_modules ./
 
 RUN npm i
 

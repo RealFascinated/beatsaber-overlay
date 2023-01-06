@@ -1,4 +1,5 @@
 import env from "@beam-australia/react-env";
+import axios from "axios";
 import { VARS } from "./EnvVars";
 
 const LeaderboardType = {
@@ -10,11 +11,10 @@ const LeaderboardType = {
 				"https://scoresaber.com/api/leaderboard/by-hash/%h/info?difficulty=%d",
 		},
 		async getMapLeaderboardData(mapHash, mapDiff, characteristic) {
-			const data = await fetch(
+			const response = await axios.get(
 				`/api/scoresaber/data?hash=${mapHash}&difficulty=${mapDiff}&characteristic=${characteristic}`
 			);
-			const json = await data.json();
-			return json || undefined;
+			return response.data || undefined;
 		},
 	},
 	BeatLeader: {
@@ -24,11 +24,10 @@ const LeaderboardType = {
 			MapData: "https://api.beatleader.xyz/map/hash/%h",
 		},
 		async getMapLeaderboardData(mapHash, mapDiff, characteristic) {
-			const data = await fetch(
+			const response = await axios.get(
 				`/api/beatleader/data?hash=${mapHash}&difficulty=${mapDiff}&characteristic=${characteristic}`
 			);
-			const json = await data.json();
-			return json || undefined;
+			return response.data || undefined;
 		},
 	},
 };

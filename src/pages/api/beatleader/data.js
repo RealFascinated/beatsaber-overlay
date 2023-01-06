@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import axios from "axios";
 import WebsiteTypes from "../../../consts/LeaderboardType";
 import { getValue, setValue, valueExists } from "../../../utils/redisUtils";
 
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
 	}
 
 	const before = Date.now();
-	const data = await fetch(
+	const reesponse = await axios.get(
 		WebsiteTypes.BeatLeader.ApiUrl.MapData.replace("%h", mapHash),
 		{
 			headers: {
@@ -45,13 +45,13 @@ export default async function handler(req, res) {
 			},
 		}
 	);
-	if (data.status === 404) {
+	if (reesponse.status === 404) {
 		return res.status(404).json({
 			status: 404,
 			message: "Unknown Map Hash",
 		});
 	}
-	const json = await data.json();
+	const json = reesponse.data;
 	let starCount = undefined;
 	let modifiers = undefined;
 	for (const diff of json.difficulties) {

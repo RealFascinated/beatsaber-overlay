@@ -1,4 +1,5 @@
 import env from "@beam-australia/react-env";
+import axios from "axios";
 import { VARS } from "../consts/EnvVars";
 import { BeatSaverMapData } from "../types/BeatSaverMapData";
 import { getValue, setValue, valueExists } from "../utils/redisUtils";
@@ -38,15 +39,15 @@ export async function getMapData(hash: string): Promise<MapData | undefined> {
 	}
 
 	const before = Date.now();
-	const data = await fetch(BEATSAVER_MAP_API.replace("%s", mapHash), {
+	const response = await axios.get(BEATSAVER_MAP_API.replace("%s", mapHash), {
 		headers: {
 			"X-Requested-With": "BeatSaber Overlay",
 		},
 	});
-	if (data.status === 404) {
+	if (response.status === 404) {
 		return undefined;
 	}
-	const jsonResponse = await data.json();
+	const jsonResponse = response.data;
 	const json = {
 		bsr: jsonResponse.id,
 		mapArt: getLatestMapArt(jsonResponse),

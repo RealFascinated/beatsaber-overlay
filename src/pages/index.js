@@ -16,6 +16,7 @@ import { Component } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import axios from "axios";
 import { NextSeo } from "next-seo";
 import NavBar from "../components/Navbar";
 import styles from "../styles/main.module.css";
@@ -122,8 +123,8 @@ export default class Home extends Component {
 			return this.setState({ avatarUrl: undefined });
 		}
 
-		const data = await fetch("/api/validateid?steamid=" + steamId);
-		const json = await data.json();
+		const response = await axios.get("/api/validateid?steamid=" + steamId);
+		const json = response.data;
 
 		if (json.message === "Valid") {
 			this.setState({

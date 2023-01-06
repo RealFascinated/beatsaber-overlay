@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import axios from "axios";
 import WebsiteTypes from "../../../consts/LeaderboardType";
 import { getValue, setValue, valueExists } from "../../../utils/redisUtils";
 import { diffToScoreSaberDiff } from "../../../utils/scoreSaberUtils";
@@ -36,7 +36,7 @@ export default async function handler(req, res) {
 	}
 
 	const before = Date.now();
-	const data = await fetch(
+	const response = await axios.get(
 		WebsiteTypes.ScoreSaber.ApiUrl.MapData.replace("%h", mapHash).replace(
 			"%d",
 			diffToScoreSaberDiff(difficulty)
@@ -47,13 +47,13 @@ export default async function handler(req, res) {
 			},
 		}
 	);
-	if (data.status === 404) {
+	if (response.status === 404) {
 		return res.status(404).json({
 			status: 404,
 			message: "Unknown Map Hash",
 		});
 	}
-	const json = await data.json();
+	const json = response.data;
 	let starCount = json.stars;
 	if (starCount === undefined) {
 		return res.status(404).json({

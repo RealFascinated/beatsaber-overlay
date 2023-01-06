@@ -1,3 +1,4 @@
+import axios from "axios";
 import { default as LeaderboardType } from "../consts/LeaderboardType";
 import { getBeatLeaderPP } from "../curve/BeatLeaderCurve";
 import { getScoreSaberPP } from "../curve/ScoreSaberCurve";
@@ -19,15 +20,15 @@ export default class Utils {
 	}
 
 	static async isLeaderboardValid(url, steamId) {
-		const data = await fetch(url.replace("%s", steamId), {
+		const response = await axios.get(url.replace("%s", steamId), {
 			headers: {
 				"X-Requested-With": "BeatSaber Overlay",
 			},
 		});
-		if (data.status === 429) {
+		if (response.status === 429) {
 			return true; // Just assume it's true is we are rate limited
 		}
-		const json = await data.json();
+		const json = response.data;
 		return !!json.pp;
 	}
 

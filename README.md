@@ -24,6 +24,7 @@ Need help? Feel free to message me at: Fascinated#4719
 
 - Add toggle for showing pp
 - Change the song time to a circular style in the song art
+- Add overall stream stats (avg acc, misses, highest combo)
 
 ## Getting started with developent
 

@@ -252,10 +252,10 @@
   resolved "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-13.1.1.tgz"
   integrity sha512-mVF0/3/5QAc5EGVnb8ll31nNvf3BWpPY4pBb84tk+BfQglWLqc5AC9q1Ht/YMWiEgs8ALNKEQ3GQnbY0bJF2Gg==
 
-"@nextui-org/react@^1.0.0-beta.11":
-  version "1.0.0-beta.11"
-  resolved "https://registry.npmjs.org/@nextui-org/react/-/react-1.0.0-beta.11.tgz"
-  integrity sha512-vI4umNZfeO8OIgAik/VJiYjq7YHAfrX9GXjgNeBAGOSEngzLjSQtbLD9qMEKzfJ9NCD7+dAq3k9exkEmasi7qw==
+"@nextui-org/react@^1.0.0-beta.12":
+  version "1.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@nextui-org/react/-/react-1.0.0-beta.12.tgz#a9674cfd4bdeab3ed3e81339b56664730393fb71"
+  integrity sha512-ay6LrdRDwIFiZDvFH6nQjRuzLWE9yPQfI3W3qEfaY1I8e+CGYm0fc8RPSj3rrfZTa9OLeV+Defh/+/ysrwrloQ==
   dependencies:
     "@babel/runtime" "^7.20.1"
     "@react-aria/button" "3.6.2"
@@ -404,7 +404,7 @@
     "@react-types/shared" "^3.16.0"
     "@swc/helpers" "^0.4.14"
 
-"@react-aria/i18n@3.6.1", "@react-aria/i18n@^3.6.1":
+"@react-aria/i18n@3.6.1":
   version "3.6.1"
   resolved "https://registry.npmjs.org/@react-aria/i18n/-/i18n-3.6.1.tgz"
   integrity sha512-kAetWsj9HOqwaqLhmFU2udhZ+4QGGYkQOgGBJYdrB7GfLZQ1GPBlZjv3QFdkX4oSf/k9cFqgftxvVQQDYZLOew==
@@ -418,7 +418,7 @@
     "@react-aria/utils" "^3.14.0"
     "@react-types/shared" "^3.15.0"
 
-"@react-aria/i18n@^3.6.3":
+"@react-aria/i18n@^3.6.1", "@react-aria/i18n@^3.6.3":
   version "3.6.3"
   resolved "https://registry.npmjs.org/@react-aria/i18n/-/i18n-3.6.3.tgz"
   integrity sha512-cDWl8FXJIXsw/raWcThywBueCJ5ncoogq81wYVS6hfZVmSyncONIB3bwUL12cojmjX1VEP31sN0ujT/83QP95Q==
@@ -432,7 +432,7 @@
     "@react-types/shared" "^3.16.0"
     "@swc/helpers" "^0.4.14"
 
-"@react-aria/interactions@3.12.0", "@react-aria/interactions@^3.10.0", "@react-aria/interactions@^3.12.0":
+"@react-aria/interactions@3.12.0":
   version "3.12.0"
   resolved "https://registry.npmjs.org/@react-aria/interactions/-/interactions-3.12.0.tgz"
   integrity sha512-KcKurjPZwme9ggvGQjbjqZtZtuyXipTBVMHUah9a3+Dz7vXxhRg5vFaEdM79oQnNsrGFW5xS6SKBehl/JG6BMw==
@@ -441,7 +441,7 @@
     "@react-aria/utils" "^3.14.0"
     "@react-types/shared" "^3.15.0"
 
-"@react-aria/interactions@^3.13.1":
+"@react-aria/interactions@^3.10.0", "@react-aria/interactions@^3.12.0", "@react-aria/interactions@^3.13.1":
   version "3.13.1"
   resolved "https://registry.npmjs.org/@react-aria/interactions/-/interactions-3.13.1.tgz"
   integrity sha512-WCvfZOi1hhussVTHxVq76OR48ry13Zvp9U5hmuQufyxIUlf4hOvDk4/cbK4o4JiCs8X7C7SRzcwFM34M4NHzmg==
@@ -543,14 +543,14 @@
     "@react-types/shared" "^3.16.0"
     "@swc/helpers" "^0.4.14"
 
-"@react-aria/ssr@3.3.0", "@react-aria/ssr@^3.3.0":
+"@react-aria/ssr@3.3.0":
   version "3.3.0"
   resolved "https://registry.npmjs.org/@react-aria/ssr/-/ssr-3.3.0.tgz"
   integrity sha512-yNqUDuOVZIUGP81R87BJVi/ZUZp/nYOBXbPsRe7oltJOfErQZD+UezMpw4vM2KRz18cURffvmC8tJ6JTeyDtaQ==
   dependencies:
     "@babel/runtime" "^7.6.2"
 
-"@react-aria/ssr@^3.4.1":
+"@react-aria/ssr@^3.3.0", "@react-aria/ssr@^3.4.1":
   version "3.4.1"
   resolved "https://registry.npmjs.org/@react-aria/ssr/-/ssr-3.4.1.tgz"
   integrity sha512-NmhoilMDyIfQiOSdQgxpVH2tC2u85Y0mVijtBNbI9kcDYLEiW/r6vKYVKtkyU+C4qobXhGMPfZ70PTc0lysSVA==
@@ -591,7 +591,7 @@
     "@react-types/switch" "^3.2.5"
     "@swc/helpers" "^0.4.14"
 
-"@react-aria/utils@3.14.0", "@react-aria/utils@^3.13.2", "@react-aria/utils@^3.14.0":
+"@react-aria/utils@3.14.0":
   version "3.14.0"
   resolved "https://registry.npmjs.org/@react-aria/utils/-/utils-3.14.0.tgz"
   integrity sha512-DHgmwNBNEhnb6DEYYAfbt99wprBqJJOBBeIpQ2g3+pxwlw4BZ+v4Qr+rDD0ZibWV0mYzt8zOhZ9StpId7iTF0Q==
@@ -602,7 +602,7 @@
     "@react-types/shared" "^3.15.0"
     clsx "^1.1.1"
 
-"@react-aria/utils@^3.14.2":
+"@react-aria/utils@^3.13.2", "@react-aria/utils@^3.14.0", "@react-aria/utils@^3.14.2":
   version "3.14.2"
   resolved "https://registry.npmjs.org/@react-aria/utils/-/utils-3.14.2.tgz"
   integrity sha512-3nr5gsAf/J/W+6Tu4NF3Q7m+1mXjfpXESh7TPa6UR6v3tVDTsJVMrITg2BkHN1jM8xELcl2ZxyUffOWqOXzWuA==
@@ -635,7 +635,7 @@
     "@react-types/checkbox" "^3.4.0"
     "@react-types/shared" "^3.15.0"
 
-"@react-stately/collections@3.4.4", "@react-stately/collections@^3.4.4":
+"@react-stately/collections@3.4.4":
   version "3.4.4"
   resolved "https://registry.npmjs.org/@react-stately/collections/-/collections-3.4.4.tgz"
   integrity sha512-gryUYCe6uzqE0ea5frTwOxOPpx/6Z42PRk7KetOh3ddN3Ts0j8XQP08jP1IB/7BC1QidrkHWvDCqGHxRiEjiIg==
@@ -643,7 +643,7 @@
     "@babel/runtime" "^7.6.2"
     "@react-types/shared" "^3.15.0"
 
-"@react-stately/collections@^3.5.1":
+"@react-stately/collections@^3.4.4", "@react-stately/collections@^3.5.1":
   version "3.5.1"
   resolved "https://registry.npmjs.org/@react-stately/collections/-/collections-3.5.1.tgz"
   integrity sha512-egzVrZC5eFc5RJBpqUkzxd2aJOHZ2T1o7horEi8tAWZkg4YI+AmKrqela4ijVrrB9l1GO9z06qPT1UoPkFrC1w==
@@ -722,7 +722,7 @@
     "@react-types/shared" "^3.15.0"
     "@react-types/table" "^3.3.2"
 
-"@react-stately/toggle@3.4.2", "@react-stately/toggle@^3.4.2":
+"@react-stately/toggle@3.4.2":
   version "3.4.2"
   resolved "https://registry.npmjs.org/@react-stately/toggle/-/toggle-3.4.2.tgz"
   integrity sha512-+pO13Ap/tj4optu6VjQrEAaAoZvJAEwarMUaZvrkc0kdvMTNPdiT/2vhN32yvsSW0ssuFqToa3jMrTylCbpo8w==
@@ -732,7 +732,7 @@
     "@react-types/checkbox" "^3.4.0"
     "@react-types/shared" "^3.15.0"
 
-"@react-stately/toggle@^3.4.4":
+"@react-stately/toggle@^3.4.2", "@react-stately/toggle@^3.4.4":
   version "3.4.4"
   resolved "https://registry.npmjs.org/@react-stately/toggle/-/toggle-3.4.4.tgz"
   integrity sha512-OwVJpd2M7P7fekTWpl3TUdD3Brq+Z/xElOCJYP5QuVytXCa5seKsk40YPld8JQnA5dRKojpbUxMDOJpb6hOOfw==
@@ -776,14 +776,14 @@
   dependencies:
     "@react-types/shared" "^3.16.0"
 
-"@react-types/checkbox@3.4.0", "@react-types/checkbox@^3.4.0":
+"@react-types/checkbox@3.4.0":
   version "3.4.0"
   resolved "https://registry.npmjs.org/@react-types/checkbox/-/checkbox-3.4.0.tgz"
   integrity sha512-ZDqbtAYWWSGPjL4ydinaWHrD65Qft9yEGA6BCKQTxdJCgxiXxgGkA3pI7Sxwk+OulR+O0CYJ1JROExM9cSJyyQ==
   dependencies:
     "@react-types/shared" "^3.15.0"
 
-"@react-types/checkbox@^3.4.1":
+"@react-types/checkbox@^3.4.0", "@react-types/checkbox@^3.4.1":
   version "3.4.1"
   resolved "https://registry.npmjs.org/@react-types/checkbox/-/checkbox-3.4.1.tgz"
   integrity sha512-kDMpy9SntjGQ7x00m5zmW8GENPouOtyiDgiEDKsPXUr2iYqHsNtricqVyG9S9+6hqpzuu8BzTcvZamc/xYjzlg==
@@ -798,14 +798,14 @@
     "@react-types/overlays" "^3.6.5"
     "@react-types/shared" "^3.16.0"
 
-"@react-types/grid@3.1.4", "@react-types/grid@^3.1.4":
+"@react-types/grid@3.1.4":
   version "3.1.4"
   resolved "https://registry.npmjs.org/@react-types/grid/-/grid-3.1.4.tgz"
   integrity sha512-i9f2VEnlex5BFV/AdSUGg71xoukn2i/XT2VLxUXUagy23gFxKJk9Xr3BT9bw+pRRLPwm/Ib+h9ELUdgi8lUAKA==
   dependencies:
     "@react-types/shared" "^3.15.0"
 
-"@react-types/grid@^3.1.5":
+"@react-types/grid@^3.1.4", "@react-types/grid@^3.1.5":
   version "3.1.5"
   resolved "https://registry.npmjs.org/@react-types/grid/-/grid-3.1.5.tgz"
   integrity sha512-KiEywsOJ+wdzLmJerAKEMADdvdItaLfhdo3bFfn1lgNUaKiNDJctDYWlhOYsRePf7MIrzoZuXEFnJj45jfpiOQ==
@@ -835,14 +835,14 @@
     "@react-types/overlays" "^3.6.4"
     "@react-types/shared" "^3.15.0"
 
-"@react-types/overlays@3.6.4", "@react-types/overlays@^3.6.4":
+"@react-types/overlays@3.6.4":
   version "3.6.4"
   resolved "https://registry.npmjs.org/@react-types/overlays/-/overlays-3.6.4.tgz"
   integrity sha512-REC4IyDUHS5WhwxMxcvTo+LdrvlSYpJKjyYkPFtJoDBpM3gmXfakTY3KW6K5eZkFv3TnmXjDF9Q2yboEk2u6WQ==
   dependencies:
     "@react-types/shared" "^3.15.0"
 
-"@react-types/overlays@^3.6.5":
+"@react-types/overlays@^3.6.4", "@react-types/overlays@^3.6.5":
   version "3.6.5"
   resolved "https://registry.npmjs.org/@react-types/overlays/-/overlays-3.6.5.tgz"
   integrity sha512-IeWcF+YTucCYYHagNh8fZLH6R4YUONO1VHY57WJyIHwMy0qgEaKSQCwq72VO1fQJ0ySZgOgm31FniOyKkg6+eQ==
@@ -856,12 +856,12 @@
   dependencies:
     "@react-types/shared" "^3.16.0"
 
-"@react-types/shared@3.15.0", "@react-types/shared@^3.14.0", "@react-types/shared@^3.15.0":
+"@react-types/shared@3.15.0":
   version "3.15.0"
   resolved "https://registry.npmjs.org/@react-types/shared/-/shared-3.15.0.tgz"
   integrity sha512-hwuE4BmgswqP+HRDSLMj7DcnYOCCK+ZRuKnc9AVhXS4LBrwRSkdUkNvXhgvqF5tav7IqTpG9pBYMR9wedehuhA==
 
-"@react-types/shared@^3.16.0":
+"@react-types/shared@^3.14.0", "@react-types/shared@^3.15.0", "@react-types/shared@^3.16.0":
   version "3.16.0"
   resolved "https://registry.npmjs.org/@react-types/shared/-/shared-3.16.0.tgz"
   integrity sha512-IQgU4oAEvMwylEvaTsr2XB1G/mAoMe1JFYLD6G78v++oAR9l8o9MQxZ0YSeANDkqTamb2gKezGoT1RxvSKjVxw==

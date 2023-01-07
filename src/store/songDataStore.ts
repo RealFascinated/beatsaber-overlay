@@ -106,13 +106,13 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			leaderboardType
 		).getMapLeaderboardData(mapHash, mapDiff, characteristic);
 
-		const mapData = await axios.get(
+		const response = await axios.get(
 			`${env("SITE_URL")}/api/beatsaver/map?hash=${mapHash}`
 		);
-		if (mapData.status !== 200) {
+		if (response.status !== 200) {
 			return set({ isLoading: false, hasError: hasError });
 		}
-		const { bsr, mapArt } = mapData.data.data;
+		const { bsr, mapArt } = response.data;
 
 		set({
 			isLoading: false,

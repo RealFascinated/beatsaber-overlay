@@ -112,7 +112,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		if (response.status !== 200) {
 			return set({ isLoading: false, hasError: hasError });
 		}
-		const { bsr, mapArt } = response.data;
+		const { bsr, mapArt } = response.data.data;
 
 		set({
 			isLoading: false,

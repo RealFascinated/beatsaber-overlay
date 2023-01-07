@@ -1,7 +1,5 @@
 # BeatSaber Overlay with real-time data from HttpSiraStatus
 
-[![Build Status](https://drone.fascinated.cc/api/badges/RealFascinated/beatsaber-overlay/status.svg)](https://drone.fascinated.cc/RealFascinated/beatsaber-overlay)
-
 The public url to view/use: <https://bs-overlay.fascinated.cc></br>
 Need help? Feel free to message me at: Fascinated#4719
 
@@ -17,8 +15,8 @@ Need help? Feel free to message me at: Fascinated#4719
 
 ## Preview
 
-![Overlay](https://cdn.fascinated.cc/mJcWZOnucG.png?raw=true)
-![Builder Menu](https://cdn.fascinated.cc/QwGTQLhJsq.png?raw=true)
+![Overlay](https://cdn.fascinated.cc/FKzlGmH9.png)
+![Builder Menu](https://cdn.fascinated.cc/wmwk2oIi.png)
 
 ## Todo
 

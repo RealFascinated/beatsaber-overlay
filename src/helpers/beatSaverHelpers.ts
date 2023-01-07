@@ -10,11 +10,7 @@ const BEATSAVER_MAP_API =
 const KEY = "BS_MAP_DATA_";
 
 function getLatestMapArt(data: BeatSaverMapData) {
-	let url: string | undefined = undefined;
-	for (const version of data.versions) {
-		url = version.coverURL;
-	}
-	return url;
+	return data.versions[data.versions.length - 1].coverURL;
 }
 
 type MapData = {

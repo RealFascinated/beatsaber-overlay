@@ -14,6 +14,7 @@ const Avatar = (props) => {
 				loading="lazy"
 				placeholder="blur"
 				blurDataURL="https://cdn.fascinated.cc/yb4fgdc1.jpg"
+				unoptimized
 			/>
 		</>
 	);

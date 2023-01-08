@@ -96,6 +96,7 @@ export default function SongInfo() {
 				loading="lazy"
 				placeholder="blur"
 				blurDataURL="https://cdn.fascinated.cc/yb4fgdc1.jpg"
+				unoptimized
 			/>
 			<div className={styles.songInfo}>
 				<p className={styles.songInfoSongName}>

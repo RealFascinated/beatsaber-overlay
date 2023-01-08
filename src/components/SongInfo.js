@@ -57,6 +57,7 @@ export default function SongInfo() {
 		songDifficulty,
 		currentSongTime,
 		songLength,
+		paused,
 	] = useSongDataStore((store) => [
 		store.isLoading,
 		store.bsr,
@@ -66,6 +67,7 @@ export default function SongInfo() {
 		store.songDifficulty,
 		store.currentSongTime,
 		store.songLength,
+		store.paused,
 	]);
 
 	if (!showSongInfo) {
@@ -97,6 +99,10 @@ export default function SongInfo() {
 				placeholder="blur"
 				blurDataURL="https://cdn.fascinated.cc/yb4fgdc1.jpg"
 				unoptimized
+				style={{
+					transition: "ease-in-out 100ms",
+					filter: paused ? "grayscale(1)" : "",
+				}}
 			/>
 			<div className={styles.songInfo}>
 				<p className={styles.songInfoSongName}>

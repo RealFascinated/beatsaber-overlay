@@ -1,6 +1,6 @@
 import env from "@beam-australia/react-env";
 import axios from "axios";
-import create from "zustand";
+import { create } from "zustand";
 import Utils from "../utils/utils";
 import { useSettingsStore } from "./overlaySettingsStore";
 

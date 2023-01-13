@@ -1,7 +1,3 @@
-stages:
-  - publish
-  - deploy
-
 publish:
   image: docker:latest
   stage: build
@@ -19,7 +15,6 @@ publish:
   only:
     - main
 
-
 deploy:
   image: alpine:latest
   stage: deploy
@@ -33,4 +28,4 @@ deploy:
     name: production
     url: https://bs-overlay.fascinated.cc
   only:
-    - master
+    - main

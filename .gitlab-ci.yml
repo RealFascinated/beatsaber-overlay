@@ -14,3 +14,11 @@ docker-build:
     - docker push "$CI_REGISTRY_IMAGE"
   only:
     - main
+
+deploy_staging:
+  stage: deploy
+  script:
+    - echo "Deploy to staging server"
+  environment:
+    name: staging
+    url: https://staging-bs-overlay.fascinated.cc

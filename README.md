@@ -1,7 +1,7 @@
 # BeatSaber Overlay with real-time data from HttpSiraStatus
 
 The project is on my [GitLab](https://git.fascinated.cc/Fascinated/beatsaber-overlay) now, but the repo will be kept in sync here. <br />
-The public url to view/use: <https://bs-overlay.fascinated.cc> <br />> e9a82f44a01b04fef6b7766a201c086c8d83eecf
+The public url to view/use: <https://bs-overlay.fascinated.cc> <br />
 Need help? Feel free to message me at: Fascinated#4719
 
 ## Usage

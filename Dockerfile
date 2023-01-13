@@ -31,7 +31,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN yarn build 
 
 # Production image, copy all the files and run next
-FROM node:19 AS runner
+FROM node:19-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV production

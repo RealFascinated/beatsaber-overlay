@@ -15,10 +15,12 @@ docker-build:
   only:
     - main
 
-deploy_staging:
+deploy:
+  image: alpine:latest
   stage: deploy
+  tags:
+    - deployment
   script:
-    - echo "Deploy to staging server"
-  environment:
-    name: staging
-    url: https://staging-bs-overlay.fascinated.cc
+    - chmod og= $ID_RSA
+    - apk update && apk add openssh-client
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "cd /home/overlay && docker compose pull && docker compose up -d"

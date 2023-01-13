@@ -6,7 +6,7 @@ Need help? Feel free to message me at: Fascinated#4719
 
 ## Usage
 
-Go to the [Wiki](wikis/Usage)
+Go to the [Wiki](https://git.fascinated.cc/Fascinated/beatsaber-overlay/-/wikis/Usage)
 
 ## Preview
 

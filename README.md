@@ -16,8 +16,8 @@ Need help? Feel free to message me at: Fascinated#4719
 
 ## Preview
 
-![Overlay](https://cdn.fascinated.cc/FKzlGmH9.png)
-![Builder Menu](https://cdn.fascinated.cc/wmwk2oIi.png)
+![Overlay](./static/overlay.png)
+![Builder Menu](./static/builder.png)
 
 ## Todo
 

@@ -6,13 +6,7 @@ Need help? Feel free to message me at: Fascinated#4719
 
 ## Usage
 
-- Install [HttpSiraStatus](https://github.com/denpadokei/HttpSiraStatus)
-- Go to <https://bs-overlay.fascinated.cc>
-- Set the values in the configuratator
-- Click on Open Overlay
-- Create a browser window in your streaming software of choice
-- Set the height to 1920 and width to 1080
-- Set the URL to the newly opened window in your browser
+Go to the [Wiki](wikis/Usage)
 
 ## Preview
 

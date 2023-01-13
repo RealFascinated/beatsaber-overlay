@@ -20,7 +20,7 @@ deploy:
   image: alpine:latest
   stage: deploy
   tags:
-    - deployment
+  #  - deployment
   script:
     - chmod og= $ID_RSA
     - apk update && apk add openssh-client

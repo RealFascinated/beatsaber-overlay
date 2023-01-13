@@ -3,6 +3,10 @@
 The public url to view/use: <https://bs-overlay.fascinated.cc></br>
 Need help? Feel free to message me at: Fascinated#4719
 
+# Notice
+This project has been migrated to my own GitLab server. The project will no longer be updated on here :)
+https://git.fascinated.cc/Fascinated/beatsaber-overlay
+
 ## Usage
 
 - Install [HttpSiraStatus](https://github.com/denpadokei/HttpSiraStatus)

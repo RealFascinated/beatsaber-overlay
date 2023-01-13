@@ -2,6 +2,9 @@ docker-build:
   # Official docker image.
   image: docker:latest
   stage: build
+  variables:
+    DOCKER_DRIVER: overlay
+
   services:
     - docker:dind
   before_script:

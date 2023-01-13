@@ -1,5 +1,8 @@
-docker-build:
-  # Official docker image.
+stages:
+  - publish
+  - deploy
+
+publish:
   image: docker:latest
   stage: build
   variables:

@@ -10,8 +10,8 @@ Go to the [Wiki](https://git.fascinated.cc/Fascinated/beatsaber-overlay/-/wikis/
 
 ## Preview
 
-![Overlay](./static/overlay.png)
-![Builder Menu](./static/builder.png)
+![Overlay](./assets/overlay.png)
+![Builder Menu](./assets/builder.png)
 
 ## Todo
 

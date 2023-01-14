@@ -12,6 +12,7 @@ interface SettingsState {
 	showCutStats: boolean;
 	shouldReplacePlayerInfoWithScore: boolean;
 	songTimeHex: string;
+	showPp: boolean;
 	setMounted: (isMounted: boolean) => void;
 	setOverlaySettings: (params: string) => void;
 }
@@ -27,6 +28,7 @@ export const useSettingsStore = create<SettingsState>()((set) => ({
 	showCutStats: false,
 	shouldReplacePlayerInfoWithScore: false,
 	songTimeHex: "FF0000",
+	showPp: true,
 
 	setMounted: (isMounted: boolean) => set(() => ({ mounted: isMounted })),
 	setOverlaySettings: (params: any) =>

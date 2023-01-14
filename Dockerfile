@@ -49,7 +49,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 COPY --from=builder --chown=nextjs:nodejs /app/public ./.next/static
 
-RUN yarn add -g @beam-australia/react-env
+RUN npm i -g @beam-australia/react-env
 
 RUN chown -R nextjs:nodejs /app
 

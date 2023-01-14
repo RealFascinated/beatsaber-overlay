@@ -4,7 +4,10 @@ import { useSongDataStore } from "../store/songDataStore";
 import styles from "../styles/scoreStats.module.css";
 
 export default function ScoreStats() {
-	const [showScoreInfo] = useSettingsStore((store) => [store.showScoreInfo]);
+	const [showScoreInfo, showPp] = useSettingsStore((store) => [
+		store.showScoreInfo,
+		store.showPp,
+	]);
 	const [percentage, currentScore, currentPP, combo, isLoading] =
 		useSongDataStore((store) => [
 			store.percentage,
@@ -40,7 +43,9 @@ export default function ScoreStats() {
 					<p>
 						{getFormattedScorePercent(percentage)} {percentage.toFixed(2)}%
 					</p>
-					{currentPP !== undefined ? <p>{currentPP.toFixed(0)}pp</p> : null}
+					{currentPP !== undefined && showPp ? (
+						<p>{currentPP.toFixed(0)}pp</p>
+					) : null}
 				</div>
 			</div>
 		</div>

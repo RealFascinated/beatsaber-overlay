@@ -1,24 +1,31 @@
-stages:
-  - First
-  - Second
-
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
   - workdir/
 
-First:
-  stage: First
-  image:
-    name: docker:latest
-    entrypoint: ["/bin/sh", "-c"]
+publish:
+  image: docker:latest
+  stage: build
+  variables:
+    DOCKER_DRIVER: overlay
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-  - mkdir -p workdir
-  - echo "asdf" > workdir/r.txt
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
+  only:
+    - main
 
-
-Second:
-  stage: Second
-  image: alpine
+deploy:
+  image: alpine:latest
+  stage: deploy
+  tags:
   script:
-  - cat workdir/r.txt
+    - chmod og= $ID_RSA
+    - apk update && apk add openssh-client
+    - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "cd /home/overlay && docker compose pull && docker compose up -d && docker image prune -f"
+  environment:
+    name: production
+    url: https://bs-overlay.fascinated.cc
+  only:
+    - main

@@ -1,7 +1,8 @@
-cache:
-  key: ${CI_COMMIT_REF_SLUG}
-  paths:
-  - workdir/
+# cache:
+#   key: ${CI_COMMIT_REF_SLUG}
+#   paths:
+#   - workdir/
+# for later?
 
 publish:
   image: docker:latest

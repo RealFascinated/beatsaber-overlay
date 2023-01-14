@@ -286,7 +286,7 @@ export default class Home extends Component {
 										size="md"
 									/>
 									<Spacer y={1.2} />
-									<Text>Show pp (The raw pp value if the map is ranked)</Text>
+									<Text>Show pp (The raw pp value of the current score)</Text>
 									<Switch
 										onChange={(event) =>
 											this.updateValue("showPp", event.target.checked)

@@ -40,6 +40,7 @@ export default class Home extends Component {
 				showSongInfo: false,
 				showCutStats: false,
 				shouldReplacePlayerInfoWithScore: false,
+				showPp: true,
 			},
 		};
 	}
@@ -282,6 +283,15 @@ export default class Home extends Component {
 											)
 										}
 										checked={this.state.values.shouldReplacePlayerInfoWithScore}
+										size="md"
+									/>
+									<Spacer y={1.2} />
+									<Text>Show pp (The raw pp value if the map is ranked)</Text>
+									<Switch
+										onChange={(event) =>
+											this.updateValue("showPp", event.target.checked)
+										}
+										checked={this.state.values.showPp}
 										size="md"
 									/>
 									<Spacer y={1.2} />

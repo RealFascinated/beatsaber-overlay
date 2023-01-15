@@ -295,7 +295,7 @@ export default class Home extends Component {
 										size="md"
 									/>
 									<Spacer y={1.2} />
-									<Text>Show pp (The raw pp value of the current score)</Text>
+									<Text>Show score raw pp (The raw pp value of the current score)</Text>
 									<Switch
 										onChange={(event) =>
 											this.updateValue("showPp", event.target.checked)

@@ -160,22 +160,31 @@ export default class Home extends Component {
 							}}
 							justify="center"
 						>
-							<div
-								style={{
-									textAlign: "center",
-								}}
-							>
-								<Text h1 css={{ color: "$text" }}>
-									BeatSaber Overlay
-								</Text>
-								<Text h4 css={{ color: "$text", marginTop: "-15px" }}>
-									Welcome to the Setup panel
-								</Text>
-
-								<Text h5 css={{ color: "$text" }}>
-									Now featuring BeatLeader score modifier support!
-								</Text>
-							</div>
+							<Container md>
+								<div
+									style={{
+										textAlign: "center",
+									}}
+								>
+									<Text h1 css={{ color: "$text" }}>
+										Overlay Builder
+									</Text>
+									<Text
+										p
+										css={{
+											color: "$text",
+											marginTop: "-15px",
+											fontSize: "23px",
+										}}
+									>
+										Elevate your Beat Saber streams with our overlay builder.
+										Customize and enhance your streams with real-time scores,
+										rankings, and leaderboard information. Stand out and attract
+										more viewers with our easy to use overlay builder for
+										ScoreSaber and BeatLeader!
+									</Text>
+								</div>
+							</Container>
 						</Grid>
 
 						<Grid xs={12} lg={9}>

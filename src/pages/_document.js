@@ -33,7 +33,7 @@ class MyDocument extends Document {
 					<meta name="theme-color" content={"#" + env(VARS.SITE_COLOR)} />
 					<meta
 						property="og:keywords"
-						content="BeatSaber,Overlay,OBS,Twitch,YouTube,BeatSaber Overlay,Github,"
+						content="BeatSaber, Overlay, OBS, Twitch, YouTube, BeatSaber Overlay, Github, Beat Saber overlay, ScoreSaber, BeatLeader, VR gaming, Twitch stream enhancement, Customizable overlay, Real-time scores, Rankings, Leaderboard information, Stream enhancement, Professional overlay, Easy to use overlay builder."
 					/>
 
 					<script

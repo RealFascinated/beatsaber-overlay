@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
 					url: env(VARS.SITE_URL),
 					title: env(VARS.SITE_NAME),
 					description: env(VARS.SITE_DESCRIPTION),
-					site_name: env(VARS.SITE_NAME),
+					siteName: env(VARS.SITE_NAME),
 					images: [
 						{
 							url: "https://cdn.fascinated.cc/0hher2nz.png",

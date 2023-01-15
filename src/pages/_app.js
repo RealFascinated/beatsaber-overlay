@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }) {
 		<>
 			<DefaultSeo
 				titleTemplate={`${env(VARS.SITE_NAME)} | %s`}
+				title={env(VARS.SITE_TITLE)}
 				description={env(VARS.SITE_DESCRIPTION)}
 				openGraph={{
 					url: env(VARS.SITE_URL),

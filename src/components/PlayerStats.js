@@ -39,7 +39,7 @@ const PlayerStats = () => {
 	if (isLoading) {
 		return (
 			<div className={styles.playerStatsContainer}>
-				<Loading size="lg" />
+				<Loading type="points" size="lg" />
 			</div>
 		);
 	}

@@ -15,8 +15,8 @@
 		"axios": "^1.2.2",
 		"core-js-pure": "^3.27.1",
 		"critters": "^0.0.16",
-		"ioredis": "^5.2.4",
-		"next": "^13.1.1",
+		"ioredis": "^5.2.5",
+		"next": "^13.1.2",
 		"next-seo": "^5.15.0",
 		"next-themes": "^0.2.1",
 		"prop-types": "^15.8.1",
@@ -26,13 +26,13 @@
 		"react-toastify": "^9.1.1",
 		"sharp": "^0.31.3",
 		"websocket": "^1.0.34",
-		"zustand": "^4.3.1"
+		"zustand": "^4.3.2"
 	},
 	"devDependencies": {
 		"@types/node": "^18.11.18",
 		"@types/react": "^18.0.26",
 		"@types/websocket": "^1.0.5",
-		"eslint": "8.31.0",
+		"eslint": "8.32.0",
 		"eslint-config-next": "13.1.2",
 		"typescript": "^4.9.4"
 	}

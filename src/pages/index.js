@@ -205,7 +205,7 @@ export default class Home extends Component {
 									<Spacer y={2} />
 									<Input
 										underlined
-										labelPlaceholder="Steam Id"
+										labelPlaceholder="Steam Id / Account Id (Oculus)"
 										initialValue=""
 										value={this.state.steamId}
 										onChange={async (event) => {
@@ -216,7 +216,7 @@ export default class Home extends Component {
 										}}
 									/>
 									<Text>
-										How to get steam id on{" "}
+										How to get account id on{" "}
 										<span>
 											<a href="https://cdn.fascinated.cc/f954sr22.mp4">
 												BeatLeader

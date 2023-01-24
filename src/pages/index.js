@@ -264,7 +264,15 @@ export default class Home extends Component {
 										checked={this.state.values.showPlayerStats}
 										size="md"
 									/>
-									<Spacer y={1.2} />
+									<Spacer y={1} />
+									<Text h4>
+										Settings below require{" "}
+										<span>
+											<a href="https://github.com/denpadokei/HttpSiraStatus/releases">
+												HttpSiraStatus
+											</a>
+										</span>
+									</Text>
 									<Text>
 										Show score info (Current swing values, total score, etc)
 									</Text>

@@ -216,7 +216,7 @@ export default class Home extends Component {
 										}}
 									/>
 									<Text>
-										How to get account id on{" "}
+										How to get your account id on{" "}
 										<span>
 											<a href="https://cdn.fascinated.cc/f954sr22.mp4">
 												BeatLeader

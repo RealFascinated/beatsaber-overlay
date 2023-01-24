@@ -72,7 +72,7 @@ function findPPModifier(acc, curve) {
 
 export function getScoreSaberPP(acc, stars) {
 	const ppValue = stars * starMultiplier;
-	const modifier = findPPModifier(acc, ppCurve);
+	const modifier = findPPModifier(acc * 100, ppCurve);
 
 	const finalPP = modifier * ppValue;
 	return Number.isNaN(finalPP) ? undefined : finalPP;

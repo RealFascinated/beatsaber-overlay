@@ -205,7 +205,7 @@ export default class Home extends Component {
 									<Spacer y={2} />
 									<Input
 										underlined
-										labelPlaceholder="Steam Id (NOT Username)"
+										labelPlaceholder="Steam Id"
 										initialValue=""
 										value={this.state.steamId}
 										onChange={async (event) => {
@@ -215,6 +215,20 @@ export default class Home extends Component {
 											this.updateStorage();
 										}}
 									/>
+									<Text>
+										How to get steam id on{" "}
+										<span>
+											<a href="https://cdn.fascinated.cc/f954sr22.mp4">
+												BeatLeader
+											</a>
+										</span>{" "}
+										or{" "}
+										<span>
+											<a href="https://cdn.fascinated.cc/uzehkvte.mp4">
+												ScoreSaber
+											</a>
+										</span>
+									</Text>
 									<Spacer y={1} />
 									<Text>Ranked leaderboard</Text>
 									<Radio.Group

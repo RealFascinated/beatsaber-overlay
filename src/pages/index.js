@@ -268,7 +268,7 @@ export default class Home extends Component {
 									<Text h4>
 										Settings below require{" "}
 										<span>
-											<a href="https://github.com/denpadokei/HttpSiraStatus/releases">
+											<a href="https://short.fascinated.cc/bs-overlay-httpsirastatus">
 												HttpSiraStatus
 											</a>
 										</span>

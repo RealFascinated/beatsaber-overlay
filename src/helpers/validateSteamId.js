@@ -4,15 +4,15 @@ import Utils from "../utils/utils";
 
 const KEY = "VALID_STEAM_ID_";
 const TO_CHECK = [
-	LeaderboardType.ScoreSaber.ApiUrl.PlayerData,
 	LeaderboardType.BeatLeader.ApiUrl.PlayerData,
+	LeaderboardType.ScoreSaber.ApiUrl.PlayerData,
 ];
 
 export async function isValidSteamId(steamId) {
 	if (!steamId) {
 		return false;
 	}
-	if (steamId.length !== 17) {
+	if (steamId.length < 15 && steamId.length > 20) {
 		return false;
 	}
 

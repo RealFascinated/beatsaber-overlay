@@ -5,6 +5,7 @@ import { usePlayerDataStore } from "../store/playerDataStore";
 import Avatar from "./Avatar";
 
 import { Loading } from "@nextui-org/react";
+import Image from "next/image";
 import { useSongDataStore } from "../store/songDataStore";
 import styles from "../styles/playerStats.module.css";
 
@@ -50,20 +51,36 @@ const PlayerStats = () => {
 				<Avatar url={avatar} />
 			</div>
 			<div className={styles.playerStats}>
-				<p>
-					{pp.toLocaleString("en-us", {
-						maximumFractionDigits: 2,
-						minimumFractionDigits: 2,
-					})}
-					pp{" "}
-					<span
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "row",
+					}}
+				>
+					<Image
+						width={36}
+						height={36}
+						src={
+							leaderboardType == "BeatLeader"
+								? "https://cdn.fascinated.cc/l5KDPanV.png"
+								: "https://cdn.fascinated.cc/Hc1eD7QY.png"
+						}
 						style={{
-							fontSize: "25px",
+							marginLeft: "-3px",
+						}}
+					></Image>
+					<p
+						style={{
+							marginLeft: "5px",
 						}}
 					>
-						({leaderboardType})
-					</span>
-				</p>
+						{pp.toLocaleString("en-us", {
+							maximumFractionDigits: 2,
+							minimumFractionDigits: 2,
+						})}
+						pp{" "}
+					</p>
+				</div>
 				<p>
 					#
 					{globalPos.toLocaleString("en-us", {

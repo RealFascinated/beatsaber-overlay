@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { getFormattedScorePercent } from "../helpers/map/mapHelpers";
 import { useSettingsStore } from "../store/overlaySettingsStore";
 import { useSongDataStore } from "../store/songDataStore";
@@ -25,6 +26,9 @@ export default function ScoreStats() {
 		return null;
 	}
 
+	const scoreSaberPP = currentPP?.scoreSaber;
+	const beatLeaderPP = currentPP?.beatLeader;
+
 	return (
 		<div className={styles.scoreStats}>
 			<p
@@ -43,8 +47,47 @@ export default function ScoreStats() {
 					<p>
 						{getFormattedScorePercent(percentage)} {percentage.toFixed(2)}%
 					</p>
-					{currentPP !== undefined && showPp ? (
-						<p>{currentPP.toFixed(0)}pp</p>
+					{scoreSaberPP !== undefined && showPp ? (
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "row",
+							}}
+						>
+							<Image
+								width={30}
+								height={30}
+								src="https://cdn.fascinated.cc/Hc1eD7QY.png"
+							></Image>
+							<p
+								style={{
+									marginLeft: "5px",
+								}}
+							>
+								{scoreSaberPP.toFixed(0)}pp
+							</p>
+						</div>
+					) : null}
+					{beatLeaderPP !== undefined && showPp ? (
+						<div
+							style={{
+								display: "flex",
+								flexDirection: "row",
+							}}
+						>
+							<Image
+								width={30}
+								height={30}
+								src="https://cdn.fascinated.cc/Wo9JRAfD.png"
+							></Image>
+							<p
+								style={{
+									marginLeft: "8px",
+								}}
+							>
+								{beatLeaderPP.toFixed(0)}pp
+							</p>
+						</div>
 					) : null}
 				</div>
 			</div>

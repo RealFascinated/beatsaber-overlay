@@ -2,7 +2,6 @@ import env from "@beam-australia/react-env";
 import axios from "axios";
 import { create } from "zustand";
 import Utils from "../utils/utils";
-import { useSettingsStore } from "./overlaySettingsStore";
 
 interface SongDataState {
 	isLoading: boolean;
@@ -14,8 +13,14 @@ interface SongDataState {
 	songDifficulty: string;
 	songModifiers: Object;
 	mapLeaderboardData: {
-		stars: Number;
-		modifiers: Object;
+		scoresaber: {
+			stars: Number | undefined;
+			modifiers: Object;
+		};
+		beatleader: {
+			stars: Number | undefined;
+			modifiers: Object;
+		};
 	};
 	mapArt: string;
 	bsr: string;
@@ -26,7 +31,10 @@ interface SongDataState {
 	currentScore: number;
 	percentage: number;
 	combo: number;
-	currentPP: number | undefined;
+	currentPP: {
+		scoreSaber: number | undefined;
+		beatLeader: number | undefined;
+	};
 	saberA: {
 		cutDistanceScore: number;
 		averagePreSwing: number;
@@ -67,8 +75,14 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 	songDifficulty: "",
 	songModifiers: {},
 	mapLeaderboardData: {
-		stars: 0,
-		modifiers: {},
+		scoresaber: {
+			stars: 0,
+			modifiers: {},
+		},
+		beatleader: {
+			stars: 0,
+			modifiers: {},
+		},
 	},
 	mapArt: "",
 	bsr: "",
@@ -79,7 +93,10 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 	currentScore: 0,
 	percentage: 100,
 	combo: 0,
-	currentPP: undefined,
+	currentPP: {
+		beatLeader: undefined,
+		scoreSaber: undefined,
+	},
 	saberA: {
 		cutDistanceScore: 0.0,
 		averagePreSwing: 0.0,
@@ -100,26 +117,35 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		songLength: number
 	) => {
 		let hasError = false;
-		const leaderboardType = useSettingsStore.getState().leaderboardType;
-
-		const mapLeaderboardData = await Utils.getWebsiteApi(
-			leaderboardType
+		//const leaderboardType = useSettingsStore.getState().leaderboardType;
+		const beatLeaderLeaderboardData = await Utils.getWebsiteApi(
+			"BeatLeader"
 		).getMapLeaderboardData(mapHash, mapDiff, characteristic);
 
-		const response = await axios.get(
+		const scoreSaberLeaderboardData = await Utils.getWebsiteApi(
+			"ScoreSaber"
+		).getMapLeaderboardData(mapHash, mapDiff, characteristic);
+
+		const mapDataresponse = await axios.get(
 			`${env("SITE_URL")}/api/beatsaver/map?hash=${mapHash}`
 		);
-		if (response.status !== 200) {
+		if (mapDataresponse.status !== 200) {
 			return set({ isLoading: false, hasError: hasError });
 		}
-		const { bsr, mapArt } = response.data.data;
+		const { bsr, mapArt } = mapDataresponse.data.data;
 
 		set({
 			isLoading: false,
 			hasError: hasError,
 			mapLeaderboardData: {
-				stars: mapLeaderboardData.stars,
-				modifiers: mapLeaderboardData.modifiers,
+				beatleader: {
+					stars: beatLeaderLeaderboardData.stars,
+					modifiers: beatLeaderLeaderboardData.modifiers,
+				},
+				scoresaber: {
+					stars: scoreSaberLeaderboardData.stars,
+					modifiers: scoreSaberLeaderboardData.modifiers,
+				},
 			},
 			bsr: bsr,
 			mapArt: mapArt,
@@ -159,14 +185,32 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 	},
 
 	setPp: (percent: number) => {
-		const leaderboardType = useSettingsStore.getState().leaderboardType;
-		const mapStarCount = useSongDataStore.getState().mapLeaderboardData.stars;
+		const scoreSaberMapStarCount =
+			useSongDataStore.getState().mapLeaderboardData.scoresaber.stars;
+		let scoreSaberPP = Utils.calculatePP(
+			scoreSaberMapStarCount,
+			percent,
+			"ScoreSaber"
+		);
 
-		let pp = Utils.calculatePP(mapStarCount, percent, leaderboardType);
-		if (pp === undefined) {
-			return;
-		}
-		set({ currentPP: pp });
+		const beatLeaderMapStarCount =
+			useSongDataStore.getState().mapLeaderboardData.beatleader.stars;
+		let beatLeaderPP = Utils.calculatePP(
+			beatLeaderMapStarCount,
+			percent,
+			"BeatLeader"
+		);
+
+		const lastSSPP = useSongDataStore.getState().currentPP?.scoreSaber;
+		const lastBLPP = useSongDataStore.getState().currentPP?.beatLeader;
+
+		// undefined is returned if the curve ate shit (BL one does that if the current % is too high).
+		set({
+			currentPP: {
+				beatLeader: beatLeaderPP == undefined ? lastBLPP : beatLeaderPP,
+				scoreSaber: scoreSaberPP == undefined ? lastSSPP : scoreSaberPP,
+			},
+		});
 	},
 
 	setInSong: (isInSong: boolean) => {
@@ -186,8 +230,14 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			songDifficulty: "",
 			songModifiers: {},
 			mapLeaderboardData: {
-				stars: 0,
-				modifiers: {},
+				scoresaber: {
+					stars: undefined,
+					modifiers: {},
+				},
+				beatleader: {
+					stars: undefined,
+					modifiers: {},
+				},
 			},
 			mapArt: "",
 			bsr: "",

@@ -216,7 +216,7 @@ export default class Home extends Component {
 										}}
 									/>
 									<Text>
-										How to get account id on{" "}
+										How to get your account id on{" "}
 										<span>
 											<a href="https://cdn.fascinated.cc/f954sr22.mp4">
 												BeatLeader
@@ -268,7 +268,7 @@ export default class Home extends Component {
 									<Text h4>
 										Settings below require{" "}
 										<span>
-											<a href="https://github.com/denpadokei/HttpSiraStatus/releases">
+											<a href="https://short.fascinated.cc/bs-overlay-httpsirastatus">
 												HttpSiraStatus
 											</a>
 										</span>

@@ -119,6 +119,7 @@ const handlers: any = {
 		state.setInSong(true);
 		state.setModifiers(data.status.mod);
 		state.setPercent(100.0);
+		state.setPp(100.0);
 		state.updateMapData(
 			getMapHashFromLevelId(levelId),
 			difficultyEnum,

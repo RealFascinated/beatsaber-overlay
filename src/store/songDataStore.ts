@@ -186,25 +186,23 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 
 	setPp: (percent: number) => {
 		const leaderboardData = useSongDataStore.getState().mapLeaderboardData;
-		if (
-			leaderboardData.beatleader.stars == undefined ||
-			leaderboardData.scoresaber.stars == undefined
-		) {
-			setTimeout(() => {
-				useSongDataStore.getState().setPp(percent);
-			}, 100);
-		}
+		// if (
+		// 	leaderboardData.beatleader.stars == undefined ||
+		// 	leaderboardData.scoresaber.stars == undefined
+		// ) {
+		// 	setTimeout(() => {
+		// 		useSongDataStore.getState().setPp(percent);
+		// 	}, 100);
+		// }
 
-		const scoreSaberMapStarCount =
-			useSongDataStore.getState().mapLeaderboardData.scoresaber.stars;
+		const scoreSaberMapStarCount = leaderboardData.scoresaber.stars;
 		let scoreSaberPP = Utils.calculatePP(
 			scoreSaberMapStarCount,
 			percent,
 			"ScoreSaber"
 		);
 
-		const beatLeaderMapStarCount =
-			useSongDataStore.getState().mapLeaderboardData.beatleader.stars;
+		const beatLeaderMapStarCount = leaderboardData.beatleader.stars;
 		let beatLeaderPP = Utils.calculatePP(
 			beatLeaderMapStarCount,
 			percent,

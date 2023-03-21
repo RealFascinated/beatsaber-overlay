@@ -49,7 +49,7 @@ export default class Utils {
 		const songMods = useSongDataStore.getState().songModifiers;
 		const modifierMulipliers =
 			useSongDataStore.getState().mapLeaderboardData.modifiers;
-		let bonus = 0;
+		let bonus = 1;
 
 		// No Fail
 		if (

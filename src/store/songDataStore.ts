@@ -59,7 +59,7 @@ interface SongDataState {
 	setCurrentScore: (score: number) => void;
 	setPercent: (percent: number) => void;
 	setCombo: (combo: number) => void;
-	setPp: (percent: number) => void;
+	setPp: (percent: number, attempt?: number) => void;
 	setInSong: (isInSong: boolean) => void;
 	setSaberData: (saberType: string, cutData: any) => void;
 	setModifiers: (modifiers: Map<string, object>) => void;
@@ -185,6 +185,16 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 	},
 
 	setPp: (percent: number) => {
+		const leaderboardData = useSongDataStore.getState().mapLeaderboardData;
+		if (
+			leaderboardData.beatleader.stars == undefined ||
+			leaderboardData.scoresaber.stars == undefined
+		) {
+			setTimeout(() => {
+				useSongDataStore.getState().setPp(percent);
+			}, 100);
+		}
+
 		const scoreSaberMapStarCount =
 			useSongDataStore.getState().mapLeaderboardData.scoresaber.stars;
 		let scoreSaberPP = Utils.calculatePP(
@@ -204,7 +214,6 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		const lastSSPP = useSongDataStore.getState().currentPP?.scoreSaber;
 		const lastBLPP = useSongDataStore.getState().currentPP?.beatLeader;
 
-		// undefined is returned if the curve ate shit (BL one does that if the current % is too high).
 		set({
 			currentPP: {
 				beatLeader: beatLeaderPP == undefined ? lastBLPP : beatLeaderPP,

@@ -68,6 +68,8 @@ const PlayerStats = () => {
 						style={{
 							marginLeft: "-3px",
 						}}
+						unoptimized
+						alt="Player country icon"
 					></Image>
 					<p
 						style={{

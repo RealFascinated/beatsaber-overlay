@@ -27,7 +27,7 @@ export function getBeatLeaderPP(acc, stars) {
 		return undefined;
 	}
 	const modifierBonus = Utils.calculateModifierBonus();
-	//let rawPP = curve(acc, stars - 0.5) * (stars + 0.5) * 42;
+	let rawPP = curve(acc, stars - 0.5) * (stars + 0.5) * 42;
 	let fullPP =
 		curve(acc, stars * modifierBonus - 0.5) *
 		(stars * modifierBonus + 0.5) *
@@ -38,7 +38,10 @@ export function getBeatLeaderPP(acc, stars) {
 		acc *= -1;
 	}
 
-	if (fullPP == NaN || fullPP == Infinity) {
+	if (isNaN(rawPP) || rawPP == Infinity) {
+		return 1024;
+	}
+	if (isNaN(fullPP) || fullPP == Infinity) {
 		return 1024;
 	}
 

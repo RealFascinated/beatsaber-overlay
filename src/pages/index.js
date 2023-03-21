@@ -191,6 +191,15 @@ export default class Home extends Component {
 							<Card>
 								<Card.Body>
 									<Spacer y={1.2} />
+									<Text>
+										How to use{" "}
+										<span>
+											<a href="https://www.youtube.com/watch?v=IjctLf1nX8w">
+												Tutorial
+											</a>
+										</span>
+									</Text>
+									<Spacer y={1.2} />
 
 									<Input
 										underlined

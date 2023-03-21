@@ -1,3 +1,5 @@
+import Utils from "../utils/utils";
+
 /**
  * I'm not even sure what this shit does, ask BL
  * @see https://github.com/BeatLeader/beatleader-server/blob/16123a792b1a837faf6287e5bcd58e2e06e6a6f0/Utils/ReplayUtils.cs for more info
@@ -24,20 +26,25 @@ export function getBeatLeaderPP(acc, stars) {
 	if (stars === undefined || acc === undefined) {
 		return undefined;
 	}
-	let pp = curve(acc, stars - 0.5) * (stars + 0.5) * 42;
+	const modifierBonus = Utils.calculateModifierBonus();
+	//let rawPP = curve(acc, stars - 0.5) * (stars + 0.5) * 42;
+	let fullPP =
+		curve(acc, stars * modifierBonus - 0.5) *
+		(stars * modifierBonus + 0.5) *
+		42;
 
 	const isNegativeAcc = acc < 0;
 	if (isNegativeAcc) {
 		acc *= -1;
 	}
 
-	if (pp == NaN || pp == Infinity) {
+	if (fullPP == NaN || fullPP == Infinity) {
 		return 1024;
 	}
 
 	if (isNegativeAcc) {
-		pp *= -1;
+		fullPP *= -1;
 	}
 
-	return pp;
+	return fullPP;
 }

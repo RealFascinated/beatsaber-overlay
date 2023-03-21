@@ -37,7 +37,7 @@ export default class Utils {
 			return undefined;
 		}
 		if (type === "BeatLeader") {
-			return getBeatLeaderPP(acc, stars) * (1 + this.calculateModifierBonus());
+			return getBeatLeaderPP(acc, stars);
 		}
 		if (type === "ScoreSaber") {
 			return getScoreSaberPP(acc, stars);

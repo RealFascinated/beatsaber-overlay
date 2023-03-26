@@ -5,7 +5,8 @@
 		"dev": "react-env -- next",
 		"build": "next build",
 		"start": "APP_ENV=production node server.js",
-		"lint": "next lint"
+		"lint": "next lint",
+		"update-depends": "npm-check -u"
 	},
 	"dependencies": {
 		"@beam-australia/react-env": "^3.1.1",

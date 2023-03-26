@@ -3,6 +3,8 @@ const nextConfig = {
 	output: "standalone",
 	swcMinify: true,
 	compress: true,
+	generateEtags: true,
+	optimizeFonts: true,
 	images: {
 		domains: [
 			"cdn.scoresaber.com",
@@ -12,9 +14,6 @@ const nextConfig = {
 			"avatars.akamai.steamstatic.com",
 		],
 	},
-	// experimental: {
-	// 	optimizeCss: true,
-	// },
 };
 
 module.exports = nextConfig;

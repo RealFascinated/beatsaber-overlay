@@ -57,7 +57,12 @@ export function getBeatLeaderPP(accuracy, accRating, passRating, techRating) {
 		techRating * modifierBonus
 	);
 	const pp = inflate(ppValues.passPP + ppValues.accPP + ppValues.techPP);
-	return isNaN(pp) ? 1024 : pp;
+	return {
+		pp: pp,
+		passPP: ppValues.passPP,
+		accPP: ppValues.accPP,
+		techPP: ppValues.techPP,
+	};
 }
 
 /**

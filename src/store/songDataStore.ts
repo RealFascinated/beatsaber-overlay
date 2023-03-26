@@ -17,7 +17,7 @@ interface SongDataState {
 			stars: Number | undefined;
 			modifiers: Object;
 		};
-		beatleader: {
+		beatLeader: {
 			stars: Number | undefined;
 			modifiers: Object;
 			passRating: number | undefined;
@@ -35,8 +35,15 @@ interface SongDataState {
 	percentage: number;
 	combo: number;
 	currentPP: {
-		scoreSaber: number | undefined;
-		beatLeader: number | undefined;
+		beatLeader: {
+			pp: number | undefined;
+			passPP: number | undefined;
+			accPP: number | undefined;
+			techPP: number | undefined;
+		};
+		scoreSaber: {
+			pp: number | undefined;
+		};
 	};
 	saberA: {
 		cutDistanceScore: number;
@@ -82,7 +89,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			stars: 0,
 			modifiers: {},
 		},
-		beatleader: {
+		beatLeader: {
 			stars: 0,
 			modifiers: {},
 			passRating: undefined,
@@ -100,8 +107,15 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 	percentage: 100,
 	combo: 0,
 	currentPP: {
-		beatLeader: undefined,
-		scoreSaber: undefined,
+		beatLeader: {
+			pp: undefined,
+			passPP: undefined,
+			accPP: undefined,
+			techPP: undefined,
+		},
+		scoreSaber: {
+			pp: undefined,
+		},
 	},
 	saberA: {
 		cutDistanceScore: 0.0,
@@ -144,7 +158,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			isLoading: false,
 			hasError: hasError,
 			mapLeaderboardData: {
-				beatleader: {
+				beatLeader: {
 					stars: beatLeaderLeaderboardData.stars,
 					modifiers: beatLeaderLeaderboardData.modifiers,
 					passRating: beatLeaderLeaderboardData.passRating,
@@ -211,8 +225,8 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			"ScoreSaber"
 		);
 
-		const beatLeaderMapStarCount = leaderboardData.beatleader.stars;
-		let beatLeaderPP = Utils.calculatePP(
+		const beatLeaderMapStarCount = leaderboardData.beatLeader.stars;
+		let beatLeaderPP: any = Utils.calculatePP(
 			beatLeaderMapStarCount,
 			percent,
 			"BeatLeader"
@@ -250,7 +264,7 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 					stars: undefined,
 					modifiers: {},
 				},
-				beatleader: {
+				beatLeader: {
 					stars: undefined,
 					modifiers: {},
 					passRating: undefined,
@@ -267,7 +281,17 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 			currentScore: 0,
 			percentage: 100,
 			combo: 0,
-			currentPP: undefined,
+			currentPP: {
+				beatLeader: {
+					pp: undefined,
+					passPP: undefined,
+					accPP: undefined,
+					techPP: undefined,
+				},
+				scoreSaber: {
+					pp: undefined,
+				},
+			},
 			saberA: {
 				cutDistanceScore: 0.0,
 				averagePreSwing: 0.0,

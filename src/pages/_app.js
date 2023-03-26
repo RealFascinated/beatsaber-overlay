@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }) {
 					siteName: env(VARS.SITE_NAME),
 					images: [
 						{
-							url: "https://git.fascinated.cc/Fascinated/beatsaber-overlay/-/raw/main/assets/overlay.png",
+							url: "https://git.fascinated.cc/Fascinated/beatsaber-overlay/media/branch/main/assets/overlay.png",
 							alt: "Site Example",
 						},
 					],

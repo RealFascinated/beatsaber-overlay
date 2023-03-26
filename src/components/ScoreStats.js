@@ -3,6 +3,7 @@ import { getFormattedScorePercent } from "../helpers/map/mapHelpers";
 import { useSettingsStore } from "../store/overlaySettingsStore";
 import { useSongDataStore } from "../store/songDataStore";
 import styles from "../styles/scoreStats.module.css";
+import Utils from "../utils/utils";
 
 export default function ScoreStats() {
 	const [showScoreInfo, showPp] = useSettingsStore((store) => [
@@ -47,7 +48,9 @@ export default function ScoreStats() {
 					<p>
 						{getFormattedScorePercent(percentage)} {percentage.toFixed(2)}%
 					</p>
-					{scoreSaberPP !== undefined && showPp ? (
+					{scoreSaberPP !== undefined &&
+					scoreSaberPP.pp !== undefined &&
+					showPp ? (
 						<div
 							style={{
 								display: "flex",
@@ -80,13 +83,32 @@ export default function ScoreStats() {
 								height={30}
 								src="https://cdn.fascinated.cc/Wo9JRAfD.png"
 							></Image>
-							<p
-								style={{
-									marginLeft: "8px",
-								}}
-							>
-								{beatLeaderPP.toFixed(0)}pp
-							</p>
+							<div>
+								{Object.entries(beatLeaderPP).map((value, i) => {
+									let name = value[0];
+									const pp = value[1];
+
+									name = name.split("PP")[0];
+									if (name == "pp") {
+										name = undefined;
+									}
+									if (name !== undefined) {
+										name = Utils.capitalizeFirstLetter(name);
+									}
+
+									return (
+										<p
+											key={i}
+											style={{
+												marginLeft: "8px",
+												fontSize: name == undefined ? "35px" : "30px",
+											}}
+										>
+											{name} {pp.toFixed(0)}pp
+										</p>
+									);
+								})}
+							</div>
 						</div>
 					) : null}
 				</div>

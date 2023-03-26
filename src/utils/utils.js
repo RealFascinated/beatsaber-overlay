@@ -38,7 +38,7 @@ export default class Utils {
 		}
 		if (type === "BeatLeader") {
 			const leaderboardData =
-				useSongDataStore.getState().mapLeaderboardData.beatleader;
+				useSongDataStore.getState().mapLeaderboardData.beatLeader;
 
 			return getBeatLeaderPP(
 				acc,
@@ -56,7 +56,7 @@ export default class Utils {
 	static calculateModifierBonus() {
 		const songMods = useSongDataStore.getState().songModifiers;
 		const modifierMulipliers =
-			useSongDataStore.getState().mapLeaderboardData.beatleader.modifiers;
+			useSongDataStore.getState().mapLeaderboardData.beatLeader.modifiers;
 		let bonus = 1;
 
 		// No Fail
@@ -131,4 +131,8 @@ export default class Utils {
 				return JSON.parse(stringValue);
 		}
 	};
+
+	static capitalizeFirstLetter(string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	}
 }

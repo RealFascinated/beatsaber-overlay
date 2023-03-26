@@ -359,10 +359,10 @@ export default class Home extends Component {
 											marginTop: "10px",
 										}}
 									>
-										<Link href="https://github.com/RealFascinated/beatsaber-overlay">
+										<Link href="https://git.fascinated.cc/Fascinated/beatsaber-overlay">
 											<a>
 												If you like this project and want to support it. Come
-												check out the project on GitHub!
+												check out the project on Gitea!
 											</a>
 										</Link>
 									</Text>

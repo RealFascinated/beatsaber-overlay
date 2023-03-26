@@ -20,6 +20,9 @@ interface SongDataState {
 		beatleader: {
 			stars: Number | undefined;
 			modifiers: Object;
+			passRating: number | undefined;
+			accRating: number | undefined;
+			techRating: number | undefined;
 		};
 	};
 	mapArt: string;
@@ -82,6 +85,9 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		beatleader: {
 			stars: 0,
 			modifiers: {},
+			passRating: undefined,
+			accRating: undefined,
+			techRating: undefined,
 		},
 	},
 	mapArt: "",
@@ -134,6 +140,16 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		}
 		const { bsr, mapArt } = mapDataresponse.data.data;
 
+		console.log({
+			beatleader: {
+				stars: beatLeaderLeaderboardData.stars,
+				modifiers: beatLeaderLeaderboardData.modifiers,
+				passRating: beatLeaderLeaderboardData.passRating,
+				accRating: beatLeaderLeaderboardData.accRating,
+				techRating: beatLeaderLeaderboardData.techRating,
+			},
+		});
+
 		set({
 			isLoading: false,
 			hasError: hasError,
@@ -141,6 +157,9 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 				beatleader: {
 					stars: beatLeaderLeaderboardData.stars,
 					modifiers: beatLeaderLeaderboardData.modifiers,
+					passRating: beatLeaderLeaderboardData.passRating,
+					accRating: beatLeaderLeaderboardData.accRating,
+					techRating: beatLeaderLeaderboardData.techRating,
 				},
 				scoresaber: {
 					stars: scoreSaberLeaderboardData.stars,
@@ -244,6 +263,9 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 				beatleader: {
 					stars: undefined,
 					modifiers: {},
+					passRating: undefined,
+					accRating: undefined,
+					techRating: undefined,
 				},
 			},
 			mapArt: "",

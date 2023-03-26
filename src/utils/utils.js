@@ -37,7 +37,15 @@ export default class Utils {
 			return undefined;
 		}
 		if (type === "BeatLeader") {
-			return getBeatLeaderPP(acc, stars);
+			const leaderboardData =
+				useSongDataStore.getState().mapLeaderboardData.beatleader;
+
+			return getBeatLeaderPP(
+				acc,
+				leaderboardData.accRating,
+				leaderboardData.passRating,
+				leaderboardData.techRating
+			);
 		}
 		if (type === "ScoreSaber") {
 			return getScoreSaberPP(acc, stars);
@@ -48,7 +56,7 @@ export default class Utils {
 	static calculateModifierBonus() {
 		const songMods = useSongDataStore.getState().songModifiers;
 		const modifierMulipliers =
-			useSongDataStore.getState().mapLeaderboardData.modifiers;
+			useSongDataStore.getState().mapLeaderboardData.beatleader.modifiers;
 		let bonus = 1;
 
 		// No Fail

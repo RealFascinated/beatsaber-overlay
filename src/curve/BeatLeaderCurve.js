@@ -1,53 +1,121 @@
 import Utils from "../utils/utils";
 
 /**
- * I'm not even sure what this shit does, ask BL
- * @see https://github.com/BeatLeader/beatleader-server/blob/16123a792b1a837faf6287e5bcd58e2e06e6a6f0/Utils/ReplayUtils.cs for more info
+ * The pp curve of this leaderboard
+ */
+const ppCurve = [
+	[1.0, 7.424],
+	[0.999, 6.241],
+	[0.9975, 5.158],
+	[0.995, 4.01],
+	[0.9925, 3.241],
+	[0.99, 2.7],
+	[0.9875, 2.303],
+	[0.985, 2.007],
+	[0.9825, 1.786],
+	[0.98, 1.618],
+	[0.9775, 1.49],
+	[0.975, 1.392],
+	[0.9725, 1.315],
+	[0.97, 1.256],
+	[0.965, 1.167],
+	[0.96, 1.101],
+	[0.955, 1.047],
+	[0.95, 1.0],
+	[0.94, 0.919],
+	[0.93, 0.847],
+	[0.92, 0.786],
+	[0.91, 0.734],
+	[0.9, 0.692],
+	[0.875, 0.606],
+	[0.85, 0.537],
+	[0.825, 0.48],
+	[0.8, 0.429],
+	[0.75, 0.345],
+	[0.7, 0.286],
+	[0.65, 0.246],
+	[0.6, 0.217],
+	[0.0, 0.0],
+];
+
+/**
+ * https://github.com/BeatLeader/beatleader-server/blob/master/Utils/ReplayUtils.cs#L45
+ * funky shit from ^
  *
- * @param {Number} acc the accuracy of the score
- * @param {Number} stars the ranked star count
+ * @param {Number} accuracy the accuracy of the score
+ * @param {Number} accRating the acc rating of the difficulty
+ * @param {Number} passRating the pass rating of the difficulty
+ * @param {Number} techRating the tech rating of the difficulty
  * @returns
  */
-function curve(acc, stars) {
-	var l = 1 - (0.03 * (stars - 3.0)) / 11.0;
-	var a = 0.96 * l;
-	var f = 1.2 - (0.6 * stars) / 14.0;
-	return Math.pow(Math.log10(l / (l - acc)) / Math.log10(l / (l - a)), f);
+export function getBeatLeaderPP(accuracy, accRating, passRating, techRating) {
+	const modifierBonus = Utils.calculateModifierBonus();
+	const ppValues = getPP(
+		accuracy,
+		accRating,
+		passRating * modifierBonus,
+		techRating * modifierBonus
+	);
+	const pp = inflate(ppValues.passPP + ppValues.accPP + ppValues.techPP);
+	return isNaN(pp) ? 1024 : pp;
 }
 
 /**
- * Gets the raw pp from the given score
+ * https://github.com/BeatLeader/beatleader-server/blob/master/Utils/ReplayUtils.cs#L45
+ * funky shit from ^
  *
- * @param {Number} acc the accuracy of the score
- * @param {Number} stars the ranked star count
+ * @param {Number} accuracy the accuracy of the score
+ * @param {Number} accRating the acc rating of the difficulty
+ * @param {Number} passRating the pass rating of the difficulty
+ * @param {Number} techRating the tech rating of the difficulty
  * @returns
  */
-export function getBeatLeaderPP(acc, stars) {
-	if (stars === undefined || acc === undefined) {
-		return undefined;
+function getPP(accuracy, accRating, passRating, techRating) {
+	let passPP = 15.2 * Math.exp(Math.pow(passRating, 1 / 2.62)) - 30;
+	if (isNaN(passPP) || passPP == Infinity) {
+		passPP = 0;
 	}
-	const modifierBonus = Utils.calculateModifierBonus();
-	let rawPP = curve(acc, stars - 0.5) * (stars + 0.5) * 42;
-	let fullPP =
-		curve(acc, stars * modifierBonus - 0.5) *
-		(stars * modifierBonus + 0.5) *
-		42;
+	let accPP = curve(accuracy) * accRating * 34;
+	let techPP = Math.exp(1.9 * accuracy) * techRating;
 
-	const isNegativeAcc = acc < 0;
-	if (isNegativeAcc) {
-		acc *= -1;
+	return {
+		passPP: passPP,
+		accPP: accPP,
+		techPP: techPP,
+	};
+}
+
+/**
+ * https://github.com/BeatLeader/beatleader-server/blob/master/Utils/ReplayUtils.cs#L45
+ * funky shit from ^
+ *
+ * @param {Number} acc the accuracy of the score
+ * @returns something
+ */
+function curve(acc) {
+	let i = 0;
+	for (; i < ppCurve.length; i++) {
+		if (ppCurve[i][0] <= acc) {
+			break;
+		}
 	}
 
-	if (isNaN(rawPP) || rawPP == Infinity) {
-		return 1024;
-	}
-	if (isNaN(fullPP) || fullPP == Infinity) {
-		return 1024;
+	if (i == 0) {
+		i = 1;
 	}
 
-	if (isNegativeAcc) {
-		fullPP *= -1;
-	}
+	const middle_dis =
+		(acc - ppCurve[i - 1][0]) / (ppCurve[i][0] - ppCurve[i - 1][0]);
+	return ppCurve[i - 1][1] + middle_dis * (ppCurve[i][1] - ppCurve[i - 1][1]);
+}
 
-	return fullPP;
+/**
+ * https://github.com/BeatLeader/beatleader-server/blob/master/Utils/ReplayUtils.cs#L77
+ * funky shit from ^
+ *
+ * @param {Number} peepee
+ * @returns funny number, idk
+ */
+function inflate(peepee) {
+	return (650 * Math.pow(peepee, 1.3)) / Math.pow(650, 1.3);
 }

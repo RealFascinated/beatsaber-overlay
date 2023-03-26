@@ -33,6 +33,9 @@ export default async function handler(req, res) {
 			difficulty: difficulty,
 			stars: json.stars,
 			modifiers: json.modifiers,
+			passRating: json.passRating,
+			accRating: json.accRating,
+			techRating: json.techRating,
 		});
 	}
 
@@ -54,6 +57,10 @@ export default async function handler(req, res) {
 	const json = reesponse.data;
 	let starCount = undefined;
 	let modifiers = undefined;
+	let passRating = undefined;
+	let accRating = undefined;
+	let techRating = undefined;
+
 	for (const diff of json.difficulties) {
 		if (
 			diff.difficultyName === difficulty &&
@@ -61,6 +68,9 @@ export default async function handler(req, res) {
 		) {
 			starCount = diff.stars;
 			modifiers = diff.modifierValues;
+			passRating = diff.passRating;
+			accRating = diff.accRating;
+			techRating = diff.techRating;
 		}
 	}
 	if (starCount === undefined) {
@@ -74,6 +84,9 @@ export default async function handler(req, res) {
 		JSON.stringify({
 			stars: starCount,
 			modifiers: modifiers,
+			passRating: passRating,
+			accRating: accRating,
+			techRating: techRating,
 		})
 	);
 	console.log(
@@ -87,5 +100,8 @@ export default async function handler(req, res) {
 		difficulty: difficulty,
 		stars: starCount,
 		modifiers: modifiers,
+		passRating: passRating,
+		accRating: accRating,
+		techRating: techRating,
 	});
 }

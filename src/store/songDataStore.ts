@@ -140,16 +140,6 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		}
 		const { bsr, mapArt } = mapDataresponse.data.data;
 
-		console.log({
-			beatleader: {
-				stars: beatLeaderLeaderboardData.stars,
-				modifiers: beatLeaderLeaderboardData.modifiers,
-				passRating: beatLeaderLeaderboardData.passRating,
-				accRating: beatLeaderLeaderboardData.accRating,
-				techRating: beatLeaderLeaderboardData.techRating,
-			},
-		});
-
 		set({
 			isLoading: false,
 			hasError: hasError,

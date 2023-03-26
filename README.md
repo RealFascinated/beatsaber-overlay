@@ -2,13 +2,13 @@
 
 [![Build Status](https://drone.fascinated.cc/api/badges/Fascinated/beatsaber-overlay/status.svg)](https://drone.fascinated.cc/Fascinated/beatsaber-overlay)
 
-The project is on my [GitLab](https://git.fascinated.cc/Fascinated/beatsaber-overlay) now, but the repo will be kept in sync here. <br />
+The project is on my [Gitea](https://git.fascinated.cc/Fascinated/beatsaber-overlay) now, but the repo will be kept in sync here. <br />
 The public url to view/use: <https://bs-overlay.fascinated.cc> <br />
 Need help? Feel free to message me at: Fascinated#4719
 
 ## Usage
 
-Go to the [Wiki](https://git.fascinated.cc/Fascinated/beatsaber-overlay/-/wikis/Usage)
+Go to the [Wiki](https://git.fascinated.cc/Fascinated/beatsaber-overlay/wiki/Usage)
 
 ## Preview
 

@@ -56,3 +56,16 @@ volumes:
   - name: cache
     host:
       path: /tmp/cache
+# deploy:
+#   image: alpine:latest
+#   stage: deploy
+#   tags:
+#   script:
+#     - chmod og= $ID_RSA
+#     - apk update && apk add openssh-client
+#     - ssh -i $ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "cd /home/overlay && docker compose pull && docker compose up -d && docker image prune -f"
+#   environment:
+#     name: production
+#     url: https://bs-overlay.fascinated.cc
+#   only:
+#     - main

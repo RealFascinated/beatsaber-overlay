@@ -154,6 +154,8 @@ export const useSongDataStore = create<SongDataState>()((set) => ({
 		}
 		const { bsr, mapArt } = mapDataresponse.data.data;
 
+		console.log(scoreSaberLeaderboardData);
+
 		set({
 			isLoading: false,
 			hasError: hasError,

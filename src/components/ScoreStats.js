@@ -62,14 +62,14 @@ export default function ScoreStats() {
 								height={30}
 								src="https://cdn.fascinated.cc/Hc1eD7QY.png"
 								unoptimized
-								alt="ScoreSaber logo"
+								alt="BeatLeader logo"
 							></Image>
 							<p
 								style={{
 									marginLeft: "5px",
 								}}
 							>
-								{scoreSaberPP.toFixed(0)}pp
+								{scoreSaberPP.pp.toFixed(0)}pp
 							</p>
 						</div>
 					) : null}

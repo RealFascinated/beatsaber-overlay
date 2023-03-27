@@ -24,7 +24,7 @@ jobs:
           path: |
             /usr/bin/docker
           key: ${{ runner.os }}-docker
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
 
       - name: Download docker
         if: steps.cache-docker.outputs.cache-hit != 'true'

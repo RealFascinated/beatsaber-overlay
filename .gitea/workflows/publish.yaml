@@ -9,7 +9,7 @@ jobs:
   docker:
     strategy:
       matrix:
-        arch: ['ubuntu-latest']
+        arch: ['git.fascinated.cc/fascinated/gitea-runner:ubuntu-latest']
         git-version: ['2.38.4']
     runs-on: ${{ matrix.arch }}
     #container: node:19-alpine
@@ -26,12 +26,12 @@ jobs:
           key: ${{ runner.os }}-docker
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Download docker
-        if: steps.cache-docker.outputs.cache-hit != 'true'
-        run: |
-          wget -q -O /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-20.10.23.tgz \
-          && tar --extract --file /tmp/docker.tgz --directory /usr/bin --strip-components 1 --no-same-owner docker/docker \
-          && rm -rf /tmp/*  
+      #- name: Download docker
+      #  if: steps.cache-docker.outputs.cache-hit != 'true'
+      #  run: |
+      #    wget -q -O /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-20.10.23.tgz \
+      #    && tar --extract --file /tmp/docker.tgz --directory /usr/bin --strip-components 1 --no-same-owner docker/docker \
+      #    && rm -rf /tmp/*  
 
       - name: Set up Docker Buildx
         uses: https://github.com/docker/setup-buildx-action@v2

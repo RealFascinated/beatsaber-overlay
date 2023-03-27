@@ -12,19 +12,10 @@ jobs:
         arch: ['git.fascinated.cc/fascinated/gitea-runner:ubuntu-latest']
         git-version: ['2.38.4']
     runs-on: ${{ matrix.arch }}
-    #container: node:19-alpine
+    container: node:19-bullseye
     steps:
       - name: checkout
         uses: https://github.com/actions/checkout@v3
-
-      - name: Restore Docker
-        id: cache-docker
-        uses: https://github.com/actions/cache/restore@v3
-        with:
-          path: |
-            /usr/bin/docker
-          key: ${{ runner.os }}-docker
-          token: ${{ secrets.GH_TOKEN }}
 
       #- name: Download docker
       #  if: steps.cache-docker.outputs.cache-hit != 'true'
@@ -35,14 +26,6 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: https://github.com/docker/setup-buildx-action@v2
-
-      - name: Cache Docker layers
-        uses: https://github.com/actions/cache@v2
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-buildx-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-buildx-
 
       - name: Login to Repo
         uses: https://github.com/docker/login-action@v2
@@ -57,10 +40,3 @@ jobs:
           push: true
           context: .
           tags: git.fascinated.cc/fascinated/beatsaber-overlay:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
-          
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache

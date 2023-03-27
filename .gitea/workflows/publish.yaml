@@ -9,10 +9,10 @@ jobs:
   docker:
     strategy:
       matrix:
-        arch: ['git.fascinated.cc/fascinated/gitea-runner:latest']
+        arch: ['ubuntu-latest']
         git-version: ['2.38.4']
     runs-on: ${{ matrix.arch }}
-    container: node:19-bullseye
+    container: git.fascinated.cc/fascinated/gitea-runner:latest
     steps:
       - name: checkout
         uses: https://github.com/actions/checkout@v3

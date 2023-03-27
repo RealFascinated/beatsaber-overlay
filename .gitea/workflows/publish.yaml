@@ -37,4 +37,5 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
+          context: .
           tags: git.fascinated.cc/fascinated/beatsaber-overlay:latest

@@ -14,6 +14,10 @@ jobs:
     runs-on: ${{ matrix.arch }}
     container: node:19-alpine
     steps:
+      - name: install git
+        run: |
+          apt install git --assume-yes
+
       - name: checkout
         uses: https://github.com/actions/checkout@v3
 

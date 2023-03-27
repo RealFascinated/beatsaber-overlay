@@ -7,7 +7,7 @@ on:
 
 jobs:
   docker:
-    runs-on: catthehacker/ubuntu:act-latest
+    runs-on: ubuntu-latest
     container: node:19-alpine
     steps:
       - name: Set up Docker Buildx

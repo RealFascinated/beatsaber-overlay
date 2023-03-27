@@ -12,7 +12,7 @@ jobs:
         arch: ['git.fascinated.cc/fascinated/gitea-runner:ubuntu-latest']
         git-version: ['2.38.4']
     runs-on: ${{ matrix.arch }}
-    #container: node:19-alpine
+    container: node:19-bullseye
     steps:
       - name: checkout
         uses: https://github.com/actions/checkout@v3

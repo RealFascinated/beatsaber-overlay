@@ -61,6 +61,8 @@ export default function ScoreStats() {
 								width={30}
 								height={30}
 								src="https://cdn.fascinated.cc/Hc1eD7QY.png"
+								unoptimized
+								alt="ScoreSaber logo"
 							></Image>
 							<p
 								style={{
@@ -82,6 +84,8 @@ export default function ScoreStats() {
 								width={30}
 								height={30}
 								src="https://cdn.fascinated.cc/Wo9JRAfD.png"
+								unoptimized
+								alt="BeatLeader logo"
 							></Image>
 							<div>
 								{Object.entries(beatLeaderPP).map((value, i) => {

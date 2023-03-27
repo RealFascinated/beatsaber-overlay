@@ -8,6 +8,7 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    container: node:19-alpine
     steps:
       - name: Login to Repo
         uses: docker/login-action@v2

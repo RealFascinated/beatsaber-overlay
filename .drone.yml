@@ -46,10 +46,11 @@ steps:
         - main
     settings:
       username:
-        from_secret: dockerhub_username
+        from_secret: repo_username
       password:
-        from_secret: dockerhub_password
-      repo: fascinated/beatsaber-overlay
+        from_secret: repo_password
+      repo: gitea.example.com/Fascinated/beatsaber-overlay:latest
+      #repo: fascinated/beatsaber-overlay
       tags: latest
 
 volumes:

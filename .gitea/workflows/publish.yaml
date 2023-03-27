@@ -1,0 +1,66 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  docker:
+    strategy:
+      matrix:
+        arch: ['git.fascinated.cc/fascinated/gitea-runner:ubuntu-latest']
+        git-version: ['2.38.4']
+    runs-on: ${{ matrix.arch }}
+    #container: node:19-alpine
+    steps:
+      - name: checkout
+        uses: https://github.com/actions/checkout@v3
+
+      - name: Restore Docker
+        id: cache-docker
+        uses: https://github.com/actions/cache/restore@v3
+        with:
+          path: |
+            /usr/bin/docker
+          key: ${{ runner.os }}-docker
+          token: ${{ secrets.GH_TOKEN }}
+
+      #- name: Download docker
+      #  if: steps.cache-docker.outputs.cache-hit != 'true'
+      #  run: |
+      #    wget -q -O /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-20.10.23.tgz \
+      #    && tar --extract --file /tmp/docker.tgz --directory /usr/bin --strip-components 1 --no-same-owner docker/docker \
+      #    && rm -rf /tmp/*  
+
+      - name: Set up Docker Buildx
+        uses: https://github.com/docker/setup-buildx-action@v2
+
+      - name: Cache Docker layers
+        uses: https://github.com/actions/cache@v2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-
+
+      - name: Login to Repo
+        uses: https://github.com/docker/login-action@v2
+        with:
+          registry: git.fascinated.cc
+          username: ${{ secrets.REPO_USERNAME }}
+          password: ${{ secrets.REPO_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          context: .
+          tags: git.fascinated.cc/fascinated/beatsaber-overlay:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache

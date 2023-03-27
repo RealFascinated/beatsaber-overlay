@@ -9,20 +9,13 @@ jobs:
   docker:
     strategy:
       matrix:
-        arch: ['git.fascinated.cc/fascinated/gitea-runner:ubuntu-latest']
+        arch: ['git.fascinated.cc/fascinated/gitea-runner:latest']
         git-version: ['2.38.4']
     runs-on: ${{ matrix.arch }}
     container: node:19-bullseye
     steps:
       - name: checkout
         uses: https://github.com/actions/checkout@v3
-
-      #- name: Download docker
-      #  if: steps.cache-docker.outputs.cache-hit != 'true'
-      #  run: |
-      #    wget -q -O /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-20.10.23.tgz \
-      #    && tar --extract --file /tmp/docker.tgz --directory /usr/bin --strip-components 1 --no-same-owner docker/docker \
-      #    && rm -rf /tmp/*  
 
       - name: Set up Docker Buildx
         uses: https://github.com/docker/setup-buildx-action@v2
@@ -33,6 +26,11 @@ jobs:
           registry: git.fascinated.cc
           username: ${{ secrets.REPO_USERNAME }}
           password: ${{ secrets.REPO_TOKEN }}
+
+      - name: Setup Node 19
+        uses: actions/setup-node@v2
+        with:
+          node-version: 19.x
 
       - name: Build and push
         uses: docker/build-push-action@v4

@@ -8,7 +8,7 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
-      - uses: docker://node:alpine
+      - uses: docker://node:19-alpine
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2

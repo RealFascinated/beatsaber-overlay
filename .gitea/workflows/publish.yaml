@@ -17,7 +17,16 @@ jobs:
       - name: checkout
         uses: https://github.com/actions/checkout@v3
 
-      - name: download docker
+      - name: Restore Docker
+        id: cache-docker
+        uses: actions/cache/restore@v3
+        with:
+          path: |
+            /usr/bin/docker
+          key: ${{ runner.os }}-docker
+
+      - name: Download docker
+        if: steps.cache-docker.outputs.cache-hit != 'true'
         run: |
           wget -q -O /tmp/docker.tgz https://download.docker.com/linux/static/stable/x86_64/docker-20.10.23.tgz \
           && tar --extract --file /tmp/docker.tgz --directory /usr/bin --strip-components 1 --no-same-owner docker/docker \

@@ -1,6 +1,6 @@
 services:
   beatsaber-overlay:
-    image: fascinated/beatsaber-overlay:latest
+    image: git.fascinated.cc/fascinated/beatsaber-overlay:latest
     restart: always
     env_file:
       - .env.production

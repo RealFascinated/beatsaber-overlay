@@ -26,12 +26,7 @@ jobs:
           registry: git.fascinated.cc
           username: ${{ secrets.REPO_USERNAME }}
           password: ${{ secrets.REPO_TOKEN }}
-
-      - name: Setup Node 19
-        uses: actions/setup-node@v2
-        with:
-          node-version: 19.x
-
+          
       - name: Build and push
         uses: docker/build-push-action@v4
         with:

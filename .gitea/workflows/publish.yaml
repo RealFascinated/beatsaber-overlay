@@ -7,7 +7,7 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-latest
+    runs-on: catthehacker/ubuntu:act-22.04
     container: node:19-alpine
     steps:
       - name: Login to Repo

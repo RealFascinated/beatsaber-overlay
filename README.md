@@ -13,13 +13,6 @@ Go to the [Wiki](https://git.fascinated.cc/Fascinated/beatsaber-overlay/wiki/Usa
 ![Overlay](./assets/overlay.png)
 ![Builder Menu](./assets/builder.png)
 
-## Todo
-
-- Add toggle for showing pp
-- Change the song time to a circular style in the song art
-- Add overall stream stats (avg acc, misses, highest combo)
-- Add option to scale the ui using css scale
-
 ## Getting started with developent
 
 - Clone the repo

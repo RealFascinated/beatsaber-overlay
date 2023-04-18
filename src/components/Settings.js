@@ -1,8 +1,8 @@
 import {
-	Avatar as NextAvatar,
-	changeTheme,
 	Dropdown,
+	Avatar as NextAvatar,
 	Text,
+	changeTheme,
 	useTheme,
 } from "@nextui-org/react";
 
@@ -27,6 +27,7 @@ const Avatar = (props) => {
 						as="button"
 						color="primary"
 						src={avatarUrl}
+						alt="Account avatar"
 					/>
 				</Dropdown.Trigger>
 				<Dropdown.Menu aria-label="Static Actions">

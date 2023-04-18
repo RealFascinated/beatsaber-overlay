@@ -360,7 +360,7 @@ export default class Home extends Component {
 										}}
 									>
 										<Link href="https://git.fascinated.cc/Fascinated/beatsaber-overlay">
-											<a>
+											<a href="https://git.fascinated.cc/Fascinated/beatsaber-overlay">
 												If you like this project and want to help me make it
 												better, come check out the project on Gitea!
 											</a>

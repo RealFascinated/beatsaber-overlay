@@ -40,7 +40,6 @@ function MyApp({ Component, pageProps }) {
 				}}
 				twitter={{
 					cardType: "summary_large_image",
-					// site: "@BeatSaber Overlay",
 				}}
 			/>
 			<NextThemesProvider

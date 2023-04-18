@@ -190,7 +190,6 @@ export default class Home extends Component {
 						<Grid xs={12} lg={9}>
 							<Card>
 								<Card.Body>
-									<Spacer y={1.2} />
 									<Text>
 										How to use{" "}
 										<span>

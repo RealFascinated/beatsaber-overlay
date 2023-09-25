@@ -3,14 +3,14 @@ name: Publish
 on:
   push:
     branches:
-      - 'main'
+      - "main"
 
 jobs:
   docker:
     strategy:
       matrix:
-        arch: ['ubuntu-latest']
-        git-version: ['2.38.4']
+        arch: ["ubuntu-20.04"]
+        git-version: ["2.38.4"]
     runs-on: ${{ matrix.arch }}
     container: git.fascinated.cc/fascinated/gitea-runner:node-18
     steps:
@@ -26,7 +26,7 @@ jobs:
           registry: git.fascinated.cc
           username: ${{ secrets.REPO_USERNAME }}
           password: ${{ secrets.REPO_TOKEN }}
-          
+
       - name: Build and push
         uses: docker/build-push-action@v4
         with:

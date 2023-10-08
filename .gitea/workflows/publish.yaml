@@ -12,7 +12,7 @@ jobs:
         arch: ["ubuntu-20.04"]
         git-version: ["2.38.4"]
     runs-on: ${{ matrix.arch }}
-    container: git.fascinated.cc/fascinated/gitea-runner:node-18
+    container: fascinated/docker-images:node-latest
     steps:
       - name: checkout
         uses: https://github.com/actions/checkout@v3
@@ -23,7 +23,6 @@ jobs:
       - name: Login to Repo
         uses: https://github.com/docker/login-action@v2
         with:
-          registry: git.fascinated.cc
           username: ${{ secrets.REPO_USERNAME }}
           password: ${{ secrets.REPO_TOKEN }}
 
@@ -32,4 +31,4 @@ jobs:
         with:
           push: true
           context: .
-          tags: git.fascinated.cc/fascinated/beatsaber-overlay:latest
+          tags: fascinated/beatsaber-overlay:latest

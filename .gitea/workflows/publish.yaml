@@ -4,12 +4,17 @@ on:
   push:
     branches:
       - "main"
+      - "development"
 
 jobs:
   docker:
     runs-on: ubuntu-22.04
     container: fascinated/docker-images:node-latest
     steps:
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v7
+
       - name: checkout
         uses: actions/checkout@v3
 
@@ -22,9 +27,29 @@ jobs:
           username: ${{ secrets.REPO_USERNAME }}
           password: ${{ secrets.REPO_TOKEN }}
 
-      - name: Build and push
+      - name: Restore Docker Build Cache
+        uses: actions/cache@v3
+        id: build-cache
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx
+
+      - name: Build and Push (Latest)
         uses: docker/build-push-action@v4
+        if: steps.branch-name.outputs.current_branch == 'master'
         with:
           push: true
           context: .
           tags: fascinated/beatsaber-overlay:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache
+
+      - name: Build and Push (Other Branches)
+        uses: docker/build-push-action@v4
+        if: steps.branch-name.outputs.current_branch != 'master'
+        with:
+          push: true
+          context: .
+          tags: fascinated/beatsaber-overlay:${{ steps.branch-name.outputs.current_branch }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache

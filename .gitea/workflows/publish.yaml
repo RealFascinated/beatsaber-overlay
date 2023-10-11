@@ -36,7 +36,7 @@ jobs:
 
       - name: Build and Push (Latest)
         uses: docker/build-push-action@v4
-        if: steps.branch-name.outputs.current_branch == 'master'
+        if: steps.branch-name.outputs.current_branch == 'main'
         with:
           push: true
           context: .
@@ -46,7 +46,7 @@ jobs:
 
       - name: Build and Push (Other Branches)
         uses: docker/build-push-action@v4
-        if: steps.branch-name.outputs.current_branch != 'master'
+        if: steps.branch-name.outputs.current_branch != 'main'
         with:
           push: true
           context: .

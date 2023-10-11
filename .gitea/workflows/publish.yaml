@@ -7,8 +7,8 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-22.04:docker
-    #container: fascinated/docker-images:node-latest
+    runs-on: ubuntu-22.04
+    container: fascinated/docker-images:node-latest
     steps:
       - name: checkout
         uses: actions/checkout@v3

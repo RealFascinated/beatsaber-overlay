@@ -7,7 +7,7 @@ on:
 
 jobs:
   docker:
-    runs-on: ubuntu-22.04:docker://node:18-bullseye
+    runs-on: ubuntu-22.04:docker
     #container: fascinated/docker-images:node-latest
     steps:
       - name: checkout

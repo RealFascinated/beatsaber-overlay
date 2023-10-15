@@ -33,6 +33,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
 COPY --from=builder --chown=nextjs:nodejs /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/package.json ./package.json
 
+ENV PNPM_HOME /cock
 RUN pnpm i -g @beam-australia/react-env
 
 USER nextjs

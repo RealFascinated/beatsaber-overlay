@@ -7,7 +7,7 @@ FROM main AS deps
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* ./
 
 # Install node modules
 RUN pnpm install --production

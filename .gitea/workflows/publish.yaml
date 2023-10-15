@@ -52,7 +52,7 @@ jobs:
 
       - name: Save Docker Build Cache
         id: build-cache
-        uses: actions/cache/restore@v3
+        uses: actions/cache/save@v3
         with:
           path: /tmp/.buildx-caches
           key: ${{ runner.os }}-buildx

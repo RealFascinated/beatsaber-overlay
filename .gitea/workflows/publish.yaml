@@ -41,8 +41,6 @@ jobs:
           push: true
           context: .
           tags: fascinated/beatsaber-overlay:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
 
       - name: Build and Push (Other Branches)
         uses: docker/build-push-action@v5
@@ -51,5 +49,10 @@ jobs:
           push: true
           context: .
           tags: fascinated/beatsaber-overlay:${{ steps.branch-name.outputs.current_branch }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache
+
+      - name: Save Docker Build Cache
+        id: build-cache
+        uses: actions/cache/restore@v3
+        with:
+          path: /tmp/.buildx-caches
+          key: ${{ runner.os }}-buildx

@@ -33,7 +33,6 @@ COPY --from=builder /app/public ./.next/static
 
 RUN npm i -g @beam-australia/react-env
 
-USER nextjs
 EXPOSE 3000
 ENV HOSTNAME "0.0.0.0"
 ENV PORT 3000
